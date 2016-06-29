@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>ToBook</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap.css') }}">
+        <link type="text/css" rel="stylesheet" href="{{asset('css/style.css') }}">
+        <script type="text/javascript" src="{{ asset('script/bootstrap.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('script/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('script/script.js') }}"></script>
+    </head>
+    <body>
+        <div class="col-md-12 header-navbar">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-5 col-md-offset-2">
+            </div>
+        </div>
+
+        {% block body %}{% endblock %}
+
+        <div class="col-md-12 footer">
+        </div>
+    </body>
+</html>

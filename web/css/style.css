@@ -1,0 +1,184 @@
+/* 
+
+CODE COULEUR 
+
+vert = #559827
+bleu foncé = #3a4e5a
+
+*/
+
+/* GLOBAL */
+
+.img-style-1
+{
+	position:absolute;
+	height:100%;
+	width:100%;
+	top:0%;
+	left:0%;
+	z-index:-1;
+}
+
+.img-style-2
+{
+	height:200px;
+	width:auto;
+	margin:auto;
+}
+
+/* HEADER */
+
+.header-navbar
+{
+	height:50px;
+	background-color:#FFFFFF;
+}
+
+/* FOOTER */
+
+.footer
+{
+	height:450px;
+	background-color:#3a4e5a;
+}
+
+/* HOME */
+
+.home-first-div
+{
+	height:600px;
+	text-align:center;
+	padding-top:75px;
+	position:relative;
+}
+
+.home-first-div h3
+{
+	font-weight:bold;
+	margin-top:40px;
+}
+
+.input-style-1
+{
+	width:50%;
+	margin-top:20px;
+}
+
+.input-style-2
+{
+	color:#FFFFFF;
+	background-color:#559827;
+	margin-top:20px;
+	padding:10px;
+}
+
+.home-second-div-part
+{
+	height:375px;
+	background-color:#3a4e5a;
+	border:solid #4a5e6b 1px;
+	padding:20px;
+}
+
+.home-second-div-part img
+{
+	height:60px;
+	width:auto;
+}
+
+.home-second-div-part h3
+{
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+.home-second-div-part h4
+{
+	color:#559827;
+}
+
+.home-second-div-part p
+{
+	color:#FFFFFF;
+	margin-top:20px;
+}
+
+.bouton-style-1
+{
+	border:solid #28363f 2px;
+	border-radius:3px;
+	padding:10px;
+	color:#FFFFFF;
+}
+
+.bouton-style-2
+{
+	border:solid #e9e9e9 1px;
+	border-radius:3px;
+	padding:10px;
+	color:#559827;
+	margin-top:20px;
+}
+
+.home-third-div
+{
+	padding:0px;
+}
+
+.border-1
+{
+	border-bottom:solid #e9e9e9 1px;
+}
+
+.border-2
+{
+	border-top:solid #e9e9e9 1px;
+}
+
+.home-third-div .img-div
+{
+	height:350px;
+	position:relative;
+}
+
+.home-third-div .text-div
+{
+	height:350px;
+	position:relative;
+	padding:40px;
+}
+
+.home-fourth-div
+{
+	height:350px;
+	padding:60px;
+	text-align:center;
+	background-color:#559827;
+}
+
+.home-fourth-div h4
+{
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+.home-fourth-div h3
+{
+	color:#48871f;
+	font-weight:bold;
+}
+
+
+.home-fourth-div p
+{
+	color:#FFFFFF;
+	margin-top:20px;
+}
+
+.home-fourth-div a
+{
+	padding:10px;
+	color:#559827;
+	background-color:#FFFFFF;
+	border-radius:3px;
+}
