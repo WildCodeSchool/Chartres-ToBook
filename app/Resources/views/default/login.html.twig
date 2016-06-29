@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+
+{% block ariane %}
+
+	<div class="col-md-12 ariane">
+		<div class="col-md-1 ariane-back">
+			<h4>< Retour</h4>
+		</div>
+		<div class="col-md-11 ariane-content">
+			<a>Accueil</a> >
+			<a>Tobook</a> >
+			<a>Login</a>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block body %}
+
+	<div class="col-md-6 col-md-offset-3 main-div">
+		<img class="img-style-2" src="{{ asset('img/picto/logo-tobook.png') }}">
+
+		<h3><strong>JE ME CONNECTE</strong></h3>
+		<h4>__________</h4>
+		<br></br>
+
+		<div class="col-md-10 col-md-offset-1">
+			<form method="POST" action="">
+				<p class="left">Adresse mail</p>
+				<p><input type="text" class="input-style-3"></p>
+				<p class="left">Password</p>
+				<p><input type="text" class="input-style-3"></p>
+				<input type="submit" class="input-style-4 btn btn-success" value="CANCER">
+				<input type="submit" class="input-style-4 btn btn-success" value="CONNECT">
+			</form>
+		</div>
+
+		<div class="row">
+			<input type="submit" class="input-style-4 btn btn-success" value="PASSWORD LOSTED">
+		</div>
+
+		<h3><strong>JE NE SUIS PAS ENCORE INSCRIT</strong>
+		<h4>__________</h4></h3>
+		<input type="submit" class="input-style-4 btn btn-success" value="REGISTER">
+	</div>
+
+{% endblock %}
