@@ -1,0 +1,214 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+	<div class="col-md-12 search-first-div">
+
+		<img class="img-style-1" src="{{ asset('img/background/background-1.jpg') }}">
+
+		<div class="col-md-12 search-bar row">
+			<div class="col-md-7">
+				<input class="input-style-5" type="text" placeholder="Vendome">
+			</div>
+			<div class="col-md-4">
+				<select class="input-style-5">
+					<option>Hôtels</option>
+				</select>
+			</div>
+			<div class="col-md-1">
+				<input class="input-style-6 btn btn-success" type="submit" value="RECHERCHER">
+			</div>
+		</div>
+
+		<div class="col-md-12 result-bar row">
+			<h4>Résultats pour Vendome</h4>
+		</div>
+
+		<div class="col-md-12 search-map row">
+			{# VOTRE MAP ICI !!! #}
+		</div>
+	</div>
+
+	<div class="col-md-12 filter-bar">
+		<div class="col-md-2 col-md-offset-2">
+			<div class="filter-div">
+				<h4><strong>Classer par :</strong></h4>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<select class="input-style-5">
+				<option>Hôtels</option>
+			</select>
+		</div>
+		<div class="col-md-2">
+			<select class="input-style-5">
+				<option>Etoile</option>
+			</select>
+		</div>
+		<div class="col-md-2">
+			<select class="input-style-5">
+				<option>Notes</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="col-md-12 search-third-div border-1">
+		<div class="col-md-5 img-div row">
+			<img class="img-style-1" src="{{asset('img/background/hotel1.jpg') }}">
+		</div>
+		<div class="col-md-6 col-md-offset-1 text-div">
+			<h3><strong>HOTEL CAPRICORNE
+				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+			</strong></h3>
+			<h4>__________</h4>
+			<p>
+				L'hôtel Capricorne est un petit hôtel charmant dont presque toutes les chambres donnent sur un jardin et, très rare pour un hôtel de cette catégorie, propose es chaînes généralistes en...
+			</p>
+			<br></br>
+			<div class="col-md-12 row">
+				<div class="pull-left search-div-style" href="#">
+					<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
+				</div>
+				<div class="pull-left search-div-style" href="#">
+					à partir de: <strong>62.00 €</strong>
+				</div>
+				<a class="bouton-style-3 pull-right" href="#">
+					<strong>PLUS DE DETAILS</strong>
+				</a>
+			</div>
+			<div class="col-md-12 row">
+				<div class="pull-left search-div-style" href="#">
+					Evalué par <strong>25</strong> personnes
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12 search-third-div border-2">
+		<div class="col-md-6 text-div">
+			<h3><strong>HOTEL LE VENDOME
+			<img src="{{ asset('img/picto/jauge_star_1.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+			</strong></h3>
+			<h4>__________</h4>
+			<p>
+				L'hôtel Capricorne est un petit hôtel charmant dont presque toutes les chambres donnent sur un jardin et, très rare pour un hôtel de cette catégorie, propose es chaînes généralistes en...
+			</p>
+			<br></br>
+			<div class="col-md-12 row">
+				<div class="pull-left search-div-style" href="#">
+					<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
+				</div>
+				<div class="pull-left search-div-style" href="#">
+					à partir de: <strong>62.00 €</strong>
+				</div>
+				<a class="bouton-style-3 pull-right" href="#">
+					<strong>PLUS DE DETAILS</strong>
+				</a>
+			</div>
+			<div class="col-md-12 row">
+				<div class="pull-left search-div-style" href="#">
+					Evalué par <strong>25</strong> personnes
+				</div>
+			</div>
+		</div>
+		<div class="col-md-5 col-md-offset-1 img-div">
+			<img class="img-style-1" src="{{asset('img/background/hotel1.jpg') }}">
+		</div>
+	</div>
+
+	<div class="col-md-12 search-third-div border-1">
+		<div class="col-md-5 img-div row">
+			<img class="img-style-1" src="{{asset('img/background/hotel1.jpg') }}">
+		</div>
+		<div class="col-md-6 col-md-offset-1 text-div">
+			<h3><strong>HOTEL MERCATOR
+			<img src="{{ asset('img/picto/jauge_star_1.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+			</strong></h3>
+			<h4>__________</h4>
+			<p>
+				L'hôtel Capricorne est un petit hôtel charmant dont presque toutes les chambres donnent sur un jardin et, très rare pour un hôtel de cette catégorie, propose es chaînes généralistes en...
+			</p>
+			<br></br>
+			<div class="col-md-12 row">
+				<div class="pull-left search-div-style" href="#">
+					<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
+				</div>
+				<div class="pull-left search-div-style" href="#">
+					à partir de: <strong>62.00 €</strong>
+				</div>
+				<a class="bouton-style-3 pull-right" href="#">
+					<strong>PLUS DE DETAILS</strong>
+				</a>
+			</div>
+			<div class="col-md-12 row">
+				<div class="pull-left search-div-style" href="#">
+					Evalué par <strong>25</strong> personnes
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-12 search-third-div border-2">
+		<div class="col-md-6 text-div">
+			<h3><strong>LE SAINT GEORGES
+			<img src="{{ asset('img/picto/jauge_star_1.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+			</strong></h3>
+			<h4>__________</h4>
+			<p>
+				L'hôtel Capricorne est un petit hôtel charmant dont presque toutes les chambres donnent sur un jardin et, très rare pour un hôtel de cette catégorie, propose es chaînes généralistes en...
+			</p>
+			<br></br>
+			<div class="col-md-12 row">
+				<div class="pull-left search-div-style" href="#">
+					<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
+					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
+				</div>
+				<div class="pull-left search-div-style" href="#">
+					à partir de: <strong>62.00 €</strong>
+				</div>
+				<a class="bouton-style-3 pull-right" href="#">
+					<strong>PLUS DE DETAILS</strong>
+				</a>
+			</div>
+			<div class="col-md-12 row">
+				<div class="pull-left search-div-style" href="#">
+					Evalué par <strong>25</strong> personnes
+				</div>
+			</div>
+		</div>
+		<div class="col-md-5 col-md-offset-1 img-div">
+			<img class="img-style-1" src="{{asset('img/background/hotel1.jpg') }}">
+		</div>
+	</div>
+
+{% endblock %}
