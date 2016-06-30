@@ -1,0 +1,4 @@
+services:
+#    tobook.example:
+#        class: TobookBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

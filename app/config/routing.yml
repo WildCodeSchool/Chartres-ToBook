@@ -1,22 +1,26 @@
-frontend:
-    resource: "@FrontendBundle/Resources/config/routing.yml"
+wcssms:
+    resource: "@WCSSMSBundle/Resources/config/routing.yml"
+    prefix:   /
+
+wcs_rating:
+    resource: "@WCSRatingBundle/Resources/config/routing.yml"
+    prefix:   /
+
+wcs_property:
+    resource: "@WCSPropertyBundle/Resources/config/routing.yml"
+    prefix:   /
+
+wcs_content:
+    resource: "@WCSContentBundle/Resources/config/routing.yml"
+    prefix:   /
+
+tobook:
+    resource: "@TobookBundle/Resources/config/routing.yml"
     prefix:   /
 
 app:
-    resource: "@AppBundle/Controller/"
+    resource: "@UserBundle/Controller/"
     type:     annotation
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-
-user_login:
-    path:     /user/login
-    defaults: { _controller: AppBundle:Security:login }
-
-user_login_check:
-    path:     /user/login/check
-    defaults: { _controller: AppBundle:Security:check }
-
-user_register:
-    path:     /user/register
-    defaults: { _controller: AppBundle:Registration:register }

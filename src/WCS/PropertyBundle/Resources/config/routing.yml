@@ -1,0 +1,3 @@
+wcs_property_homepage:
+    path:     /
+    defaults: { _controller: WCSPropertyBundle:Default:index }
