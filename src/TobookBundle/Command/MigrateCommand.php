@@ -1,7 +1,7 @@
 <?php
-// src/WCS/GestyBundle/Command/MigrateCommand.php
+// src/TobookBundle/Command/MigrateCommand.php
 
-namespace AppBundle\Command;
+namespace TobookBundle\Command;
 
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
