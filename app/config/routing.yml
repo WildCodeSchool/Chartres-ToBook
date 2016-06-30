@@ -1,3 +1,7 @@
+tobook:
+    resource: "@TobookBundle/Resources/config/routing.yml"
+    prefix:   /
+
 wcssms:
     resource: "@WCSSMSBundle/Resources/config/routing.yml"
     prefix:   /
@@ -12,10 +16,6 @@ wcs_property:
 
 wcs_content:
     resource: "@WCSContentBundle/Resources/config/routing.yml"
-    prefix:   /
-
-tobook:
-    resource: "@TobookBundle/Resources/config/routing.yml"
     prefix:   /
 
 app:
