@@ -25,18 +25,34 @@
 		<br></br>
 
 		<div class="col-md-10 col-md-offset-1">
-			<form method="POST" action="">
-				<p class="left">Last name</p>
+			{% trans_default_domain 'FOSUserBundle' %}
+			{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register')}) }}
+				{{ form_label(form.username, form.username, {'label_attr': {'class': 'left'}}) }}
+			    {{ form_widget(form.username, {'attr': {'class': 'input-style-3'}}) }}
+				{{ form_label(form.email, form.email, {'label_attr': {'class': 'left'}}) }}
+			    {{ form_widget(form.email, {'attr': {'class': 'input-style-3'}}) }}			    
+				{{ form_label(form.plainPassword.first, form.plainPassword.first, {'label_attr': {'class': 'left'}}) }}
+			    {{ form_widget(form.plainPassword.first, {'attr': {'class': 'input-style-3'}}) }}	
+			    {{ form_label(form.plainPassword.second, form.plainPassword.second, {'label_attr': {'class': 'left'}}) }}
+			    {{ form_widget(form.plainPassword.second, {'attr': {'class': 'input-style-3'}}) }}			    
+			    <div>
+			        <input type="reset" value="Annuler" class="input-style-4 btn btn-success"/>
+			        <input type="submit" value="{{ 'registration.submit'|trans }}" class="input-style-4 btn btn-success"/>
+			    </div>
+			{{ form_end(form) }}
+
+{# 			<form method="POST" action="">
+				<p class="left">Nom</p>
 				<p><input type="text" class="input-style-3"></p>
-				<p class="left">First name</p>
+				<p class="left">Prénom</p>
 				<p><input type="text" class="input-style-3"></p>
 				<p class="left">Adresse mail</p>
 				<p><input type="text" class="input-style-3"></p>
-				<p class="left">Password</p>
+				<p class="left">Mot de passe</p>
 				<p><input type="text" class="input-style-3"></p>
-				<input type="submit" class="input-style-4 btn btn-success" value="CANCER">
-				<input type="submit" class="input-style-4 btn btn-success" value="CONNECT">
-			</form>
+				<input type="submit" class="input-style-4 btn btn-success" value="CANCEL">
+				<input type="submit" class="input-style-4 btn btn-success" value="CONNEXION">
+			</form> #}
 		</div>
 	</div>
 
