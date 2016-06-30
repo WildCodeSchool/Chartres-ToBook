@@ -1,0 +1,7 @@
+tobook_homepage:
+    path:     /
+    defaults: { _controller: TobookBundle:Default:index }
+
+tobook_search:
+    path:     /search
+    defaults: { _controller: TobookBundle:Default:search }
