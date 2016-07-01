@@ -31,17 +31,7 @@ class MigrateCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $file = $input->getArgument('file');
-        $em = $this->getContainer()->get('doctrine')->getManager();
-        if (!$this->askConfirmation($input, $output, '<question>Careful, database will be purged. Do you want to continue y/N ?</question>', false)) {
-            return;
-        }
-        $purger = new ORMPurger($em);
-        $purger->setPurgeMode(ORMPurger::PURGE_MODE_DELETE);
-        $executor = new ORMExecutor($em, $purger);
-        $executor->setLogger(function ($message) use ($output) {
-            $output->writeln(sprintf('  <comment>></comment> <info>%s</info>', $message));
-        });
-        $executor->purge();
+       
         // Load users
         $stream = fopen($file, 'r');
         $userManager = $this->getUserManager();
@@ -68,7 +58,7 @@ class MigrateCommand extends ContainerAwareCommand
             $userManager->updateUser($entity, true);
             $users[$data[0]] = $entity;
         }
-        $em->flush();
+
         $output->writeln(sprintf('  <comment>></comment> <info>%s users loaded</info>', count($users)));
 
         fclose($stream);
