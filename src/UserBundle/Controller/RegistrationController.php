@@ -59,7 +59,7 @@ class RegistrationController extends Controller
 
         if ($form->isValid()) {
             $event = new FormEvent($form, $request);
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+            
             
             // on récupère les données entrées dans le formulaire
             $formulaire = $this->getRequest()->request->all();
@@ -68,7 +68,9 @@ class RegistrationController extends Controller
             if ($formulaire['fos_user_registration_form']['userProf'] == 0){
                 $user->setEnabled(true);
             } else {
+                // enabled mis à false, c'est l'envoi du mail et le clic sur le lien qui activera le compte
                 $user->setEnabled(false);
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
             }
 
             $userManager->updateUser($user);
