@@ -27,6 +27,9 @@ class RegistrationType extends AbstractType
                     1 => 'Professionnel',
                     0 => 'Client',
                 ),
+            'multiple'  => false,
+            'expanded'  => true,
+            'required'  => true,
         ));
     }
 
