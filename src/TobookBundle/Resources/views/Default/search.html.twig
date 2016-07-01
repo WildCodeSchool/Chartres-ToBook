@@ -19,12 +19,17 @@
 				<input class="input-style-6 btn btn-success" type="submit" value="RECHERCHER">
 			</div>
 		</div>
-
+		<script type="text/javascript">
+		$(document).ready(function() {
+			initMap();
+			$('#resultatMap').text( address );
+		});
+		</script>
 		<div class="col-md-12 result-bar row">
-			<h4>Résultats pour Vendome</h4>
+			<h4>Résultats pour <span id="resultatMap">Vendome</span></h4>
 		</div>
 
-		<div class="col-md-12 search-map row">
+		<div  id="map" style="width:100%; height:500px;" class="col-md-12 search-map row">
 			{# VOTRE MAP ICI !!! #}
 		</div>
 	</div>
