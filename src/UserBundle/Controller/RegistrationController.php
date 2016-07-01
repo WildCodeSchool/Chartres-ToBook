@@ -44,7 +44,6 @@ class RegistrationController extends Controller
         $dispatcher = $this->get('event_dispatcher');
 
         $user = $userManager->createUser();
-        $user->setEnabled(true);
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
@@ -61,6 +60,16 @@ class RegistrationController extends Controller
         if ($form->isValid()) {
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+            
+            // on récupère les données entrées dans le formulaire
+            $formulaire = $this->getRequest()->request->all();
+
+            // on teste si l'utilisateur est un pro ou un client pour enabled son compte
+            if ($formulaire['fos_user_registration_form']['userProf'] == 0){
+                $user->setEnabled(true);
+            } else {
+                $user->setEnabled(false);
+            }
 
             $userManager->updateUser($user);
 
