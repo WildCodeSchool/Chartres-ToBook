@@ -1,0 +1,118 @@
+<?php
+// src/UserBundle/Entity/User.php
+
+namespace UserBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
+ */
+class User extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="user_prof", type="boolean", nullable=false)
+     */
+    private $userProf;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_session", type="bigint", nullable=false)
+     */
+    private $userSession;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="user_actif", type="boolean", nullable=false)
+     */
+    private $userActif;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_prenom", type="string", length=128, nullable=true)
+     */
+    private $userPrenom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_langue", type="string", length=4, nullable=false)
+     */
+    private $userLangue;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_add1", type="string", length=250, nullable=true)
+     */
+    private $userAdd1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_add2", type="string", length=250, nullable=true)
+     */
+    private $userAdd2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_cp", type="string", length=16, nullable=true)
+     */
+    private $userCp;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_ville", type="string", length=250, nullable=true)
+     */
+    private $userVille;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_tel", type="string", length=32, nullable=true)
+     */
+    private $userTel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_mob", type="string", length=32, nullable=true)
+     */
+    private $userMob;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="user_dt_nais", type="date", nullable=true)
+     */
+    private $userDtNais;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_descriptif", type="text", length=65535, nullable=true)
+     */
+    private $userDescriptif;
+
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
+}
