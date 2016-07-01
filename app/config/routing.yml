@@ -15,6 +15,10 @@ wcs_rating:
     resource: "@WCSRatingBundle/Resources/config/routing.yml"
     prefix:   /
 
+user_bundle:
+    resource: "@WCSRatingBundle/Resources/config/routing.yml"
+    prefix:   /
+
 wcs_property:
     resource: "@WCSPropertyBundle/Resources/config/routing.yml"
     prefix:   /

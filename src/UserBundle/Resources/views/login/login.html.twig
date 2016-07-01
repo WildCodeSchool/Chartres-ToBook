@@ -15,7 +15,14 @@
 
 {% endblock %}
 
+{% trans_default_domain 'FOSUserBundle' %}
+
 {% block body %}
+
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
 
 	<div class="col-md-6 col-md-offset-3 main-div">
 		<img class="img-style-2" src="{{ asset('img/picto/logo-tobook.png') }}">
@@ -25,18 +32,23 @@
 		<br></br>
 
 		<div class="col-md-10 col-md-offset-1">
-			<form method="POST" action="">
-				<p class="left">Adresse mail</p>
-				<p><input type="text" class="input-style-3"></p>
-				<p class="left">Password</p>
-				<p><input type="text" class="input-style-3"></p>
-				<input type="submit" class="input-style-4 btn btn-success" value="CANCER">
-				<input type="submit" class="input-style-4 btn btn-success" value="CONNECT">
+			<form action="{{ path("fos_user_security_check") }}" method="post">
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+				<label for="username" class="left">{{ ''|trans }}</label>
+				<input class="input-style-3" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+
+				<label class="left" for="password">{{ 'security.login.password'|trans }}</label>
+				<input class="input-style-3" type="password" id="password" name="_password" required="required" />
+
+				<input type="reset" class="input-style-4 btn btn-success" value="Cancel">
+				<input type="submit" class="input-style-4 btn btn-success" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+
 			</form>
 		</div>
 
 		<div class="row">
-			<input type="submit" class="input-style-4 btn btn-success" value="PASSWORD LOSTED">
+			<input type="submit" class="input-style-4 btn btn-success" value="Password Lost">
 		</div>
 
 		<h3><strong>JE NE SUIS PAS ENCORE INSCRIT</strong>
