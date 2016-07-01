@@ -27,20 +27,6 @@ class User extends BaseUser
     private $userProf;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="user_session", type="bigint", nullable=false)
-     */
-    private $userSession;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="user_actif", type="boolean", nullable=false)
-     */
-    private $userActif;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="user_prenom", type="string", length=128, nullable=true)
@@ -50,7 +36,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="user_langue", type="string", length=4, nullable=false)
+     * @ORM\Column(name="user_langue", type="string", length=4, nullable=true)
      */
     private $userLangue;
 
@@ -137,52 +123,6 @@ class User extends BaseUser
     public function getUserProf()
     {
         return $this->userProf;
-    }
-
-    /**
-     * Set userSession
-     *
-     * @param integer $userSession
-     * @return User
-     */
-    public function setUserSession($userSession)
-    {
-        $this->userSession = $userSession;
-
-        return $this;
-    }
-
-    /**
-     * Get userSession
-     *
-     * @return integer 
-     */
-    public function getUserSession()
-    {
-        return $this->userSession;
-    }
-
-    /**
-     * Set userActif
-     *
-     * @param boolean $userActif
-     * @return User
-     */
-    public function setUserActif($userActif)
-    {
-        $this->userActif = $userActif;
-
-        return $this;
-    }
-
-    /**
-     * Get userActif
-     *
-     * @return boolean 
-     */
-    public function getUserActif()
-    {
-        return $this->userActif;
     }
 
     /**
