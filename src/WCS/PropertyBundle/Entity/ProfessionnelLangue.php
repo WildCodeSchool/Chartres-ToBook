@@ -1,6 +1,6 @@
 <?php
 
-namespace TobookBundle\Entity;
+namespace PropertyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
