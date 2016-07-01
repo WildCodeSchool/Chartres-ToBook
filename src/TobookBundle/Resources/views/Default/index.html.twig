@@ -9,8 +9,8 @@
 
 		<h3>Servez-vous !</h3>
 
-		<form method="POST" action="">
-			<input type="text" placeholder="Ville / Code postal" class="input-style-1">
+		<form method="POST" action="{{ path('tobook_search') }}">
+			<input id="autocomplete" type="text" onfocus="initautocomplete()" placeholder="Ville / Code postal" class="input-style-1">
 			<select class="input-style-1">
 				<option>Hôtels</option>
 			</select>

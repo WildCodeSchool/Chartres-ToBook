@@ -6,9 +6,9 @@
 
 		<img class="img-style-1" src="{{ asset('img/background/background-1.jpg') }}">
 
-		<div class="col-md-12 search-bar row">
+		<form method="POST" action="{{ path('tobook_search') }}" class="col-md-12 search-bar row">
 			<div class="col-md-7">
-				<input class="input-style-5" type="text" placeholder="Vendome">
+				<input id="autocomplete" class="input-style-5" onfocus="initautocomplete()" type="text" placeholder="Entrez votre recherche">
 			</div>
 			<div class="col-md-4">
 				<select class="input-style-5">
@@ -18,7 +18,7 @@
 			<div class="col-md-1">
 				<input class="input-style-6 btn btn-success" type="submit" value="RECHERCHER">
 			</div>
-		</div>
+		</form>
 		<script type="text/javascript">
 		$(document).ready(function() {
 			initMap();

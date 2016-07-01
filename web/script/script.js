@@ -39,7 +39,7 @@ function geolocate() {
   }
 }
 
-*
+/*
 * author - Kennouche Omar Wild Code School Session 1
 */
 
