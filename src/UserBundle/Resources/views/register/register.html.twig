@@ -27,8 +27,12 @@
 		<div class="col-md-10 col-md-offset-1">
 			{% trans_default_domain 'FOSUserBundle' %}
 			{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register')}) }}
-				{{ form_label(form.username, form.username, {'label_attr': {'class': 'left'}}) }}
+				{{ form_label(form.userProf, 'Je suis ?'|trans, {'label_attr': {'class': 'left'}}) }}			    
+			    {{ form_widget(form.userProf, {'attr': {'class': 'input-style-3'}}) }}			
+				{{ form_label(form.username, 'Nom'|trans, {'label_attr': {'class': 'left'}}) }}
 			    {{ form_widget(form.username, {'attr': {'class': 'input-style-3'}}) }}
+			    {{ form_label(form.userPrenom, 'Prénom'|trans, {'label_attr': {'class': 'left'}}) }}
+			    {{ form_widget(form.userPrenom, {'attr': {'class': 'input-style-3'}}) }}
 				{{ form_label(form.email, form.email, {'label_attr': {'class': 'left'}}) }}
 			    {{ form_widget(form.email, {'attr': {'class': 'input-style-3'}}) }}			    
 				{{ form_label(form.plainPassword.first, form.plainPassword.first, {'label_attr': {'class': 'left'}}) }}
