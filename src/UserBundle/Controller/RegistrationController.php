@@ -65,7 +65,7 @@ class RegistrationController extends Controller
             $userManager->updateUser($user);
 
             if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('fos_user_registration_confirmed');
+                $url = $this->generateUrl('user_registration_confirmed');
                 $response = new RedirectResponse($url);
             }
 
@@ -83,7 +83,7 @@ class RegistrationController extends Controller
      * Tell the user to check his email provider
      */
     /**
-    * @Route("/user/login/check", name="user_login_check")
+    * @Route("/user/register/check", name="user_registration_check")
     */    
     public function checkEmailAction()
     {
@@ -103,6 +103,9 @@ class RegistrationController extends Controller
     /**
      * Receive the confirmation token from user email provider, login the user
      */
+    /**
+    * @Route("/user/register/confirm", name="user_registration_confirm")
+    */   
     public function confirmAction(Request $request, $token)
     {
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -126,7 +129,7 @@ class RegistrationController extends Controller
         $userManager->updateUser($user);
 
         if (null === $response = $event->getResponse()) {
-            $url = $this->generateUrl('fos_user_registration_confirmed');
+            $url = $this->generateUrl('user_registration_confirmed');
             $response = new RedirectResponse($url);
         }
 
@@ -138,6 +141,9 @@ class RegistrationController extends Controller
     /**
      * Tell the user his account is now confirmed
      */
+    /**
+    * @Route("/user/register/confirmed", name="user_registration_confirmed")
+    */   
     public function confirmedAction()
     {
         $user = $this->getUser();
