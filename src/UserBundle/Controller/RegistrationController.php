@@ -106,7 +106,7 @@ class RegistrationController extends Controller
             throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $email));
         }
 
-        return $this->render('FOSUserBundle:Registration:checkEmail.html.twig', array(
+        return $this->render('UserBundle:register:checkEmail.html.twig', array(
             'user' => $user,
         ));
     }
@@ -153,7 +153,7 @@ class RegistrationController extends Controller
      * Tell the user his account is now confirmed
      */
     /**
-    * @Route("/user/register/confirmed", name="user_registration_confirmed")
+    * @Route("/register/confirmed", name="user_registration_confirmed")
     */   
     public function confirmedAction()
     {
@@ -162,7 +162,7 @@ class RegistrationController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        return $this->render('FOSUserBundle:Registration:confirmed.html.twig', array(
+        return $this->render('UserBundle:register:confirmed.html.twig', array(
             'user' => $user,
             'targetUrl' => $this->getTargetUrlFromSession(),
         ));
