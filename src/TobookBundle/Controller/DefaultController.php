@@ -22,32 +22,32 @@ class DefaultController extends Controller
         $etoiles = $request->request->get('etoiles');
         $notes = $request->request->get('note');
 
-        $order = "";
+        $order = array();
 
         switch ($prix) {
             case "asc":
-                $order = array("prof_prix_mini" )=> "asc");
+                $order = array("prof_prix_mini" => "asc");
                 break;
             case "desc":
-                $order = array("prof_prix_mini" )=> "desc");
+                $order = array("prof_prix_mini" => "desc");
                 break;
         } 
 
         switch ($etoiles) {
             case "asc":
-                $order = array("prof_etoiles" )=> "asc");
+                $order = array("prof_etoiles" => "asc");
                 break;
             case "desc":
-                $order = array("prof_etoiles" )=> "desc");
+                $order = array("prof_etoiles" => "desc");
                 break;
         } 
 
         switch ($notes) {
             case "asc":
-                $order = array("prof_etoiles" )=> "asc");
+                $order = array("prof_etoiles" => "asc");
                 break;
             case "desc":
-                $order = array("prof_etoiles" )=> "desc");
+                $order = array("prof_etoiles" => "desc");
                 break;
         } 
         $criteria = array();
@@ -58,7 +58,7 @@ class DefaultController extends Controller
         // replace this example code with whatever you need
         return $this->render('TobookBundle:Default:search.html.twig', array(
             'base_dir'  => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'resultats'    => $resultats,
+            'resultats' => $resultats,
         ));
     }  
 
