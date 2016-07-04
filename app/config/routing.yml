@@ -2,20 +2,16 @@ tobook:
     resource: "@TobookBundle/Resources/config/routing.yml"
     prefix:   /
 
-app:
+user:
     resource: "@UserBundle/Controller/"
     type:     annotation
     prefix:   /
 
-wcssms:
+wcs_sms:
     resource: "@WCSSMSBundle/Resources/config/routing.yml"
     prefix:   /
 
 wcs_rating:
-    resource: "@WCSRatingBundle/Resources/config/routing.yml"
-    prefix:   /
-
-user_bundle:
     resource: "@WCSRatingBundle/Resources/config/routing.yml"
     prefix:   /
 
