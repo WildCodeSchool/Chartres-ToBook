@@ -29,8 +29,8 @@
 			{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register')}) }}
 				{{ form_label(form.userProf, 'Je suis ?'|trans, {'label_attr': {'class': 'left'}}) }}			    
 			    {{ form_widget(form.userProf, {'attr': {'class': 'input-style-3'}}) }}			
-				{{ form_label(form.username, 'Nom'|trans, {'label_attr': {'class': 'left'}}) }}
-			    {{ form_widget(form.username, {'attr': {'class': 'input-style-3'}}) }}
+				{{ form_label(form.userNom, 'Nom'|trans, {'label_attr': {'class': 'left'}}) }}
+			    {{ form_widget(form.userNom, {'attr': {'class': 'input-style-3'}}) }}
 			    {{ form_label(form.userPrenom, 'Prénom'|trans, {'label_attr': {'class': 'left'}}) }}
 			    {{ form_widget(form.userPrenom, {'attr': {'class': 'input-style-3'}}) }}
 				{{ form_label(form.email, form.email, {'label_attr': {'class': 'left'}}) }}
@@ -44,19 +44,6 @@
 			        <input type="submit" value="{{ 'registration.submit'|trans }}" class="input-style-4 btn btn-success"/>
 			    </div>
 			{{ form_end(form) }}
-
-{# 			<form method="POST" action="">
-				<p class="left">Nom</p>
-				<p><input type="text" class="input-style-3"></p>
-				<p class="left">Prénom</p>
-				<p><input type="text" class="input-style-3"></p>
-				<p class="left">Adresse mail</p>
-				<p><input type="text" class="input-style-3"></p>
-				<p class="left">Mot de passe</p>
-				<p><input type="text" class="input-style-3"></p>
-				<input type="submit" class="input-style-4 btn btn-success" value="CANCEL">
-				<input type="submit" class="input-style-4 btn btn-success" value="CONNEXION">
-			</form> #}
 		</div>
 	</div>
 

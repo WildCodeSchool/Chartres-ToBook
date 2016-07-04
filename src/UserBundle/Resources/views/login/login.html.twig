@@ -35,7 +35,7 @@
 			<form action="{{ path("fos_user_security_check") }}" method="post">
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-				<label for="username" class="left">{{ ''|trans }}</label>
+				<label for="username" class="left">{{ 'Email'|trans }}</label>
 				<input class="input-style-3" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
 
 				<label class="left" for="password">{{ 'security.login.password'|trans }}</label>

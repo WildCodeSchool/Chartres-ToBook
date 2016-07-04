@@ -367,27 +367,4 @@ class User extends BaseUser
     {
         return $this->userDescriptif;
     }
-
-    /**
-     * Set userNom
-     *
-     * @param string $userNom
-     * @return User
-     */
-    public function setUserNom($userNom)
-    {
-        $this->userNom = $userNom;
-
-        return $this;
-    }
-
-    /**
-     * Get userNom
-     *
-     * @return string 
-     */
-    public function getUserNom()
-    {
-        return $this->userNom;
-    }
 }
