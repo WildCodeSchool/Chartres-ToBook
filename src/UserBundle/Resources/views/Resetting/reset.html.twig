@@ -25,9 +25,18 @@
         <br></br>
 
         <div class="col-md-10 col-md-offset-1">
-        	<p>Un email vient d'être envoyé à l'adresse suivante : {{user.email}}</p>
+        	{% trans_default_domain 'FOSUserBundle' %}
+
+			{{ form_start(form, { 'action': path('user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+			    {{ form_widget(form) }}
+			    <div>
+			        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+			    </div>
+			{{ form_end(form) }}
+			</div>
 		</div>
-	</div>
 
 
 {% endblock %}
+
+
