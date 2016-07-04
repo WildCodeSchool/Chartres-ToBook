@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block ariane %}
+
+	<div class="col-md-12 ariane">
+		<div class="col-md-1 ariane-back">
+			<h4>< Retour</h4>
+		</div>
+		<div class="col-md-11 ariane-content">
+			<a>Accueil</a> >
+			<a>Tobook</a> >
+			<a>Login</a>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block body %}
+
+	<div class="col-md-6 col-md-offset-3 main-div-register">
+		<img class="img-style-2" src="{{ asset('img/picto/logo-tobook.png') }}">
+
+		<h3><strong>JE M'INSCRIS</strong></h3>
+		<h4>__________</h4>
+		<br></br>
+
+		<div class="col-md-10 col-md-offset-1">
+			<p> Félicitations,vous venez de recevoir un mail à l'adresse : <b>{{ user.email }}</b> </p>
+		</div>
+	</div>
+
+{% endblock %}
