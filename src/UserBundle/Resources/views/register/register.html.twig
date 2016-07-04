@@ -26,7 +26,7 @@
 
 		<div class="col-md-10 col-md-offset-1">
 			{% trans_default_domain 'FOSUserBundle' %}
-			{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register')}) }}
+			{{ form_start(form, {'method': 'post', 'action': path('user_register')}) }}
 				{{ form_label(form.userProf, 'Je suis ?'|trans, {'label_attr': {'class': 'left'}}) }}			    
 			    {{ form_widget(form.userProf, {'attr': {'class': 'input-style-3'}}) }}			
 				{{ form_label(form.userNom, 'Nom'|trans, {'label_attr': {'class': 'left'}}) }}

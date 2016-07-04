@@ -8,3 +8,9 @@ services:
         class: UserBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
+
+    fos_user.listener.email_confirmation:
+        class:        "UserBundle\EventListener\EmailConfirmationListener"
+        arguments:    ["@fos_user.mailer", "@fos_user.util.token_generator", "@router", "@session"]
+        tags:
+            - { name: kernel.event_subscriber }
