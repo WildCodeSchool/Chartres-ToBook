@@ -13,6 +13,7 @@
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">
 
         {% block javascript %}
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHW8RuM2GARduKFEHWK-yItzoWymc81CU&signed_in=true&libraries=places" async defer></script>
         <script type="text/javascript" src="{{ asset('script/script.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/jquery-1.11.0.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/jquery.leanModal.min.js') }}"></script> 
@@ -23,7 +24,6 @@
         <script type="text/javascript" src="{{ asset('script/main.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/jquery.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/bootstrap.js') }}"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHW8RuM2GARduKFEHWK-yItzoWymc81CU&signed_in=true&libraries=places" async defer></script>
         {% endblock javascript %}
   
     </head>
