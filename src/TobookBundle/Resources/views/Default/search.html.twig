@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'TobookBundle::base.html.twig' %}
 
 {% block body %}
 
@@ -44,26 +44,36 @@
 				<h4><strong>Classer par :</strong></h4>
 			</div>
 		</div>
-		<div class="col-md-2">
-			<select class="input-style-5">
-				<option>Prix</option>
-				<option value="">Les plus chers</option>
-				<option value="">Les plus économiques</option>
-			</select>
-		</div>
-		<div class="col-md-2">
-			<select class="input-style-5">
-				<option>Etoile</option>
-				<option value="">Par ordre croissant</option>
-				<option value="">Par ordre décroissant </option>				
-			</select>
-		</div>
-		<div class="col-md-2">
-			<select class="input-style-5">
-				<option>Notes</option>
-				<option value="">Les plus appréciés par l'utilisateur</option>				
-			</select>
-		</div>
+		<form id="tri" name="tri" methode="get" action="{{ path('tobook_search') }}">
+			<div class="col-md-2">
+				<select id="tri-prix" name="prix" class="input-style-5">
+					<option value="">Prix</option>
+					<option value="desc">Les plus chers</option>
+					<option value="asc">Les plus économiques</option>
+				</select>
+			</div>
+			<div class="col-md-2">
+				<select id="tri-etoiles" name="etoiles" class="input-style-5">
+					<option value="">Etoile</option>
+					<option value="desc">Par ordre croissant</option>
+					<option value="asc">Par ordre décroissant </option>				
+				</select>
+			</div>
+			<div class="col-md-2">
+				<select id="tri-note" name="note" class="input-style-5">
+					<option value="">Notes</option>
+					<option value="desc">Les plus appréciés par l'utilisateur</option>				
+					<option value="asc">Les moins appréciés par l'utilisateur</option>				
+				</select>
+			</div>
+		</form>
+		<script type="text/javascript">
+		    $('#tri div select').change(function(){
+		        alert( $(this).attr('name') +' ' + $(this).find("option:selected").attr('value') );
+		        //$("#tri").submit();
+		        this.form.submit();
+		    });
+		</script>
 	</div>
 
 {% for resultat in resultats %}

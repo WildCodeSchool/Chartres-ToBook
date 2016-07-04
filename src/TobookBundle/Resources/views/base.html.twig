@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+
+        <title>ToBook</title>
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('img/picto/logo-tobook.png') }}" />
+
+        <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap.css') }}">
+        <link type="text/css" rel="stylesheet" href="{{asset('css/style.css') }}">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHW8RuM2GARduKFEHWK-yItzoWymc81CU&signed_in=true&libraries=places" async defer></script>
+        <script type="text/javascript" src="{{ asset('script/script.js') }}"></script>
+
+        <script type="text/javascript" src="{{ asset('script/jquery-1.11.0.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('script/jquery.leanModal.min.js') }}"></script> 
+        <script type="text/javascript" src="{{ asset('script/jquery.dependClass.js') }}"></script> 
+        <script type="text/javascript" src="{{ asset('script/jquery.scrolly.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('script/skel.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('script/util.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('script/main.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('script/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('script/bootstrap.js') }}"></script>
+  
+    </head>
+    <body>
+        {% block navbar %}{% include ('TobookBundle:navbar:navbar.html.twig') %}{% endblock %}
+        
+        {% block ariane %}{% endblock %}
+
+        </div>
+
+        {% block body %}{% endblock %}
+
+        <div class="col-md-12 footer">
+        </div>
+    </body>
+</html>
