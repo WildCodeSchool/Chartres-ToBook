@@ -24,7 +24,7 @@
         <img src="{{ asset('img/picto/icon-facebook.png') }}" alt="Logo Facebook" title="Suivez-nous sur Facebook" class="vertialimid" />
     </a>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <span>Bienvenue {{ app.user.username }}</span>
+        <span>Bienvenue {{ app.user.userPrenom }} {{ app.user.userNom }}</span>
     {% else %}
         <a href="{{ path('user_register') }}" class="btn btnsansrien"><span>{{ 'S\'INSCRIRE'|trans }}</span></a>
         <a href="{{ path('user_login') }}"><span>{{ 'SE CONNECTER'|trans }}</span></a>
