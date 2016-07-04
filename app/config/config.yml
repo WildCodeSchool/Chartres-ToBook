@@ -79,3 +79,8 @@ fos_user:
             type: UserBundle\Form\RegistrationType 
         confirmation:
             enabled: true
+    resetting:
+        email:
+            from_email:
+                address:        clubtobook@gmail.com
+                sender_name:    Reset password

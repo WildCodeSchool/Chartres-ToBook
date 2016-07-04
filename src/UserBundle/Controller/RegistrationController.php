@@ -44,7 +44,6 @@ class RegistrationController extends Controller
         $dispatcher = $this->get('event_dispatcher');
 
         $user = $userManager->createUser();
-        $user->setEnabled(true);
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
@@ -60,12 +59,24 @@ class RegistrationController extends Controller
 
         if ($form->isValid()) {
             $event = new FormEvent($form, $request);
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+            
+            
+            // on récupère les données entrées dans le formulaire
+            $formulaire = $this->getRequest()->request->all();
+
+            // on teste si l'utilisateur est un pro ou un client pour enabled son compte
+            if ($formulaire['fos_user_registration_form']['userProf'] == 0){
+                $user->setEnabled(true);
+            } else {
+                // enabled mis à false, c'est l'envoi du mail et le clic sur le lien qui activera le compte
+                $user->setEnabled(false);
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+            }
 
             $userManager->updateUser($user);
 
             if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('fos_user_registration_confirmed');
+                $url = $this->generateUrl('user_registration_confirmed');
                 $response = new RedirectResponse($url);
             }
 
@@ -83,7 +94,7 @@ class RegistrationController extends Controller
      * Tell the user to check his email provider
      */
     /**
-    * @Route("/user/login/check", name="user_login_check")
+    * @Route("/user/register/check", name="user_registration_check")
     */    
     public function checkEmailAction()
     {
@@ -95,7 +106,7 @@ class RegistrationController extends Controller
             throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $email));
         }
 
-        return $this->render('FOSUserBundle:Registration:checkEmail.html.twig', array(
+        return $this->render('UserBundle:register:checkEmail.html.twig', array(
             'user' => $user,
         ));
     }
@@ -103,6 +114,9 @@ class RegistrationController extends Controller
     /**
      * Receive the confirmation token from user email provider, login the user
      */
+    /**
+    * @Route("/user/register/confirm", name="user_registration_confirm")
+    */   
     public function confirmAction(Request $request, $token)
     {
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -126,7 +140,7 @@ class RegistrationController extends Controller
         $userManager->updateUser($user);
 
         if (null === $response = $event->getResponse()) {
-            $url = $this->generateUrl('fos_user_registration_confirmed');
+            $url = $this->generateUrl('user_registration_confirmed');
             $response = new RedirectResponse($url);
         }
 
@@ -138,6 +152,9 @@ class RegistrationController extends Controller
     /**
      * Tell the user his account is now confirmed
      */
+    /**
+    * @Route("/register/confirmed", name="user_registration_confirmed")
+    */   
     public function confirmedAction()
     {
         $user = $this->getUser();
@@ -145,7 +162,7 @@ class RegistrationController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        return $this->render('FOSUserBundle:Registration:confirmed.html.twig', array(
+        return $this->render('UserBundle:register:confirmed.html.twig', array(
             'user' => $user,
             'targetUrl' => $this->getTargetUrlFromSession(),
         ));

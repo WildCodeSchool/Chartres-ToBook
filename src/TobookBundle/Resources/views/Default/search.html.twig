@@ -11,12 +11,16 @@
 				<input id="autocomplete" class="input-style-5" onfocus="initautocomplete()" type="text" placeholder="Entrez votre recherche">
 			</div>
 			<div class="col-md-4">
-				<select class="input-style-5">
-					<option>Hôtels</option>
+				<select class="input-style-5" name="category">
+					<option value='3' >Chambres d'hotes</option>
+					<option value='2' >Gîtes</option>
+					<option value='1' selected>Hôtels</option>
+					<option value='8' >Musés</option>
+					<option value='5' >Restaurants</option>
 				</select>
 			</div>
 			<div class="col-md-1">
-				<input class="input-style-6 btn btn-success" type="submit" value="RECHERCHER">
+				<input class="input-style-6 btn btn-success" type="submit" value="Rechecrher">
 			</div>
 		</form>
 		<script type="text/javascript">
@@ -42,27 +46,34 @@
 		</div>
 		<div class="col-md-2">
 			<select class="input-style-5">
-				<option>Hôtels</option>
+				<option>Prix</option>
+				<option value="">Les plus chers</option>
+				<option value="">Les plus économiques</option>
 			</select>
 		</div>
 		<div class="col-md-2">
 			<select class="input-style-5">
 				<option>Etoile</option>
+				<option value="">Par ordre croissant</option>
+				<option value="">Par ordre décroissant </option>				
 			</select>
 		</div>
 		<div class="col-md-2">
 			<select class="input-style-5">
 				<option>Notes</option>
+				<option value="">Les plus appréciés par l'utilisateur</option>				
 			</select>
 		</div>
 	</div>
 
+{% for resultat in resultats %}
+	{% if loop.index is odd %}
 	<div class="col-md-12 search-third-div border-1">
 		<div class="col-md-5 img-div row">
 			<img class="img-style-1" src="{{asset('img/background/hotel1.jpg') }}">
 		</div>
 		<div class="col-md-6 col-md-offset-1 text-div">
-			<h3><strong>HOTEL CAPRICORNE
+			<h3><strong>{{ resultat.profNom }}
 				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
 				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
 				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
@@ -70,9 +81,7 @@
 				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
 			</strong></h3>
 			<h4>__________</h4>
-			<p>
-				L'hôtel Capricorne est un petit hôtel charmant dont presque toutes les chambres donnent sur un jardin et, très rare pour un hôtel de cette catégorie, propose es chaînes généralistes en...
-			</p>
+			<p>{{ resultat.profDescriptif }}</p>
 			<br></br>
 			<div class="col-md-12 row">
 				<div class="pull-left search-div-style" href="#">
@@ -83,10 +92,10 @@
 					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
 				</div>
 				<div class="pull-left search-div-style" href="#">
-					à partir de: <strong>62.00 €</strong>
+					à partir de: <strong>{{ resultat.profPrixMini }} €</strong>
 				</div>
 				<a class="bouton-style-3 pull-right" href="#">
-					<strong>PLUS DE DETAILS</strong>
+					<strong>Plus de details</strong>
 				</a>
 			</div>
 			<div class="col-md-12 row">
@@ -96,9 +105,12 @@
 			</div>
 		</div>
 	</div>
+
+	{% else %}
+
 	<div class="col-md-12 search-third-div border-2">
 		<div class="col-md-6 text-div">
-			<h3><strong>HOTEL LE VENDOME
+			<h3><strong>{{ resultat.profNom }}
 			<img src="{{ asset('img/picto/jauge_star_1.png') }}">
 				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
 				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
@@ -106,9 +118,7 @@
 				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
 			</strong></h3>
 			<h4>__________</h4>
-			<p>
-				L'hôtel Capricorne est un petit hôtel charmant dont presque toutes les chambres donnent sur un jardin et, très rare pour un hôtel de cette catégorie, propose es chaînes généralistes en...
-			</p>
+			<p>{{ resultat.profDescriptif }}</p>
 			<br></br>
 			<div class="col-md-12 row">
 				<div class="pull-left search-div-style" href="#">
@@ -119,10 +129,10 @@
 					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
 				</div>
 				<div class="pull-left search-div-style" href="#">
-					à partir de: <strong>62.00 €</strong>
+					à partir de: <strong>{{ resultat.profPrixMini }} €</strong>
 				</div>
 				<a class="bouton-style-3 pull-right" href="#">
-					<strong>PLUS DE DETAILS</strong>
+					<strong>Plus de details</strong>
 				</a>
 			</div>
 			<div class="col-md-12 row">
@@ -135,85 +145,7 @@
 			<img class="img-style-1" src="{{asset('img/background/hotel1.jpg') }}">
 		</div>
 	</div>
-
-	<div class="col-md-12 search-third-div border-1">
-		<div class="col-md-5 img-div row">
-			<img class="img-style-1" src="{{asset('img/background/hotel1.jpg') }}">
-		</div>
-		<div class="col-md-6 col-md-offset-1 text-div">
-			<h3><strong>HOTEL MERCATOR
-			<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-			</strong></h3>
-			<h4>__________</h4>
-			<p>
-				L'hôtel Capricorne est un petit hôtel charmant dont presque toutes les chambres donnent sur un jardin et, très rare pour un hôtel de cette catégorie, propose es chaînes généralistes en...
-			</p>
-			<br></br>
-			<div class="col-md-12 row">
-				<div class="pull-left search-div-style" href="#">
-					<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
-					<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
-					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
-					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
-					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
-				</div>
-				<div class="pull-left search-div-style" href="#">
-					à partir de: <strong>62.00 €</strong>
-				</div>
-				<a class="bouton-style-3 pull-right" href="#">
-					<strong>PLUS DE DETAILS</strong>
-				</a>
-			</div>
-			<div class="col-md-12 row">
-				<div class="pull-left search-div-style" href="#">
-					Evalué par <strong>25</strong> personnes
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col-md-12 search-third-div border-2">
-		<div class="col-md-6 text-div">
-			<h3><strong>LE SAINT GEORGES
-			<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-			</strong></h3>
-			<h4>__________</h4>
-			<p>
-				L'hôtel Capricorne est un petit hôtel charmant dont presque toutes les chambres donnent sur un jardin et, très rare pour un hôtel de cette catégorie, propose es chaînes généralistes en...
-			</p>
-			<br></br>
-			<div class="col-md-12 row">
-				<div class="pull-left search-div-style" href="#">
-					<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
-					<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
-					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
-					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
-					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
-				</div>
-				<div class="pull-left search-div-style" href="#">
-					à partir de: <strong>62.00 €</strong>
-				</div>
-				<a class="bouton-style-3 pull-right" href="#">
-					<strong>PLUS DE DETAILS</strong>
-				</a>
-			</div>
-			<div class="col-md-12 row">
-				<div class="pull-left search-div-style" href="#">
-					Evalué par <strong>25</strong> personnes
-				</div>
-			</div>
-		</div>
-		<div class="col-md-5 col-md-offset-1 img-div">
-			<img class="img-style-1" src="{{asset('img/background/hotel1.jpg') }}">
-		</div>
-	</div>
+{% endif %}
+{% endfor %}
 
 {% endblock %}

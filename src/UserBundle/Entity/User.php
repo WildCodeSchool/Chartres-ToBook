@@ -36,6 +36,13 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="user_nom", type="string", length=128, nullable=true)
+     */
+    private $userNom;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="user_langue", type="string", length=4, nullable=true)
      */
     private $userLangue;
@@ -100,6 +107,12 @@ class User extends BaseUser
     {
         parent::__construct();
         // your own logic
+    }
+
+    public function setEmail($email)
+    {
+        parent::setEmail($email);
+        $this->setUsername($email);
     }
 
     /**
@@ -353,5 +366,28 @@ class User extends BaseUser
     public function getUserDescriptif()
     {
         return $this->userDescriptif;
+    }
+
+    /**
+     * Set userNom
+     *
+     * @param string $userNom
+     * @return User
+     */
+    public function setUserNom($userNom)
+    {
+        $this->userNom = $userNom;
+
+        return $this;
+    }
+
+    /**
+     * Get userNom
+     *
+     * @return string 
+     */
+    public function getUserNom()
+    {
+        return $this->userNom;
     }
 }
