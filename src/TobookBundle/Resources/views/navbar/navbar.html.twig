@@ -43,7 +43,7 @@
             <li><a href='#'>Mes Favoris</a></li>
             <li><a href='#'>Mes paramètres</a></li>
         </ul>
-        <ul class="actions vertical">
+        <ul class="actions vertical" style="list-style:none;">
             <li><a href="{{ path('fos_user_security_logout') }}" class="btn btnsansrien button fit"><span>SE DECONNECTER</span></a></li>
         </ul>
     {% else %}
@@ -53,7 +53,7 @@
             <li><a href='#'>Mes Favoris</a></li>
             <li><a href='#'>Mes paramètres</a></li>
         </ul>
-        <ul class="actions vertical">
+        <ul class="actions vertical" style="list-style:none;">
             <li><a href="{{ path ('user_register') }}" class="btn btnsansrien button fit special"><span>S'INSCRIRE</span></a></li>
             <li><a href="{{ path('user_login') }}" class="btn btnsansrien button fit"><span>SE CONNECTER</span></a></li>
         </ul>

@@ -68,7 +68,7 @@ longitudeSearch = parseFloat(localStorage.getItem('longitude'));
 
 function initMap() {
   
-  marker_path = "http://localhost/Tobook-Chartres/web/img/marker_map/tobook.png"
+  marker_path = "http://80.67.190.233/web/Chartres-ToBook/web/img/marker_map/tobook.png"
 
   var myLatLng = {lat: latitudeSearch, lng: longitudeSearch};
 
