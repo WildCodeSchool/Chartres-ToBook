@@ -26,6 +26,10 @@ bleu foncé = #3a4e5a
 	margin:auto;
 }
 
+.home-first-div {
+	height:100vh;
+}
+
 
 
 /* HEADER navbar */
@@ -242,10 +246,240 @@ body {
 }
 
 
+/* Menu */
 
+#menu {
+    background-color: #545669;
+    color: #e5e5e8;
+    -moz-transform: translateX(20em);
+    -webkit-transform: translateX(20em);
+    -ms-transform: translateX(20em);
+    transform: translateX(20em);
+    -moz-transition: -moz-transform 0.5s ease, box-shadow 0.5s ease, visibility 0.5s;
+    -webkit-transition: -webkit-transform 0.5s ease, box-shadow 0.5s ease, visibility 0.5s;
+    -ms-transition: -ms-transform 0.5s ease, box-shadow 0.5s ease, visibility 0.5s;
+    transition: transform 0.5s ease, box-shadow 0.5s ease, visibility 0.5s;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: none;
+    height: 100%;
+    max-width: 80%;
+    overflow-y: auto;
+    padding: 3em 2em;
+    position: fixed;
+    right: 0;
+    text-transform: uppercase;
+    top: 0;
+    visibility: hidden;
+    width: 20em;
+    z-index: 10002;
+}
 
+#menu input, #menu select, #menu textarea {
+    color: #ffffff;
+}
 
+#menu a {
+    color: #76C8B7;
+}
 
+#menu strong, #menu b {
+    color: #ffffff;
+}
+
+#menu h1, #menu h2, #menu h3, #menu h4, #menu h5, #menu h6 {
+    color: #ffffff;
+}
+
+#menu h1.major:after, #menu h2.major:after, #menu h3.major:after, #menu h4.major:after, #menu h5.major:after, #menu h6.major:after {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#menu blockquote {
+    border-left-color: rgba(0, 0, 0, 0.3);
+}
+
+#menu code {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+#menu hr {
+    border-bottom-color: rgba(0, 0, 0, 0.3);
+}
+
+#menu input[type="submit"],
+#menu input[type="reset"],
+#menu input[type="button"],
+#menu button,
+#menu .button {
+    background-color: transparent;
+    border-color: rgba(0, 0, 0, 0.3);
+    color: #ffffff !important;
+}
+
+#menu input[type="submit"]:hover,
+#menu input[type="reset"]:hover,
+#menu input[type="button"]:hover,
+#menu button:hover,
+#menu .button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#menu input[type="submit"]:active,
+#menu input[type="reset"]:active,
+#menu input[type="button"]:active,
+#menu button:active,
+#menu .button:active {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#menu input[type="submit"].icon:before,
+#menu input[type="reset"].icon:before,
+#menu input[type="button"].icon:before,
+#menu button.icon:before,
+#menu .button.icon:before {
+    color: #ffffff;
+}
+
+#menu input[type="submit"].special,
+#menu input[type="reset"].special,
+#menu input[type="button"].special,
+#menu button.special,
+#menu .button.special {
+    border: none;
+    background-color: #66B32F;
+    color: #ffffff !important;
+}
+
+#menu input[type="submit"].special:hover,
+#menu input[type="reset"].special:hover,
+#menu input[type="button"].special:hover,
+#menu button.special:hover,
+#menu .button.special:hover {
+    background-color: #66B32F;
+}
+
+#menu input[type="submit"].special:active,
+#menu input[type="reset"].special:active,
+#menu input[type="button"].special:active,
+#menu button.special:active,
+#menu .button.special:active {
+    background-color: #64c1ad;
+}
+
+#menu input[type="submit"].special.icon:before,
+#menu input[type="reset"].special.icon:before,
+#menu input[type="button"].special.icon:before,
+#menu button.special.icon:before,
+#menu .button.special.icon:before {
+    color: #ffffff;
+}
+
+#menu > ul {
+    margin: 0 0 1em 0;
+}
+
+#menu > ul.links {
+    list-style: none;
+    padding: 0;
+}
+
+#menu > ul.links > li {
+    padding: 0;
+}
+
+#menu > ul.links > li > a:not(.button) {
+    border-top: solid 1px rgba(0, 0, 0, 0.3);
+    color: inherit;
+    display: block;
+    line-height: 3.5em;
+    text-decoration: none;
+}
+
+#menu > ul.links > li > .button {
+    display: block;
+    margin: 0.5em 0 0 0;
+}
+
+#menu > ul.links > li:first-child > a:not(.button) {
+    border-top: 0 !important;
+}
+
+#menu .close {
+    text-decoration: none;
+    -moz-transition: color 0.2s ease-in-out;
+    -webkit-transition: color 0.2s ease-in-out;
+    -ms-transition: color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
+    -webkit-tap-highlight-color: transparent;
+    border: 0;
+    color: #babbc3;
+    cursor: pointer;
+    display: block;
+    height: 3.25em;
+    line-height: 3.25em;
+    padding-right: 1.25em;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+    vertical-align: middle;
+    width: 7em;
+}
+
+#menu .close:before {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-transform: none !important;
+}
+
+#menu .close:before {
+    content: '\f00d';
+    font-size: 1.25em;
+}
+
+#menu .close:hover {
+    color: #ffffff;
+}
+
+@media screen and (max-width: 736px) {
+
+    #menu .close {
+        height: 4em;
+        line-height: 4em;
+    }
+
+}
+
+#menu.visible {
+    -moz-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+    box-shadow: 0 0 1.5em 0 rgba(0, 0, 0, 0.2);
+    visibility: visible;
+}
+
+@media screen and (max-width: 736px) {
+
+    #menu {
+        padding: 2.5em 1.75em;
+    }
+
+}
+
+#header .facebook {
+    margin-top: 30px;
+}
+
+#header .btnsansrien {
+    padding: 0;
+    background: none;
+    border: none;
+}
 
 
 .ariane

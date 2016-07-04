@@ -6,9 +6,9 @@
         <form>
                 <button class="langdevise">Langue &nbsp;</button>
                 <select name="langue">
-                    <option>fr</option>
-                    <option>en</option>
-                    <option>de</option>
+                    <option>{{ 'fr'|upper }}</option>
+                    <option>{{ 'en'|upper }}</option>
+                    <option>{{ 'de'|upper }}</option>
                 </select>
                 <span class="barre">&nbsp; &nbsp; | &nbsp; &nbsp;</span>
                 <button class="langdevise">Devise &nbsp;</button>
@@ -26,14 +26,15 @@
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <span>Bienvenue {{ app.user.userPrenom }} {{ app.user.userNom }}</span>
     {% else %}
-        <a href="{{ path('user_register') }}" class="btn btnsansrien"><span>{{ 'S\'INSCRIRE'|trans }}</span></a>
+        <a href="{{ path('user_register') }}"><span>{{ 'S\'INSCRIRE'|trans }}</span></a>
         <a href="{{ path('user_login') }}"><span>{{ 'SE CONNECTER'|trans }}</span></a>
     {% endif %}           
+    
     <a href="#menu"><span>Menu</span></a>
 
 </header>
 
-{#      <!-- Menu -->
+<!-- Menu -->
 <nav id="menu">
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <ul class="links">
@@ -42,7 +43,7 @@
             <li><a href='#'>Mes Favoris</a></li>
             <li><a href='#'>Mes paramètres</a></li>
         </ul>
-        <ul class="actions vertical">
+        <ul class="actions vertical" style="list-style:none;">
             <li><a href="{{ path('fos_user_security_logout') }}" class="btn btnsansrien button fit"><span>SE DECONNECTER</span></a></li>
         </ul>
     {% else %}
@@ -52,9 +53,9 @@
             <li><a href='#'>Mes Favoris</a></li>
             <li><a href='#'>Mes paramètres</a></li>
         </ul>
-        <ul class="actions vertical">
-            <li><a href="{{ path ('fos_user_registration_register') }}" class="btn btnsansrien button fit special"><span>S'INSCRIRE</span></a></li>
-            <li><a href="{{ path('fos_user_security_login') }}" class="btn btnsansrien button fit"><span>SE CONNECTER</span></a></li>
+        <ul class="actions vertical" style="list-style:none;">
+            <li><a href="{{ path ('user_register') }}" class="btn btnsansrien button fit special"><span>S'INSCRIRE</span></a></li>
+            <li><a href="{{ path('user_login') }}" class="btn btnsansrien button fit"><span>SE CONNECTER</span></a></li>
         </ul>
     {% endif %}
-</nav> #}
+</nav>
