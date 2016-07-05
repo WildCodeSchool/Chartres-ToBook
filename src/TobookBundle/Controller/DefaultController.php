@@ -50,7 +50,7 @@ class DefaultController extends Controller
                 break;
         }
 
-        var_dump($order);
+        // var_dump($order);
         
         $criteria = array();
         $repository = $this->getDoctrine()
