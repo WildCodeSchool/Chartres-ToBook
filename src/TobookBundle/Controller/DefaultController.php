@@ -15,4 +15,9 @@ class DefaultController extends Controller
     {
         return $this->render('TobookBundle:Default:search.html.twig');
     }
+	
+	public function clubhouseAction()
+    {
+        return $this->render('TobookBundle:Default:clubhouse.html.twig');
+    }
 }

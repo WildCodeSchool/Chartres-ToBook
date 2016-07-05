@@ -5,3 +5,7 @@ tobook_homepage:
 tobook_search:
     path:     /search
     defaults: { _controller: TobookBundle:Default:search }
+
+tobook_clubhouse:
+    path:     /clubhouse
+    defaults: { _controller: TobookBundle:Default:clubhouse }
