@@ -31,32 +31,33 @@ class DefaultController extends Controller
         $prix = $request->query->get('prix');
         $etoiles = $request->query->get('etoiles');
         $note = $request->query->get('note');
-        $order = array();
-        switch ($prix) {
-            case "asc":
-                $order = array("profPrixMini" => "asc");
-                break;
-            case "desc":
-                $order = array("profPrixMini" => "desc");
-                break;
-        } 
-        switch ($etoiles) {
-            case "asc":
-                $order = array("profEtoiles" => "asc");
-                break;
-            case "desc":
-                $order = array("profEtoiles" => "desc");
-                break;
-        } 
-        switch ($note) {
-            case "asc":
-                $order = array("profId" => "asc");
-                break;
-            case "desc":
-                $order = array("profId" => "desc");
-                break;
-        }
-        // var_dump($order);
+
+        // $order = array();
+        // switch ($prix) {
+        //     case "asc":
+        //         $order = array("profPrixMini" => "asc");
+        //         break;
+        //     case "desc":
+        //         $order = array("profPrixMini" => "desc");
+        //         break;
+        // } 
+        // switch ($etoiles) {
+        //     case "asc":
+        //         $order = array("profEtoiles" => "asc");
+        //         break;
+        //     case "desc":
+        //         $order = array("profEtoiles" => "desc");
+        //         break;
+        // } 
+        // switch ($note) {
+        //     case "asc":
+        //         $order = array("profId" => "asc");
+        //         break;
+        //     case "desc":
+        //         $order = array("profId" => "desc");
+        //         break;
+        // }
+
         
         $criteria = array();
         $repository = $this->getDoctrine()
@@ -74,6 +75,9 @@ class DefaultController extends Controller
 
         return $this->render('TobookBundle:Default:search.html.twig', array(
             'base_dir'  => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'latitude'  => $latitude,
+            'longitude' => $longitude,
+            'address'    => $address,
             'resultats' => $resultats,
         ));
     } 

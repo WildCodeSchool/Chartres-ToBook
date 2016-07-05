@@ -23,6 +23,28 @@ function initautocomplete() {
   
 }
 
+function initautocompleteTony() {
+ 
+  autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{types: ['geocode']});
+
+  autocomplete.addListener('place_changed', function(){
+  
+  place = autocomplete.getPlace();
+  address = place.formatted_address;
+  lat = place.geometry.location.lat();
+  lng = place.geometry.location.lng();
+  lat = lat.toString();
+  lng = lng.toString();
+
+  // On ecrit les données dans des champs cachés comme ça elles seront envoyées lors de la soumission du formulaire
+  $("input[name=latitude]").val(lat);
+  $("input[name=longitude]").val(lng);
+  $("input[name=address]").val(address);
+
+  });
+  
+}
+
 function geolocate() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -65,6 +87,21 @@ latitudeSearch = parseFloat(localStorage.getItem('latitude'));
 // On stock dans une variable les valeurs de longitude qui provient du formulaire de recherche de la homepage.
 longitudeSearch = parseFloat(localStorage.getItem('longitude'));
 // declaration de la fonction initMap qui sera appeler en callback dans l'url de l'api google map.  
+
+/*************************************
+* modifs Tony
+*/
+$(document).ready(function () {
+  //your code here
+  address         = $("input[name=address]").val();
+  // latitudeSearch  = $("input[name=latitude]").val();
+  // longitudeSearch = $("input[name=longitude]").val();
+  alert(address);
+});
+/*************************************
+* Fin modifs Tony
+*/
+
 
 function initMap() {
   
