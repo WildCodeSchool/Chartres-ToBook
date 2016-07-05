@@ -15,12 +15,16 @@ class DefaultController extends Controller
     public function searchAction(Request $request)
     {   
 
-        $latitude = $request->query->get('latitude');
-        $longitude = $request->query->get('longitude');
+        $address    = $request->query->get('address');
+        $latitude   = $request->query->get('latitude');
+        $longitude  = $request->query->get('longitude');
 
-        $prix = $request->query->get('prix');
-        $etoiles = $request->query->get('etoiles');
-        $note = $request->query->get('note');
+        $prix       = $request->query->get('prix');
+        $etoiles    = $request->query->get('etoiles');
+        $note       = $request->query->get('note');
+        var_dump($address);
+        var_dump($latitude);
+        var_dump($longitude);
 
         $order = array();
 
@@ -50,7 +54,6 @@ class DefaultController extends Controller
                 break;
         }
 
-        var_dump($order);
         
         $criteria = array();
         $repository = $this->getDoctrine()
@@ -60,6 +63,9 @@ class DefaultController extends Controller
         // replace this example code with whatever you need
         return $this->render('TobookBundle:Default:search.html.twig', array(
             'base_dir'  => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            'latitude'  => $latitude,
+            'longitude' => $longitude,
+            'address'    => $address,
             'resultats' => $resultats,
         ));
     }  
