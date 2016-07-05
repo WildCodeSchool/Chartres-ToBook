@@ -12,6 +12,16 @@ class DefaultController extends Controller
         return $this->render('TobookBundle:Default:index.html.twig');
     }
 
+    public function changeLocaleAction(Request $request)
+    {
+        $lg = $request->get('langue');
+
+        $request = $this->getRequest();
+        $request->setLocale($lg);
+
+        return $this->redirect($this->generateUrl('tobook_homepage', array('_locale' => $lg)));
+    }  
+
     public function searchAction(Request $request)
     {   
 
