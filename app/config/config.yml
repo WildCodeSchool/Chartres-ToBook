@@ -94,5 +94,5 @@ knp_paginator:
         sort_direction_name: direction # sort direction query parameter name
         distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
     template:
-        pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
+        pagination: TobookBundle:Pagination:pagination.html.twig     # J'ai emmené le template du slider de pagination dans notre bundle pour le rendre modifiable sans toucher aux vendors
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template

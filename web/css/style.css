@@ -790,3 +790,9 @@ body {
 {
 	padding:10px;
 }
+
+/*pagination*/
+
+.navigation {
+    text-align: center;
+}
