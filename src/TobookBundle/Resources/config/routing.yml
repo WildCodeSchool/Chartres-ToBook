@@ -1,5 +1,5 @@
 tobook_homepage:
-    path:     /
+    path:     /{_locale}
     defaults: { _controller: TobookBundle:Default:index }
 
 tobook_search:
@@ -9,3 +9,8 @@ tobook_search:
 tobook_clubhouse:
     path:     /clubhouse
     defaults: { _controller: TobookBundle:Default:clubhouse }
+
+changeLocale:
+    path:     /{_locale}/change
+    defaults: { _controller: TobookBundle:Default:changeLocale}
+

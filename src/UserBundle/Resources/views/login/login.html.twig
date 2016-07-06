@@ -41,19 +41,19 @@
 				<label class="left" for="password">{{ 'security.login.password'|trans }}</label>
 				<input class="input-style-3" type="password" id="password" name="_password" required="required" />
 
-				<input type="reset" class="input-style-4 btn btn-success" value="Cancel">
+				<input type="reset" class="input-style-4 btn btn-success" value="Annuler">
 				<input type="submit" class="input-style-4 btn btn-success" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
 
 			</form>
 		</div>
 
 		<div class="row">
-			<a href="{{ path('user_resetting_request') }}"><input type="submit" class="input-style-4 btn btn-success" value="Password Lost"></a>
+			<a href="{{ path('user_resetting_request') }}"><input type="submit" class="input-style-4 btn btn-success" value="Mot de passe oublié"></a>
 		</div>
 
 		<h3><strong>JE NE SUIS PAS ENCORE INSCRIT</strong>
 		<h4>__________</h4></h3>
-		<input type="submit" class="input-style-4 btn btn-success" value="REGISTER">
+		<input type="submit" class="input-style-4 btn btn-success" value="S'INSCRIRE">
 	</div>
 
 {% endblock %}

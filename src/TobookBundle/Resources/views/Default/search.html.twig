@@ -12,11 +12,11 @@
 			</div>
 			<div class="col-md-4">
 				<select class="input-style-5" name="category">
-					<option value='3' >Chambres d'hôtes</option>
-					<option value='2' >Gîtes</option>
-					<option value='1' selected>Hôtels</option>
-					<option value='8' >Musées</option>
-					<option value='5' >Restaurants</option>
+					<option value='3' >{{ "Chambres d'hôtes"|trans }}</option>
+					<option value='2' >{{ "Gîtes"|trans }}</option>
+					<option value='1' selected>{{ "Hôtels"|trans }}</option>
+					<option value='8' >{{ "Musées"|trans }}</option>
+					<option value='5' >{{ "Restaurants"|trans }}</option>
 				</select>
 			</div>
 			<div class="col-md-1">
@@ -30,7 +30,7 @@
 		});
 		</script>
 		<div class="col-md-12 result-bar row">
-			<h4>Résultats pour <span id="resultatMap">Vendome</span></h4>
+			<h4>{{ 'Résultats pour'|trans }} <span id="resultatMap">Vendome</span></h4>
 		</div>
 
 		<div  id="map" style="width:100%; height:500px;" class="col-md-12 search-map row">
@@ -41,29 +41,29 @@
 	<div class="col-md-12 filter-bar">
 		<div class="col-md-2 col-md-offset-2">
 			<div class="filter-div">
-				<h4><strong>Classer par :</strong></h4>
+				<h4><strong>{{ 'Classer par'|trans }} :</strong></h4>
 			</div>
 		</div>
 		<form id="tri" name="tri" methode="get" action="{{ path('tobook_search') }}">
 			<div class="col-md-2">
 				<select id="tri-prix" name="prix" class="input-style-5">
-					<option value="">Prix</option>
-					<option value="desc">Les plus chers</option>
-					<option value="asc">Les plus économiques</option>
+					<option value="">{{ 'Prix'|trans }}</option>
+					<option value="desc">{{ 'Les plus chers'|trans }}</option>
+					<option value="asc">{{ 'Les plus économiques'|trans }}</option>
 				</select>
 			</div>
 			<div class="col-md-2">
 				<select id="tri-etoiles" name="etoiles" class="input-style-5">
-					<option value="">Étoile</option>
-					<option value="desc">Par ordre croissant</option>
-					<option value="asc">Par ordre décroissant </option>				
+					<option value="">{{ 'Étoile'|trans }}</option>
+					<option value="desc">{{ 'Par ordre croissant'|trans }}</option>
+					<option value="asc">{{ 'Par ordre décroissant'|trans }} </option>				
 				</select>
 			</div>
 			<div class="col-md-2">
 				<select id="tri-note" name="note" class="input-style-5">
-					<option value="">Notes</option>
-					<option value="desc">Les plus appréciés par l'utilisateur</option>				
-					<option value="asc">Les moins appréciés par l'utilisateur</option>				
+					<option value="">{{ "Notes"|trans }}</option>
+					<option value="desc">{{ "Les plus appréciés par l'utilisateur"|trans }}</option>				
+					<option value="asc">{{ "Les moins appréciés par l'utilisateur"|trans }}</option>				
 				</select>
 			</div>
 		</form>
@@ -102,15 +102,15 @@
 					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
 				</div>
 				<div class="pull-left search-div-style" href="#">
-					à partir de: <strong>{{ resultat.profPrixMini }} €</strong>
+					{{ 'à partir de'|trans }}: <strong>{{ resultat.profPrixMini }} €</strong>
 				</div>
 				<a class="bouton-style-3 pull-right" href="#">
-					<strong>Plus de details</strong>
+					<strong>{{ 'Plus de details'|trans }}</strong>
 				</a>
 			</div>
 			<div class="col-md-12 row">
 				<div class="pull-left search-div-style" href="#">
-					Evalué par <strong>25</strong> personnes
+					{{ 'Evalué par'|trans }} <strong>25</strong> {{ 'personnes'|trans }}
 				</div>
 			</div>
 		</div>
@@ -139,15 +139,15 @@
 					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
 				</div>
 				<div class="pull-left search-div-style" href="#">
-					à partir de: <strong>{{ resultat.profPrixMini }} €</strong>
+					{{ 'à partir de'|trans }}: <strong>{{ resultat.profPrixMini }} €</strong>
 				</div>
 				<a class="bouton-style-3 pull-right" href="#">
-					<strong>Plus de details</strong>
+					<strong>{{ 'Plus de details'|trans }}</strong>
 				</a>
 			</div>
 			<div class="col-md-12 row">
 				<div class="pull-left search-div-style" href="#">
-					Evalué par <strong>25</strong> personnes
+					{{'Evalué par'|trans }} <strong>25</strong> {{ 'personnes'|trans }}
 				</div>
 			</div>
 		</div>
