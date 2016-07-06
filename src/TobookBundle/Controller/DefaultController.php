@@ -4,6 +4,7 @@ namespace TobookBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 
 class DefaultController extends Controller
@@ -33,6 +34,7 @@ class DefaultController extends Controller
         $note = $request->query->get('note');
 
         // $order = array();
+
         // switch ($prix) {
         //     case "asc":
         //         $order = array("profPrixMini" => "asc");
@@ -59,19 +61,38 @@ class DefaultController extends Controller
         // }
 
         
-        $criteria = array();
-        $repository = $this->getDoctrine()
-            ->getRepository('WCSPropertyBundle:Professionnel');
-        $listeresultats =  $repository->findBy($criteria, $order, null);
+        // $criteria = array();
+        // $repository = $this->getDoctrine()
+        //     ->getRepository('WCSPropertyBundle:Professionnel');
+        // $resultats =  $repository->findBy($criteria, $order, 5, null);
         // $resultats =  $repository->findOneByProfId('1');
         // replace this example code with whatever you need
 
-        //Systeme de pagination ci dessous
+        $offset = 0;
+        $limit = 3;
 
-        $resultats = $this->get('knp_paginator')->paginate($listeresultats, /* Ici on appelle la liste d'entité qu'on veut voir apparaitre en tant qu'éléments de notre pagination */
-            $this->get('request')->query->get('page', 1)/*Ici la page à laquelle la pagination commence*/,
-            14/*Et ici la limite d'éléments par page*/
-        );
+        $d = $this->getDoctrine()->getRepository('WCSPropertyBundle:Professionnel')->createQueryBuilder('l');
+        $d
+            ->select('l')
+            ->addSelect(
+                '( 3959 * acos(cos(radians(' . $latitude . '))' .
+                    '* cos( radians( l.prof_latitude ) )' .
+                    '* cos( radians( l.prof_longitude )' .
+                    '- radians(' . $longitude . ') )' .
+                    '+ sin( radians(' . $latitude . ') )' .
+                    '* sin( radians( l.prof_latitude ) ) ) ) as distance'
+            )
+            ->andWhere('l.prof_actif = :enabled')
+            ->setParameter('enabled', 1)
+            ->having('distance < :distance')
+            ->setParameter('distance', 10)
+            ->orderBy('distance', 'ASC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+
+        $resultats = $d->getQuery();
+
+        var_dump($resultats);
 
         return $this->render('TobookBundle:Default:search.html.twig', array(
             'base_dir'  => realpath($this->container->getParameter('kernel.root_dir').'/..'),
