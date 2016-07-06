@@ -3,8 +3,8 @@ Gîtes: __Gîtes
 Hôtels: __Hôtels
 Musées: __Musées
 Restaurants: __Restaurants
-'Résultats pour': '__Résultats pour'
-'Classer par': '__Classer par'
+'Résultats pour': 'Results for'
+'Classer par': 'Classified by'
 Prix: __Prix
 'Les plus chers': '__Les plus chers'
 'Les plus économiques': '__Les plus économiques'
@@ -17,7 +17,7 @@ Notes: __Notes
 'à partir de': '__à partir de'
 'Plus de details': '__Plus de details'
 'Evalué par': '__Evalué par'
-personnes: __personnes
+personnes: people
 Servez-vous: __Servez-vous
 Rechercher: __Rechercher
 'JE RECHERCHE UN HÔTEL': '__JE RECHERCHE UN HÔTEL'
@@ -34,11 +34,11 @@ LONDRES: __LONDRES
 'TOBOOK C''EST L''ASSURANCE D''UNE RESERVATION AU MEILLEUR PRIX ET D''UNE RELATION DIRECTE ENTRE HÔTELIERS ET PARTICULIERS.': '__TOBOOK C''EST L''ASSURANCE D''UNE RESERVATION AU MEILLEUR PRIX ET D''UNE RELATION DIRECTE ENTRE HÔTELIERS ET PARTICULIERS.'
 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.': '__Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 Bienvenue: __Bienvenue
-'S''INSCRIRE': '__S''INSCRIRE'
-'SE CONNECTER': '__SE CONNECTER'
-Menu: __Menu
-'Nouvelle Recherche': '__Nouvelle Recherche'
-'Ma page': '__Ma page'
-'Mes Favoris': '__Mes Favoris'
-'Mes paramètres': '__Mes paramètres'
-'SE DECONNECTER': '__SE DECONNECTER'
+'S''INSCRIRE': 'REGISTER'
+'SE CONNECTER': 'LOGIN'
+Menu: Menu
+'Nouvelle Recherche': 'New search'
+'Ma page': 'My page'
+'Mes Favoris': 'My favourites'
+'Mes paramètres': 'My settings'
+'SE DECONNECTER': 'LOG OUT'
