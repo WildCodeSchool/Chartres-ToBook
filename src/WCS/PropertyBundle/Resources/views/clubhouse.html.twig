@@ -16,10 +16,8 @@
 {% endblock %}
 
 {% block body %}
-	
-	<div class="col-md-12 large-empty"></div>
 
-	<div class="col-md-6 col-md-offset-1">
+	<div class="col-md-8">
 
 		<!-- Nom de l'hôtel et nb d'étoiles -->
 		<div class="col-m-12">
@@ -39,7 +37,7 @@
 		<!-- Notation des clients -->
 		<div class="col-md-12 club-head">
 		    <h4>
-		        <span>Note des clients : </span>
+		        <span>{{ "Note des clients :"|trans }}</span>
 		        <span>
 		        	<!-- Coeurs (actuellement géré avec les étoiles) -->
 		            {% for i in 1..5 %}
@@ -55,13 +53,12 @@
 		        </span>
 
 		        <!-- suivre cet hotel -->
-		        <span style='vertical-align:super;'>
-		            {# {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-		            alors on ajoute cet établissement à ses favoris
+		        <span>
+		            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+		            	<img src="{{ asset('img/picto/n_suit.png') }}" title="{{ "Mettre l'établissement en favoris"|trans }}" />
 		            {% else %}
-		            sinon on envoit vers la connexion
-		            {% endif %} #}
-		            <img src="{{ asset('img/picto/n_suit.png') }}" title="Favori" />
+		            	<img id="favoriGray" src="{{ asset('img/picto/n_suit.png') }}" title="{{ "Veuillez vous connectez"|trans }}" />
+		            {% endif %}
 		        </span>
 
 		    </h4>
@@ -71,11 +68,15 @@
 		    <div class="connected-carousels">
 		        <div class="stage">
 		            <div class="carousel carousel-stage">
-		                <ul>
-		                    {% for i in 0..((etablissement_img|length)-1) %}
-		                        <li><img src="{{ asset('uploads/img/'~etablissement.profCode~'/'~etablissement_img[i].primOrd~'.jpg') }}"width="600" height="400" alt=""/></li>
-		                    {%  endfor %}
-		                </ul>
+		            	{% if etablissement_img|length == 0 %}
+						    <img src="{{ asset('img/picto/defaut.png') }}" width="600" height="400" title="Defaut" />
+						{% else %}
+							<ul>
+			                    {% for i in 0..((etablissement_img|length)-1) %}
+			                        <li><img src="{{ asset('uploads/img/'~etablissement.profCode~'/'~etablissement_img[i].primOrd~'.jpg') }}"width="600" height="400" alt=""/></li>
+			                    {%  endfor %}
+			                </ul>
+						{% endif %}
 		            </div>
 		            <a href="#" class="prev prev-stage"><span>&lsaquo;</span></a>
 		            <a href="#" class="next next-stage"><span>&rsaquo;</span></a>
@@ -85,43 +86,62 @@
 		            <a href="#" class="prev prev-navigation">&lsaquo;</a>
 		            <a href="#" class="next next-navigation">&rsaquo;</a>
 		            <div class="carousel carousel-navigation">
-		                <ul>
-		                    {% for i in 0..((etablissement_img|length)-1) %}
-		                        <li><img src="{{ asset('uploads/img/'~etablissement.profCode~'/'~etablissement_img[i].primOrd~'.jpg') }}"width="50" height="50" alt=""/></li>
-		                    {%  endfor %}
-		                </ul>
+		            	{% if etablissement_img|length == 0 %}
+		            		<img src="{{ asset('img/picto/defaut.png') }}" width="50" height="50" title="Defaut" />
+		            	{% else %}
+			                <ul>
+			                    {% for i in 0..((etablissement_img|length)-1) %}
+			                        <li><img src="{{ asset('uploads/img/'~etablissement.profCode~'/'~etablissement_img[i].primOrd~'.jpg') }}" width="50" height="50" alt=""/></li>
+			                    {%  endfor %}
+			                </ul>
+			            {% endif %}
 		            </div>
 		        </div>
 		    </div>
 		</div>
+		
+		<div class="col-md-12 onglets row">
+			<div class="col-md-12 titre row">
+				<div class="col-md-4 but1 but">
+					<h3 class="front-color-1">{{ "DESCRIPTIF"|trans }}</h3>
+				</div>
+				<div class="col-md-4 but2 but">
+					<h3 class="front-color-2">{{ "COMMENTAIRES"|trans }}</h3>
+				</div>
+				<div class="col-md-4 but3 but">
+					<h3 class="front-color-2">{{ "CONTACT"|trans }}</h3>
+				</div>
+			</div>
+			<div class="col-md-12 contenu row">
+				<div class="col-md-12 row case1 pageother"> 
+					<div class="col-md-3 page1-map">
 
-		<div class="col-md-12 row">
-			<div class="col-md-3">
-				<h3 class="front-color-1">DESCRIPTIF</h3>
-			</div>
-			<div class="col-md-4">
-				<h3 class="front-color-2">COMMENTAIRES</h3>
-			</div>
-			<div class="col-md-3">
-				<h3 class="front-color-2">CONTACT</h3>
-			</div>
-			<div class="col-md-12">
-				<hr>
-			</div>
-		</div>
-		<div class="col-md-12 page1 row">
-			<div class="col-md-3 page1-map">
-			</div>
-			<div class="col-md-9 page1-text">
-				<h3><strong>Title</strong></h3>
-				<br></br>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-				</p>
+					</div>
+					<div class="col-md-9 page1-text">
+						<p>{{ etablissement.profDescriptif }}</p>
+					</div>
+				</div> 
+				<div class="col-md-12 case2 pageother"> 
+					<h2>{{ "Formulaire de commentaires"|trans }}</h2>
+					<h2>{{ "Commentaires"|trans }} </h2> 
+				</div> 
+				<div class="col-md-12 case3 pageother"> 
+					<p>{{ "Voici les coordonnées téléphoniques :"|trans }}</p>
+					<p>{{ etablissement.profTel }}</p>
+					<p>{{ "Voici le mail de contact :"|trans }}</p>
+					<p>{{ etablissement.profMail }}</p>
+					<p>{{ "Voici l'adresse :"|trans }}</p>
+					<p>{{ etablissement.profAdd1 }}</p>
+					<p>{{ etablissement.profAdd2 }}</p>
+					<p>{{ etablissement.profAdd3 }}</p>
+					<p>{{ etablissement.profCp }} {{ etablissement.profVille }}</p>
+
+				</div> 
 			</div>
 		</div>
+
 	</div>
+
 	<div class="col-md-4">
 		<div class="col-md-12 info-comparateur">
 			<h3><strong>Comparateur de prix</strong></h3>
@@ -130,13 +150,13 @@
 		</div>
 		<div class="col-md-12 comparateur-item">
 			<div class="col-md-6">
-				<h3><strong>Prix direct Hôtelier</strong></h3>
+				<h3><a href="{{ etablissement.profWebResa }}"><strong>Prix direct Hôtelier</strong></a></h3>
 			</div>
 			<div class="col-md-3">
 				<h3><i>à partir de</i></h3>
 			</div>
 			<div class="col-md-2">
-				<h3><strong>62.00</strong></h3>
+				<h3><strong>{{ etablissement.profPrixMini }}</strong></h3>
 			</div>
 			<div class="col-md-1">
 				<h3>€</h3>
@@ -198,7 +218,9 @@
 				<h3>€</h3>
 			</div>
 		</div>
+
 		<br></br>
+
 		<div class="col-md-12 row picto-section">
 			<div class="col-md-3 picto">
 				<img class="img-style-4" src="{{ asset('img/picto/picto1.png') }}">
@@ -245,13 +267,14 @@
 				<p>Piscine chaufée</p>
 			</div>
 		</div>
-		<div class="col-md-12 info-comparateur">
+
+		{# Le fil actu correspond aux trois derniers commentaires laissés sur la page de l'établissement #}
+		<div class="col-md-12 filActuTitre">
 			<h3><strong>Actualités / Fil d'infos</strong></h3>
 		</div>
-		<div class="col-md-12 comparateur-item">
+		<div class="col-md-12 fileActuContenu">
 		</div>
-	</div>
 
-	<div class="col-md-12 large-empty"></div>
+	</div>
 
 {% endblock %}

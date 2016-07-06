@@ -12,10 +12,10 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        // permet de récupérer l'id de l'établissement écrit dans l'url après son nom (via une regex qui supprime les caractères non numériques)
         $profId = preg_replace("/\D/",'', $profCode);
 
         $etablissement = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneByprofId($profId);
-        $etablissement_etoile = $etablissement->getProfEtoiles();
         // echo ("<pre>");
         // var_dump($etablissement);
         // echo ("</pre>");
@@ -26,7 +26,7 @@ class DefaultController extends Controller
         // echo ("</pre>");
 
         return $this->render('WCSPropertyBundle::clubhouse.html.twig', array(
-            'etablissement' => $etablissement, $etablissement_etoile, 'etablissement_img' => $etablissement_img,
+            'etablissement' => $etablissement, 'etablissement_img' => $etablissement_img,
         ));
     } 
 }
