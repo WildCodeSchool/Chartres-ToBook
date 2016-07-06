@@ -1,6 +1,6 @@
 <?php
 
-namespace PropertyBundle\Entity;
+namespace WCS\PropertyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

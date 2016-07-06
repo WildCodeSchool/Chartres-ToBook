@@ -20,33 +20,81 @@
 	<div class="col-md-12 large-empty"></div>
 
 	<div class="col-md-6 col-md-offset-1">
+
+		<!-- Nom de l'hôtel et nb d'étoiles -->
 		<div class="col-m-12">
-			<h3><strong>HOTEL CAPRICORNE
-				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-			</strong></h3>
+		    <h3>
+		        {{ etablissement.profNom }}
+		        <!-- Etoiles -->
+		        {% for i in 1..5 %}
+		            {% if i <= etablissement.profEtoiles %}
+		                <img src="{{ asset('img/picto/jauge_star_1.png') }}" title="Etoiles" />
+		            {% else %}
+		                <img src="{{ asset('img/picto/jauge_star_0.png') }}" title="Etoiles" />
+		            {% endif %}
+		        {% endfor %}
+		    </h3>
 		</div>
+
+		<!-- Notation des clients -->
 		<div class="col-md-12 club-head">
-			<h3><strong>NOTE DES CLIENTS :
-				<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_coeur_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
-				<img class="pull-right" src="{{ asset('img/picto/favoris.png') }}">
-			</strong></h3>
+		    <h4>
+		        <span>Note des clients : </span>
+		        <span>
+		        	<!-- Coeurs (actuellement géré avec les étoiles) -->
+		            {% for i in 1..5 %}
+		                {% if i <= etablissement.profEtoiles %}
+		                    <img src="{{ asset('img/picto/jauge_coeur_1.png') }}" title="Note" />
+		                {% else %}
+		                    <img src="{{ asset('img/picto/jauge_coeur_0.png') }}" title="Note" />
+		                {% endif %}
+		            {% endfor %}
+		        </span>
+		        <span>
+		            <img src="{{ asset('img/picto/jauge_coeur_0.png') }}" title="Note" />
+		        </span>
+
+		        <!-- suivre cet hotel -->
+		        <span style='vertical-align:super;'>
+		            {# {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+		            alors on ajoute cet établissement à ses favoris
+		            {% else %}
+		            sinon on envoit vers la connexion
+		            {% endif %} #}
+		            <img src="{{ asset('img/picto/n_suit.png') }}" title="Favori" />
+		        </span>
+
+		    </h4>
 		</div>
+
 		<div class="col-md-12 club-photo">
-			<img class="img-style-1" src="{{ asset('img/background/photo1.jpg') }}">
+		    <div class="connected-carousels">
+		        <div class="stage">
+		            <div class="carousel carousel-stage">
+		                <ul>
+		                    {% for i in 0..((etablissement_img|length)-1) %}
+		                        <li><img src="{{ asset('uploads/img/'~etablissement.profCode~'/'~etablissement_img[i].primOrd~'.jpg') }}"width="600" height="400" alt=""/></li>
+		                    {%  endfor %}
+		                </ul>
+		            </div>
+		            <a href="#" class="prev prev-stage"><span>&lsaquo;</span></a>
+		            <a href="#" class="next next-stage"><span>&rsaquo;</span></a>
+		        </div>
+
+		        <div class="navigation">
+		            <a href="#" class="prev prev-navigation">&lsaquo;</a>
+		            <a href="#" class="next next-navigation">&rsaquo;</a>
+		            <div class="carousel carousel-navigation">
+		                <ul>
+		                    {% for i in 0..((etablissement_img|length)-1) %}
+		                        <li><img src="{{ asset('uploads/img/'~etablissement.profCode~'/'~etablissement_img[i].primOrd~'.jpg') }}"width="50" height="50" alt=""/></li>
+		                    {%  endfor %}
+		                </ul>
+		            </div>
+		        </div>
+		    </div>
 		</div>
-		<div class="col-md-12 row multi-photo">
-			<img class="img-style-3" src="{{ asset('img/background/photo1.jpg') }}">
-			<img class="img-style-3" src="{{ asset('img/background/photo2.jpg') }}">
-			<img class="img-style-3" src="{{ asset('img/background/photo3.jpg') }}">
-		</div>
+
 		<div class="col-md-12 row">
 			<div class="col-md-3">
 				<h3 class="front-color-1">DESCRIPTIF</h3>
