@@ -4,6 +4,7 @@ namespace TobookBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\Query;
 
 class DefaultController extends Controller
 {
@@ -65,9 +66,17 @@ class DefaultController extends Controller
         $criteria = array();
         $repository = $this->getDoctrine()
             ->getRepository('WCSPropertyBundle:Professionnel');
-        $resultats =  $repository->findBy($criteria, $order, 5, null);
+        $listeresultats =  $repository->findBy($criteria, $order, null);
         // $resultats =  $repository->findOneByProfId('1');
         // replace this example code with whatever you need
+
+        //Systeme de pagination ci dessous
+
+        $resultats = $this->get('knp_paginator')->paginate($listeresultats, /* Ici on appelle la liste d'entité qu'on veut voir apparaitre en tant qu'éléments de notre pagination */
+            $this->get('request')->query->get('page', 1)/*Ici la page à laquelle la pagination commence*/,
+            14/*Et ici la limite d'éléments par page*/
+        );
+
         return $this->render('TobookBundle:Default:search.html.twig', array(
             'base_dir'  => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'resultats' => $resultats,
