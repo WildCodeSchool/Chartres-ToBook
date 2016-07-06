@@ -760,130 +760,137 @@ body {
 
 .filter-bar
 {
-	background-color:#3a4e5a;
-	min-height:65px;
-	padding-top:10px;
+    background-color:#3a4e5a;
+    min-height:65px;
+    padding-top:10px;
 }
 
 .filter-div
 {
-	min-height:45px;
-	background-color:#559827;
-	color:#FFFFFF;
-	padding-top:1px;
-	text-align:center;
+    min-height:45px;
+    background-color:#559827;
+    color:#FFFFFF;
+    padding-top:1px;
+    text-align:center;
 }
 
 .search-third-div .img-div
 {
-	min-height:400px;
-	position:relative;
+    min-height:400px;
+    position:relative;
 }
 
 .search-third-div .text-div
 {
-	min-height:400px;
-	position:relative;
-	padding:40px;
+    min-height:400px;
+    position:relative;
+    padding:40px;
 }
 
 .search-div-style
 {
-	padding:10px;
+    padding:10px;
+}
+
+/* PAGINATION */
+
+.navigation {
+    text-align: center;
+
 }
 
 /* CLUB-HOUSE */
 
 .club-head
 {
-	padding:10px 0px 10px 0px;
+    padding:10px 0px 10px 0px;
 }
 
 .club-photo
 {
-	height:600px;
+    height:600px;
 }
 
 .multi-photo
 {
-	min-height:200px;
-	padding:40px 0px 40px 15px;
+    min-height:200px;
+    padding:40px 0px 40px 15px;
 }
 
 .img-style-3
 {
-	height:150px;
-	width:auto;
-	margin:auto;
+    height:150px;
+    width:auto;
+    margin:auto;
 }
 
 .front-color-1
 {
-	color:#559827;
-	font-weight:bold;
+    color:#559827;
+    font-weight:bold;
 }
 
 .front-color-2
 {
-	color:#D8D8D8;
-	font-weight:bold;
+    color:#D8D8D8;
+    font-weight:bold;
 }
 
 .page1
 {
-	padding:20px;
+    padding:20px;
 }
 
 .page1-text
 {
-	padding-left:40px;
+    padding-left:40px;
 }
 
 .page1-map
 {
-	background-color:#F3E2A9;
-	height:215px;
+    background-color:#F3E2A9;
+    height:215px;
 }
 
 .info-comparateur
 {
-	background-color:#559827;
-	min-height:100px;
-	text-align:center;
-	padding:15px;
-	margin-top:25px;
+    background-color:#559827;
+    min-height:100px;
+    text-align:center;
+    padding:15px;
+    margin-top:25px;
 }
 
 .info-comparateur h3
 {
-	color:#FFFFFF;
+    color:#FFFFFF;
 }
 
 .info-empty
 {
-	height:25px;
+    height:25px;
 }
 
 .comparateur-item
 {
-	background-color:#eff6ff;
-	min-height:75px;
-	padding:10px;
-	margin-top:10px;
+    background-color:#eff6ff;
+    min-height:75px;
+    padding:10px;
+    margin-top:10px;
 }
 
 .img-style-4
 {
-	min-height:65px;
-	width:auto;
+    min-height:65px;
+    width:auto;
 }
 
 .picto-section
 {
-	margin-top:50px;
+    margin-top:50px;
 }
 
 .large-empty
 {
-	height:100px;
+    height:100px;
 }
