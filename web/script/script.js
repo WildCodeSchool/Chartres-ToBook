@@ -36,6 +36,10 @@ function initautocompleteTony() {
   lat = lat.toString();
   lng = lng.toString();
 
+  localStorage.setItem('address',address);
+  localStorage.setItem('latitude',lat);
+  localStorage.setItem('longitude',lng);
+  
   // On ecrit les données dans des champs cachés comme ça elles seront envoyées lors de la soumission du formulaire
   $("input[name=latitude]").val(lat);
   $("input[name=longitude]").val(lng);
@@ -91,13 +95,13 @@ longitudeSearch = parseFloat(localStorage.getItem('longitude'));
 /*************************************
 * modifs Tony
 */
-$(document).ready(function () {
+//$(document).ready(function () {
   //your code here
-  address         = $("input[name=address]").val();
+  //address         = $("input[name=address]").val();
   // latitudeSearch  = $("input[name=latitude]").val();
   // longitudeSearch = $("input[name=longitude]").val();
-  alert(address);
-});
+  //alert(address);
+//});
 /*************************************
 * Fin modifs Tony
 */
