@@ -1,5 +1,7 @@
 <?php
+
 namespace TobookBundle\Controller;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -74,5 +76,5 @@ class DefaultController extends Controller
             'base_dir'  => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'resultats' => $resultats,
         ));
-    }  
+    } 
 }

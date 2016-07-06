@@ -687,7 +687,6 @@ body {
 
 .input-style-3
 {
-	color:#FFFFFF;
 	width:100%;
 }
 
@@ -797,100 +796,4 @@ body {
 .navigation {
     text-align: center;
 
-}
-
-/* CLUB-HOUSE */
-
-.club-head
-{
-    padding:10px 0px 10px 0px;
-}
-
-.club-photo
-{
-    height:600px;
-}
-
-.multi-photo
-{
-    min-height:200px;
-    padding:40px 0px 40px 15px;
-}
-
-.img-style-3
-{
-    height:150px;
-    width:auto;
-    margin:auto;
-}
-
-.front-color-1
-{
-    color:#559827;
-    font-weight:bold;
-}
-
-.front-color-2
-{
-    color:#D8D8D8;
-    font-weight:bold;
-}
-
-.page1
-{
-    padding:20px;
-}
-
-.page1-text
-{
-    padding-left:40px;
-}
-
-.page1-map
-{
-    background-color:#F3E2A9;
-    height:215px;
-}
-
-.info-comparateur
-{
-    background-color:#559827;
-    min-height:100px;
-    text-align:center;
-    padding:15px;
-    margin-top:25px;
-}
-
-.info-comparateur h3
-{
-    color:#FFFFFF;
-}
-
-.info-empty
-{
-    height:25px;
-}
-
-.comparateur-item
-{
-    background-color:#eff6ff;
-    min-height:75px;
-    padding:10px;
-    margin-top:10px;
-}
-
-.img-style-4
-{
-    min-height:65px;
-    width:auto;
-}
-
-.picto-section
-{
-    margin-top:50px;
-}
-
-.large-empty
-{
-    height:100px;
 }

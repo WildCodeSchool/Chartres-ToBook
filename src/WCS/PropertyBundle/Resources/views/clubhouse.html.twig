@@ -1,0 +1,280 @@
+{% extends 'TobookBundle::base.html.twig' %}
+
+{% block ariane %}
+
+	<div class="col-md-12 ariane">
+		<div class="col-md-2 ariane-back">
+			<h4>< Retour à la liste</h4>
+		</div>
+		<div class="col-md-10 ariane-content">
+			<a>Accueil</a> >
+			<a>Tobook</a> >
+			<a>Club-house</a>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block body %}
+
+	<div class="col-md-8">
+
+		<!-- Nom de l'hôtel et nb d'étoiles -->
+		<div class="col-m-12">
+		    <h3>
+		        {{ etablissement.profNom }}
+		        <!-- Etoiles -->
+		        {% for i in 1..5 %}
+		            {% if i <= etablissement.profEtoiles %}
+		                <img src="{{ asset('img/picto/jauge_star_1.png') }}" title="Etoiles" />
+		            {% else %}
+		                <img src="{{ asset('img/picto/jauge_star_0.png') }}" title="Etoiles" />
+		            {% endif %}
+		        {% endfor %}
+		    </h3>
+		</div>
+
+		<!-- Notation des clients -->
+		<div class="col-md-12 club-head">
+		    <h4>
+		        <span>{{ "Note des clients :"|trans }}</span>
+		        <span>
+		        	<!-- Coeurs (actuellement géré avec les étoiles) -->
+		            {% for i in 1..5 %}
+		                {% if i <= etablissement.profEtoiles %}
+		                    <img src="{{ asset('img/picto/jauge_coeur_1.png') }}" title="Note" />
+		                {% else %}
+		                    <img src="{{ asset('img/picto/jauge_coeur_0.png') }}" title="Note" />
+		                {% endif %}
+		            {% endfor %}
+		        </span>
+		        <span>
+		            <img src="{{ asset('img/picto/jauge_coeur_0.png') }}" title="Note" />
+		        </span>
+
+		        <!-- suivre cet hotel -->
+		        <span>
+		            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+		            	<img src="{{ asset('img/picto/n_suit.png') }}" title="{{ "Mettre l'établissement en favoris"|trans }}" />
+		            {% else %}
+		            	<img id="favoriGray" src="{{ asset('img/picto/n_suit.png') }}" title="{{ "Veuillez vous connectez"|trans }}" />
+		            {% endif %}
+		        </span>
+
+		    </h4>
+		</div>
+
+		<div class="col-md-12 club-photo">
+		    <div class="connected-carousels">
+		        <div class="stage">
+		            <div class="carousel carousel-stage">
+		            	{% if etablissement_img|length == 0 %}
+						    <img src="{{ asset('img/picto/defaut.png') }}" width="600" height="400" title="Defaut" />
+						{% else %}
+							<ul>
+			                    {% for i in 0..((etablissement_img|length)-1) %}
+			                        <li><img src="{{ asset('uploads/img/'~etablissement.profCode~'/'~etablissement_img[i].primOrd~'.jpg') }}"width="600" height="400" alt=""/></li>
+			                    {%  endfor %}
+			                </ul>
+						{% endif %}
+		            </div>
+		            <a href="#" class="prev prev-stage"><span>&lsaquo;</span></a>
+		            <a href="#" class="next next-stage"><span>&rsaquo;</span></a>
+		        </div>
+
+		        <div class="navigation">
+		            <a href="#" class="prev prev-navigation">&lsaquo;</a>
+		            <a href="#" class="next next-navigation">&rsaquo;</a>
+		            <div class="carousel carousel-navigation">
+		            	{% if etablissement_img|length == 0 %}
+		            		<img src="{{ asset('img/picto/defaut.png') }}" width="50" height="50" title="Defaut" />
+		            	{% else %}
+			                <ul>
+			                    {% for i in 0..((etablissement_img|length)-1) %}
+			                        <li><img src="{{ asset('uploads/img/'~etablissement.profCode~'/'~etablissement_img[i].primOrd~'.jpg') }}" width="50" height="50" alt=""/></li>
+			                    {%  endfor %}
+			                </ul>
+			            {% endif %}
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		
+		<div class="col-md-12 onglets row">
+			<div class="col-md-12 titre row">
+				<div class="col-md-4 but1 but">
+					<h3 class="front-color-1">{{ "DESCRIPTIF"|trans }}</h3>
+				</div>
+				<div class="col-md-4 but2 but">
+					<h3 class="front-color-2">{{ "COMMENTAIRES"|trans }}</h3>
+				</div>
+				<div class="col-md-4 but3 but">
+					<h3 class="front-color-2">{{ "CONTACT"|trans }}</h3>
+				</div>
+			</div>
+			<div class="col-md-12 contenu row">
+				<div class="col-md-12 row case1 pageother"> 
+					<div class="col-md-3 page1-map">
+
+					</div>
+					<div class="col-md-9 page1-text">
+						<p>{{ etablissement.profDescriptif }}</p>
+					</div>
+				</div> 
+				<div class="col-md-12 case2 pageother"> 
+					<h2>{{ "Formulaire de commentaires"|trans }}</h2>
+					<h2>{{ "Commentaires"|trans }} </h2> 
+				</div> 
+				<div class="col-md-12 case3 pageother"> 
+					<p>{{ "Voici les coordonnées téléphoniques :"|trans }}</p>
+					<p>{{ etablissement.profTel }}</p>
+					<p>{{ "Voici le mail de contact :"|trans }}</p>
+					<p>{{ etablissement.profMail }}</p>
+					<p>{{ "Voici l'adresse :"|trans }}</p>
+					<p>{{ etablissement.profAdd1 }}</p>
+					<p>{{ etablissement.profAdd2 }}</p>
+					<p>{{ etablissement.profAdd3 }}</p>
+					<p>{{ etablissement.profCp }} {{ etablissement.profVille }}</p>
+
+				</div> 
+			</div>
+		</div>
+
+	</div>
+
+	<div class="col-md-4">
+		<div class="col-md-12 info-comparateur">
+			<h3><strong>Comparateur de prix</strong></h3>
+		</div>
+		<div class="info-empty col-md-12">
+		</div>
+		<div class="col-md-12 comparateur-item">
+			<div class="col-md-6">
+				<h3><a href="{{ etablissement.profWebResa }}"><strong>Prix direct Hôtelier</strong></a></h3>
+			</div>
+			<div class="col-md-3">
+				<h3><i>à partir de</i></h3>
+			</div>
+			<div class="col-md-2">
+				<h3><strong>{{ etablissement.profPrixMini }}</strong></h3>
+			</div>
+			<div class="col-md-1">
+				<h3>€</h3>
+			</div>
+		</div>
+		<div class="col-md-12 comparateur-item">
+			<div class="col-md-6">
+				<h3><strong>Hôtels.com</strong></h3>
+			</div>
+			<div class="col-md-3">
+				<h3><i>à partir de</i></h3>
+			</div>
+			<div class="col-md-2">
+				<h3><strong>520.00</strong></h3>
+			</div>
+			<div class="col-md-1">
+				<h3>€</h3>
+			</div>
+		</div>
+		<div class="col-md-12 comparateur-item">
+			<div class="col-md-6">
+				<h3><strong>Booking.com</strong></h3>
+			</div>
+			<div class="col-md-3">
+				<h3><i>à partir de</i></h3>
+			</div>
+			<div class="col-md-2">
+				<h3><strong>540.00</strong></h3>
+			</div>
+			<div class="col-md-1">
+				<h3>€</h3>
+			</div>
+		</div>
+		<div class="col-md-12 comparateur-item">
+			<div class="col-md-6">
+				<h3><strong>Expedia.fr</strong></h3>
+			</div>
+			<div class="col-md-3">
+				<h3><i>à partir de</i></h3>
+			</div>
+			<div class="col-md-2">
+				<h3><strong>590.00</strong></h3>
+			</div>
+			<div class="col-md-1">
+				<h3>€</h3>
+			</div>
+		</div>
+		<div class="col-md-12 comparateur-item">
+			<div class="col-md-6">
+				<h3><strong>Kayak.fr</strong></h3>
+			</div>
+			<div class="col-md-3">
+				<h3><i>à partir de</i></h3>
+			</div>
+			<div class="col-md-2">
+				<h3><strong>1620.00</strong></h3>
+			</div>
+			<div class="col-md-1">
+				<h3>€</h3>
+			</div>
+		</div>
+
+		<br></br>
+
+		<div class="col-md-12 row picto-section">
+			<div class="col-md-3 picto">
+				<img class="img-style-4" src="{{ asset('img/picto/picto1.png') }}">
+				<p>Parking surveillé</p>
+			</div>
+			<div class="col-md-3 picto">
+				<img class="img-style-4" src="{{ asset('img/picto/picto2.png') }}">
+				<p>Gare à proximité</p>
+			</div>
+			<div class="col-md-3 picto">
+				<img class="img-style-4" src="{{ asset('img/picto/picto3.png') }}">
+				<p>Piscine chaufée</p>
+			</div>
+			<div class="col-md-3 picto">
+				<img class="img-style-4" src="{{ asset('img/picto/picto4.png') }}">
+				<p>Restaurant Gastronomique</p>
+			</div>
+		</div>
+		<div class="col-md-12 row">
+			<div class="col-md-3 picto">
+				<img class="img-style-4" src="{{ asset('img/picto/picto5.png') }}">
+				<p>Wifi haut débit</p>
+			</div>
+			<div class="col-md-3 picto">
+				<img class="img-style-4" src="{{ asset('img/picto/picto6.png') }}">
+				<p>Coffre fort personnel</p>
+			</div>
+			<div class="col-md-3 picto">
+				<img class="img-style-4" src="{{ asset('img/picto/picto7.png') }}">
+				<p>Accès handicapé</p>
+			</div>
+			<div class="col-md-3 picto">
+				<img class="img-style-4" src="{{ asset('img/picto/picto8.png') }}">
+				<p>Ascenseur</p>
+			</div>
+		</div>
+		<div class="col-md-12 row">
+			<div class="col-md-3 picto">
+				<img class="img-style-4" src="{{ asset('img/picto/picto9.png') }}">
+				<p>Animaux interdits</p>
+			</div>
+			<div class="col-md-3 picto">
+				<img class="img-style-4" src="{{ asset('img/picto/picto3.png') }}">
+				<p>Piscine chaufée</p>
+			</div>
+		</div>
+
+		{# Le fil actu correspond aux trois derniers commentaires laissés sur la page de l'établissement #}
+		<div class="col-md-12 filActuTitre">
+			<h3><strong>Actualités / Fil d'infos</strong></h3>
+		</div>
+		<div class="col-md-12 fileActuContenu">
+		</div>
+
+	</div>
+
+{% endblock %}
