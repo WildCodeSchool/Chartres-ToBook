@@ -1,29 +1,28 @@
 <?php
-
 namespace TobookBundle\Controller;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
 class DefaultController extends Controller
 {
     public function indexAction()
     {
         return $this->render('TobookBundle:Default:index.html.twig');
     }
-
+    public function changeLocaleAction(Request $request)
+    {
+        $lg = $request->get('langue');
+        $request = $this->getRequest();
+        $request->setLocale($lg);
+        return $this->redirect($this->generateUrl('tobook_homepage', array('_locale' => $lg)));
+    }  
     public function searchAction(Request $request)
     {   
-
         $latitude = $request->query->get('latitude');
         $longitude = $request->query->get('longitude');
-
         $prix = $request->query->get('prix');
         $etoiles = $request->query->get('etoiles');
         $note = $request->query->get('note');
-
         $order = array();
-
         switch ($prix) {
             case "asc":
                 $order = array("profPrixMini" => "asc");
@@ -40,7 +39,6 @@ class DefaultController extends Controller
                 $order = array("profEtoiles" => "desc");
                 break;
         } 
-
         switch ($note) {
             case "asc":
                 $order = array("profId" => "asc");
@@ -49,7 +47,6 @@ class DefaultController extends Controller
                 $order = array("profId" => "desc");
                 break;
         }
-
         // var_dump($order);
         
         $criteria = array();
@@ -63,5 +60,4 @@ class DefaultController extends Controller
             'resultats' => $resultats,
         ));
     }  
-
 }
