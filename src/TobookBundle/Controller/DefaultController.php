@@ -4,6 +4,11 @@ namespace TobookBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use WCS\PropertyBundle\Entity\Professionnel;
 
 
 
@@ -63,7 +68,6 @@ class DefaultController extends Controller
         //         break;
         // }
 
-        
         $d = $this->getDoctrine()->getRepository('WCSPropertyBundle:Professionnel')->createQueryBuilder('l');
         $d
             ->select('l')
@@ -73,14 +77,36 @@ class DefaultController extends Controller
             ->having('distance < :distance')
             ->orderBy('distance', 'ASC')
             ->setFirstResult(0)  
-            ->setMaxResults(15)
+            ->setMaxResults(2)
             ->setParameter('enabled', 1)
             ->setParameter('distance', $distance);
         $query= $d->getQuery();
         $resultats= $query->getResult();
 
+        // var_dump($resultats);
 
-        var_dump($resultats);
+        $tab_resultats = [];
+        if (!empty($resultats))
+        {
+            foreach ($resultats as $res)
+            {   
+                $tab_res = [];
+                $tab_res[] = array(
+                        'id'=>$res[0]->getProfId(),
+                        'distance'=>$res['distance'],
+                        'lat'=>$res[0]->getProfLatitude(),
+                        'lng'=>$res[0]->getProfLongitude(),
+                    );
+                array_push($tab_resultats, $tab_res);
+            }
+        }        
+        // var_dump($tab_resultats);
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $result = $serializer->serialize( $tab_resultats, 'json');
+        var_dump($result);         
 
         return $this->render('TobookBundle:Default:search.html.twig', array(
             'base_dir'  => realpath($this->container->getParameter('kernel.root_dir').'/..'),
