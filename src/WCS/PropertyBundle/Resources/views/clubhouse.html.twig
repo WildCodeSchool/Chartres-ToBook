@@ -55,7 +55,12 @@
 		        <!-- suivre cet hotel -->
 		        <span>
 		            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-		            	<img src="{{ asset('img/picto/n_suit.png') }}" title="{{ "Mettre l'établissement en favoris"|trans }}" />
+
+					{# <form method="post" action="{{ path('favorites') }}">
+						<input type="submit" value="Mettre en favoris">
+					</form> #}
+					<!--<img src="{{ asset('img/picto/n_suit.png') }}" title="{{ "Mettre l'établissement en favoris"|trans }}" />-->
+		            	
 		            {% else %}
 		            	<img id="favoriGray" src="{{ asset('img/picto/n_suit.png') }}" title="{{ "Veuillez vous connectez"|trans }}" />
 		            {% endif %}
