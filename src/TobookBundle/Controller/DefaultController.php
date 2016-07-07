@@ -4,7 +4,7 @@ namespace TobookBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+
 
 class DefaultController extends Controller
 {
@@ -19,15 +19,14 @@ class DefaultController extends Controller
         $address    = $request->query->get('address');
         $latitude   = $request->query->get('latitude');
         $longitude  = $request->query->get('longitude');
+        $distance   = 10.5;
 
         $prix       = $request->query->get('prix');
         $etoiles    = $request->query->get('etoiles');
         $note       = $request->query->get('note');
-        var_dump($address);
-        var_dump($latitude);
-        var_dump($longitude);
-
-        $order = array();
+        // var_dump($address);
+        // var_dump($latitude);
+        // var_dump($longitude);
 
         // switch ($prix) {
         //     case "asc":
@@ -56,36 +55,21 @@ class DefaultController extends Controller
         // }
 
         
-        // $criteria = array();
-        // $repository = $this->getDoctrine()
-        //     ->getRepository('WCSPropertyBundle:Professionnel');
-        // $resultats =  $repository->findBy($criteria, $order, 5, null);
-        // $resultats =  $repository->findOneByProfId('1');
-        // replace this example code with whatever you need
-
-        $offset = 0;
-        $limit = 3;
-
         $d = $this->getDoctrine()->getRepository('WCSPropertyBundle:Professionnel')->createQueryBuilder('l');
         $d
             ->select('l')
             ->addSelect(
-                '( 3959 * acos(cos(radians(' . $latitude . '))' .
-                    '* cos( radians( l.prof_latitude ) )' .
-                    '* cos( radians( l.prof_longitude )' .
-                    '- radians(' . $longitude . ') )' .
-                    '+ sin( radians(' . $latitude . ') )' .
-                    '* sin( radians( l.prof_latitude ) ) ) ) as distance'
-            )
-            ->andWhere('l.prof_actif = :enabled')
-            ->setParameter('enabled', 1)
+            '( 6371 * acos(cos(radians(' . $latitude . ')) * cos( radians( l.profLatitude ) ) * cos( radians( l.profLongitude ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( l.profLatitude ) ) ) ) as distance'
+        )   ->where('l.profActif = :enabled')
             ->having('distance < :distance')
-            ->setParameter('distance', 10)
             ->orderBy('distance', 'ASC')
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
+            ->setFirstResult(0)  
+            ->setMaxResults(15)
+            ->setParameter('enabled', 1)
+            ->setParameter('distance', $distance);
+        $query= $d->getQuery();
+        $resultats= $query->getResult();
 
-        $resultats = $d->getQuery();
 
         var_dump($resultats);
 
