@@ -40,7 +40,7 @@
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <ul class="links">
             <li><a href="#">{{ 'Nouvelle Recherche'|trans }}</a></li>
-            <li><a href='#'>{{ 'Ma page'|trans }}</a></li>
+            <li><a href='{{ path('profil_edit', { 'id': app.user.id }) }}'>{{ 'Ma page'|trans }}</a></li>
             <li><a href='#'>{{ 'Mes Favoris'|trans }}</a></li>
             <li><a href='#'>{{ 'Mes paramètres'|trans }}</a></li>
         </ul>

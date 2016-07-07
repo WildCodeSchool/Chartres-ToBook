@@ -5,6 +5,7 @@ namespace UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class UserType extends AbstractType
 {
@@ -15,17 +16,25 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('userProf')
             ->add('userPrenom')
             ->add('userNom')
-            ->add('userLangue')
+            ->add('userLangue', ChoiceType::class, array(
+                'choices'  => array(
+                    "fr" => 'Français',
+                    "en" => 'English',
+                    "de" => 'German',
+                ),
+            'multiple'  => false,
+            'expanded'  => false,
+            'required'  => false,
+            ))
             ->add('userAdd1')
             ->add('userAdd2')
             ->add('userCp')
             ->add('userVille')
             ->add('userTel')
             ->add('userMob')
-            ->add('userDtNais', 'date')
+            ->add('userDtNais', null , array('widget' => 'single_text'))
             ->add('userDescriptif')
         ;
     }

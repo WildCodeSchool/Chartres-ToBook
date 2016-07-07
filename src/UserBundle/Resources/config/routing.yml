@@ -1,4 +1,4 @@
 user_profil:
     resource: "@UserBundle/Resources/config/routing/user.yml"
-    prefix:   /profil
+    prefix:   /{_locale}/profil
 
