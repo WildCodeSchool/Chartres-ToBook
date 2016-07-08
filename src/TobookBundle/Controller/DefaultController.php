@@ -21,10 +21,10 @@ class DefaultController extends Controller
     public function searchAction(Request $request)
     {   
 
+        $distance   = 50;
         $address    = $request->query->get('address');
         $latitude   = $request->query->get('latitude');
         $longitude  = $request->query->get('longitude');
-        $distance   = 10.5;
 
         $prix       = $request->query->get('prix');
         $etoiles    = $request->query->get('etoiles');
