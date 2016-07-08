@@ -9,15 +9,18 @@
 
 		<h3>{{ 'Servez-vous'|trans }} !</h3>
 
-		<form id="form" method="POST" action="{{ path('tobook_search') }}">
-			<input id="autocomplete" type="text" onfocus="initautocomplete()" placeholder="Ville / Code postal" class="input-style-1">
-			<select class="input-style-1" id="category">
+		<form name="mainSearch" method="get" action="{{ path('tobook_search') }}">
+			<input name="location" id="autocomplete" type="text" onfocus="initautocompleteTony()" placeholder="Ville / Code postal" class="input-style-1">
+			<select name="categorie" id="category" class="input-style-1">
 				<option value='hotels'selected>{{ "Hôtels"|trans }}</option>
                 <option value='chambreHotes'>{{ "Chambres d'hôtes"|trans }}</option>
                 <option value='gites'>{{ "Gîtes"|trans }}</option>
                 <option value='restaurants'>{{ "Restaurants"|trans }}</option>
                 <option value='musees'>{{ "Musées"|trans }}</option>
 			</select>
+			<input name="latitude"  type="hidden" value=""/>
+			<input name="longitude" type="hidden" value=""/>
+			<input name="address" type="hidden" value=""/>
 			<p>
 				<input type="submit" class="input-style-2 btn btn-success" value="{{ 'Rechercher'|trans }}">
 			</p>
