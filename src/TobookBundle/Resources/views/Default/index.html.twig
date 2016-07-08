@@ -9,10 +9,14 @@
 
 		<h3>Servez-vous !</h3>
 
-		<form method="POST" action="{{ path('tobook_search') }}">
+		<form id="form" method="POST" action="{{ path('tobook_search') }}">
 			<input id="autocomplete" type="text" onfocus="initautocomplete()" placeholder="Ville / Code postal" class="input-style-1">
-			<select class="input-style-1">
-				<option>Hôtels</option>
+			<select class="input-style-1" id="category">
+				<option value='hotels' selected >Hôtels</option>
+                <option value='chambreHotes'>Chambres d'hotes</option>
+                <option value='gites'>Gîtes</option>
+                <option value='restaurants' >Restaurants</option>
+                <option value='musees'>Musées</option>
 			</select>
 			<p>
 				<input type="submit" class="input-style-2 btn btn-success" value="Rechercher">
@@ -124,5 +128,18 @@
 			<a href=""><strong>JE M'INSCRIS</strong></a>
 		</div>
 	</div>
+	<script type="text/javascript">
+$(document).ready(function() {
+
+  $("#form").submit(function(e){
+
+    var selectType = document.getElementById("category"); 
+    
+    var choice = selectType.options[selectType.selectedIndex].getAttribute('value');
+    
+  });
+  
+});
+</script>
 
 {% endblock %}

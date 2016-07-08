@@ -6,17 +6,17 @@
 
 		<img class="img-style-1" src="{{ asset('img/background/background-1.jpg') }}">
 
-		<form method="POST" action="{{ path('tobook_search') }}" class="col-md-12 search-bar row">
+		<form id="form" method="POST" action="{{ path('tobook_search') }}" class="col-md-12 search-bar row">
 			<div class="col-md-7">
 				<input id="autocomplete" class="input-style-5" onfocus="initautocomplete()" type="text" placeholder="Entrez votre recherche">
 			</div>
 			<div class="col-md-4">
-				<select class="input-style-5" name="category">
-					<option value='3' >Chambres d'hotes</option>
-					<option value='2' >Gîtes</option>
-					<option value='1' selected>Hôtels</option>
-					<option value='8' >Musés</option>
-					<option value='5' >Restaurants</option>
+				<select class="input-style-5" name="category" id="category">
+					<option value='hotels'>Hôtels</option>
+                    <option value='chambreHotes'>Chambres d'hotes</option>
+                    <option value='gites'>Gîtes</option>
+                    <option value='restaurants' >Restaurants</option>
+                    <option value='musees'>Musées</option>
 				</select>
 			</div>
 			<div class="col-md-1">
@@ -25,8 +25,25 @@
 		</form>
 		<script type="text/javascript">
 		$(document).ready(function() {
+
+		  $("#form").submit(function(e){
+
+		    var selectType = document.getElementById("category"); 
+		    
+		    var choice = selectType.options[selectType.selectedIndex].getAttribute('value');
+
+		    localStorage.setItem('choice',choice);
+		    
+		  });
+		  
+		});
+		</script>
+		<script type="text/javascript">
+		$(document).ready(function() {
 			initMap();
+
 			$('#resultatMap').text( address );
+			
 		});
 		</script>
 		<div class="col-md-12 result-bar row">
