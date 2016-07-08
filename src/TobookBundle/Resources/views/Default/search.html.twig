@@ -1,8 +1,6 @@
 {% extends 'TobookBundle::base.html.twig' %}
 
 {% block body %}
-	{{ dump(resultats)}}
-
 	<div class="col-md-12 search-first-div">
 
 		<img class="img-style-1" src="{{ asset('img/background/background-1.jpg') }}">
@@ -37,7 +35,7 @@
 			<h4>Résultats pour <span id="resultatMap">{{ address }}</span></h4>
 		</div>
 
-		<div  id="map" style="width:100%; height:100px;" class="col-md-12 search-map row">
+		<div  id="map" style="width:100%; height:500px;" class="col-md-12 search-map row">
 			{# VOTRE MAP ICI !!! #}
 		</div>
 	</div>
@@ -90,7 +88,7 @@
 			<img class="img-style-1" src="{{asset('img/background/hotel1.jpg') }}">
 		</div>
 		<div class="col-md-6 col-md-offset-1 text-div">
-			<h3><strong>{# resultat.profNom #}
+			<h3><strong>{{ resultat[0].profNom }}
 				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
 				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
 				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
@@ -98,7 +96,7 @@
 				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
 			</strong></h3>
 			<h4>__________</h4>
-			<p>{# resultat.profDescriptif #}</p>
+			<p>{{ resultat[0].profDescriptif }}</p>
 			<br></br>
 			<div class="col-md-12 row">
 				<div class="pull-left search-div-style" href="#">
@@ -109,7 +107,7 @@
 					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
 				</div>
 				<div class="pull-left search-div-style" href="#">
-					à partir de: <strong>{# resultat.profPrixMini #} €</strong>
+					à partir de: <strong>{{ resultat[0].profPrixMini }} €</strong>
 				</div>
 				<a class="bouton-style-3 pull-right" href="#">
 					<strong>Plus de details</strong>
@@ -127,7 +125,7 @@
 
 	<div class="col-md-12 search-third-div border-2">
 		<div class="col-md-6 text-div">
-			<h3><strong>{# resultat.profNom #}
+			<h3><strong>{{ resultat[0].profNom }}
 			<img src="{{ asset('img/picto/jauge_star_1.png') }}">
 				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
 				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
@@ -135,7 +133,7 @@
 				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
 			</strong></h3>
 			<h4>__________</h4>
-			<p>{# resultat.profDescriptif #}</p>
+			<p>{{ resultat[0].profDescriptif }}</p>
 			<br></br>
 			<div class="col-md-12 row">
 				<div class="pull-left search-div-style" href="#">
@@ -146,7 +144,7 @@
 					<img src="{{ asset('img/picto/jauge_coeur_0.png') }}">
 				</div>
 				<div class="pull-left search-div-style" href="#">
-					à partir de: <strong>{# resultat.profPrixMini #} €</strong>
+					à partir de: <strong>{{ resultat[0].profPrixMini }} €</strong>
 				</div>
 				<a class="bouton-style-3 pull-right" href="#">
 					<strong>Plus de details</strong>
