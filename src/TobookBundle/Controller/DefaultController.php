@@ -11,7 +11,6 @@ use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use WCS\PropertyBundle\Entity\Professionnel;
 
 
-
 class DefaultController extends Controller
 {
     public function indexAction()
@@ -80,7 +79,6 @@ class DefaultController extends Controller
                 array_push($tab_resultats, $tab_res);
             }
         }        
-
 
         return $this->render('TobookBundle:Default:search.html.twig', array(
             'base_dir'  => realpath($this->container->getParameter('kernel.root_dir').'/..'),
