@@ -18,6 +18,22 @@ class DefaultController extends Controller
         return $this->render('TobookBundle:Default:index.html.twig');
     }
 
+    public function getRefererRoute()
+    {
+        $request = $this->getRequest();
+
+        //look for the referer route
+        $referer = $request->headers->get('referer');
+        $lastPath = substr($referer, strpos($referer, $request->getBaseUrl()));
+        $lastPath = str_replace($request->getBaseUrl(), '', $lastPath);
+
+        $matcher = $this->get('router')->getMatcher();
+        $parameters = $matcher->match($lastPath);
+        $route = $parameters['_route'];
+
+        return $route;
+    }
+
     public function changeLocaleAction(Request $request)
     {
         $lg = $request->get('langue');
@@ -25,7 +41,13 @@ class DefaultController extends Controller
         $request = $this->getRequest();
         $request->setLocale($lg);
 
-        return $this->redirect($this->generateUrl('tobook_homepage', array('_locale' => $lg)));
+        $ruta = $this->getRefererRoute();
+
+        
+        $url = $this->get('router')->generate($ruta, array('_locale' => $lg));
+
+        return $this->redirect($url);
+        // return $this->redirect($this->generateUrl('tobook_homepage', array('_locale' => $lg)));
     }  
 
     public function searchAction(Request $request)

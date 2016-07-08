@@ -1,7 +1,7 @@
 club-house:
-    path:     /clubhouse/{profCode}
+    path:     /{_locale}/clubhouse/{profCode}
     defaults: {_controller: WCSPropertyBundle:Default:clubhouse }
 
 favorites:
-    path:     /clubhouse/{profCode}/favorites
+    path:     /{_locale}/clubhouse/{profCode}/favorites
     defaults: {_controller: WCSPropertyBundle:Default:favoris }
