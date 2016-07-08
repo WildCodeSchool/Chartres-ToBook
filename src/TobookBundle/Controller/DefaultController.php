@@ -78,14 +78,19 @@ class DefaultController extends Controller
                     );
                 array_push($tab_resultats, $tab_res);
             }
-        }        
+        }
 
+        $resultats = $this->get('knp_paginator')->paginate($tab_resultats, /* Ici on appelle la liste d'entité qu'on veut voir apparaitre en tant qu'éléments de notre pagination */
+            $this->get('request')->query->get('page', 1)/*Ici la page à laquelle la pagination commence*/,
+            14/*Et ici la limite d'éléments par page*/
+        );
+        
         return $this->render('TobookBundle:Default:search.html.twig', array(
             'base_dir'  => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'latitude'  => $latitude,
             'longitude' => $longitude,
             'address'    => $address,
-            'resultats' => $tab_resultats,
+            'resultats' => $resultats,
         ));
     }
 
