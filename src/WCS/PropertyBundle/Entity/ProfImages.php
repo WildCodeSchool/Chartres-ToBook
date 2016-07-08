@@ -1,6 +1,6 @@
 <?php
 
-namespace PropertyBundle\Entity;
+namespace WCS\PropertyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,9 +36,9 @@ class ProfImages
     private $primDefaut;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="prim_ord", type="boolean", nullable=false)
+     * @ORM\Column(name="prim_ord", type="integer", nullable=false)
      */
     private $primOrd;
 

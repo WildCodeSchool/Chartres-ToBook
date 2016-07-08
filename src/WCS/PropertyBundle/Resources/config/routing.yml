@@ -1,3 +1,7 @@
-wcs_property_homepage:
-    path:     /
-    defaults: { _controller: WCSPropertyBundle:Default:index }
+club-house:
+    path:     /clubhouse/{profCode}
+    defaults: {_controller: WCSPropertyBundle:Default:clubhouse }
+
+favorites:
+    path:     /clubhouse/{profCode}/favorites
+    defaults: {_controller: WCSPropertyBundle:Default:favoris }

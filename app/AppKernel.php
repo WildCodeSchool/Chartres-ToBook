@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new WCS\PropertyBundle\WCSPropertyBundle(),
             new WCS\RatingBundle\WCSRatingBundle(),
             new WCS\SMSBundle\WCSSMSBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
