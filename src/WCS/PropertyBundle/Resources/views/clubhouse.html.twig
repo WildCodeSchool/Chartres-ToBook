@@ -55,7 +55,12 @@
 		        <!-- suivre cet hotel -->
 		        <span>
 		            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-		            	<img src="{{ asset('img/picto/n_suit.png') }}" title="{{ "Mettre l'établissement en favoris"|trans }}" />
+
+					<!-- Ce lien dynamique permet de remplir le champs "profCode" de l'URL avec le ProfCode de l'établissement concerné -->
+					<a href="{{ path('favorites', { 'profCode': etablissement.profCode }) }}">
+						<img src="{{ asset('img/picto/n_suit.png') }}" title="{{ "Mettre l'établissement en favoris"|trans }}" />
+					</a>
+		            	
 		            {% else %}
 		            	<img id="favoriGray" src="{{ asset('img/picto/n_suit.png') }}" title="{{ "Veuillez vous connectez"|trans }}" />
 		            {% endif %}

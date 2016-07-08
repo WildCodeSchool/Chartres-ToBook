@@ -1,0 +1,43 @@
+{% extends 'TobookBundle::base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Gestion profil'|trans }}</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_label(edit_form.userNom, 'Nom :'|trans ) }}
+        {{ form_widget(edit_form.userNom) }}<br>
+
+        {{ form_label(edit_form.userPrenom, 'Prénom :'|trans ) }}
+        {{ form_widget(edit_form.userPrenom) }}<br>
+
+        {{ form_label(edit_form.userLangue, 'Langue principale'|trans ) }}
+        {{ form_widget(edit_form.userLangue) }}<br>
+
+        {{ form_label(edit_form.userAdd1, 'Adresse :'|trans ) }}
+        {{ form_widget(edit_form.userAdd1) }}<br>
+        {{ form_widget(edit_form.userAdd2) }}<br>
+
+        {{ form_label(edit_form.userCp, 'Code Postal :'|trans ) }}
+        {{ form_widget(edit_form.userCp) }}<br>
+
+        {{ form_label(edit_form.userVille, 'Ville :'|trans ) }}
+        {{ form_widget(edit_form.userVille) }}<br>
+
+        {{ form_label(edit_form.userTel, 'Tel :'|trans ) }}
+        {{ form_widget(edit_form.userTel) }}<br>
+
+        {{ form_label(edit_form.userMob, 'Mobile :'|trans ) }}
+        {{ form_widget(edit_form.userMob) }}<br>
+
+        {{ form_label(edit_form.userDtNais, 'Date de naissance :'|trans) }}
+        {{ form_widget(edit_form.userDtNais, { 'attr': {'placeholder': "yyyy-mm-dd"} }) }}<br>
+
+        {{ form_label(edit_form.userDescriptif, 'Description'|trans ) }}<br>
+        {{ form_widget(edit_form.userDescriptif) }} <br>
+
+        <input type="submit" value="{{ 'Sauvegarder'|trans }}" />
+        {{ form_end(edit_form) }}
+
+{% endblock %}
+
+
