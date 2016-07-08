@@ -21,6 +21,32 @@ function initautocomplete() {
   });
 }
 
+function initautocompleteTony() {
+ 
+  autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{types: ['geocode']});
+
+  autocomplete.addListener('place_changed', function(){
+  
+  place = autocomplete.getPlace();
+  address = place.formatted_address;
+  lat = place.geometry.location.lat();
+  lng = place.geometry.location.lng();
+  lat = lat.toString();
+  lng = lng.toString();
+
+  localStorage.setItem('address',address);
+  localStorage.setItem('latitude',lat);
+  localStorage.setItem('longitude',lng);
+  
+  // On ecrit les données dans des champs cachés comme ça elles seront envoyées lors de la soumission du formulaire
+  $("input[name=latitude]").val(lat);
+  $("input[name=longitude]").val(lng);
+  $("input[name=address]").val(address);
+
+  });
+  
+}
+
 function geolocate() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
