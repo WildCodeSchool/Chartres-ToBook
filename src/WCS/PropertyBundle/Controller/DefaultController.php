@@ -61,7 +61,7 @@ class DefaultController extends Controller
         $em->persist($favoris);
         $em->flush();
 
-        return $this->render('TobookBundle:Default:index.html.twig', array(
+        return $this->render('WCSPropertyBundle::clubhouse.html.twig', array(
             'etablissement' => $etablissement, 'etablissement_img' => $etablissement_img,
         ));
     } 
