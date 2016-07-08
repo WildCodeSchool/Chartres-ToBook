@@ -26,6 +26,7 @@ class DefaultController extends Controller
 
     public function searchAction(Request $request)
     {   
+        /*ceci est un commentaire pour push dans le vide */
         $latitude = $request->query->get('latitude');
         $longitude = $request->query->get('longitude');
         $prix = $request->query->get('prix');
