@@ -95,7 +95,7 @@ function initMap(resultat) {
            }, callback);
 
     }else if(choice == 'chambreHotes'){
-      marker_path = "../../web/img/marker_map/hotels.png";
+      marker_path = "../../marker_map/hotels.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
@@ -103,7 +103,7 @@ function initMap(resultat) {
            }, callback);
 
     }else if(choice == 'gites'){
-      marker_path = "../../web/img/marker_map/hotels.png";
+      marker_path = "../../img/marker_map/hotels.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
@@ -111,7 +111,7 @@ function initMap(resultat) {
            }, callback);
 
     }else if(choice == 'restaurants'){
-      marker_path = "../../web/img/marker_map/restaurant64.png";
+      marker_path = "../../img/marker_map/restaurant64.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
@@ -119,7 +119,7 @@ function initMap(resultat) {
            }, callback);
 
     }else if(choice == 'musees'){
-      marker_path = "../../web/img/marker_map/museum64.png";
+      marker_path = "../../img/marker_map/museum64.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
@@ -164,6 +164,12 @@ jQuery(document).ready(function($) {
     // Quand on mes le focus dans le champs recherche on vide le localstorage. 
     $('#autocomplete').focus(function() {
     localStorage.clear();
+    });
+
+    $('#autocomplete').blur(function() {
+        var selectType = document.getElementById("category"); 
+        var choice = selectType.options[selectType.selectedIndex].getAttribute('value');
+        localStorage.setItem('choice',choice);
     });
 
     $('#category').blur(function() {
