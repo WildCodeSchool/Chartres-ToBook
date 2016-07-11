@@ -9,7 +9,7 @@
 
 		<h3>{{ 'Servez-vous'|trans }} !</h3>
 
-		<form name="mainSearch" method="POST" action="{{ path('tobook_search') }}">
+		<form name="mainSearch" method="GET" action="{{ path('tobook_search') }}">
 			<input name="location" id="autocomplete" type="text" onfocus="initautocomplete()" placeholder="Ville / Code postal" class="input-style-1">
 			<select name="categorie" id="category" class="input-style-1">
 				<option value='hotels'selected>{{ "Hôtels"|trans }}</option>
