@@ -95,7 +95,7 @@ function initMap(resultat) {
            }, callback);
 
     }else if(choice == 'chambreHotes'){
-      marker_path = "../../marker_map/hotels.png";
+      marker_path = "../../img/marker_map/hotels.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
