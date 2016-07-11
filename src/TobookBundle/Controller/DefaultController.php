@@ -65,13 +65,13 @@ class DefaultController extends Controller
     {   
 
         $distance   = 50;
-        $address    = $request->request->get('address');
-        $latitude   = $request->request->get('latitude');
-        $longitude  = $request->request->get('longitude');
+        $address    = $request->query->get('address');
+        $latitude   = $request->query->get('latitude');
+        $longitude  = $request->query->get('longitude');
 
-        $prix       = $request->request->get('prix');
-        $etoiles    = $request->request->get('etoiles');
-        $note       = $request->request->get('note');
+        $prix       = $request->query->get('prix');
+        $etoiles    = $request->query->get('etoiles');
+        $note       = $request->query->get('note');
 
         $d = $this->getDoctrine()->getRepository('WCSPropertyBundle:Professionnel')->createQueryBuilder('p');
         $d
@@ -82,7 +82,7 @@ class DefaultController extends Controller
             ->having('distance < :distance')
             ->orderBy('distance', 'ASC')
             ->setFirstResult(0)  
-            ->setMaxResults(15)
+            ->setMaxResults(50)
             ->setParameter('latitude', $latitude)
             ->setParameter('longitude', $longitude)
             ->setParameter('distance', $distance)
@@ -112,8 +112,7 @@ class DefaultController extends Controller
                 array_push($tab_resultats, $tab_res);
             }
         }
-
-        $resultats = $this->get('knp_paginator')->paginate($tab_resultats, /* Ici on appelle la liste d'entité qu'on veut voir apparaitre en tant qu'éléments de notre pagination */
+        $resultatss = $this->get('knp_paginator')->paginate($tab_resultats, /* Ici on appelle la liste d'entité qu'on veut voir apparaitre en tant qu'éléments de notre pagination */
             $this->get('request')->query->get('page', 1)/*Ici la page à laquelle la pagination commence*/,
             14/*Et ici la limite d'éléments par page*/
         );
@@ -123,7 +122,7 @@ class DefaultController extends Controller
             'latitude'  => $latitude,
             'longitude' => $longitude,
             'address'    => $address,
-            'resultats' => $resultats,
+            'resultats' => $resultatss,
         ));
     }
 
