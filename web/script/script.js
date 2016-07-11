@@ -58,6 +58,7 @@ choice = localStorage.getItem('choice');
 latitudeSearch = parseFloat(localStorage.getItem('latitude'));
 // On stock dans une variable les valeurs de longitude qui provient du formulaire de recherche de la homepage.
 longitudeSearch = parseFloat(localStorage.getItem('longitude'));
+
 // declaration de la fonction initMap qui sera appeler en callback dans l'url de l'api google map.  
 function initMap(resultat) {
 
