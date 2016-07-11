@@ -1,6 +1,6 @@
 <?php
 
-namespace ContentBundle\Entity;
+namespace WCS\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,14 +24,16 @@ class Abus
     /**
      * @var integer
      *
-     * @ORM\Column(name="abus_user_id", type="bigint", nullable=true)
+     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
+     * @ORM\JoinColumn(name="prim_prof_id", referencedColumnName="prof_id")
      */
     private $abusUserId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="abus_cont_id", type="bigint", nullable=true)
+     * @ORM\OneToOne(targetEntity="WCS\ContentBundle\Entity\Abus")
+     * @ORM\JoinColumn(name="abus_cont_id", referencedColumnName="abus_id")     
      */
     private $abusContId;
 

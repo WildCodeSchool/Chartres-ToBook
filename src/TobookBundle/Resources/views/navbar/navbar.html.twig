@@ -6,9 +6,9 @@
         <form method="POST" action="{{ path('changeLocale') }}">
             <button class="langdevise">Langue &nbsp;</button>
             <select name="langue">
-                <option>fr</option>
-                <option>en</option>
-                <option>de</option>
+                <option {% if app.request.locale == 'fr' %}selected{% endif %}>fr</option>
+                <option {% if app.request.locale == 'en' %}selected{% endif %}>en</option>
+                <option {% if app.request.locale == 'de' %}selected{% endif %}>de</option>               
             </select>
 
             <span class="barre">&nbsp; &nbsp; | &nbsp; &nbsp;</span>

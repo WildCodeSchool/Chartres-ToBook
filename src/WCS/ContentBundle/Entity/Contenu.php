@@ -1,6 +1,6 @@
 <?php
 
-namespace ContentBundle\Entity;
+namespace WCS\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

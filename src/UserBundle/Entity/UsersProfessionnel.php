@@ -24,14 +24,16 @@ class UsersProfessionnel
     /**
      * @var integer
      *
-     * @ORM\Column(name="uspr_user_id", type="bigint", nullable=false)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="uspr_user_id", referencedColumnName="id")
      */
     private $usprUserId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="uspr_prof_id", type="bigint", nullable=false)
+     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
+     * @ORM\JoinColumn(name="uspr_prof_id", referencedColumnName="prof_id")
      */
     private $usprProfId;
 

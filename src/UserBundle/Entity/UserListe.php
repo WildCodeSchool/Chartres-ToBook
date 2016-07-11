@@ -24,7 +24,8 @@ class UserListe
     /**
      * @var integer
      *
-     * @ORM\Column(name="usli_user_id", type="bigint", nullable=false)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="usli_user_id", referencedColumnName="id")
      */
     private $usliUserId;
 
