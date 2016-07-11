@@ -11,10 +11,6 @@ tobook_search:
     path:     /{_locale}/search
     defaults: { _controller: TobookBundle:Default:search }
 
-tobook_clubhouse:
-    path:     /clubhouse
-    defaults: { _controller: TobookBundle:Default:clubhouse }
-
 changeLocale:
     path:     /{_locale}/change
     defaults: { _controller: TobookBundle:Default:changeLocale}
