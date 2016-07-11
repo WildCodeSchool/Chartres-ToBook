@@ -32,13 +32,13 @@ class DefaultController extends Controller
     {   
 
         $distance   = 50;
-        $address    = $request->query->get('address');
-        $latitude   = $request->query->get('latitude');
-        $longitude  = $request->query->get('longitude');
+        $address    = $request->request->get('address');
+        $latitude   = $request->request->get('latitude');
+        $longitude  = $request->request->get('longitude');
 
-        $prix       = $request->query->get('prix');
-        $etoiles    = $request->query->get('etoiles');
-        $note       = $request->query->get('note');
+        $prix       = $request->request->get('prix');
+        $etoiles    = $request->request->get('etoiles');
+        $note       = $request->request->get('note');
 
         $d = $this->getDoctrine()->getRepository('WCSPropertyBundle:Professionnel')->createQueryBuilder('p');
         $d
@@ -97,14 +97,14 @@ class DefaultController extends Controller
 public function jsonNearbyAction(Request $request)
     {   
 
-        $address    = $request->query->get('address');
-        $latitude   = $request->query->get('latitude');
-        $longitude  = $request->query->get('longitude');
+        $address    = $request->request->get('address');
+        $latitude   = $request->request->get('latitude');
+        $longitude  = $request->request->get('longitude');
         $distance   = 10.5;
 
-        $prix       = $request->query->get('prix');
-        $etoiles    = $request->query->get('etoiles');
-        $note       = $request->query->get('note');
+        $prix       = $request->request->get('prix');
+        $etoiles    = $request->request->get('etoiles');
+        $note       = $request->request->get('note');
         // var_dump($address);
         // var_dump($latitude);
         // var_dump($longitude);

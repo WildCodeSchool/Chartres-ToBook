@@ -5,9 +5,9 @@
 
 		<img class="img-style-1" src="{{ asset('img/background/background-1.jpg') }}">
 
-		<form method="get" action="{{ path('tobook_search') }}" class="col-md-12 search-bar row">
+		<form method="POST" action="{{ path('tobook_search') }}" class="col-md-12 search-bar row">
 			<div class="col-md-7">
-				<input id="autocomplete" class="input-style-5" onfocus="initautocompleteTony()" type="text" placeholder="Entrez votre recherche">
+				<input id="autocomplete" class="input-style-5" onfocus="initautocomplete()" type="text" placeholder="Entrez votre recherche">
 			</div>
 			<div class="col-md-4">
 				<select class="input-style-5" name="category" id="category">
@@ -61,7 +61,7 @@
 				<h4><strong>{{ 'Classer par'|trans }} :</strong></h4>
 			</div>
 		</div>
-		<form id="tri" name="tri" methode="get" action="{{ path('tobook_search') }}">
+		<form id="tri" name="tri" methode="POST" action="{{ path('mapResult') }}">
 			<div class="col-md-2">
 				<select id="tri-prix" name="prix" class="input-style-5">
 					<option value="">{{ 'Prix'|trans }}</option>

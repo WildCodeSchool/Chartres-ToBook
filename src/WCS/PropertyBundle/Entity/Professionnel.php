@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="professionnel", uniqueConstraints={@ORM\UniqueConstraint(name="prof_code", columns={"prof_code"})})
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WCS\PropertyBundle\Repository\ProfessionnelRepository")
  */
 class Professionnel
 {
