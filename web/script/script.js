@@ -79,12 +79,20 @@ choice = localStorage.getItem('choice');
 latitudeSearch = parseFloat(localStorage.getItem('latitude'));
 // On stock dans une variable les valeurs de longitude qui provient du formulaire de recherche de la homepage.
 longitudeSearch = parseFloat(localStorage.getItem('longitude'));
-// declaration de la fonction initMap qui sera appeler en callback dans l'url de l'api google map.  
+// declaration de la fonction initMap qui sera appeler en callback dans l'url de l'api google map. 
+
+console.log("document.URL : "+document.URL);
+console.log("document.location.href : "+document.location.href);
+
+function getRootUrl(url) {
+  return url.toString().replace(/^(.*)\/app(_dev)\.php\/*.*$/,"$1");
+}
+console.log ("getRootUrl("+document.location.href+") : "+getRootUrl(document.location.href));
+var icon_baseurl = getRootUrl(document.location.href);
+
+
 function initMap() {
  
-  marker_path = "http://80.67.190.233/web/Chartres-ToBook/web/img/marker_map/tobook.png"
-
-
   var myLatLng = {lat: latitudeSearch, lng: longitudeSearch};
 
   map = new google.maps.Map(document.getElementById('map'), {
@@ -107,7 +115,7 @@ function initMap() {
   var service = new google.maps.places.PlacesService(map);
 
   if(choice == 'hotels'){
-      marker_path = "http://localhost/Chartres-ToBook/web/img/marker_map/hotels.png";
+      marker_path = "http://80.67.190.233/web/Chartres-ToBook/web/img/marker_map/hotels.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
@@ -115,7 +123,7 @@ function initMap() {
            }, callback);
 
     }else if(choice == 'chambreHotes'){
-      marker_path = "http://localhost/Chartres-ToBook/web/img/marker_map/hotels.png";
+      marker_path = "http://80.67.190.233/web/Chartres-ToBook/web/img/marker_map/hotels.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
@@ -123,7 +131,7 @@ function initMap() {
            }, callback);
 
     }else if(choice == 'gites'){
-      marker_path = "http://localhost/Chartres-ToBook/web/img/marker_map/hotels.png";
+      marker_path = "http://80.67.190.233/web/Chartres-ToBook/web/img/marker_map/hotels.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
@@ -131,7 +139,7 @@ function initMap() {
            }, callback);
 
     }else if(choice == 'restaurants'){
-      marker_path = "http://localhost/Chartres-ToBook/web/img/marker_map/restaurant64.png";
+      marker_path = "http://80.67.190.233/web/Chartres-ToBook/web/img/marker_map/restaurant64.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
@@ -139,7 +147,7 @@ function initMap() {
            }, callback);
 
     }else if(choice == 'musees'){
-      marker_path = "http://localhost/Chartres-ToBook/web/img/marker_map/museum64.png";
+      marker_path = "http://80.67.190.233/web/Chartres-ToBook/web/img/marker_map/museum64.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
