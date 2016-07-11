@@ -144,7 +144,7 @@ function createMarker(place) {
     map: map,
     position: placeLoc,
     animation: google.maps.Animation.DROP,
-    //icon: marker_path
+    icon: marker_path
   });
 
   google.maps.event.addListener(marker, 'click', function() {
