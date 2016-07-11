@@ -87,6 +87,7 @@ function initMap(resultat) {
   var service = new google.maps.places.PlacesService(map);
 
   if(choice == 'hotels'){
+      alert('HOTELS');
       marker_path = "../../img/marker_map/hotels.png";
       service.nearbySearch({
            location: myLatLng,
@@ -159,7 +160,7 @@ function createMarker(place) {
   
 }
 
-jQuery(document).ready(function($) {
+$(document).ready(function($) {
 
     // Quand on mes le focus dans le champs recherche on vide le localstorage. 
     $('#autocomplete').focus(function() {
