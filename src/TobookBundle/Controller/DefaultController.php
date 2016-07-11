@@ -56,7 +56,8 @@ class DefaultController extends Controller
         $newRoute = implode("/", $pieces);
 
         // on génère la nouvelle url
-        $url = 'http://localhost/Chartres-ToBook/web/app_dev.php'.$newRoute;
+        // $url = 'http://localhost/Chartres-ToBook/web/app_dev.php'.$newRoute;
+        $url = '..'.$newRoute;
         return $this->redirect($url);
     }  
 
