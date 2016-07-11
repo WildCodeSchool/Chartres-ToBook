@@ -87,7 +87,7 @@ function initMap(resultat) {
   var service = new google.maps.places.PlacesService(map);
 
   if(choice == 'hotels'){
-      marker_path = "../../web/img/marker_map/hotels.png";
+      marker_path = "../img/marker_map/hotels.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
@@ -95,7 +95,7 @@ function initMap(resultat) {
            }, callback);
 
     }else if(choice == 'chambreHotes'){
-      marker_path = "../../web/img/marker_map/hotels.png";
+      marker_path = "../img/marker_map/hotels.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
@@ -103,7 +103,7 @@ function initMap(resultat) {
            }, callback);
 
     }else if(choice == 'gites'){
-      marker_path = "../../web/img/marker_map/hotels.png";
+      marker_path = "../img/marker_map/hotels.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
@@ -111,7 +111,7 @@ function initMap(resultat) {
            }, callback);
 
     }else if(choice == 'restaurants'){
-      marker_path = "../../web/img/marker_map/restaurant64.png";
+      marker_path = "../img/marker_map/restaurant64.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
@@ -119,7 +119,7 @@ function initMap(resultat) {
            }, callback);
 
     }else if(choice == 'musees'){
-      marker_path = "../../web/img/marker_map/museum64.png";
+      marker_path = "../img/marker_map/museum64.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
@@ -144,7 +144,7 @@ function createMarker(place) {
     map: map,
     position: placeLoc,
     animation: google.maps.Animation.DROP,
-    icon: marker_path
+    //icon: marker_path
   });
 
   google.maps.event.addListener(marker, 'click', function() {
