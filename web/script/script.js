@@ -160,7 +160,7 @@ function createMarker(place) {
   
 }
 
-$(document).ready(function($) {
+$jQuery(document).ready(function($) {
 
     // Quand on mes le focus dans le champs recherche on vide le localstorage. 
     $('#autocomplete').focus(function() {
