@@ -1,5 +1,5 @@
 club-house:
-    path:     /clubhouse/{profCode}
+    path:     /{_locale}/clubhouse/{profCode}
     defaults: {_controller: WCSPropertyBundle:Default:clubhouse }
 
 favorites:
@@ -9,3 +9,4 @@ favorites:
 mapResult:
     path:     /mapResult
     defaults: {_controller: WCSPropertyBundle:ShowMap:ShowMap }
+
