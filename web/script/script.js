@@ -87,7 +87,7 @@ function initMap(resultat) {
   var service = new google.maps.places.PlacesService(map);
 
   if(choice == 'hotels'){
-      marker_path = "../../web/img/marker_map/hotels.png";
+      marker_path = "../../img/marker_map/hotels.png";
       service.nearbySearch({
            location: myLatLng,
            radius: 10000,
