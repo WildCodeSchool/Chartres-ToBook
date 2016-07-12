@@ -108,6 +108,8 @@ class DefaultController extends Controller
                         'profDescriptif'    =>$res[0]->getProfDescriptif(),
                         'profPrixMini'      =>$res[0]->getProfPrixMini(),
                         'profEtoiles'       =>$res[0]->getProfEtoiles(),
+                        'profCode' =>$res[0]->getProfCode(),
+                        'profEtoiles' =>$res[0]->getProfEtoiles(),
                     );
                 array_push($tab_resultats, $tab_res);
             }
