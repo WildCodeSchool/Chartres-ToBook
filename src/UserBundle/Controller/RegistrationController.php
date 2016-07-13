@@ -152,7 +152,7 @@ class RegistrationController extends Controller
      * Tell the user his account is now confirmed
      */
     /**
-    * @Route("/{_locale}/register/confirmed", name="user_registration_confirmed")
+    * @Route("/register/confirmed", name="user_registration_confirmed")
     */   
     public function confirmedAction()
     {
