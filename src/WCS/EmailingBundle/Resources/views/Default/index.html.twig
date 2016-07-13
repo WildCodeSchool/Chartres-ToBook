@@ -1,1 +1,7 @@
-Hello World!
+{% extends 'TobookBundle::base.html.twig' %}
+
+{% block body %}
+<div>
+	<a href={{ path('wcs_emailing_import') }}>Import</a>
+</div>
+{% endblock %}
