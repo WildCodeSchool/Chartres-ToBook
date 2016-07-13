@@ -1,0 +1,19 @@
+{% extends 'TobookBundle::base.html.twig' %}
+
+{% block body %}
+
+	<h1>{{ "Import d'un nouveau fichier csv"|trans }}</h1>
+
+	{{ form_start(form, {'method': 'post', 'action': path('wcs_emailing_import')}) }}
+    	{{ form_row(form.csv) }}
+		<div>
+	        <input type="submit" value="Upload" class="input-style-4 btn btn-success"/>
+	    </div>
+	{{ form_end(form) }}
+
+{#     <form method="POST" action="{{ path('wcs_emailing_import') }}">
+		Fichier: <input type="file" name="fichier"><br>
+		<input type="submit" value="Submit">
+    </form> #}
+
+{% endblock %}
