@@ -89,7 +89,6 @@ class RegistrationController extends Controller
             'form' => $form->createView(),
         ));
     }
-
     /**
      * Tell the user to check his email provider
      */
@@ -115,7 +114,7 @@ class RegistrationController extends Controller
      * Receive the confirmation token from user email provider, login the user
      */
     /**
-    * @Route("/{_locale}/user/register/confirm", name="user_registration_confirm")
+    * @Route("/{_locale}/user/register/confirm", name="fos_user_registration_confirm")
     */   
     public function confirmAction(Request $request, $token)
     {
