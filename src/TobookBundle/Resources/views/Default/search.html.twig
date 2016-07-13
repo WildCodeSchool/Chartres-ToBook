@@ -104,11 +104,13 @@
 		</div>
 		<div class="col-md-6 col-md-offset-1 text-div">
 			<h3><strong>{{ resultat[0].profNom }}
-				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+		        {% for i in 1..5 %}
+		            {% if i <= resultat[0].profEtoiles %}
+		                <img src="{{ asset('img/picto/jauge_star_1.png') }}" title="Etoiles" />
+		            {% else %}
+		                <img src="{{ asset('img/picto/jauge_star_0.png') }}" title="Etoiles" />
+		            {% endif %}
+		        {% endfor %}
 			</strong></h3>
 			<h4>__________</h4>
 			<p>{{ resultat[0].profDescriptif }}</p>
@@ -124,7 +126,7 @@
 				<div class="pull-left search-div-style" href="#">
 					{{ 'à partir de'|trans }}: <strong>{{ resultat[0].profPrixMini }} €</strong>
 				</div>
-				<a class="bouton-style-3 pull-right" href="#">
+				<a class="bouton-style-3 pull-right" href="{{ path('club-house', { 'profCode': resultat[0].profCode }) }}">
 					<strong>{{ 'Plus de details'|trans }}</strong>
 				</a>
 			</div>
@@ -141,11 +143,13 @@
 	<div class="col-md-12 search-third-div border-2">
 		<div class="col-md-6 text-div">
 			<h3><strong>{{ resultat[0].profNom }}
-			<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+		        {% for i in 1..5 %}
+		            {% if i <= resultat[0].profEtoiles %}
+		                <img src="{{ asset('img/picto/jauge_star_1.png') }}" title="Etoiles" />
+		            {% else %}
+		                <img src="{{ asset('img/picto/jauge_star_0.png') }}" title="Etoiles" />
+		            {% endif %}
+		        {% endfor %}
 			</strong></h3>
 			<h4>__________</h4>
 			<p>{{ resultat[0].profDescriptif }}</p>
@@ -161,7 +165,7 @@
 				<div class="pull-left search-div-style" href="#">
 					{{ 'à partir de'|trans }}: <strong>{{ resultat[0].profPrixMini }} €</strong>
 				</div>
-				<a class="bouton-style-3 pull-right" href="#">
+				<a class="bouton-style-3 pull-right" href="{{ path('club-house', { 'profCode': resultat[0].profCode }) }}">
 					<strong>{{ 'Plus de details'|trans }}</strong>
 				</a>
 			</div>

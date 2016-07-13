@@ -1,0 +1,3 @@
+wcs_emailing_homepage:
+    path:     /{_locale}/emailing
+    defaults: { _controller: WCSEmailingBundle:Default:index }
