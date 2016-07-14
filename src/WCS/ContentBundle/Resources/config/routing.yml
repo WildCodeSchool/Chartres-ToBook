@@ -1,3 +1,7 @@
+wcs_content_contenu:
+    resource: "@WCSContentBundle/Resources/config/routing/contenu.yml"
+    prefix:   /{_locale}/contenu
+
 wcs_content_homepage:
     path:     /{_locale}/content
     defaults: { _controller: WCSContentBundle:Default:index }

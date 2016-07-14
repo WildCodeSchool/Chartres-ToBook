@@ -1,0 +1,77 @@
+{% extends 'TobookBundle::base.html.twig' %}
+
+{% block body %}
+    <h1>Contenu list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Contid</th>
+                <th>Contcontid</th>
+                <th>Contsourceid</th>
+                <th>Contuserid</th>
+                <th>Contprofid</th>
+                <th>Contcibleid</th>
+                <th>Contsourcetype</th>
+                <th>Contcibletype</th>
+                <th>Contdroits</th>
+                <th>Contactif</th>
+                <th>Contvisible</th>
+                <th>Contnature</th>
+                <th>Contdate</th>
+                <th>Contnote1</th>
+                <th>Contnote2</th>
+                <th>Contnote3</th>
+                <th>Contnote4</th>
+                <th>Contsujet</th>
+                <th>Conttext</th>
+                <th>Contimgext</th>
+                <th>Contimgxy</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contenu in contenus %}
+            <tr>
+                <td><a href="{{ path('contenu_show', { 'id': contenu.contId }) }}">{{ contenu.contId }}</a></td>
+                <td>{{ contenu.contContId }}</td>
+                <td>{{ contenu.contSourceId }}</td>
+                <td>{{ contenu.contUserId }}</td>
+                <td>{{ contenu.contProfId }}</td>
+                <td>{{ contenu.contCibleId }}</td>
+                <td>{{ contenu.contSourceType }}</td>
+                <td>{{ contenu.contCibleType }}</td>
+                <td>{{ contenu.contDroits }}</td>
+                <td>{% if contenu.contActif %}Yes{% else %}No{% endif %}</td>
+                <td>{% if contenu.contVisible %}Yes{% else %}No{% endif %}</td>
+                <td>{{ contenu.contNature }}</td>
+                <td>{% if contenu.contDate %}{{ contenu.contDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if contenu.contNote1 %}Yes{% else %}No{% endif %}</td>
+                <td>{% if contenu.contNote2 %}Yes{% else %}No{% endif %}</td>
+                <td>{% if contenu.contNote3 %}Yes{% else %}No{% endif %}</td>
+                <td>{% if contenu.contNote4 %}Yes{% else %}No{% endif %}</td>
+                <td>{{ contenu.contSujet }}</td>
+                <td>{{ contenu.contText }}</td>
+                <td>{{ contenu.contImgExt }}</td>
+                <td>{{ contenu.contImgXy }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('contenu_show', { 'id': contenu.contId }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('contenu_edit', { 'id': contenu.contId }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('contenu_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
