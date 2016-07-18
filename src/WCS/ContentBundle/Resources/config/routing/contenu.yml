@@ -8,11 +8,6 @@ contenu_show:
     defaults: { _controller: "WCSContentBundle:Contenu:show" }
     methods:  GET
 
-contenu_new:
-    path:     /new
-    defaults: { _controller: "WCSContentBundle:Contenu:new" }
-    methods:  [GET, POST]
-
 contenu_edit:
     path:     /{id}/edit
     defaults: { _controller: "WCSContentBundle:Contenu:edit" }

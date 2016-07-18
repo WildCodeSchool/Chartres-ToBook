@@ -14,6 +14,24 @@ use WCS\ContentBundle\Form\ContenuType;
  */
 class ContenuController extends Controller
 {
+
+
+    public function getRefererRoute()
+    {
+        $request = $this->getRequest();
+
+        //récupère la route actuelle
+        $referer = $request->headers->get('referer');
+        $lastPath = substr($referer, strpos($referer, $request->getBaseUrl()));
+        $lastPath = str_replace($request->getBaseUrl(), '', $lastPath);
+
+        // récupère les informations du nom de la route (pas utile pour le besoin que l'on a)
+        // $matcher = $this->get('router')->getMatcher();
+        // $parameters = $matcher->match($lastPath);
+        // $route = $parameters['_route'];
+
+        return $lastPath;
+    }
     /**
      * Lists all Contenu entities.
      *
@@ -22,8 +40,10 @@ class ContenuController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $contenus = $em->getRepository('WCSContentBundle:Contenu')->findAll();
-        // $listerecus = $em->getRepository('AppBundle:Message')->findByIdDestinataire($iduser);
+        $route = $this->getRefererRoute();
+        $profId = preg_replace("/\D/",'', $route);
+
+        $contenus = $em->getRepository('WCSContentBundle:Contenu')->findByContProfId($profId);
 
         $tab = [];
 
@@ -54,17 +74,14 @@ class ContenuController extends Controller
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
         $userid = $user->getId();
-        $url = $request->getUri();
-        $profId = preg_replace("/\D/",'', $url);
-
+        $route = $this->getRefererRoute();
+        $profId = preg_replace("/\D/",'', $route);
 
         $contenu = new Contenu();
         $form = $this->createForm('WCS\ContentBundle\Form\ContenuType', $contenu);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            echo('toto'); die; 
 
             $img = $contenu->getContImgExt();
             if ($img === null) {
@@ -92,7 +109,9 @@ class ContenuController extends Controller
             $em->persist($contenu);
             $em->flush();
 
-            return $this->redirectToRoute('contenu_show', array('id' => $contenu->getContId()));
+            $url = '..'.$route;
+
+            return $this->redirect($url);
         }
 
         return $this->render('WCSContentBundle:contenu:new.html.twig', array(

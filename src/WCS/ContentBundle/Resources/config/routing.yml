@@ -2,4 +2,7 @@ wcs_content_contenu:
     resource: "@WCSContentBundle/Resources/config/routing/contenu.yml"
     prefix:   /{_locale}/contenu
 
-
+contenu_new:
+    path:     /contenu/new
+    defaults: { _controller: "WCSContentBundle:Contenu:new" }
+    methods:  [GET, POST]
