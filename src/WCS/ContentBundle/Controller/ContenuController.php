@@ -23,9 +23,26 @@ class ContenuController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $contenus = $em->getRepository('WCSContentBundle:Contenu')->findAll();
+        // $listerecus = $em->getRepository('AppBundle:Message')->findByIdDestinataire($iduser);
+
+        $tab = [];
+
+        foreach ($contenus as $contenu)
+        {
+            $userid = $em->getRepository('UserBundle:User')->findOneById($contenu->getContUserId());
+            $username = $userid->getUserName();
+            $tab[] = array(
+                'prenom' => $userid->getUserPrenom(),
+                'nom' => $userid->getUserNom(),
+                'contenu' => $contenu->getContText(),
+                'sujet' => $contenu->getContSujet(),
+                'file' => $contenu->getContImgExt(),           
+            );
+        }
 
         return $this->render('WCSContentBundle:contenu:index.html.twig', array(
             'contenus' => $contenus,
+            'tab'=> $tab,
         ));
     }
 
@@ -37,6 +54,9 @@ class ContenuController extends Controller
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
         $userid = $user->getId();
+        $url = $request->getUri();
+        $profId = preg_replace("/\D/",'', $url);
+
 
         $contenu = new Contenu();
         $form = $this->createForm('WCS\ContentBundle\Form\ContenuType', $contenu);
@@ -44,8 +64,30 @@ class ContenuController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            echo('toto'); die; 
+
+            $img = $contenu->getContImgExt();
+            if ($img === null) {
+
+            }
+            else {
+                // Generate a unique name for the file before saving it
+                $imgName = md5(uniqid()).'.'.$img->guessExtension();
+                
+
+                // Move the file to the directory where files are stored
+                $img->move(
+                    $this->getParameter('img_directory'),
+                    $imgName
+                );
+
+                // Update the 'file' property to store the PDF file name
+                // instead of its contents
+                $contenu->setContImgExt($imgName);
+            }
+
             $contenu->setContUserId($userid);
-            $contenu->setContProfId(1);
+            $contenu->setContProfId($profId);
             $em = $this->getDoctrine()->getManager();
             $em->persist($contenu);
             $em->flush();

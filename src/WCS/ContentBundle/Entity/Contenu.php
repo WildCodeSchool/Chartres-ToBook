@@ -3,6 +3,7 @@
 namespace WCS\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Contenu
@@ -148,9 +149,9 @@ class Contenu
     private $contText;
 
     /**
-     * @var string
+     * @ORM\Column(type="string", nullable=true)
      *
-     * @ORM\Column(name="cont_img_ext", type="string", length=16, nullable=true)
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/pjpeg", "image/png" })
      */
     private $contImgExt;
 

@@ -5,6 +5,7 @@ namespace WCS\ContentBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ContenuType extends AbstractType
 {
@@ -17,7 +18,6 @@ class ContenuType extends AbstractType
         $builder
             ->remove('contContId')
             ->remove('contSourceId')
-            
             ->remove('contCibleId')
             ->remove('contSourceType')
             ->remove('contCibleType')
@@ -32,7 +32,7 @@ class ContenuType extends AbstractType
             ->remove('contNote4')
             ->add('contSujet')
             ->add('contText')
-            ->remove('contImgExt')
+            ->add('contImgExt', FileType::class, array('label' => 'Pièce jointe', 'required' => false))
             ->remove('contImgXy')
         ;
     }

@@ -57,7 +57,7 @@
 		            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
 					<!-- Ce lien dynamique permet de remplir le champs "profCode" de l'URL avec le ProfCode de l'établissement concerné -->
-					<a href="{{ path('favorites', { 'profCode': etablissement.profCode }) }}">
+					<a href="{{ path('putFavorites', { 'profCode': etablissement.profCode }) }}">
 						<img src="{{ asset('img/picto/n_suit.png') }}" title="{{ "Mettre l'établissement en favoris"|trans }}" />
 					</a>
 		            	
@@ -128,7 +128,9 @@
 				</div> 
 				<div class="col-md-12 case2 pageother"> 
 					<h2>{{ "Formulaire de commentaires"|trans }}</h2>
+					{{ render(controller('WCSContentBundle:Contenu:new')) }}
 					<h2>{{ "Commentaires"|trans }} </h2> 
+					{{ render(controller('WCSContentBundle:Contenu:index')) }}
 				</div> 
 				<div class="col-md-12 case3 pageother"> 
 					<p>{{ "Voici les coordonnées téléphoniques :"|trans }}</p>
