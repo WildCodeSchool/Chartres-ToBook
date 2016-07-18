@@ -3,13 +3,5 @@ wcs_emailing_homepage:
     defaults: { _controller: WCSEmailingBundle:Default:index }
 
 wcs_emailing_import:
-    path:     /{_locale}/emailing/import
+    path:     /{_locale}/emailing/import/{profCode}
     defaults: { _controller: WCSEmailingBundle:Default:importCSV }
-
-# wcs_emailing_upload:
-#     path:     /{_locale}/emailing/newupload
-#     defaults: { _controller: WCSEmailingBundle:Default:uploadCSV }
-
-# wcs_emailing_import:
-#     path:     /{_locale}/emailing/import
-#     defaults: { _controller: WCSEmailingBundle:Default:importCSV }

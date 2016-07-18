@@ -23,67 +23,83 @@ class EmailUserListing
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
+     * @ORM\JoinColumn(name="emai_prof_id", referencedColumnName="prof_id")
+     */
+    private $emaiProfId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="emai_user_id", referencedColumnName="id")
+     */
+    private $emaiUserId;
+    
+    /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, unique=true)
+     * @ORM\Column(name="emai_email", type="string", length=255)
      */
-    private $email;
+    private $emaiEmail;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="emai_nom", type="string", length=255)
      */
-    private $nom;
+    private $emaiNom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="emai_prenom", type="string", length=255)
      */
-    private $prenom;
+    private $emaiPrenom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="addresse", type="string", length=255)
+     * @ORM\Column(name="emai_adresse", type="string", length=255)
      */
-    private $addresse;
+    private $emaiAdresse;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=255)
+     * @ORM\Column(name="emai_ville", type="string", length=255)
      */
-    private $ville;
+    private $emaiVille;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pays", type="string", length=255)
+     * @ORM\Column(name="emai_pays", type="string", length=255)
      */
-    private $pays;
+    private $emaiPays;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="genre", type="string", length=255)
+     * @ORM\Column(name="emai_genre", type="string", length=255)
      */
-    private $genre;
+    private $emaiGenre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="csp", type="string", length=255)
+     * @ORM\Column(name="emai_csp", type="string", length=255)
      */
-    private $csp;
+    private $emaiCSP;
 
     /**
      * @var date
      *
-     * @ORM\Column(name="date_upload", type="date")
+     * @ORM\Column(name="emai_date_upload", type="date")
      */
-    private $dateUpload;
+    private $emaiDateUpload;
     
     /**
      * @ORM\Column(type="string")
@@ -91,16 +107,16 @@ class EmailUserListing
      * @Assert\NotBlank(message="Merci de choisir un fichier csv.")
      * @Assert\File(mimeTypes={ "text/plain" })
      */
-    private $csvFile;
+    private $emaiCSVFile;
 
-    public function getCsv()
+    public function getEmaiCSVFile()
     {
-        return $this->csvFile;
+        return $this->emaiCSVFile;
     }
 
-    public function setCsv($csvFile)
+    public function setEmaiCSVFile($emaiCSVFile)
     {
-        $this->csvFile = $csvFile;
+        $this->emaiCSVFile = $emaiCSVFile;
 
         return $this;
     }
@@ -116,209 +132,255 @@ class EmailUserListing
     }
 
     /**
-     * Set email
+     * Set emaiEmail
      *
-     * @param string $email
+     * @param string $emaiEmail
      * @return EmailUserListing
      */
-    public function setEmail($email)
+    public function setEmaiEmail($emaiEmail)
     {
-        $this->email = $email;
+        $this->emaiEmail = $emaiEmail;
 
         return $this;
     }
 
     /**
-     * Get email
+     * Get emaiEmail
      *
      * @return string 
      */
-    public function getEmail()
+    public function getEmaiEmail()
     {
-        return $this->email;
+        return $this->emaiEmail;
     }
 
     /**
-     * Set nom
+     * Set emaiNom
      *
-     * @param string $nom
+     * @param string $emaiNom
      * @return EmailUserListing
      */
-    public function setNom($nom)
+    public function setEmaiNom($emaiNom)
     {
-        $this->nom = $nom;
+        $this->emaiNom = $emaiNom;
 
         return $this;
     }
 
     /**
-     * Get nom
+     * Get emaiNom
      *
      * @return string 
      */
-    public function getNom()
+    public function getEmaiNom()
     {
-        return $this->nom;
+        return $this->emaiNom;
     }
 
     /**
-     * Set prenom
+     * Set emaiPrenom
      *
-     * @param string $prenom
+     * @param string $emaiPrenom
      * @return EmailUserListing
      */
-    public function setPrenom($prenom)
+    public function setEmaiPrenom($emaiPrenom)
     {
-        $this->prenom = $prenom;
+        $this->emaiPrenom = $emaiPrenom;
 
         return $this;
     }
 
     /**
-     * Get prenom
+     * Get emaiPrenom
      *
      * @return string 
      */
-    public function getPrenom()
+    public function getEmaiPrenom()
     {
-        return $this->prenom;
+        return $this->emaiPrenom;
     }
 
     /**
-     * Set addresse
+     * Set emaiAdresse
      *
-     * @param string $addresse
+     * @param string $emaiAdresse
      * @return EmailUserListing
      */
-    public function setAddresse($addresse)
+    public function setEmaiAdresse($emaiAdresse)
     {
-        $this->addresse = $addresse;
+        $this->emaiAdresse = $emaiAdresse;
 
         return $this;
     }
 
     /**
-     * Get addresse
+     * Get emaiAdresse
      *
      * @return string 
      */
-    public function getAddresse()
+    public function getEmaiAdresse()
     {
-        return $this->addresse;
+        return $this->emaiAdresse;
     }
 
     /**
-     * Set ville
+     * Set emaiVille
      *
-     * @param string $ville
+     * @param string $emaiVille
      * @return EmailUserListing
      */
-    public function setVille($ville)
+    public function setEmaiVille($emaiVille)
     {
-        $this->ville = $ville;
+        $this->emaiVille = $emaiVille;
 
         return $this;
     }
 
     /**
-     * Get ville
+     * Get emaiVille
      *
      * @return string 
      */
-    public function getVille()
+    public function getEmaiVille()
     {
-        return $this->ville;
+        return $this->emaiVille;
     }
 
     /**
-     * Set pays
+     * Set emaiPays
      *
-     * @param string $pays
+     * @param string $emaiPays
      * @return EmailUserListing
      */
-    public function setPays($pays)
+    public function setEmaiPays($emaiPays)
     {
-        $this->pays = $pays;
+        $this->emaiPays = $emaiPays;
 
         return $this;
     }
 
     /**
-     * Get pays
+     * Get emaiPays
      *
      * @return string 
      */
-    public function getPays()
+    public function getEmaiPays()
     {
-        return $this->pays;
+        return $this->emaiPays;
     }
 
     /**
-     * Set genre
+     * Set emaiGenre
      *
-     * @param string $genre
+     * @param string $emaiGenre
      * @return EmailUserListing
      */
-    public function setGenre($genre)
+    public function setEmaiGenre($emaiGenre)
     {
-        $this->genre = $genre;
+        $this->emaiGenre = $emaiGenre;
 
         return $this;
     }
 
     /**
-     * Get genre
+     * Get emaiGenre
      *
      * @return string 
      */
-    public function getGenre()
+    public function getEmaiGenre()
     {
-        return $this->genre;
+        return $this->emaiGenre;
     }
 
     /**
-     * Set csp
+     * Set emaiCSP
      *
-     * @param string $csp
+     * @param string $emaiCSP
      * @return EmailUserListing
      */
-    public function setCsp($csp)
+    public function setEmaiCSP($emaiCSP)
     {
-        $this->csp = $csp;
+        $this->emaiCSP = $emaiCSP;
 
         return $this;
     }
 
     /**
-     * Get csp
+     * Get emaiCSP
      *
      * @return string 
      */
-    public function getCsp()
+    public function getEmaiCSP()
     {
-        return $this->csp;
+        return $this->emaiCSP;
     }
 
     /**
-     * Set dateUpload
+     * Set emaiDateUpload
      *
-     * @param \DateTime $dateUpload
+     * @param \DateTime $emaiDateUpload
      * @return EmailUserListing
      */
-    public function setDateUpload($dateUpload)
+    public function setEmaiDateUpload($emaiDateUpload)
     {
-        $this->dateUpload = $dateUpload;
+        $this->emaiDateUpload = $emaiDateUpload;
 
         return $this;
     }
 
     /**
-     * Get dateUpload
+     * Get emaiDateUpload
      *
      * @return \DateTime 
      */
-    public function getDateUpload()
+    public function getEmaiDateUpload()
     {
-        return $this->dateUpload;
+        return $this->emaiDateUpload;
+    }
+
+    /**
+     * Set emaiProfId
+     *
+     * @param \WCS\PropertyBundle\Entity\Professionnel $emaiProfId
+     * @return EmailUserListing
+     */
+    public function setEmaiProfId(\WCS\PropertyBundle\Entity\Professionnel $emaiProfId = null)
+    {
+        $this->emaiProfId = $emaiProfId;
+
+        return $this;
+    }
+
+    /**
+     * Get emaiProfId
+     *
+     * @return \WCS\PropertyBundle\Entity\Professionnel 
+     */
+    public function getEmaiProfId()
+    {
+        return $this->emaiProfId;
+    }
+
+    /**
+     * Set emaiUserId
+     *
+     * @param \UserBundle\Entity\User $emaiUserId
+     * @return EmailUserListing
+     */
+    public function setEmaiUserId(\UserBundle\Entity\User $emaiUserId = null)
+    {
+        $this->emaiUserId = $emaiUserId;
+
+        return $this;
+    }
+
+    /**
+     * Get emaiUserId
+     *
+     * @return \UserBundle\Entity\User 
+     */
+    public function getEmaiUserId()
+    {
+        return $this->emaiUserId;
     }
 }
