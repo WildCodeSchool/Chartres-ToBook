@@ -13,7 +13,7 @@ class EmailUserListingType extends AbstractType
     {
         $builder
             // ...
-            ->add('csv', FileType::class, array('label' => 'Listing client (fichier csv)'))
+            ->add('emaiCSVFile', FileType::class, array('label' => 'Listing client (fichier csv)'))
             // ...
         ;
     }

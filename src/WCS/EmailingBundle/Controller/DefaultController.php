@@ -14,45 +14,52 @@ class DefaultController extends Controller
     
     public function indexAction()
     {
-        return $this->render('WCSEmailingBundle:Default:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $userId = $this->get('security.token_storage')->getToken()->getUser()->getId();
+
+		$liste_etablissements = $em->getRepository('UserBundle:UsersProfessionnel')->findByUsprUserId($userId);
+		// echo('<pre>');
+		// var_dump($liste_etablissements);
+		// echo('</pre>');
+		$client = $em->getRepository('WCSEmailingBundle:EmailUserListing')->findByemaiUserId($userId);
+		// echo('<pre>');
+		// var_dump($client);
+		// echo('</pre>');
+
+        return $this->render('WCSEmailingBundle:Default:index.html.twig', array(
+            'liste_etablissements' => $liste_etablissements,
+            'client' => $client,
+        ));
     }
 
-    // public function uploadCSVAction(Request $request)
-    // {
-    // 	// Getting php array of data from CSV
-    //     // $fileName = '/var/www/html/Chartres-ToBook/web/uploads/csv/test1.csv';
-    //     $converter = $this->container->get('import.csvtoarray');
-    //     $tableau = $converter->convert($fileName, ',');
-
-    //     return $tableau;
-    // }
-
-    public function importCSVAction(Request $request)
+    // Controleur gérant la vue d'import de fichier csv
+    public function importCSVAction(Request $request, $profCode)
     {
-        $csvFile = new EmailUserListing();
-        $form = $this->createForm(EmailUserListingType::class, $csvFile);
+        $CSVFile = new EmailUserListing();
+        $form = $this->createForm(EmailUserListingType::class, $CSVFile);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $file stores the uploaded file
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $file = $csvFile->getCsv();
+            // $file stocke le fichier uploadé
+            $file = $CSVFile->getEmaiCSVFile();
 
-            // Generate a unique name for the file before saving it
+            // Création d'un nom unique pour le fichier avant l'écriture
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
-            // Move the file to the directory where brochures are stored
+            // Déplacement du fichier vers le dossier
             $file->move(
                 $this->getParameter('csv_directory'),
                 $fileName
             );
 
+			// Récupération du chemin où est stocké le fichier uploadé
 			$path = $this->get('kernel')->getRootDir(). "/../web/uploads/csv/";
 
+	        // Lancement du service de conversion csv vers array
 	        $converter = $this->container->get('import.csvtoarray');
 	        $data = $converter->convert($path.$fileName, ',');
 
-	        // Getting doctrine manager
 	        $em = $this->getDoctrine()->getManager();
 	        
 	        // Define the size of record, the frequency for persisting the data and the current index of records
@@ -62,29 +69,41 @@ class DefaultController extends Controller
 	        
 	        $now = new \DateTime(); 
 
-	        // Processing on each row of data
+			// permet de récupérer l'id de l'établissement écrit dans l'url après son nom (via une regex qui supprime les caractères non numériques)
+			$profId = preg_replace("/\D/",'', $profCode);
+			// récupère l'établissement pour lequel l'upload du csv se fait
+			$etablissement = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneByprofId($profId);
+			// récupère l'id du pro
+			$userId = $this->get('security.token_storage')->getToken()->getUser()->getId();
+			// var_dump($userId);die;
+
+	        // Traitement de chaque ligne du fichier
 	        foreach($data as $row) {
 	 
-	            $user = $em->getRepository('WCSEmailingBundle:EmailUserListing')
-	                       ->findOneByEmail($row['email']);		
+	            // $customer = $em->getRepository('WCSEmailingBundle:EmailUserListing')
+	            //            ->findOneByemaiEmail($row['email']);
+	            $customerCheck = $em->getRepository('WCSEmailingBundle:EmailUserListing')
+	                       ->findBy(array('emaiEmail' => $row['email'], 'emaiUserId' => $userId, 'emaiProfId' => $etablissement ));
 
-	            // If the user doest not exist we create one
-	            if(!is_object($user)){
-	                $user = new EmailUserListing();
-	                $user->setEmail($row['email']);
-	                $user->setNom($row['nom']);
-		            $user->setPrenom($row['prenom']);
-		            $user->setAddresse($row['adresse']);
-		            $user->setVille($row['ville']);
-		            $user->setPays($row['pays']);
-		            $user->setGenre($row['genre']);
-		            $user->setCsp($row['csp']);
-		            $user->setDateUpload($now);
-		            $user->setCsv($fileName);
+	            // If the customer does not exist we create one
+	            if(empty($customerCheck)){
+	                $customer = new EmailUserListing();
+	                $customer->setEmaiEmail($row['email']);
+	                $customer->setEmaiNom($row['nom']);
+		            $customer->setEmaiPrenom($row['prenom']);
+		            $customer->setEmaiAdresse($row['adresse']);
+		            $customer->setEmaiVille($row['ville']);
+		            $customer->setEmaiPays($row['pays']);
+		            $customer->setEmaiGenre($row['genre']);
+		            $customer->setEmaiCSP($row['csp']);
+		            $customer->setEmaiDateUpload($now);
+		            $customer->setEmaiCSVFile($fileName);
+		            $customer->setEmaiUserId($this->get('security.token_storage')->getToken()->getUser());
+		            $customer->setEmaiProfId($etablissement);
+
+		            // Persisting the current customer
+	            	$em->persist($customer);
 	            }
-
-				// Persisting the current user
-	            $em->persist($user);
 	            
 				// Each 20 users persisted we flush everything
 	            if (($i % $batchSize) === 0) {
@@ -98,9 +117,13 @@ class DefaultController extends Controller
 	 
 	        }
 			
-			// Flushing and clear data on queue
 	        $em->flush();
 	        $em->clear();
+
+	        // décommenter les trois lignes ci-dessous si vous voulez supprimer le fichier du serveur après import
+	        // if(file_exists($path.$fileName)){
+	        // 	unlink($path.$fileName);
+	        // }
 
             return $this->redirect($this->generateUrl('wcs_emailing_homepage'));
         }
