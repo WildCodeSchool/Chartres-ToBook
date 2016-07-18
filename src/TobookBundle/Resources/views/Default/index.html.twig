@@ -11,12 +11,20 @@
 
 		<form name="mainSearch" method="GET" action="{{ path('tobook_search') }}">
 			<input name="location" id="autocomplete" type="text" onfocus="initautocomplete()" placeholder="Ville / Code postal" class="input-style-1">
-			<select name="categorie" id="category" class="input-style-1">
-				<option value='hotels'selected>{{ "Hôtels"|trans }}</option>
-                <option value='chambreHotes'>{{ "Chambres d'hôtes"|trans }}</option>
-                <option value='gites'>{{ "Gîtes"|trans }}</option>
-                <option value='restaurants'>{{ "Restaurants"|trans }}</option>
-                <option value='musees'>{{ "Musées"|trans }}</option>
+			<select name="category" id="category" class="input-style-1">
+				<option value='1'selected>{{ "Hôtels"|trans }}</option>
+                <option value='3'>{{ "Chambres d'hôtes"|trans }}</option>
+                <option value='2'>{{ "Gîtes"|trans }}</option>
+                <option value='5'>{{ "Restaurants"|trans }}</option>
+                <option value='8'>{{ "Musées"|trans }}</option>
+                <option value='6'>{{ "Restaurants gastronomique"|trans }}</option>
+                <!--
+                <option value='4'>{{ "Camping"|trans }}</option>
+                <option value='7'>{{ "Parcs de loisirs"|trans }}</option>
+                <option value='9'>{{ "Chateaux"|trans }}</option>
+                <option value='10'>{{ "Hébergements"|trans }}</option>
+                <option value='11'>{{ "Tables d'hotes"|trans }}</option>
+            	-->                
 			</select>
 			<input name="latitude"  type="hidden" value=""/>
 			<input name="longitude" type="hidden" value=""/>

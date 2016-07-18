@@ -68,29 +68,68 @@ class DefaultController extends Controller
         $address    = $request->query->get('address');
         $latitude   = $request->query->get('latitude');
         $longitude  = $request->query->get('longitude');
+        $category   = $request->query->get('category');
 
         $prix       = $request->query->get('prix');
         $etoiles    = $request->query->get('etoiles');
         $note       = $request->query->get('note');
+        // var_dump($prix);
+
+        $orderCrit = "distance";
+        $orderSort = "ASC";
+
+        switch ($prix) {
+            case 'asc':
+                $orderCrit = 'p.profPrixMini';
+                $orderSort = 'ASC';     
+                break;
+            case 'desc':
+                $orderCrit = "p.profPrixMini";
+                $orderSort = "DESC";     
+                break;
+        }
+        switch ($etoiles) {
+            case 'asc':
+                $orderCrit = "p.profEtoiles";
+                $orderSort = "ASC";     
+                break;
+            case 'desc':
+                $orderCrit = "p.profEtoiles";
+                $orderSort = "DESC";     
+                break;
+        }
+
+        switch ($note) {
+            case 'asc':
+                $orderCrit = "p.profEtoiles";
+                $orderSort = "ASC";     
+                break;
+            case 'desc':
+                $orderCrit = "p.profEtoiles";
+                $orderSort = "DESC";     
+                break;
+        }
 
         $d = $this->getDoctrine()->getRepository('WCSPropertyBundle:Professionnel')->createQueryBuilder('p');
         $d
-            ->select('p')
+            ->select('p, c.cateNom')
             ->addSelect(
-            '( 6371 * acos(cos(radians( :latitude )) * cos( radians( p.profLatitude ) ) * cos( radians( p.profLongitude ) - radians( :longitude) ) + sin( radians( :latitude ) ) * sin( radians( p.profLatitude ) ) ) ) as distance'
-        )   ->where('p.profActif = :enabled')
+            '( 6371 * acos(cos(radians( :latitude )) * cos( radians( p.profLatitude ) ) * cos( radians( p.profLongitude ) - radians( :longitude) ) + sin( radians( :latitude ) ) * sin( radians( p.profLatitude ) ) ) ) as distance')   
+            ->leftJoin('p.profCateId', 'c', 'WITH', 'c.cateId = p.profCateId')
+            ->where('p.profActif = :enabled AND p.profCateId = :category ')
             ->having('distance < :distance')
-            ->orderBy('distance', 'ASC')
+            ->orderBy($orderCrit, $orderSort)
             ->setFirstResult(0)  
             ->setMaxResults(50)
             ->setParameter('latitude', $latitude)
             ->setParameter('longitude', $longitude)
             ->setParameter('distance', $distance)
+            ->setParameter('category', $category)
             ->setParameter('enabled', 1);
         $query= $d->getQuery();
         $resultats= $query->getResult();
 
-        // var_dump($resultats);
+// p.prof_cate_id = categorie.cate_id and categorie.cate_nom
 
         $tab_resultats = [];
         if (!empty($resultats))
@@ -103,13 +142,12 @@ class DefaultController extends Controller
                         'id'    =>$res[0]->getProfId(),
                         'lat'   =>$res[0]->getProfLatitude(),
                         'lng'   =>$res[0]->getProfLongitude(),
-                        'lng'   =>$res[0]->getProfLongitude(),
                         'profNom'           =>$res[0]->getProfNom(),
                         'profDescriptif'    =>$res[0]->getProfDescriptif(),
                         'profPrixMini'      =>$res[0]->getProfPrixMini(),
                         'profEtoiles'       =>$res[0]->getProfEtoiles(),
-                        'profCode' =>$res[0]->getProfCode(),
-                        'profEtoiles' =>$res[0]->getProfEtoiles(),
+                        'profCode'          =>$res[0]->getProfCode(),
+                        'profEtoiles'       =>$res[0]->getProfEtoiles(),
                     );
                 array_push($tab_resultats, $tab_res);
             }
@@ -123,7 +161,8 @@ class DefaultController extends Controller
             'base_dir'  => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'latitude'  => $latitude,
             'longitude' => $longitude,
-            'address'    => $address,
+            'address'   => $address,
+            'category'     => $category,
             'resultats' => $resultatss,
         ));
     }
