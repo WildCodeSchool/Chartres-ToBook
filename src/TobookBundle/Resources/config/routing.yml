@@ -3,9 +3,9 @@ tobook_homepage:
     defaults: { _controller: TobookBundle:Default:index }
 
 # ceci est un cache misère car sans ceci, la il n'y a pas de page par défaut
-tobook_homepages:
+tobook_redirect:
     path:     /
-    defaults: { _controller: TobookBundle:Default:index }
+    defaults: { _controller: TobookBundle:Default:redirect }
 
 tobook_search:
     path:     /{_locale}/search
