@@ -41,15 +41,14 @@
 		        <span>
 		        	<!-- Coeurs (actuellement géré avec les étoiles) -->
 		            {% for i in 1..5 %}
+		                <a href="{{ path('rating-property', { 'profCode': etablissement.profCode, 'note': i }) }}" title="Voter {{i}} coeur(s)">
 		                {% if i <= etablissement.profEtoiles %}
-		                    <img src="{{ asset('img/picto/jauge_coeur_1.png') }}" title="Note" />
+		                    	<img src="{{ asset('img/picto/jauge_coeur_1.png') }}" alt="Note" />
 		                {% else %}
-		                    <img src="{{ asset('img/picto/jauge_coeur_0.png') }}" title="Note" />
+		                    <img src="{{ asset('img/picto/jauge_coeur_0.png') }}" alt="Note" />
 		                {% endif %}
+		                </a>
 		            {% endfor %}
-		        </span>
-		        <span>
-		            <img src="{{ asset('img/picto/jauge_coeur_0.png') }}" title="Note" />
 		        </span>
 
 		        <!-- suivre cet hotel -->
