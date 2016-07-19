@@ -9,7 +9,7 @@
 		<a href="{{ path('wcs_emailing_import', { 'profCode': etablissement.usprProfId.profCode }) }}">{{ "Ajouter des clients (fichier csv)"|trans }}</a>
 	</div>
 
-    <div class="container">
+{#     <div class="container">
         <table class="table table-striped">
 
             <thead>
@@ -27,7 +27,6 @@
 
             {% for client in client if client.emaiProfId == etablissement.usprProfId %}
                 <tbody>
-
                     <tr>
                         <td>{{ client.emaiEmail }}</td> <!--email-->
                         <td>{{ client.emaiNom }}</td> <!--nom-->
@@ -42,8 +41,68 @@
             {%  endfor %}
 
         </table> <!--top table-->
-    </div> <!--container-->
+    </div> <!--container--> #}
 	
-{% endfor %}    
+
+    <table id="example" class="display" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>{{ "Email"|trans }}</th>
+                <th>{{ "Nom"|trans }}</th>
+                <th>{{ "Prénom"|trans }}</th>
+                <th>{{ "Adresse"|trans }}</th>
+                <th>{{ "Ville"|trans }}</th>
+                <th>{{ "Pays"|trans }}</th>
+                <th>{{ "Genre"|trans }}</th>
+                <th>{{ "CSP"|trans }}</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>{{ "Email"|trans }}</th>
+                <th>{{ "Nom"|trans }}</th>
+                <th>{{ "Prénom"|trans }}</th>
+                <th>{{ "Adresse"|trans }}</th>
+                <th>{{ "Ville"|trans }}</th>
+                <th>{{ "Pays"|trans }}</th>
+                <th>{{ "Genre"|trans }}</th>
+                <th>{{ "CSP"|trans }}</th>
+            </tr>
+        </tfoot>
+        {% for client in client if client.emaiProfId == etablissement.usprProfId %}
+            <tbody>
+                <tr>
+                    <td>{{ client.emaiEmail }}</td> <!--email-->
+                    <td>{{ client.emaiNom }}</td> <!--nom-->
+                    <td>{{ client.emaiPrenom }}</td> <!--prénom-->
+                    <td>{{ client.emaiAdresse }}</td> <!--adresse-->
+                    <td>{{ client.emaiVille }}</td> <!--ville-->
+                    <td>{{ client.emaiPays }}</td> <!--pays-->
+                    <td>{{ client.emaiGenre }}</td> <!--genre-->
+                    <td>{{ client.emaiCSP }}</td> <!--csp-->
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+
+
+
+{% endfor %}
+
+<script>
+    $(document).ready(function() {
+        var table = $('#example').DataTable();
+     
+        $('#example tbody').on( 'click', 'tr', function () {
+            $(this).toggleClass('selected');
+        } );
+     
+        $('#button').click( function () {
+            alert( table.rows('.selected').data().length +' row(s) selected' );
+        } );
+
+    } );
+</script>
+
 
 {% endblock %}
