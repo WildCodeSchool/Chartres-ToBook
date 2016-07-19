@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use WCS\ContentBundle\Entity\Contenu;
+use WCS\ContentBundle\Entity\Professionnel;
 use WCS\ContentBundle\Form\ContenuType;
 
 /**
@@ -36,14 +37,14 @@ class ContenuController extends Controller
      * Lists all Contenu entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request, $profCode)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $route = $this->getRefererRoute();
-        $profId = preg_replace("/\D/",'', $route);
+        $profId = preg_replace("/\D/",'', $profCode);
 
         $contenus = $em->getRepository('WCSContentBundle:Contenu')->findByContProfId($profId);
+
 
         $tab = [];
 
@@ -56,12 +57,13 @@ class ContenuController extends Controller
                 'nom' => $userid->getUserNom(),
                 'contenu' => $contenu->getContText(),
                 'sujet' => $contenu->getContSujet(),
-                'file' => $contenu->getContImgExt(),           
+                'file' => $contenu->getContImgExt(),
+                'date' => $contenu->getContDate(),
             );
         }
 
         return $this->render('WCSContentBundle:contenu:index.html.twig', array(
-            'contenus' => $contenus,
+            'contenu' => $contenus,
             'tab'=> $tab,
         ));
     }
@@ -72,8 +74,6 @@ class ContenuController extends Controller
      */
     public function newAction(Request $request)
     {
-        $user = $this->container->get('security.context')->getToken()->getUser();
-        $userid = $user->getId();
         $route = $this->getRefererRoute();
         $profId = preg_replace("/\D/",'', $route);
 
@@ -83,6 +83,8 @@ class ContenuController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $user = $this->container->get('security.context')->getToken()->getUser();
+            $userid = $user->getId();
             $img = $contenu->getContImgExt();
             if ($img === null) {
 
@@ -105,6 +107,7 @@ class ContenuController extends Controller
 
             $contenu->setContUserId($userid);
             $contenu->setContProfId($profId);
+            $contenu->setContDate(new \Datetime());
             $em = $this->getDoctrine()->getManager();
             $em->persist($contenu);
             $em->flush();
