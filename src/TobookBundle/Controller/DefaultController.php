@@ -18,6 +18,11 @@ class DefaultController extends Controller
         return $this->render('TobookBundle:Default:index.html.twig');
     }
 
+    public function redirectAction()
+    {
+        return $this->redirectToRoute('tobook_homepage', array(), 301);
+    }
+
     // fonction permettant de récupérer la route actuelle en vue du changement de langue
     public function getRefererRoute()
     {
