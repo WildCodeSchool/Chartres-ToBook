@@ -128,9 +128,14 @@
 				</div> 
 				<div class="col-md-12 case2 pageother"> 
 					<h2>{{ "Formulaire de commentaires"|trans }}</h2>
-					{{ render(controller('WCSContentBundle:Contenu:new')) }}
+					{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+						{{ render(controller('WCSContentBundle:Contenu:new')) }}
+					{% else %}
+						<p>Vous devez être connecté pour laisser un commentaire !</p>
+						<a href="{{ path('user_login') }}">Se connecter </a>	
+					{% endif %}
 					<h2>{{ "Commentaires"|trans }} </h2> 
-					{{ render(controller('WCSContentBundle:Contenu:index')) }}
+					{{ render(controller('WCSContentBundle:Contenu:index', { 'profCode': etablissement.profCode })) }}
 				</div> 
 				<div class="col-md-12 case3 pageother"> 
 					<p>{{ "Voici les coordonnées téléphoniques :"|trans }}</p>
