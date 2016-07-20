@@ -14,33 +14,37 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ShowMapController extends Controller
 {
+
     public function ShowMapAction(Request $request)
     {
 
-        if($request->isXmlHttpRequest()){
-        $latitude = $request->request->get('lat');
-        $longitude = $request->request->get('lng');
-        $radius = 50;
-        dump($longitude);
-        $encoders = array(new XmlEncoder(), new JsonEncoder());
-        $normalizers = array(new GetSetMethodNormalizer());
-        $serializer = new Serializer($normalizers, $encoders);
+        if($request->isXmlHttpRequest())
+        {
 
-        $em = $this->getDoctrine()->getManager();
-
-        $repository = $em->getRepository('AppBundle:Professionnel');
-
-        $LatLng = $repository->getLatLng($latitude, $longitude, $radius);
+            $latitude = $request->request->get('lat');
+            $longitude = $request->request->get('lng');
+            $radius = 10;
         
-        $resultat = $serializer->serialize( $LatLng, 'json');
+            $encoders = array(new XmlEncoder(), new JsonEncoder());
+            $normalizers = array(new GetSetMethodNormalizer());
+            $serializer = new Serializer($normalizers, $encoders);
 
-        $response = new Response($resultat);
+            $em = $this->getDoctrine()->getManager();
 
-        $response->headers->set('Content-Type', 'application/json');
+            $repository = $em->getRepository('WCSPropertyBundle:Professionnel');
 
-        return $response;
+            $LatLng = $repository->getLatLng($latitude, $longitude, $radius);
+            
+            $resultat = $serializer->serialize( $LatLng, 'json');
 
-        } 
+            $response = new Response($resultat);
+
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+
+        }
     }
     
 }
+        

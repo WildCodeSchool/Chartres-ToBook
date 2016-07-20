@@ -7,5 +7,7 @@ putFavorites:
     defaults: {_controller: WCSPropertyBundle:Default:favoris }
 
 mapResult:
-    path:     /mapResult
+    path:     /zmapResult
     defaults: {_controller: WCSPropertyBundle:ShowMap:ShowMap }
+    options:
+        expose: true

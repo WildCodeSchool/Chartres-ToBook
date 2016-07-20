@@ -5,9 +5,9 @@
 
 		<img class="img-style-1" src="{{ asset('img/background/background-1.jpg') }}">
 
-		<form method="POST" action="{{ path('tobook_search') }}" class="col-md-12 search-bar row">
+		<form method="post" action="{{ path('mapResult') }}" class="col-md-12 search-bar row" id="form">
 			<div class="col-md-7">
-				<input id="autocomplete" class="input-style-5" onfocus="initautocomplete()" type="text" placeholder="Entrez votre recherche">
+				<input id="autocomplete" onfocus="initautocomplete()" class="input-style-5" type="text" placeholder="Entrez votre recherche">
 			</div>
 			<div class="col-md-4">
 				<select class="input-style-5" name="category" id="category">
@@ -25,27 +25,6 @@
 				<input class="input-style-6 btn btn-success" type="submit" value="Rechercher">
 			</div>
 		</form>
-		<script type="text/javascript">
-		// script
-		$(document).ready(function() {
-		  $("#form").submit(function(e){
-
-		    var selectType = document.getElementById("category"); 
-		    
-		    var choice = selectType.options[selectType.selectedIndex].getAttribute('value');
-
-		    localStorage.setItem('choice',choice);
-		    
-		  });
-		  
-		});
-		</script>
-		<script type="text/javascript">
-		$(document).ready(function() {
-			initMap();
-			//$('#resultatMap').text( address );
-		});
-		</script>
 		<div class="col-md-12 result-bar row">
 			<h4>{{ 'Résultats pour'|trans }} <span id="resultatMap">{{ address }}</span></h4>
 		</div>
