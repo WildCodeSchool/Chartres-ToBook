@@ -51,15 +51,26 @@ class ContenuController extends Controller
         foreach ($contenus as $contenu)
         {
             $userid = $em->getRepository('UserBundle:User')->findOneById($contenu->getContUserId());
-            $username = $userid->getUserName();
-            $tab[] = array(
-                'prenom' => $userid->getUserPrenom(),
-                'nom' => $userid->getUserNom(),
-                'contenu' => $contenu->getContText(),
-                'sujet' => $contenu->getContSujet(),
-                'file' => $contenu->getContImgExt(),
-                'date' => $contenu->getContDate(),
-            );
+            if (!empty($userid)) {
+                $tab[] = array(
+                    'prenom' => $userid->getUserPrenom(),
+                    'nom' => $userid->getUserNom(),
+                    'contenu' => $contenu->getContText(),
+                    'sujet' => $contenu->getContSujet(),
+                    'file' => $contenu->getContImgExt(),
+                    'date' => $contenu->getContDate(),
+                );
+            }
+            else {
+                $tab[] = array(
+                    'prenom' => "utilisateur",
+                    'nom' => "anonyme",
+                    'contenu' => $contenu->getContText(),
+                    'sujet' => $contenu->getContSujet(),
+                    'file' => $contenu->getContImgExt(),
+                    'date' => $contenu->getContDate(),
+                );
+            }
         }
 
         return $this->render('WCSContentBundle:contenu:index.html.twig', array(
