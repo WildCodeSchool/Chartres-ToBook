@@ -3,6 +3,7 @@
         <p class="text-gris">{{ 'Message de'|trans }} <span class="text-vert">{{ contenu['prenom'] }} {{ contenu['nom'] }}</span></p>
         <p class="text-gris">{{ 'Sujet'|trans }} : <b class="text-noir">{{ contenu['sujet'] }}</b></p>
         <p class="text-gris">{{ 'Message'|trans }} : <span class="text-noir">{{ contenu['contenu'] }}</span></p>
+        <p class="text-gris">{{ 'Publié le'|trans }} <span class="text-noir">{{ contenu['date']|date("m/d/Y à H:i") }}</span> </p>
         {% if contenu['file'] is null %}
 
         {% else %}
