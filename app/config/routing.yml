@@ -27,5 +27,9 @@ wcs_content:
     resource: "@WCSContentBundle/Resources/config/routing.yml"
     prefix:   /
 
+wcs_emailing:
+    resource: "@WCSEmailingBundle/Resources/config/routing.yml"
+    prefix:   /
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

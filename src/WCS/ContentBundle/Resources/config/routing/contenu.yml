@@ -1,0 +1,19 @@
+contenu_index:
+    path:     /
+    defaults: { _controller: "WCSContentBundle:Contenu:index" }
+    methods:  GET
+
+contenu_show:
+    path:     /{id}/show
+    defaults: { _controller: "WCSContentBundle:Contenu:show" }
+    methods:  GET
+
+contenu_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "WCSContentBundle:Contenu:edit" }
+    methods:  [GET, POST]
+
+contenu_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "WCSContentBundle:Contenu:delete" }
+    methods:  DELETE

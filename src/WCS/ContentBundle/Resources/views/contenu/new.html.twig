@@ -1,0 +1,8 @@
+{{ form_start(form, {'method': 'post', 'action': path('contenu_new')}) }}
+    <label>{{ 'Sujet'|trans }}</label> : {{ form_widget(form.contSujet) }} </br>
+    <label>{{ 'Commentaire'|trans }}</label> : <br>{{ form_widget(form.contText) }}<br>
+    {{ form_widget(form.contImgExt) }}
+
+    <input type="submit" value="Envoyer" />
+{{ form_end(form) }}
+

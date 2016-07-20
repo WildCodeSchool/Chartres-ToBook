@@ -24,7 +24,8 @@ class ProfImages
     /**
      * @var integer
      *
-     * @ORM\Column(name="prim_prof_id", type="bigint", nullable=false)
+     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
+     * @ORM\JoinColumn(name="prim_prof_id", referencedColumnName="prof_id")
      */
     private $primProfId;
 

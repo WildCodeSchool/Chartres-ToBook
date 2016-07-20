@@ -1,5 +1,4 @@
 {% extends 'TobookBundle::base.html.twig' %}
-
 {% block body %}
 	<div class="col-md-12 search-first-div">
 
@@ -7,15 +6,23 @@
 
 		<form method="GET" action="{{ path('tobook_search') }}" class="col-md-12 search-bar row">
 			<div class="col-md-7">
-				<input id="autocomplete" class="input-style-5" onfocus="initautocomplete()" type="text" placeholder="Entrez votre recherche">
+				<input id="autocomplete" class="input-style-5" onfocus="initautocomplete()" type="text" value="{{ address }}" placeholder="Entrez votre recherche">
 			</div>
 			<div class="col-md-4">
 				<select class="input-style-5" name="category" id="category">
-					<option value='hotels' selected>{{ "Hôtels"|trans }}</option>
-                    <option value='chambreHotes'>{{ "Chambres d'hôtes"|trans }}</option>
-                    <option value='gites'>{{ "Gîtes"|trans }}</option>
-                    <option value='restaurants'>{{ "Restaurants"|trans }}</option>
-                    <option value='musees'>{{ "Musées"|trans }}</option>
+				<option value='1' {{ category == 1 ? 'selected="selected"' : '' }}>{{ "Hôtels"|trans }}</option>
+                <option value='3' {{ category == 3 ? 'selected="selected"' : '' }}>{{ "Chambres d'hôtes"|trans }}</option>
+                <option value='2' {{ category == 2 ? 'selected="selected"' : '' }}>{{ "Gîtes"|trans }}</option>
+                <option value='5' {{ category == 5 ? 'selected="selected"' : '' }}>{{ "Restaurants"|trans }}</option>
+                <option value='8' {{ category == 8 ? 'selected="selected"' : '' }}>{{ "Musées"|trans }}</option>
+                <option value='6' {{ category == 6 ? 'selected="selected"' : '' }}>{{ "Restaurants gastronomique"|trans }}</option>
+                <!--
+                <option value='4' {{ category == 4 ? 'selected="selected"' : '' }}>{{ "Camping"|trans }}</option>
+                <option value='7' {{ category == 7 ? 'selected="selected"' : '' }}>{{ "Parcs de loisirs"|trans }}</option>
+                <option value='9' {{ category == 9 ? 'selected="selected"' : '' }}>{{ "Chateaux"|trans }}</option>
+                <option value='10' {{ category == 10 ? 'selected="selected"' : '' }}>{{ "Hébergements"|trans }}</option>
+                <option value='11' {{ category == 11 ? 'selected="selected"' : '' }}>{{ "Tables d'hotes"|trans }}</option>
+            	-->
 				</select>
 			</div>
 			<input name="address" type="hidden" value="{{ address }}"/>
@@ -61,7 +68,7 @@
 				<h4><strong>{{ 'Classer par'|trans }} :</strong></h4>
 			</div>
 		</div>
-		<form id="tri" name="tri" methode="GET" action="{{ path('mapResult') }}">
+		<form id="tri" name="tri" methode="GET" action="{{ path('tobook_search') }}">
 			<div class="col-md-2">
 				<select id="tri-prix" name="prix" class="input-style-5">
 					<option value="">{{ 'Prix'|trans }}</option>
@@ -72,8 +79,8 @@
 			<div class="col-md-2">
 				<select id="tri-etoiles" name="etoiles" class="input-style-5">
 					<option value="">{{ 'Étoile'|trans }}</option>
-					<option value="desc">{{ 'Par ordre croissant'|trans }}</option>
-					<option value="asc">{{ 'Par ordre décroissant'|trans }} </option>				
+					<option value="asc">{{ 'Par ordre croissant'|trans }}</option>
+					<option value="desc">{{ 'Par ordre décroissant'|trans }} </option>				
 				</select>
 			</div>
 			<div class="col-md-2">
@@ -86,6 +93,7 @@
 			<input name="latitude" type="hidden" value="{{ latitude }}"/>
 			<input name="longitude" type="hidden" value="{{ longitude }}"/>
 			<input name="address" type="hidden" value="{{ address }}"/>
+			<input name="category" type="hidden" value="{{ category }}"/>
 		</form>
 		<script type="text/javascript">
 		    $('#tri div select').change(function(){
@@ -104,11 +112,13 @@
 		</div>
 		<div class="col-md-6 col-md-offset-1 text-div">
 			<h3><strong>{{ resultat[0].profNom }}
-				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+		        {% for i in 1..5 %}
+		            {% if i <= resultat[0].profEtoiles %}
+		                <img src="{{ asset('img/picto/jauge_star_1.png') }}" title="Etoiles" />
+		            {% else %}
+		                <img src="{{ asset('img/picto/jauge_star_0.png') }}" title="Etoiles" />
+		            {% endif %}
+		        {% endfor %}
 			</strong></h3>
 			<h4>__________</h4>
 			<p>{{ resultat[0].profDescriptif }}</p>
@@ -124,7 +134,7 @@
 				<div class="pull-left search-div-style" href="#">
 					{{ 'à partir de'|trans }}: <strong>{{ resultat[0].profPrixMini }} €</strong>
 				</div>
-				<a class="bouton-style-3 pull-right" href="#">
+				<a class="bouton-style-3 pull-right" href="{{ path('club-house', { 'profCode': resultat[0].profCode }) }}">
 					<strong>{{ 'Plus de details'|trans }}</strong>
 				</a>
 			</div>
@@ -141,11 +151,13 @@
 	<div class="col-md-12 search-third-div border-2">
 		<div class="col-md-6 text-div">
 			<h3><strong>{{ resultat[0].profNom }}
-			<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_1.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
-				<img src="{{ asset('img/picto/jauge_star_0.png') }}">
+		        {% for i in 1..5 %}
+		            {% if i <= resultat[0].profEtoiles %}
+		                <img src="{{ asset('img/picto/jauge_star_1.png') }}" title="Etoiles" />
+		            {% else %}
+		                <img src="{{ asset('img/picto/jauge_star_0.png') }}" title="Etoiles" />
+		            {% endif %}
+		        {% endfor %}
 			</strong></h3>
 			<h4>__________</h4>
 			<p>{{ resultat[0].profDescriptif }}</p>
@@ -161,7 +173,7 @@
 				<div class="pull-left search-div-style" href="#">
 					{{ 'à partir de'|trans }}: <strong>{{ resultat[0].profPrixMini }} €</strong>
 				</div>
-				<a class="bouton-style-3 pull-right" href="#">
+				<a class="bouton-style-3 pull-right" href="{{ path('club-house', { 'profCode': resultat[0].profCode }) }}">
 					<strong>{{ 'Plus de details'|trans }}</strong>
 				</a>
 			</div>

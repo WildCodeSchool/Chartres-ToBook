@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "262afd29c2ac1a7b2034a1c56eed4414",
-    "content-hash": "3e7a475b94dbdd2bed62c8aff4711bba",
+    "hash": "8b4409bcbd9e299c9eff5e85b51753e9",
+    "content-hash": "ca268a23bf49d21c3013d803eb19c972",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -785,12 +785,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "298f27ce696deaa6ecd72e6ba563f892a17e0512"
+                "reference": "42ad0730ee22406de20da75fa9a3f4d74c565a83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/298f27ce696deaa6ecd72e6ba563f892a17e0512",
-                "reference": "298f27ce696deaa6ecd72e6ba563f892a17e0512",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/42ad0730ee22406de20da75fa9a3f4d74c565a83",
+                "reference": "42ad0730ee22406de20da75fa9a3f4d74c565a83",
                 "shasum": ""
             },
             "require": {
@@ -846,7 +846,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2016-06-21 10:34:42"
+            "time": "2016-07-19 12:01:22"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1447,23 +1447,23 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8"
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/d8db871a54619458a805229a057ea2af33c753e8",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9.1,<0.9.4"
+                "mockery/mockery": "~0.9.1"
             },
             "type": "library",
             "extra": {
@@ -1496,7 +1496,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-05-01 08:45:47"
+            "time": "2016-07-08 11:51:25"
         },
         {
             "name": "symfony/monolog-bundle",

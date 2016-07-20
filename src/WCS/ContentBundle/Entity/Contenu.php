@@ -1,8 +1,9 @@
 <?php
 
-namespace ContentBundle\Entity;
+namespace WCS\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Contenu
@@ -24,16 +25,30 @@ class Contenu
     /**
      * @var integer
      *
-     * @ORM\Column(name="cont_cont_id", type="bigint", nullable=false)
+     * @ORM\Column(name="cont_cont_id", type="bigint", nullable=true)
      */
     private $contContId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="cont_source_id", type="integer", nullable=false)
+     * @ORM\Column(name="cont_source_id", type="integer", nullable=true)
      */
     private $contSourceId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cont_user_id", type="bigint", nullable=false)
+     */
+    private $contUserId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cont_prof_id", type="integer", nullable=false)
+     */
+    private $contProfId;
 
     /**
      * @var integer
@@ -66,14 +81,14 @@ class Contenu
     /**
      * @var boolean
      *
-     * @ORM\Column(name="cont_actif", type="boolean", nullable=false)
+     * @ORM\Column(name="cont_actif", type="boolean", nullable=true)
      */
     private $contActif;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="cont_visible", type="boolean", nullable=false)
+     * @ORM\Column(name="cont_visible", type="boolean", nullable=true)
      */
     private $contVisible;
 
@@ -94,56 +109,56 @@ class Contenu
     /**
      * @var boolean
      *
-     * @ORM\Column(name="cont_note_1", type="boolean", nullable=false)
+     * @ORM\Column(name="cont_note_1", type="boolean", nullable=true)
      */
     private $contNote1;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="cont_note_2", type="boolean", nullable=false)
+     * @ORM\Column(name="cont_note_2", type="boolean", nullable=true)
      */
     private $contNote2;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="cont_note_3", type="boolean", nullable=false)
+     * @ORM\Column(name="cont_note_3", type="boolean", nullable=true)
      */
     private $contNote3;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="cont_note_4", type="boolean", nullable=false)
+     * @ORM\Column(name="cont_note_4", type="boolean", nullable=true)
      */
     private $contNote4;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cont_note_sujet", type="string", length=250, nullable=true)
+     * @ORM\Column(name="cont_sujet", type="string", length=250, nullable=true)
      */
-    private $contNoteSujet;
+    private $contSujet;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cont_note_text", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="cont_text", type="text", length=65535, nullable=true)
      */
-    private $contNoteText;
+    private $contText;
 
     /**
-     * @var string
+     * @ORM\Column(type="string", nullable=true)
      *
-     * @ORM\Column(name="cont_img_ext", type="string", length=16, nullable=true)
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/pjpeg", "image/png" })
      */
     private $contImgExt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cont_img_xy", type="decimal", precision=6, scale=3, nullable=false)
+     * @ORM\Column(name="cont_img_xy", type="decimal", precision=6, scale=3, nullable=true)
      */
     private $contImgXy;
 
@@ -482,52 +497,6 @@ class Contenu
     }
 
     /**
-     * Set contNoteSujet
-     *
-     * @param string $contNoteSujet
-     * @return Contenu
-     */
-    public function setContNoteSujet($contNoteSujet)
-    {
-        $this->contNoteSujet = $contNoteSujet;
-
-        return $this;
-    }
-
-    /**
-     * Get contNoteSujet
-     *
-     * @return string 
-     */
-    public function getContNoteSujet()
-    {
-        return $this->contNoteSujet;
-    }
-
-    /**
-     * Set contNoteText
-     *
-     * @param string $contNoteText
-     * @return Contenu
-     */
-    public function setContNoteText($contNoteText)
-    {
-        $this->contNoteText = $contNoteText;
-
-        return $this;
-    }
-
-    /**
-     * Get contNoteText
-     *
-     * @return string 
-     */
-    public function getContNoteText()
-    {
-        return $this->contNoteText;
-    }
-
-    /**
      * Set contImgExt
      *
      * @param string $contImgExt
@@ -571,5 +540,97 @@ class Contenu
     public function getContImgXy()
     {
         return $this->contImgXy;
+    }
+
+    /**
+     * Set contSujet
+     *
+     * @param string $contSujet
+     * @return Contenu
+     */
+    public function setContSujet($contSujet)
+    {
+        $this->contSujet = $contSujet;
+
+        return $this;
+    }
+
+    /**
+     * Get contSujet
+     *
+     * @return string 
+     */
+    public function getContSujet()
+    {
+        return $this->contSujet;
+    }
+
+    /**
+     * Set contText
+     *
+     * @param string $contText
+     * @return Contenu
+     */
+    public function setContText($contText)
+    {
+        $this->contText = $contText;
+
+        return $this;
+    }
+
+    /**
+     * Get contText
+     *
+     * @return string 
+     */
+    public function getContText()
+    {
+        return $this->contText;
+    }
+
+    /**
+     * Set contUserId
+     *
+     * @param integer $contUserId
+     * @return Contenu
+     */
+    public function setContUserId($contUserId)
+    {
+        $this->contUserId = $contUserId;
+
+        return $this;
+    }
+
+    /**
+     * Get contUserId
+     *
+     * @return integer 
+     */
+    public function getContUserId()
+    {
+        return $this->contUserId;
+    }
+
+    /**
+     * Set contProfId
+     *
+     * @param integer $contProfId
+     * @return Contenu
+     */
+    public function setContProfId($contProfId)
+    {
+        $this->contProfId = $contProfId;
+
+        return $this;
+    }
+
+    /**
+     * Get contProfId
+     *
+     * @return integer 
+     */
+    public function getContProfId()
+    {
+        return $this->contProfId;
     }
 }

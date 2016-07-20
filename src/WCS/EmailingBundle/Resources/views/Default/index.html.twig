@@ -1,0 +1,49 @@
+{% extends 'TobookBundle::base.html.twig' %}
+
+{% block body %}
+
+{% for etablissement in liste_etablissements %}
+
+	<div>
+		{{ etablissement.usprProfId.profNom }}</br>
+		<a href="{{ path('wcs_emailing_import', { 'profCode': etablissement.usprProfId.profCode }) }}">{{ "Ajouter des clients (fichier csv)"|trans }}</a>
+	</div>
+
+    <div class="container">
+        <table class="table table-striped">
+
+            <thead>
+                <tr>
+                    <th>{{ "Email"|trans }}</th>
+                    <th>{{ "Nom"|trans }}</th>
+                    <th>{{ "Pr&eacute;nom"|trans }}</th>
+                    <th>{{ "Adresse"|trans }}</th>
+                    <th>{{ "Ville"|trans }}</th>
+                    <th>{{ "Pays"|trans }}</th>
+                    <th>{{ "Genre"|trans }}</th>
+                    <th>{{ "CSP"|trans }}</th>                    
+                </tr>
+            </thead>
+
+            {% for client in client if client.emaiProfId == etablissement.usprProfId %}
+                <tbody>
+
+                    <tr>
+                        <td>{{ client.emaiEmail }}</td> <!--email-->
+                        <td>{{ client.emaiNom }}</td> <!--nom-->
+                        <td>{{ client.emaiPrenom }}</td> <!--prénom-->
+                        <td>{{ client.emaiAdresse }}</td> <!--adresse-->
+                        <td>{{ client.emaiVille }}</td> <!--ville-->
+                        <td>{{ client.emaiPays }}</td> <!--pays-->
+                        <td>{{ client.emaiGenre }}</td> <!--genre-->
+                        <td>{{ client.emaiCSP }}</td> <!--csp-->
+                    </tr>
+                </tbody>
+            {%  endfor %}
+
+        </table> <!--top table-->
+    </div> <!--container-->
+	
+{% endfor %}    
+
+{% endblock %}

@@ -11,3 +11,4 @@ web/app_dev.php
 /vendor/
 /bin/
 /composer.phar
+*.sublime-*
