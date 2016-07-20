@@ -1,6 +1,6 @@
 tobook:
     resource: "@TobookBundle/Resources/config/routing.yml"
-    prefix:   /s
+    prefix:   /
 
 user:
     resource: "@UserBundle/Controller/"
@@ -25,6 +25,10 @@ wcs_property:
 
 wcs_content:
     resource: "@WCSContentBundle/Resources/config/routing.yml"
+    prefix:   /
+
+wcs_emailing:
+    resource: "@WCSEmailingBundle/Resources/config/routing.yml"
     prefix:   /
 
 fos_user:

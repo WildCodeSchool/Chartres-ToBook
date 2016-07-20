@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ProfessionnelLangue
  *
- * @ORM\Table(name="professionnel_langue", uniqueConstraints={@ORM\UniqueConstraint(name="prla_unic", columns={"prla_lang_code", "prla_code", "prla_prof_id"})})
+ * @ORM\Table(name="professionnel_langue")
  * @ORM\Entity
  */
 class ProfessionnelLangue
@@ -24,7 +24,8 @@ class ProfessionnelLangue
     /**
      * @var integer
      *
-     * @ORM\Column(name="prla_prof_id", type="bigint", nullable=false)
+     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
+     * @ORM\JoinColumn(name="prla_prof_id", referencedColumnName="prof_id")
      */
     private $prlaProfId;
 

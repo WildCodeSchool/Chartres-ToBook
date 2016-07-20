@@ -24,14 +24,16 @@ class ProfCate
     /**
      * @var integer
      *
-     * @ORM\Column(name="prca_prof_id", type="bigint", nullable=false)
+     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
+     * @ORM\JoinColumn(name="prca_prof_id", referencedColumnName="prof_id")
      */
     private $prcaProfId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="prca_cate_id", type="bigint", nullable=false)
+     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Categorie")
+     * @ORM\JoinColumn(name="prca_cate_id", referencedColumnName="cate_id")
      */
     private $prcaCateId;
 

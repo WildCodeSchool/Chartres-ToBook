@@ -18,6 +18,11 @@ class DefaultController extends Controller
         return $this->render('TobookBundle:Default:index.html.twig');
     }
 
+    public function redirectAction()
+    {
+        return $this->redirectToRoute('tobook_homepage', array(), 301);
+    }
+
     // fonction permettant de récupérer la route actuelle en vue du changement de langue
     public function getRefererRoute()
     {
@@ -56,7 +61,8 @@ class DefaultController extends Controller
         $newRoute = implode("/", $pieces);
 
         // on génère la nouvelle url
-        $url = 'http://localhost/Chartres-ToBook/web/app_dev.php'.$newRoute;
+        // $url = 'http://localhost/Chartres-ToBook/web/app_dev.php'.$newRoute;
+        $url = '..'.$newRoute;
         return $this->redirect($url);
     }  
 
@@ -64,32 +70,71 @@ class DefaultController extends Controller
     {   
 
         $distance   = 50;
-        $address    = $request->request->get('address');
-        $latitude   = $request->request->get('latitude');
-        $longitude  = $request->request->get('longitude');
+        $address    = $request->query->get('address');
+        $latitude   = $request->query->get('latitude');
+        $longitude  = $request->query->get('longitude');
+        $category   = $request->query->get('category');
 
-        $prix       = $request->request->get('prix');
-        $etoiles    = $request->request->get('etoiles');
-        $note       = $request->request->get('note');
+        $prix       = $request->query->get('prix');
+        $etoiles    = $request->query->get('etoiles');
+        $note       = $request->query->get('note');
+        // var_dump($prix);
+
+        $orderCrit = "distance";
+        $orderSort = "ASC";
+
+        switch ($prix) {
+            case 'asc':
+                $orderCrit = 'p.profPrixMini';
+                $orderSort = 'ASC';     
+                break;
+            case 'desc':
+                $orderCrit = "p.profPrixMini";
+                $orderSort = "DESC";     
+                break;
+        }
+        switch ($etoiles) {
+            case 'asc':
+                $orderCrit = "p.profEtoiles";
+                $orderSort = "ASC";     
+                break;
+            case 'desc':
+                $orderCrit = "p.profEtoiles";
+                $orderSort = "DESC";     
+                break;
+        }
+
+        switch ($note) {
+            case 'asc':
+                $orderCrit = "p.profEtoiles";
+                $orderSort = "ASC";     
+                break;
+            case 'desc':
+                $orderCrit = "p.profEtoiles";
+                $orderSort = "DESC";     
+                break;
+        }
 
         $d = $this->getDoctrine()->getRepository('WCSPropertyBundle:Professionnel')->createQueryBuilder('p');
         $d
-            ->select('p')
+            ->select('p, c.cateNom')
             ->addSelect(
-            '( 6371 * acos(cos(radians( :latitude )) * cos( radians( p.profLatitude ) ) * cos( radians( p.profLongitude ) - radians( :longitude) ) + sin( radians( :latitude ) ) * sin( radians( p.profLatitude ) ) ) ) as distance'
-        )   ->where('p.profActif = :enabled')
+            '( 6371 * acos(cos(radians( :latitude )) * cos( radians( p.profLatitude ) ) * cos( radians( p.profLongitude ) - radians( :longitude) ) + sin( radians( :latitude ) ) * sin( radians( p.profLatitude ) ) ) ) as distance')   
+            ->leftJoin('p.profCateId', 'c', 'WITH', 'c.cateId = p.profCateId')
+            ->where('p.profActif = :enabled AND p.profCateId = :category ')
             ->having('distance < :distance')
-            ->orderBy('distance', 'ASC')
+            ->orderBy($orderCrit, $orderSort)
             ->setFirstResult(0)  
-            ->setMaxResults(15)
+            ->setMaxResults(50)
             ->setParameter('latitude', $latitude)
             ->setParameter('longitude', $longitude)
             ->setParameter('distance', $distance)
+            ->setParameter('category', $category)
             ->setParameter('enabled', 1);
         $query= $d->getQuery();
         $resultats= $query->getResult();
 
-        // var_dump($resultats);
+// p.prof_cate_id = categorie.cate_id and categorie.cate_nom
 
         $tab_resultats = [];
         if (!empty($resultats))
@@ -102,17 +147,17 @@ class DefaultController extends Controller
                         'id'    =>$res[0]->getProfId(),
                         'lat'   =>$res[0]->getProfLatitude(),
                         'lng'   =>$res[0]->getProfLongitude(),
-                        'lng'   =>$res[0]->getProfLongitude(),
                         'profNom'           =>$res[0]->getProfNom(),
                         'profDescriptif'    =>$res[0]->getProfDescriptif(),
                         'profPrixMini'      =>$res[0]->getProfPrixMini(),
+                        'profEtoiles'       =>$res[0]->getProfEtoiles(),
+                        'profCode'          =>$res[0]->getProfCode(),
                         'profEtoiles'       =>$res[0]->getProfEtoiles(),
                     );
                 array_push($tab_resultats, $tab_res);
             }
         }
-
-        $resultats = $this->get('knp_paginator')->paginate($tab_resultats, /* Ici on appelle la liste d'entité qu'on veut voir apparaitre en tant qu'éléments de notre pagination */
+        $resultatss = $this->get('knp_paginator')->paginate($tab_resultats, /* Ici on appelle la liste d'entité qu'on veut voir apparaitre en tant qu'éléments de notre pagination */
             $this->get('request')->query->get('page', 1)/*Ici la page à laquelle la pagination commence*/,
             14/*Et ici la limite d'éléments par page*/
         );
@@ -121,8 +166,9 @@ class DefaultController extends Controller
             'base_dir'  => realpath($this->container->getParameter('kernel.root_dir').'/..'),
             'latitude'  => $latitude,
             'longitude' => $longitude,
-            'address'    => $address,
-            'resultats' => $resultats,
+            'address'   => $address,
+            'category'     => $category,
+            'resultats' => $resultatss,
         ));
     }
 

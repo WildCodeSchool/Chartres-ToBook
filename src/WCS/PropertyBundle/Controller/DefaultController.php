@@ -4,7 +4,7 @@ namespace WCS\PropertyBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use UserBundle\Entity\UserListe;
+use UserBundle\Entity\User;
 
 class DefaultController extends Controller
 {

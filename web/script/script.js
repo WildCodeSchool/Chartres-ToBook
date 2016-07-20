@@ -121,6 +121,63 @@ function geolocate() {
     });
     autocomplete.setBounds(circle.getBounds());
   });
+<<<<<<< HEAD
+=======
+
+  infowindow = new google.maps.InfoWindow();
+
+  var service = new google.maps.places.PlacesService(map);
+
+  if(choice == 'hotels'){
+      marker_path = "../../img/marker_map/hotels.png";
+      service.nearbySearch({
+           location: myLatLng,
+           radius: 10000,
+           types: ['lodging']
+           }, callback);
+
+    }else if(choice == 'chambreHotes'){
+      marker_path = "../../img/marker_map/hotels.png";
+      service.nearbySearch({
+           location: myLatLng,
+           radius: 10000,
+           types: ['lodging']
+           }, callback);
+
+    }else if(choice == 'gites'){
+      marker_path = "../../img/marker_map/hotels.png";
+      service.nearbySearch({
+           location: myLatLng,
+           radius: 10000,
+           types: ['lodging']
+           }, callback);
+
+    }else if(choice == 'restaurants'){
+      marker_path = "../../img/marker_map/restaurant64.png";
+      service.nearbySearch({
+           location: myLatLng,
+           radius: 10000,
+           types: ['restaurant']
+           }, callback);
+
+    }else if(choice == 'musees'){
+      marker_path = "../../img/marker_map/museum64.png";
+      service.nearbySearch({
+           location: myLatLng,
+           radius: 10000,
+           types: ['museum']
+           }, callback);
+    }
+}
+
+function callback(results, status) {
+  if (status === google.maps.places.PlacesServiceStatus.OK) {
+    var resultat = JSON.stringify(results);
+    localStorage.setItem('resultat',resultat);
+    for (var i = 0; i < results.length; i++) {
+      createMarker(results[i]);
+    }
+>>>>>>> 8bf9339a3107fcee28f636948dbb5b34afd785e1
   }
 }
 jQuery(document).ready(function() {
@@ -142,6 +199,18 @@ jQuery(document).ready(function() {
     var choice = selectType.options[selectType.selectedIndex].getAttribute('value');
     localStorage.setItem('choice',choice);
   });
+<<<<<<< HEAD
+=======
+  
+}
+
+$(document).ready(function() {
+
+    // Quand on mes le focus dans le champs recherche on vide le localstorage. 
+    $('#autocomplete').focus(function() {
+    localStorage.clear();
+    });
+>>>>>>> 8bf9339a3107fcee28f636948dbb5b34afd785e1
 
   $("#form").submit(function(event) {
   event.preventDefault();

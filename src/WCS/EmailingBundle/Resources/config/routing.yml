@@ -1,0 +1,7 @@
+wcs_emailing_homepage:
+    path:     /{_locale}/emailing/
+    defaults: { _controller: WCSEmailingBundle:Default:index }
+
+wcs_emailing_import:
+    path:     /{_locale}/emailing/import/{profCode}
+    defaults: { _controller: WCSEmailingBundle:Default:importCSV }

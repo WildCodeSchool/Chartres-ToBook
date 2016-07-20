@@ -24,7 +24,8 @@ class UserImages
     /**
      * @var integer
      *
-     * @ORM\Column(name="usim_user_id", type="bigint", nullable=false)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="usim_user_id", referencedColumnName="id")
      */
     private $usimUserId;
 

@@ -16,10 +16,15 @@
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">
 
         {% block javascript %}
+<<<<<<< HEAD
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
         <script type="text/javascript" src="{{ asset('script/jquery.js') }}"></script>
+=======
+            
+>>>>>>> 8bf9339a3107fcee28f636948dbb5b34afd785e1
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRBSgtiopCCg-UWOSzjqE1VN6KjSxTgss&signed_in=true&libraries=places" async defer></script>
+        <script type="text/javascript" src="{{ asset('script/jquery.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/script.js') }}"></script>
 
         <script type="text/javascript" src="{{ asset('script/jquery-1.11.0.min.js') }}"></script>
@@ -29,7 +34,7 @@
         <script type="text/javascript" src="{{ asset('script/skel.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/util.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/main.js') }}"></script>
-        
+        <script type="text/javascript" src="{{ asset('script/jquery.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/bootstrap.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/clubhouse_jquery.jcarousel.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/clubhouse_jcarousel.connected-carousels.js') }}"></script>
@@ -41,8 +46,6 @@
         {% block navbar %}{% include ('TobookBundle:navbar:navbar.html.twig') %}{% endblock %}
         
         {% block ariane %}{% endblock %}
-
-        </div>
 
         {% block body %}{% endblock %}
 

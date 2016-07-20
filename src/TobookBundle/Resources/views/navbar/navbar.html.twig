@@ -6,17 +6,17 @@
         <form method="POST" action="{{ path('changeLocale') }}">
             <button class="langdevise">Langue &nbsp;</button>
             <select name="langue">
-                <option>fr
-                <option>en
-                <option>de
+                <option {% if app.request.locale == 'fr' %}selected{% endif %}>fr</option>
+                <option {% if app.request.locale == 'en' %}selected{% endif %}>en</option>
+                <option {% if app.request.locale == 'de' %}selected{% endif %}>de</option>               
             </select>
 
             <span class="barre">&nbsp; &nbsp; | &nbsp; &nbsp;</span>
             <button class="langdevise">Devise &nbsp;</button>
             <select>
-            <option>EUR</option>
-            <option>GBP</option>
-            <option>USD</option>
+                <option>EUR</option>
+                <option>GBP</option>
+                <option>USD</option>
             </select>
         </form>
     </span>
@@ -25,7 +25,7 @@
         <img src="{{ asset('img/picto/icon-facebook.png') }}" alt="Logo Facebook" title="Suivez-nous sur Facebook" class="vertialimid" />
     </a>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <span>{{ 'Bienvenue'|trans }} {{ app.user.userPrenom }} {{ app.user.userNom }}</span>
+        <span>{{ 'Bienvenu'|trans }} {{ app.user.userPrenom }} {{ app.user.userNom }}</span>
     {% else %}
         <a href="{{ path('user_register') }}"><span>{{ "S'INSCRIRE"|trans }}</span></a>
         <a href="{{ path('user_login') }}"><span>{{ 'SE CONNECTER'|trans }}</span></a>
@@ -43,6 +43,9 @@
             <li><a href='{{ path('profil_edit', { 'id': app.user.id }) }}'>{{ 'Ma page'|trans }}</a></li>
             <li><a href='#'>{{ 'Mes Favoris'|trans }}</a></li>
             <li><a href='#'>{{ 'Mes paramètres'|trans }}</a></li>
+            {% if app.user.userProf == 1 %}
+                <li><a href="{{ path('wcs_emailing_homepage') }}">{{ 'Emailing'|trans }}</a></li>
+            {% endif %}
         </ul>
         <ul class="actions vertical" style="list-style:none;">
             <li><a href="{{ path('fos_user_security_logout') }}" class="btn btnsansrien button fit"><span>{{ 'SE DECONNECTER'|trans }}</span></a></li>
