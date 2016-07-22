@@ -142,10 +142,16 @@ class DefaultController extends Controller
         $sujet = $request->request->get('sujet');
         $destinataire = $request->request->get('destinataire');
 
+		// $dest = '\''.str_replace(',', '\', \'', $destinataire).'\'';
+		$dest = explode(',', $destinataire);
+
+
+        
+        var_dump($dest);
 	    $message = \Swift_Message::newInstance()
 	        ->setSubject($sujet)
 	        ->setFrom('send@example.com')
-	        ->setTo($destinataire)
+	        ->setTo($dest)
 	        ->setBody($message);
 	    $this->get('mailer')->send($message);
 
