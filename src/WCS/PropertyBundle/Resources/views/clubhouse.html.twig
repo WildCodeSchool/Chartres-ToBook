@@ -41,11 +41,11 @@
 		        <span>
 		        	<!-- Coeurs (actuellement géré avec les étoiles) -->
 		            {% for i in 1..5 %}
-		                <a href="{{ path('rating-property', { 'profCode': etablissement.profCode, 'note': i }) }}" title="Voter {{i}} coeur(s)">
+		                <a href="{{ path('rating-property', { 'profCode': etablissement.profCode, 'note1': i, 'note2': i, 'note3': i }) }}" title="Voter {{i}} coeur(s)">
 		                {% if i <= etablissement.profEtoiles %}
-		                    	<img src="{{ asset('img/picto/jauge_coeur_1.png') }}" alt="Note" />
+		                    	<img src="{{ asset('img/picto/jauge_coeur_1.png') }}" alt="Coeur allumé" />
 		                {% else %}
-		                    <img src="{{ asset('img/picto/jauge_coeur_0.png') }}" alt="Note" />
+		                    <img src="{{ asset('img/picto/jauge_coeur_0.png') }}" alt="Coeur éteind" />
 		                {% endif %}
 		                </a>
 		            {% endfor %}
