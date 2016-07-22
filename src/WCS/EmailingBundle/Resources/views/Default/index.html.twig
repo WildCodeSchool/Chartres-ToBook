@@ -38,14 +38,20 @@
                 {% endfor %}
             </tbody>
         </table>
-        <input id="BNom" type="button" value="{{ "Valider"|trans }}" />
+        <input id="suppr" type="button" value="{{ "Supprimer sélection"|trans }}" />
+        <input id="envoi" type="button" value="{{ "Valider"|trans }}" />
     </div> <!--container-->
 	
 
 
 
 {% endfor %}
-
+<style>
+/*display none du nb de sélection du tableau, affichage erroné quand on fait un select avec shift*/
+.dataTables_info span {
+    display: none;
+}
+</style>
 <script>
 $(document).ready(function() {
     
@@ -59,25 +65,13 @@ $(document).ready(function() {
         paging:         false,
     } );
 
-    // fonction permettant de taguer à selected la class du tr à chaque clic
-    // var arraymsg = [];
-    // $('tr').click(function() {
-    //     idtr = this.id;
-    //     var datainfo = $('#'+idtr).data('info');
-    //     if ($(this).hasClass('selected')) {
-    //         $(this).removeClass('selected');
-    //         arraymsg.pop(datainfo);
-    //     }else {
-    //         $(this).addClass('selected');
-    //         arraymsg.push(datainfo);
-    //     }
-
-    // });
     var arraymsg = [];
     var lastSelected;
     $('tr').click(function(event) {
         
+        // récupère l'id du tr sélectionné
         idtr = this.id;
+        // récupère le data-info du tr sélectionné
         var datainfo = $('#'+idtr).data('info');
         var tableRow = $(this).closest('tr').prevAll('tr').length + 1;
 
@@ -88,34 +82,26 @@ $(document).ready(function() {
             var table = $('#clientTable');
             var start = Math.min(tableRow, lastSelected);
             var end = Math.max(tableRow, lastSelected);
-            for (var i = start+1; i < end; i++) {
+            for (var i = start+1; i < end+1; i++) {
                 table.find('tr').eq(i).addClass('selected');
-                // var datainfoloop = $(table.find('tr').eq(i)..data('info'));
-                // arraymsg.push(datainfoloop); 
+                arraymsg.push(table.find('tr').eq(i).data('info')); 
             } 
         } else {
             $(this).addClass('selected');
             arraymsg.push(datainfo);
             lastSelected = $(this).closest('tr').prevAll('tr').length + 1;       
         }
-
-        
-        // if (event.shiftKey) { 
-            // var table = $('tr');
-            // var start = Math.min(tableRow, lastSelected);
-            // var end = Math.max(tableRow, lastSelected);
-            // alert(start);
-        //     table.find('tr:gt('+(start-1)+'):lt('+(end)+')').addClass('selected');
-        // }
-        // else {
-
-            // lastSelected = $(this).closest("tr").prevAll("tr").length + 1;
-        // }
     });
 
     // fonction permettant d'envoyer la sélection des lignes vers l'email
-    $('#BNom').click(function() {
+    $('#envoi').click(function() {
         alert(arraymsg.join("\n"));
+    });
+    // fonction permettant la suppression de la sélection
+    $('#suppr').click(function() {
+        var table = $('#clientTable');
+        table.find('tr').removeClass('selected');
+        arraymsg = [];
     });
 
 } );
