@@ -10,25 +10,22 @@
 	</div>
 
     <div class="container">
-        <table class="table table-striped">
-
+        <table id="clientTable" class="display" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th>{{ "Email"|trans }}</th>
                     <th>{{ "Nom"|trans }}</th>
-                    <th>{{ "Pr&eacute;nom"|trans }}</th>
+                    <th>{{ "Prénom"|trans }}</th>
                     <th>{{ "Adresse"|trans }}</th>
                     <th>{{ "Ville"|trans }}</th>
                     <th>{{ "Pays"|trans }}</th>
                     <th>{{ "Genre"|trans }}</th>
-                    <th>{{ "CSP"|trans }}</th>                    
+                    <th>{{ "CSP"|trans }}</th>
                 </tr>
             </thead>
-
-            {% for client in client if client.emaiProfId == etablissement.usprProfId %}
-                <tbody>
-
-                    <tr>
+            <tbody>    
+                {% for key, client in client if client.emaiProfId == etablissement.usprProfId %}
+                    <tr id="{{ key }}" data-info="{{ client.emaiEmail }}">
                         <td>{{ client.emaiEmail }}</td> <!--email-->
                         <td>{{ client.emaiNom }}</td> <!--nom-->
                         <td>{{ client.emaiPrenom }}</td> <!--prénom-->
@@ -38,12 +35,78 @@
                         <td>{{ client.emaiGenre }}</td> <!--genre-->
                         <td>{{ client.emaiCSP }}</td> <!--csp-->
                     </tr>
-                </tbody>
-            {%  endfor %}
-
-        </table> <!--top table-->
+                {% endfor %}
+            </tbody>
+        </table>
+        <input id="suppr" type="button" value="{{ "Supprimer sélection"|trans }}" />
+        <input id="envoi" type="button" value="{{ "Valider"|trans }}" />
     </div> <!--container-->
 	
-{% endfor %}    
+
+
+
+{% endfor %}
+<style>
+/*display none du nb de sélection du tableau, affichage erroné quand on fait un select avec shift*/
+.dataTables_info span {
+    display: none;
+}
+</style>
+<script>
+$(document).ready(function() {
+    
+    // stylisation du datatable avec selection multiple sans pagination et avec scroll
+    $('#clientTable').DataTable( {
+        select: {
+            style: 'multi'
+        },
+        scrollY:        "200px",
+        scrollCollapse: true,
+        paging:         false,
+    } );
+
+    var arraymsg = [];
+    var lastSelected;
+    $('tr').click(function(event) {
+        
+        // récupère l'id du tr sélectionné
+        idtr = this.id;
+        // récupère le data-info du tr sélectionné
+        var datainfo = $('#'+idtr).data('info');
+        var tableRow = $(this).closest('tr').prevAll('tr').length + 1;
+
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+            arraymsg.pop(datainfo);
+        } else if (event.shiftKey) {
+            var table = $('#clientTable');
+            var start = Math.min(tableRow, lastSelected);
+            var end = Math.max(tableRow, lastSelected);
+            for (var i = start+1; i < end+1; i++) {
+                table.find('tr').eq(i).addClass('selected');
+                arraymsg.push(table.find('tr').eq(i).data('info')); 
+            } 
+        } else {
+            $(this).addClass('selected');
+            arraymsg.push(datainfo);
+            lastSelected = $(this).closest('tr').prevAll('tr').length + 1;       
+        }
+    });
+
+    // fonction permettant d'envoyer la sélection des lignes vers l'email
+    $('#envoi').click(function() {
+        alert(arraymsg.join("\n"));
+    });
+    // fonction permettant la suppression de la sélection
+    $('#suppr').click(function() {
+        var table = $('#clientTable');
+        table.find('tr').removeClass('selected');
+        arraymsg = [];
+    });
+
+} );
+
+</script>
+
 
 {% endblock %}
