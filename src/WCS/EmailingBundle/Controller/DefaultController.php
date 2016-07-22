@@ -132,5 +132,29 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+    public function sendmailAction(request $request)
+	{
+
+		$em = $this->getDoctrine()->getManager();
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $message = $request->request->get('message');
+        $sujet = $request->request->get('sujet');
+        $destinataire = $request->request->get('destinataire');
+
+	    $message = \Swift_Message::newInstance()
+	        ->setSubject($sujet)
+	        ->setFrom('send@example.com')
+	        ->setTo($destinataire)
+	        ->setBody($message);
+	    $this->get('mailer')->send($message);
+
+	    return $this->redirect($this->generateUrl('wcs_emailing_homepage'));
+	}
+
+	public function createmailAction()
+    {
+        return $this->render('WCSEmailingBundle:Emails:create.html.twig');
+    }
  
 }

@@ -5,3 +5,11 @@ wcs_emailing_homepage:
 wcs_emailing_import:
     path:     /{_locale}/emailing/import/{profCode}
     defaults: { _controller: WCSEmailingBundle:Default:importCSV }
+
+send_mail:
+    path:     /{_locale}/emailing/send
+    defaults: { _controller: WCSEmailingBundle:Default:sendmail }
+
+create_mail:
+    path:     /{_locale}/emailing/create
+    defaults: { _controller: WCSEmailingBundle:Default:createmail }

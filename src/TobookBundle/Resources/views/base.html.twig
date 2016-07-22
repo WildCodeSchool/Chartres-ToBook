@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>ToBook</title>
+        <title>{% block title %}{% endblock %} - ToBook</title>
 
         <link rel="icon" type="image/x-icon" href="{{ asset('img/picto/logo-tobook.png') }}" />
 
@@ -14,6 +14,9 @@
         <link type="text/css" rel="stylesheet" href="{{ asset('css/jcarousel.connected-carousels.css') }}" />
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/DataTables/datatables.min.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/DataTables/jquery.dataTables.min.css') }}"/>
 
         {% block javascript %}
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
@@ -30,11 +33,12 @@
         <script type="text/javascript" src="{{ asset('script/skel.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/util.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/main.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('script/jquery.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/bootstrap.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/clubhouse_jquery.jcarousel.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/clubhouse_jcarousel.connected-carousels.js') }}"></script>
         <script type="text/javascript" src="{{ asset('script/clubhouse_onglets.js') }}"></script>
+
+
         {% endblock javascript %}
   
     </head>
@@ -46,6 +50,7 @@
         {% block body %}{% endblock %}
 
         <div class="col-md-12 footer">
+        <script type="text/javascript" src="{{ asset('script/DataTables/datatables.min.js') }}"></script>
         </div>
     </body>
 </html>
