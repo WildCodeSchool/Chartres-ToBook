@@ -8,7 +8,7 @@ tobook_redirect:
     defaults: { _controller: TobookBundle:Default:redirect }
 
 tobook_search:
-    path:     /search
+    path:     /{_locale}/search
     defaults: { _controller: TobookBundle:Default:search }
 
 changeLocale:

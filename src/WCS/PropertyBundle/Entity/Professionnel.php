@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Professionnel
  *
- * @ORM\Table(name="professionnel")
+ * @ORM\Table(name="professionnel", uniqueConstraints={@ORM\UniqueConstraint(name="prof_code", columns={"prof_code"})})
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="WCS\PropertyBundle\Repository\ProfessionnelRepository")
  */

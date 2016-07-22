@@ -15,6 +15,9 @@ var zoom = 14;
 var address;
 // On declare une variable pour stocker le type de recherche
 var choice;
+// On declare une variable pour stocker le lien vers img
+var assetMarker;
+var assetEtablissement;
 // On test si des coordonnées son disponible sinon on lance la geolocalisation
 if (myLatLng === undefined || myLatLng == null && navigator.geolocation) {
 navigator.geolocation.getCurrentPosition(
@@ -86,7 +89,7 @@ function affichageMap(results){
       position: LatLong,
       map: map,
       animation: google.maps.Animation.DROP,
-      icon: "../../web/img/marker_map/hotels.png"
+      icon: assetMarker + "marker_map/hotels.png"
       });
     }, timeout);
   }
@@ -121,70 +124,69 @@ function geolocate() {
     });
     autocomplete.setBounds(circle.getBounds());
   });
-<<<<<<< HEAD
-=======
-
-  infowindow = new google.maps.InfoWindow();
-
-  var service = new google.maps.places.PlacesService(map);
-
-  if(choice == 'hotels'){
-      marker_path = "../../img/marker_map/hotels.png";
-      service.nearbySearch({
-           location: myLatLng,
-           radius: 10000,
-           types: ['lodging']
-           }, callback);
-
-    }else if(choice == 'chambreHotes'){
-      marker_path = "../../img/marker_map/hotels.png";
-      service.nearbySearch({
-           location: myLatLng,
-           radius: 10000,
-           types: ['lodging']
-           }, callback);
-
-    }else if(choice == 'gites'){
-      marker_path = "../../img/marker_map/hotels.png";
-      service.nearbySearch({
-           location: myLatLng,
-           radius: 10000,
-           types: ['lodging']
-           }, callback);
-
-    }else if(choice == 'restaurants'){
-      marker_path = "../../img/marker_map/restaurant64.png";
-      service.nearbySearch({
-           location: myLatLng,
-           radius: 10000,
-           types: ['restaurant']
-           }, callback);
-
-    }else if(choice == 'musees'){
-      marker_path = "../../img/marker_map/museum64.png";
-      service.nearbySearch({
-           location: myLatLng,
-           radius: 10000,
-           types: ['museum']
-           }, callback);
-    }
-}
-
-function callback(results, status) {
-  if (status === google.maps.places.PlacesServiceStatus.OK) {
-    var resultat = JSON.stringify(results);
-    localStorage.setItem('resultat',resultat);
-    for (var i = 0; i < results.length; i++) {
-      createMarker(results[i]);
-    }
->>>>>>> 8bf9339a3107fcee28f636948dbb5b34afd785e1
   }
 }
-jQuery(document).ready(function() {
+function showEtablissementMarker(){
+  assetMarker = document.getElementById('assetMarker').getAttribute('src');
+  $.ajax({
+      url: Routing.generate('showMap'),
+      type: 'POST',
+      dataType: "json",
+      data: {'lat': latitudeSearch, 'lng': longitudeSearch },
+      success: function (results){
 
+        affichageMap(results);
+
+      }
+    });
+}
+function showEtablissementDetail(){
+  assetEtablissement = document.getElementById('assetEtablissement').getAttribute('src');
+  $.ajax({
+      url: Routing.generate('Etablissement'),
+      type: 'POST',
+      dataType: "json",
+      data: {'lat': latitudeSearch, 'lng': longitudeSearch },
+      success: function (results){
+
+        affichageResultats(results);
+
+      }
+    });
+}
+function affichageResultats (results) {
+
+  $('#two > section').remove();
+
+  for (var i = 0; i < results.length; i++) {
+    var detail = results[i];
+    $('#two').append("<section class='col-md-12 search-third-div border-1'>"
+            +"<div class='col-md-5 img-div row'>"
+            +"<a href=''>"
+            +"<img class='img-style-1' src=" + assetEtablissement + "suite-romantique.jpg />"
+            +"</a>"
+            +"</div>"
+            +"<div class='col-md-6 col-md-offset-1 text-div'>"
+            +"<h3><a href=''>" + detail.name + "</a></h3>"
+            +"<p class='descriptif_hotel'>" + detail.description + "</p>"
+            +"<div id='prix'>"
+            +"<h2 id='elements'>"
+            +"<img src='http://localhost/Tobook-Chartres/web/img/jauge_coeur_1.png' title='Note' >"
+            +"</h2>"
+            +"<p class='infoprix'>à partir de: <span>" + detail.prixmini + "€</span></p>"
+            +"<a href='club-house.php?code=capricorne' class='button detail'>Plus de détails</a>"
+            +"</div>"
+            +"<p class='vue'>Evalué par <span>25</span> personnes</p>"
+            +"</div>"
+            );
+          
+  }    
+}
+jQuery(document).ready(function() {
+  
   // Quand on mes le focus dans le champs recherche on vide le localstorage. 
   $('#autocomplete').focus(function() {
-  $(this).val('');
+  $(this).val('');  
   });
 
   $('#category').blur(function() {
@@ -194,37 +196,17 @@ jQuery(document).ready(function() {
   });
 
   $('#submitForm').click(function() {
-  
+    showEtablissementDetail();
     var selectType = document.getElementById("category"); 
     var choice = selectType.options[selectType.selectedIndex].getAttribute('value');
     localStorage.setItem('choice',choice);
   });
-<<<<<<< HEAD
-=======
-  
-}
-
-$(document).ready(function() {
-
-    // Quand on mes le focus dans le champs recherche on vide le localstorage. 
-    $('#autocomplete').focus(function() {
-    localStorage.clear();
-    });
->>>>>>> 8bf9339a3107fcee28f636948dbb5b34afd785e1
 
   $("#form").submit(function(event) {
   event.preventDefault();
   latitudeSearch = parseFloat(lat);
   longitudeSearch = parseFloat(lng);
-    $.ajax({
-      url: Routing.generate('mapResult'),
-      type: 'POST',
-      dataType: "json",
-      data: {'lat': latitudeSearch, 'lng': longitudeSearch },
-      success: function (results){
-        affichageMap(results);
-
-      }
-    });
+    showEtablissementMarker();
+    showEtablissementDetail();
     });
 });

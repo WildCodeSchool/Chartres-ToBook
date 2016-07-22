@@ -11,9 +11,9 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\HttpFoundation\Response;
 
-class ShowMapController extends Controller
+class ShowEtablissementController extends Controller
 {
-    public function ShowMapAction(Request $request)
+    public function EtablissementAction(Request $request)
     {
 
         if($request->isXmlHttpRequest())
@@ -21,7 +21,7 @@ class ShowMapController extends Controller
 
             $latitude = $request->request->get('lat');
             $longitude = $request->request->get('lng');
-            $radius = 10;
+            $radius = 5;
         
             $encoders = array(new XmlEncoder(), new JsonEncoder());
             $normalizers = array(new GetSetMethodNormalizer());
@@ -31,18 +31,17 @@ class ShowMapController extends Controller
 
             $repository = $em->getRepository('WCSPropertyBundle:Professionnel');
 
-            $LatLng = $repository->getLatLng($latitude, $longitude, $radius);
+            $Detail = $repository->getDetail($latitude, $longitude, $radius);
             
-            $resultat = $serializer->serialize( $LatLng, 'json');
+            $resultat = $serializer->serialize( $Detail, 'json');
 
             $response = new Response($resultat);
 
             $response->headers->set('Content-Type', 'application/json');
-
+            
             return $response;
 
         }
     }
     
 }
-        

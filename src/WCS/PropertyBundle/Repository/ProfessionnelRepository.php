@@ -25,4 +25,24 @@ class ProfessionnelRepository extends \Doctrine\ORM\EntityRepository
     
         return $qb->getQuery()->getResult();    
     }
+
+    public function getDetail($latitude, $longitude, $radius)
+    {
+
+        $qb = $this->createQueryBuilder('Detail');
+
+        $qb->select('Detail.profLatitude as lat',
+                    'Detail.profLongitude as lng',
+                    'Detail.profNom as name',
+                    'Detail.profDescriptif as description',
+                    'Detail.profEtoiles as etoile',
+                    'Detail.profPrixMini as prixmini')
+            ->addSelect('( 6371 * acos(cos(radians(' . $latitude . ')) * cos( radians( Detail.profLatitude ) ) * cos( radians( Detail.profLongitude ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( Detail.profLatitude ) ) ) ) as radius')
+            ->having('radius < :radius')
+            ->orderBy('radius', 'ASC')
+            ->setParameter('radius', $radius);
+        ;
+    
+        return $qb->getQuery()->getResult();    
+    }
 }

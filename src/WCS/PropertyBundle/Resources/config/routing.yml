@@ -6,8 +6,14 @@ putFavorites:
     path:     /{_locale}/clubhouse/{profCode}/favorites
     defaults: {_controller: WCSPropertyBundle:Default:favoris }
 
-mapResult:
-    path:     /zmapResult
+showMap:
+    path:     /fr/ShowMap
     defaults: {_controller: WCSPropertyBundle:ShowMap:ShowMap }
+    options:
+        expose: true
+
+Etablissement:
+    path:     /fr/Etablissement
+    defaults: {_controller: WCSPropertyBundle:ShowEtablissement:Etablissement }
     options:
         expose: true
