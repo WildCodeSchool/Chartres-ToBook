@@ -27,9 +27,7 @@ class DefaultController extends Controller
 		// var_dump($client);
 		// echo('</pre>');
         
-        $CSVFile = new EmailUserListing();
-        $form = $this->createForm(EmailUserListingType::class, $CSVFile);
-        $form->handleRequest($request);
+        $form = $this->createForm(EmailUserListingType::class);
 
         return $this->render('WCSEmailingBundle:Default:index.html.twig', array(
         	'form' => $form->createView(),
