@@ -135,15 +135,17 @@ class DefaultController extends Controller
 	{
 
 		$em = $this->getDoctrine()->getManager();
-        $user = $this->container->get('security.context')->getToken()->getUser();
+
+		//On récupère les inputs de la vue
+
         $message = $request->request->get('message');
         $sujet = $request->request->get('sujet');
         $destinataire = $request->request->get('destinataire');
 
-		// $dest = '\''.str_replace(',', '\', \'', $destinataire).'\'';
+        //On convertit le string que nous retourne l'input destinataire en un tableau contenant chaque adresse mail
 		$dest = explode(',', $destinataire);
 
-        var_dump($dest);
+		//On utilise chaque champ précédemment 
 	    $message = \Swift_Message::newInstance()
 	        ->setSubject($sujet)
 	        ->setFrom('send@example.com')

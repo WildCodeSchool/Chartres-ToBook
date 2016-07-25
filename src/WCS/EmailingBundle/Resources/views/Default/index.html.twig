@@ -64,6 +64,47 @@
         
     </div> <!--container-->
 
+    <div class="container">
+      <fieldset>
+          <form class="well form-horizontal" id="contact_form" method="post" action="{{ path ('send_mail') }}">
+            <div class="form-group">
+              <label class="col-md-4 control-label">Destinataire</label>
+              <div class="col-md-4 inputGroupContainer">
+                  <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input id ="{{ etablissement.usprProfId.profCode }}" class="form-control"  type="text" name="destinataire" placeholder="Liste des destinataires" value="">
+                      <span class="input-group-addon"><a data-toggle="modal" data-target="#modal-warning"><i class="glyphicon glyphicon-warning-sign"></i></a></span>
+                  </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Sujet</label>  
+              <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                  <input class="form-control" type="text" name="sujet" placeholder="Sujet">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Contenu du mail</label>  
+              <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                  <textarea class="form-control" name="message" placeholder="Contenu du mail"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label"></label>
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-warning" >Envoyer<span class="glyphicon glyphicon-send"></span></button>
+              </div>
+            </div>
+          </form>
+        </fieldset>
+      </div>
+
     <!-- Modal -->
     <div class="modal fade" id="modalAjoutClient" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -85,13 +126,6 @@
             </div>
         </div>
     </div>
-
-    <form method="post" action="{{ path ('send_mail') }}">
-      <input id ="{{ etablissement.usprProfId.profCode }}" name="destinataire" placeholder="destinataire" value="">
-      <input name="sujet" placeholder="sujet">
-      <textarea name="message" placeholder="contenu du message"></textarea>
-      <input type="submit">
-    </form>
 
 <script>
 $(document).ready(function() {
@@ -172,5 +206,22 @@ $(document).ready(function() {
 } );
 
 </script>
+
+<div class="modal fade" id="modal-warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-warning">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Attention</h4>
+      </div>
+      <div class="modal-body">
+        Veuillez bien respecter le format suivant pour l'écriture des destinataire : mail1@test.com,mail2@test.com,mail3@test.com
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
