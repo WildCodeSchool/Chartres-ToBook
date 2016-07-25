@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use WCS\EmailingBundle\Form\EmailUserListingType;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 use WCS\EmailingBundle\Entity\EmailUserListing;
 
@@ -133,7 +134,7 @@ class DefaultController extends Controller
 
     public function sendmailAction(request $request)
 	{
-
+		$session = new Session();
 		$em = $this->getDoctrine()->getManager();
 
 		//On récupère les inputs de la vue
@@ -152,6 +153,8 @@ class DefaultController extends Controller
 	        ->setTo($dest)
 	        ->setBody($message);
 	    $this->get('mailer')->send($message);
+
+	    $session->getFlashBag()->add('infos', $this->get('translator')->trans('Mails envoyé'));
 
 	    return $this->redirect($this->generateUrl('wcs_emailing_homepage'));
 	}

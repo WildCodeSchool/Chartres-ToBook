@@ -49,6 +49,11 @@
 
         {% block body %}{% endblock %}
 
+        {% for message in app.session.flashbag.get('infos') %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %} 
         <div class="col-md-12 footer">
         <script type="text/javascript" src="{{ asset('script/DataTables/datatables.min.js') }}"></script>
         </div>
