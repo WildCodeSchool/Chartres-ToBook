@@ -2,15 +2,32 @@
 
 {% block body %}
 
+<style>
+/*display none du nb de sélection du tableau, affichage erroné quand on fait un select avec shift*/
+.dataTables_info span {
+    display: none;
+}
+/*affichage de la modale*/
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: 650px;
+        margin: 80px auto;
+    }
+}
+#imgModal {
+    width: 600px;
+}
+
+</style>
+
 {% for etablissement in liste_etablissements %}
 
 	<div>
-		{{ etablissement.usprProfId.profNom }}</br>
-		<a href="{{ path('wcs_emailing_import', { 'profCode': etablissement.usprProfId.profCode }) }}">{{ "Ajouter des clients (fichier csv)"|trans }}</a>
+		<h2>{{ etablissement.usprProfId.profNom }}</h2></br>
 	</div>
 
     <div class="container">
-        <table id="clientTable" class="display" width="100%" cellspacing="0">
+        <table id="" class="display" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th>{{ "Email"|trans }}</th>
@@ -38,40 +55,58 @@
                 {% endfor %}
             </tbody>
         </table>
-        <input id="suppr" type="button" value="{{ "Supprimer sélection"|trans }}" />
-        <input id="envoi" type="button" value="{{ "Valider"|trans }}" />
+
+        <input id="suppr" type="button" class="btn btn-danger" value="{{ "Supprimer sélection"|trans }}" />
+        <!-- Button trigger modal -->
+        <button type="button" class="btn pull-right btn-primary" data-toggle="modal" data-target="#modalAjoutClient" data-profcode="{{ etablissement.usprProfId.profCode }}">{{ "Ajout de clients"|trans }}</button>
+        <br />
+        <input id="envoi" type="button" class="btn btn-primary" value="{{ "Envoi vers email"|trans }}" />
+        
     </div> <!--container-->
-	
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalAjoutClient" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="modalLabel">Ajout de nouveaux clients</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form, {'method': 'post', 'action': path('wcs_emailing_import', { 'profCode': etablissement.usprProfId.profCode })}) }}
+                        {{ form_row(form.emaiCSVFile) }}
+                        <input type="submit" value="Upload" class="btn btn-success"/>
+                    {{ form_end(form) }}
+                </div>
+                <h5>{{ "Exemple de fichier à charger"|trans }} (<a href="{{ asset('downloads/exCsvTab.csv') }}">{{ "Télécharger un exemple"|trans }}</a>)</h5>
+                <img id="imgModal" src="{{ asset('img/ex_csv_tab.png') }}" title="exCsvTab" />
+            </div>
+        </div>
+    </div>
+
     <form method="post" action="{{ path ('send_mail') }}">
       <input id ="{{ etablissement.usprProfId.profCode }}" name="destinataire" placeholder="destinataire" value="">
-      <input name="sujet" placeholder "sujet">
+      <input name="sujet" placeholder="sujet">
       <textarea name="message" placeholder="contenu du message"></textarea>
       <input type="submit">
     </form>
 
-<style>
-/*display none du nb de sélection du tableau, affichage erroné quand on fait un select avec shift*/
-.dataTables_info span {
-    display: none;
-}
-</style>
-
 <script>
 $(document).ready(function() {
     
-    // stylisation du datatable avec selection multiple sans pagination et avec scroll
-    $('#clientTable').DataTable( {
-        select: {
-            style: 'multi'
-        },
-        scrollY:        "200px",
-        scrollCollapse: true,
-        paging:         false,
-    } );
-
     var profCode = "{{ etablissement.usprProfId.profCode }}";
+    var locale = "{{ app.request.getLocale() }}";
     var arraymsg = [];
     var lastSelected;
+
+    $('#modalAjoutClient').on('show.bs.modal', function(e) {
+        var profCode = $(e.relatedTarget).data('profcode');
+        $(e.currentTarget).find('.modal-body form').removeAttr('action');
+        $(e.currentTarget).find('.modal-body form').attr('action', Routing.generate('wcs_emailing_import', {'profCode': profCode, '_locale': locale}));
+    });
+
     $('tr').click(function(event) {
         
         // récupère l'id du tr sélectionné
@@ -98,13 +133,6 @@ $(document).ready(function() {
         }
     });
 
-    // fonction permettant d'envoyer la sélection des lignes vers l'email (join permet de passer d'un tableau à un string)
-    $('#envoi').click(function() {
-        $("#"+profCode).val( function( index, val ) {
-            return val + arraymsg.join();
-        });
-    });
-
     // fonction permettant la suppression de la sélection
     $('#suppr').click(function() {
         var table = $('#clientTable');
@@ -112,10 +140,37 @@ $(document).ready(function() {
         arraymsg = [];
     });
 
+    // fonction permettant d'envoyer la sélection des lignes vers l'email (join permet de passer d'un tableau à un string)
+    $('#envoi').click(function() {
+        $("#"+profCode).val( function( index, val ) {
+            return "";
+        });
+        $("#"+profCode).val( function( index, val ) {
+            return val + arraymsg.join();
+        });
+    });
+
 } );
 
 </script>
 
 {% endfor %}
+
+<script>
+$(document).ready(function() {
+    
+    // stylisation du datatable avec selection multiple sans pagination et avec scroll
+    $('table.display').DataTable( {
+        select: {
+            style: 'multi'
+        },
+        scrollY:        "200px",
+        scrollCollapse: true,
+        paging:         false,
+    } );
+
+} );
+
+</script>
 
 {% endblock %}

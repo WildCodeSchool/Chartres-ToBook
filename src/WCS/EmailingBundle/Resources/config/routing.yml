@@ -5,6 +5,8 @@ wcs_emailing_homepage:
 wcs_emailing_import:
     path:     /{_locale}/emailing/import/{profCode}
     defaults: { _controller: WCSEmailingBundle:Default:importCSV }
+    options:
+        expose: true
 
 send_mail:
     path:     /{_locale}/emailing/send
