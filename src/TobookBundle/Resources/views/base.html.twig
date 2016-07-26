@@ -15,47 +15,46 @@
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">
 
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/DataTables/datatables.min.css') }}"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/DataTables/jquery.dataTables.min.css') }}"/>
+        {% block extraCSS %}{% endblock extraCSS %}
 
-        {% block javascript %}
-        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-        <script type="text/javascript" src="{{ asset('script/jquery.js') }}"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRBSgtiopCCg-UWOSzjqE1VN6KjSxTgss&signed_in=true&libraries=places" async defer></script>
-        <script type="text/javascript" src="{{ asset('script/jquery.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('script/script.js') }}"></script>
-
-        <script type="text/javascript" src="{{ asset('script/jquery-1.11.0.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('script/jquery.leanModal.min.js') }}"></script> 
-        <script type="text/javascript" src="{{ asset('script/jquery.dependClass.js') }}"></script> 
-        <script type="text/javascript" src="{{ asset('script/jquery.scrolly.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('script/skel.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('script/util.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('script/main.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('script/bootstrap.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('script/clubhouse_jquery.jcarousel.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('script/clubhouse_jcarousel.connected-carousels.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('script/clubhouse_onglets.js') }}"></script>
-
-
-        {% endblock javascript %}
-  
     </head>
     <body>
-        {% block navbar %}{% include ('TobookBundle:navbar:navbar.html.twig') %}{% endblock %}
+        {% block navbar %}{% include ('TobookBundle:navbar:navbar.html.twig') %}
+            {% for message in app.session.flashbag.get('infos') %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %} 
+        {% endblock navbar %}
         
-        {% block ariane %}{% endblock %}
+        {% block ariane %}{% endblock ariane %}
 
         {% block body %}{% endblock %}
 
-        {% for message in app.session.flashbag.get('infos') %}
-            <div class="alert alert-success" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %} 
-        <div class="col-md-12 footer">
-        <script type="text/javascript" src="{{ asset('script/DataTables/datatables.min.js') }}"></script>
-        </div>
-    </body>
+        <div class="col-md-12 footer"></div>
+
+        {% block javascript %}
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+            <script type="text/javascript" src="{{ asset('script/jquery.js') }}"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRBSgtiopCCg-UWOSzjqE1VN6KjSxTgss&signed_in=true&libraries=places" async defer></script>
+            <script type="text/javascript" src="{{ asset('script/jquery.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('script/script.js') }}"></script>
+
+            <script type="text/javascript" src="{{ asset('script/jquery-1.11.0.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('script/jquery.leanModal.min.js') }}"></script> 
+            <script type="text/javascript" src="{{ asset('script/jquery.dependClass.js') }}"></script> 
+            <script type="text/javascript" src="{{ asset('script/jquery.scrolly.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('script/skel.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('script/util.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('script/main.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('script/bootstrap.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('script/clubhouse_jquery.jcarousel.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('script/clubhouse_jcarousel.connected-carousels.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('script/clubhouse_onglets.js') }}"></script>
+        {% endblock javascript %}
+
+        {% block extraJavascript %}{% endblock extraJavascript %}
+
+    </body>   
 </html>

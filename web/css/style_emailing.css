@@ -1,0 +1,13 @@
+/*display none du nb de sélection du tableau, affichage erroné quand on fait un select avec shift*/
+.dataTables_info span {
+    display: none;
+}
+/*affichage de la modale*/
+.modal-dialog {
+    width: 650px;
+    margin: 80px auto;
+}
+
+#imgModal {
+    width: 600px;
+}

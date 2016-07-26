@@ -30,7 +30,7 @@ class DefaultController extends Controller
         
         $form = $this->createForm(EmailUserListingType::class);
 
-        return $this->render('WCSEmailingBundle:Default:index.html.twig', array(
+        return $this->render('WCSEmailingBundle:Default:emailing.html.twig', array(
         	'form' => $form->createView(),
             'liste_etablissements' => $liste_etablissements,
             'client' => $client,
@@ -134,11 +134,11 @@ class DefaultController extends Controller
 
     public function sendmailAction(request $request)
 	{
-		$session = new Session();
+		// new session pour flashbag
+        $session = new Session();
 		$em = $this->getDoctrine()->getManager();
 
 		//On récupère les inputs de la vue
-
         $message = $request->request->get('message');
         $sujet = $request->request->get('sujet');
         $destinataire = $request->request->get('destinataire');
@@ -149,7 +149,6 @@ class DefaultController extends Controller
 		//On utilise chaque champ précédemment 
 	    $message = \Swift_Message::newInstance()
 	        ->setSubject($sujet)
-	        ->setFrom('send@example.com')
 	        ->setTo($dest)
 	        ->setBody($message);
 	    $this->get('mailer')->send($message);
