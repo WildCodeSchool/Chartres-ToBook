@@ -34,22 +34,11 @@ LONDRES: __LONDRES
 'TOBOOK C''EST L''ASSURANCE D''UNE RESERVATION AU MEILLEUR PRIX ET D''UNE RELATION DIRECTE ENTRE HÔTELIERS ET PARTICULIERS.': '__TOBOOK C''EST L''ASSURANCE D''UNE RESERVATION AU MEILLEUR PRIX ET D''UNE RELATION DIRECTE ENTRE HÔTELIERS ET PARTICULIERS.'
 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.': '__Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 Bienvenue: __Bienvenue
-'S''INSCRIRE': REGISTER
-'SE CONNECTER': LOGIN
+'S''INSCRIRE': 'REGISTER'
+'SE CONNECTER': 'LOGIN'
 Menu: Menu
 'Nouvelle Recherche': 'New search'
 'Ma page': 'My page'
 'Mes Favoris': 'My favourites'
 'Mes paramètres': 'My settings'
 'SE DECONNECTER': 'LOG OUT'
-'Restaurants gastronomique': '__Restaurants gastronomique'
-Home: __Home
-Camping: __Camping
-'Parcs de loisirs': '__Parcs de loisirs'
-Chateaux: __Chateaux
-Hébergements: __Hébergements
-'Tables d''hotes': '__Tables d''hotes'
-Previous: __Previous
-Next: __Next
-Bienvenu: __Bienvenu
-Emailing: __Emailing
