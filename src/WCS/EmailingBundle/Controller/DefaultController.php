@@ -154,7 +154,7 @@ class DefaultController extends Controller
 	        ->setBody($message);
 	    $this->get('mailer')->send($message);
 
-	    $session->getFlashBag()->add('infos', $this->get('translator')->trans('Mails envoyé'));
+	    $session->getFlashBag()->add('infos', $this->get('translator')->trans('Mail(s) envoyé(s)'));
 
 	    return $this->redirect($this->generateUrl('wcs_emailing_homepage'));
 	}
