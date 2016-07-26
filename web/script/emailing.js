@@ -34,7 +34,6 @@ $(document).ready(function() {
             arraymsg.push(datainfo);
             lastSelected = $(this).closest('tr').prevAll('tr').length + 1;  
         }
-        alert(arraymsg.join());
     });
 
     // fonction permettant la suppression de la sélection

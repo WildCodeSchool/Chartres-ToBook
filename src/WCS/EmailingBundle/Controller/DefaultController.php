@@ -30,7 +30,7 @@ class DefaultController extends Controller
         
         $form = $this->createForm(EmailUserListingType::class);
 
-        return $this->render('WCSEmailingBundle:Default:index.html.twig', array(
+        return $this->render('WCSEmailingBundle:Default:emailing.html.twig', array(
         	'form' => $form->createView(),
             'liste_etablissements' => $liste_etablissements,
             'client' => $client,

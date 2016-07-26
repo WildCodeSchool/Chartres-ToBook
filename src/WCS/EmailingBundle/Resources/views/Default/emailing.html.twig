@@ -1,29 +1,14 @@
 {% extends 'TobookBundle::base.html.twig' %}
 
+{% block title %}{{ "Emailing"|trans }}{% endblock %}
+
 {% block extraCSS %}
   <link rel="stylesheet" type="text/css" href="{{ asset('css/DataTables/datatables.min.css') }}"/>
   <link rel="stylesheet" type="text/css" href="{{ asset('css/DataTables/jquery.dataTables.min.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/style_emailing.css') }}"/>
 {% endblock extraCSS %}
 
 {% block body %}
-
-<style>
-/*display none du nb de sélection du tableau, affichage erroné quand on fait un select avec shift*/
-.dataTables_info span {
-    display: none;
-}
-/*affichage de la modale*/
-@media (min-width: 768px) {
-    .modal-dialog {
-        width: 650px;
-        margin: 80px auto;
-    }
-}
-#imgModal {
-    width: 600px;
-}
-
-</style>
 
     {% for etablissement in liste_etablissements %}
 
@@ -72,46 +57,46 @@
         <!--container-->
         <div class="container">
           <fieldset>
-              <form class="well form-horizontal" id="contact_form" method="post" action="{{ path ('send_mail') }}">
-                <div class="form-group">
-                  <label class="col-md-4 control-label">Destinataire</label>
-                  <div class="col-md-4 inputGroupContainer">
-                      <div class="input-group">
-                          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                          <input id ="{{ etablissement.usprProfId.profCode }}" class="form-control"  type="text" name="destinataire" placeholder="Liste des destinataires" value="">
-                          <span class="input-group-addon"><a data-toggle="modal" data-target="#modal-warning"><i class="glyphicon glyphicon-warning-sign"></i></a></span>
-                      </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-4 control-label">Sujet</label>  
-                  <div class="col-md-4 inputGroupContainer">
+            <form class="well form-horizontal" id="contact_form" method="post" action="{{ path ('send_mail') }}">
+              <div class="form-group">
+                <label class="col-md-4 control-label">Destinataire</label>
+                <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                      <input class="form-control" type="text" name="sujet" placeholder="Sujet">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id ="{{ etablissement.usprProfId.profCode }}" class="form-control"  type="text" name="destinataire" placeholder="Liste des destinataires" value="">
+                        <span class="input-group-addon"><a data-toggle="modal" data-target="#modal-warning"><i class="glyphicon glyphicon-warning-sign"></i></a></span>
                     </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label">Sujet</label>  
+                <div class="col-md-4 inputGroupContainer">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                    <input class="form-control" type="text" name="sujet" placeholder="Sujet">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="col-md-4 control-label">Contenu du mail</label>  
-                  <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                      <textarea class="form-control" name="message" placeholder="Contenu du mail"></textarea>
-                    </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label">Contenu du mail</label>  
+                <div class="col-md-4 inputGroupContainer">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <textarea class="form-control" name="message" placeholder="Contenu du mail"></textarea>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="col-md-4 control-label"></label>
-                  <div class="col-md-4">
-                    <button type="submit" class="btn btn-warning" >Envoyer<span class="glyphicon glyphicon-send"></span></button>
-                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                  <button type="submit" class="btn btn-warning" >Envoyer<span class="glyphicon glyphicon-send"></span></button>
                 </div>
-              </form>
-            </fieldset>
-          </div>
+              </div>
+            </form>
+          </fieldset>
+        </div>
 
-        <!-- Modal -->
+        <!-- Modal ajout de nouveaux clients -->
         <div class="modal fade" id="modalAjoutClient" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -135,12 +120,6 @@
 
     {% endfor %}
 
-    {# appel script gestion emailing et datatables #}
-    <script src="{{ asset('script/emailing.js') }}"></script>
-
-    {# appel script options datatables #}
-    <script src="{{ asset('script/emailing_dataTables_options.js') }}"></script>
-
     <div class="modal fade" id="modal-warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content modal-warning">
@@ -159,3 +138,13 @@
     </div>
 
 {% endblock %}
+
+{% block extraJavascript %}
+    {# appel script gestion emailing et datatables #}
+    <script src="{{ asset('script/emailing.js') }}"></script>
+
+    {# appel script options datatables #}
+    <script src="{{ asset('script/emailing_dataTables_options.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('script/DataTables/datatables.min.js') }}"></script>
+{% endblock extraJavascript %}
