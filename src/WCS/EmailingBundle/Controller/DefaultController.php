@@ -134,11 +134,11 @@ class DefaultController extends Controller
 
     public function sendmailAction(request $request)
 	{
-		$session = new Session();
+		// new session pour flashbag
+        $session = new Session();
 		$em = $this->getDoctrine()->getManager();
 
 		//On récupère les inputs de la vue
-
         $message = $request->request->get('message');
         $sujet = $request->request->get('sujet');
         $destinataire = $request->request->get('destinataire');
@@ -149,7 +149,6 @@ class DefaultController extends Controller
 		//On utilise chaque champ précédemment 
 	    $message = \Swift_Message::newInstance()
 	        ->setSubject($sujet)
-	        ->setFrom('send@example.com')
 	        ->setTo($dest)
 	        ->setBody($message);
 	    $this->get('mailer')->send($message);
