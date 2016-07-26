@@ -39,10 +39,11 @@
 <nav id="menu">
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <ul class="links">
-            <li><a href="#">{{ 'Nouvelle Recherche'|trans }}</a></li>
+            <li><a href="{{ path('tobook_search') }}">{{ 'Nouvelle Recherche'|trans }}</a></li>
             <li><a href='{{ path('profil_edit', { 'id': app.user.id }) }}'>{{ 'Ma page'|trans }}</a></li>
+            {# 
             <li><a href='#'>{{ 'Mes Favoris'|trans }}</a></li>
-            <li><a href='#'>{{ 'Mes paramètres'|trans }}</a></li>
+            <li><a href='#'>{{ 'Mes paramètres'|trans }}</a></li> #}
             {% if app.user.userProf == 1 %}
                 <li><a href="{{ path('wcs_emailing_homepage') }}">{{ 'Emailing'|trans }}</a></li>
             {% endif %}
@@ -52,10 +53,10 @@
         </ul>
     {% else %}
         <ul class="links">
-            <li><a href="#">{{ 'Nouvelle Recherche'|trans }}</a></li>
-            <li><a href='#'>{{ 'Ma page'|trans }}</a></li>
+            <li><a href="{{ path('tobook_search') }}">{{ 'Nouvelle Recherche'|trans }}</a></li>
+            {# <li><a href='#'>{{ 'Ma page'|trans }}</a></li>
             <li><a href='#'>{{ 'Mes Favoris'|trans }}</a></li>
-            <li><a href='#'>{{ 'Mes paramètres'|trans }}</a></li>
+            <li><a href='#'>{{ 'Mes paramètres'|trans }}</a></li> #}
         </ul>
         <ul class="actions vertical" style="list-style:none;">
             <li><a href="{{ path ('user_register') }}" class="btn btnsansrien button fit special"><span>{{ "S'INSCRIRE"|trans }}</span></a></li>
