@@ -12,6 +12,6 @@ tobook_search:
     defaults: { _controller: TobookBundle:Default:search }
 
 changeLocale:
-    path:     /change
+    path:     /{_locale}/change
     defaults: { _controller: TobookBundle:Default:changeLocale}
 

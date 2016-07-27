@@ -798,6 +798,7 @@ body {
 
 }
 
+
 #loading {
   position: fixed;
   top: 0;
@@ -834,3 +835,11 @@ body {
 .rating3 { background-position: left 60%; }
 .rating4 { background-position: left 80%; }
 .rating5 { background-position: left 100%; }
+
+/* Import CSV */
+
+.modal-warning {
+  margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
+  transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+}
+
