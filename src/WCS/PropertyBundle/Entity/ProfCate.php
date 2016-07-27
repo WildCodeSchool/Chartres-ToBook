@@ -25,7 +25,7 @@ class ProfCate
      * @var integer
      *
      * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
-     * @ORM\JoinColumn(name="prca_prof_id", referencedColumnName="prof_id")
+     * @ORM\JoinColumn(name="prca_prof_id", referencedColumnName="id")
      */
     private $prcaProfId;
 

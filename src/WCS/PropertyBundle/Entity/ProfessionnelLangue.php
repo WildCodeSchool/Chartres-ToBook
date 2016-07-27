@@ -25,7 +25,7 @@ class ProfessionnelLangue
      * @var integer
      *
      * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
-     * @ORM\JoinColumn(name="prla_prof_id", referencedColumnName="prof_id")
+     * @ORM\JoinColumn(name="prla_prof_id", referencedColumnName="id")
      */
     private $prlaProfId;
 

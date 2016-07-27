@@ -16,16 +16,17 @@ class Professionnel
     /**
      * @var integer
      *
-     * @ORM\Column(name="prof_id", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $profId;
+    private $id;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="prof_cate_id", type="bigint", nullable=false)
+     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Categorie")
+     * @ORM\JoinColumn(name="prof_cate_id", referencedColumnName="cate_id")
      */
     private $profCateId;
 
@@ -35,6 +36,12 @@ class Professionnel
      * @ORM\Column(name="prof_actif", type="boolean", nullable=false)
      */
     private $profActif;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WCS\PropertyBundle\Entity\ProfImages", mappedBy="professionnel")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $profimages;
 
     /**
      * @var string

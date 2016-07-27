@@ -797,3 +797,40 @@ body {
     text-align: center;
 
 }
+
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 998;
+  background-color: #FFFFFF;
+  opacity: 0.6;
+  display: none ;
+}
+#loadingImg {
+  position: fixed;
+  top: 44%;
+  left: 44%;
+  width: 12%;
+  height: 12%;
+  z-index: 999;
+  display: none ;
+}
+#rating {
+  display: inline-block;
+  width: 145.4px;
+  height: 26.66666666666667px;
+  margin-left: 1em;
+  background-image: url(../img/rating/rating.svg);
+  background-repeat: no-repeat;
+  list-style: none;
+  background-size: 100%;
+}
+.rating0 { background-position: left top; }
+.rating1 { background-position: left 20%; }
+.rating2 { background-position: left 40%; }
+.rating3 { background-position: left 60%; }
+.rating4 { background-position: left 80%; }
+.rating5 { background-position: left 100%; }

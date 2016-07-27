@@ -29,9 +29,75 @@ class ShowEtablissementController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            $repository = $em->getRepository('WCSPropertyBundle:Professionnel');
+            $repository = $em->getRepository('WCS\PropertyBundle:Professionnel');
 
-            $Detail = $repository->getDetail($latitude, $longitude, $radius);
+            $Detail = $repository->getEtablissement($latitude, $longitude, $radius);
+            
+            $resultat = $serializer->serialize( $Detail, 'json');
+
+            $response = new Response($resultat);
+
+            $response->headers->set('Content-Type', 'application/json');
+    
+            return $response;
+
+        }
+    }
+   
+    public function SortingEtablissementAction(Request $request)
+    {
+
+        if($request->isXmlHttpRequest())
+        {
+
+            $latitude = $request->request->get('lat');
+            $longitude = $request->request->get('lng');
+            $radius = 5;
+            $sorting = $request->request->get('prixmini');
+            $direction = $request->request->get('direction');
+        
+            $encoders = array(new XmlEncoder(), new JsonEncoder());
+            $normalizers = array(new GetSetMethodNormalizer());
+            $serializer = new Serializer($normalizers, $encoders);
+
+            $em = $this->getDoctrine()->getManager();
+
+            $repository = $em->getRepository('WCS\PropertyBundle:Professionnel');
+
+            $Detail = $repository->getSortingEtablissement($latitude, $longitude, $radius, $sorting, $direction);
+            
+            $resultat = $serializer->serialize( $Detail, 'json');
+
+            $response = new Response($resultat);
+
+            $response->headers->set('Content-Type', 'application/json');
+            
+            return $response;
+
+        }
+    }
+    
+    public function StarEtablissementAction(Request $request)
+    {
+
+        if($request->isXmlHttpRequest())
+        {
+
+            $latitude = $request->request->get('lat');
+            $longitude = $request->request->get('lng');
+            $radius = 5;
+            $star = $request->request->get('etoile');
+            $direction = $request->request->get('direction');
+        
+            $encoders = array(new XmlEncoder(), new JsonEncoder());
+            $normalizers = array(new GetSetMethodNormalizer());
+            $serializer = new Serializer($normalizers, $encoders);
+
+            $em = $this->getDoctrine()->getManager();
+
+            $repository = $em->getRepository('WCS\PropertyBundle:Professionnel');
+
+            $Detail = $repository->getStarEtablissement($latitude, $longitude, $radius, $star, $direction);
             
             $resultat = $serializer->serialize( $Detail, 'json');
 
