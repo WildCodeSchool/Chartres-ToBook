@@ -23,10 +23,8 @@ class Professionnel
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Categorie")
-     * @ORM\JoinColumn(name="prof_cate_id", referencedColumnName="cate_id")
+     * @ORM\OneToMany(targetEntity="WCS\PropertyBundle\Entity\ProfCate", mappedBy="prcaProfId")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $profCateId;
 
@@ -204,39 +202,23 @@ class Professionnel
      */
     private $profTemp;
 
-
-
     /**
-     * Get profId
-     *
-     * @return integer 
+     * Constructor
      */
-    public function getProfId()
+    public function __construct()
     {
-        return $this->profId;
+        $this->profCateId = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->profimages = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Set profCateId
-     *
-     * @param integer $profCateId
-     * @return Professionnel
-     */
-    public function setProfCateId($profCateId)
-    {
-        $this->profCateId = $profCateId;
-
-        return $this;
-    }
-
-    /**
-     * Get profCateId
+     * Get id
      *
      * @return integer 
      */
-    public function getProfCateId()
+    public function getId()
     {
-        return $this->profCateId;
+        return $this->id;
     }
 
     /**
@@ -790,22 +772,38 @@ class Professionnel
     {
         return $this->profTemp;
     }
+
     /**
-     * Constructor
+     * Add profCateId
+     *
+     * @param \WCS\PropertyBundle\Entity\ProfCate $profCateId
+     * @return Professionnel
      */
-    public function __construct()
+    public function addProfCateId(\WCS\PropertyBundle\Entity\ProfCate $profCateId)
     {
-        $this->profimages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->profCateId[] = $profCateId;
+
+        return $this;
     }
 
     /**
-     * Get id
+     * Remove profCateId
      *
-     * @return integer 
+     * @param \WCS\PropertyBundle\Entity\ProfCate $profCateId
      */
-    public function getId()
+    public function removeProfCateId(\WCS\PropertyBundle\Entity\ProfCate $profCateId)
     {
-        return $this->id;
+        $this->profCateId->removeElement($profCateId);
+    }
+
+    /**
+     * Get profCateId
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProfCateId()
+    {
+        return $this->profCateId;
     }
 
     /**

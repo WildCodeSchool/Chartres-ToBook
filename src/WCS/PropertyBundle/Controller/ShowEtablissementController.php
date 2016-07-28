@@ -29,7 +29,7 @@ class ShowEtablissementController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            $repository = $em->getRepository('WCS\PropertyBundle:Professionnel');
+            $repository = $em->getRepository('WCSPropertyBundle:Professionnel');
 
             $Detail = $repository->getEtablissement($latitude, $longitude, $radius);
             
@@ -62,7 +62,7 @@ class ShowEtablissementController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            $repository = $em->getRepository('WCS\PropertyBundle:Professionnel');
+            $repository = $em->getRepository('WCSPropertyBundle:Professionnel');
 
             $Detail = $repository->getSortingEtablissement($latitude, $longitude, $radius, $sorting, $direction);
             
@@ -95,7 +95,7 @@ class ShowEtablissementController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            $repository = $em->getRepository('WCS\PropertyBundle:Professionnel');
+            $repository = $em->getRepository('WCSPropertyBundle:Professionnel');
 
             $Detail = $repository->getStarEtablissement($latitude, $longitude, $radius, $star, $direction);
             

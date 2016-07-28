@@ -2,99 +2,83 @@
 {% block title %}{{ 'Rechercher'|trans }}{% endblock %}
 
 {% block body %}
-	<div class="col-md-12 search-first-div">
-
+<div class="container-fluid">
+	<div class="search-first-div row padd-row">
 		<img class="img-style-1" src="{{ asset('img/background/background-1.jpg') }}">
+		<form class="col-md-12 search-bar" method="post" action="{{ path('showMap') }}" id="form">
+			<div class="row">
+				<div class="col-md-5 col-md-offset-1">
+					<input id="autocomplete" onfocus="initautocomplete()" class="input-style-5" type="text" placeholder="Entrez votre recherche">
+				</div>
+				<div class="col-md-4">
+	                <select class="input-style-5" name="category" id="category">
+	                <option value='1'>{{ "Hôtels"|trans }}</option>
+	                <option value='3'>{{ "Chambres d'hôtes"|trans }}</option>
+	                <option value='2'>{{ "Gîtes"|trans }}</option>
+	                <option value='5'>{{ "Restaurants"|trans }}</option>
+	                <option value='8'>{{ "Musées"|trans }}</option>
+	                <option value='6'>{{ "Restaurants gastronomique"|trans }}</option>
 
-		<form method="post" action="{{ path('showMap') }}" class="col-md-12 search-bar row" id="form">
-			<div class="col-md-7">
-				<input id="autocomplete" onfocus="initautocomplete()" class="input-style-5" type="text" placeholder="Entrez votre recherche">
-			</div>
-			<div class="col-md-4">
-				<select class="input-style-5" name="category" id="category">
-				<option value='1' {{ category == 1 ? 'selected="selected"' : '' }}>{{ "Hôtels"|trans }}</option>
-                <option value='3' {{ category == 3 ? 'selected="selected"' : '' }}>{{ "Chambres d'hôtes"|trans }}</option>
-                <option value='2' {{ category == 2 ? 'selected="selected"' : '' }}>{{ "Gîtes"|trans }}</option>
-                <option value='5' {{ category == 5 ? 'selected="selected"' : '' }}>{{ "Restaurants"|trans }}</option>
-                <option value='8' {{ category == 8 ? 'selected="selected"' : '' }}>{{ "Musées"|trans }}</option>
-                <option value='6' {{ category == 6 ? 'selected="selected"' : '' }}>{{ "Restaurants gastronomique"|trans }}</option>
-                
-                {# <option value='4' {{ category == 4 ? 'selected="selected"' : '' }}>{{ "Camping"|trans }}</option>
-                <option value='7' {{ category == 7 ? 'selected="selected"' : '' }}>{{ "Parcs de loisirs"|trans }}</option>
-                <option value='9' {{ category == 9 ? 'selected="selected"' : '' }}>{{ "Chateaux"|trans }}</option>
-                <option value='10' {{ category == 10 ? 'selected="selected"' : '' }}>{{ "Hébergements"|trans }}</option>
-                <option value='11' {{ category == 11 ? 'selected="selected"' : '' }}>{{ "Tables d'hotes"|trans }}</option> #}
-            	
-				</select>
-			</div>
-			<input name="address" type="hidden" value="{{ address }}"/>
-			<input name="latitude" type="hidden" value="{{ latitude }}"/>
-			<input name="longitude" type="hidden" value="{{ longitude }}"/>
-			<div class="col-md-1">
-				<input class="input-style-6 btn btn-success" type="submit" value="Rechercher">
+	                {# <option value='4' {{ category == 4 ? 'selected="selected"' : '' }}>{{ "Camping"|trans }}</option>
+	                <option value='7' {{ category == 7 ? 'selected="selected"' : '' }}>{{ "Parcs de loisirs"|trans }}</option>
+	                <option value='9' {{ category == 9 ? 'selected="selected"' : '' }}>{{ "Chateaux"|trans }}</option>
+	                <option value='10' {{ category == 10 ? 'selected="selected"' : '' }}>{{ "Hébergements"|trans }}</option>
+	                <option value='11' {{ category == 11 ? 'selected="selected"' : '' }}>{{ "Tables d'hotes"|trans }}</option> #}
+
+	                </select>
+	            </div>
+				<div class="col-md-1">
+					<input class="input-style-6 btn btn-success" type="submit" value="Rechercher">
+				</div>
 			</div>
 		</form>
-		<div class="col-md-12 result-bar row">
-			<h4>{{ 'Résultats pour'|trans }} <span id="resultatMap">{{ address }}</span></h4>
+		<div class="col-md-12 result-bar"><font id="resultatMap"></font></div>
+		<div class="col-md-12 search-map" id="map" style="width:100%; height:500px;" ></div>
+	</div>
+<div class="row">
+	<div class="col-md-12 filter-bar">         
+		<div class="col-md-2 col-md-offset-2 filter-div">
+			<div class="">
+                <h4 id="classerpar">{{ 'Classer par'|trans }} :</h4>
+            </div>
+		</div>
+		<div class="col-md-2">
+			<select class="input-style-5" id="prix" name="prixmini" class="category">
+				<option disabled selected>{{ 'Prix'|trans }}</option>
+				<option value="DESC">{{ 'Les plus chers'|trans }}</option>
+				<option value="ASC">{{ 'Les plus économiques'|trans }}</option>
+			</select>
 		</div>
 		
-		<div  id="map" style="width:100%; height:500px;" class="col-md-12 search-map row">
-			{# VOTRE MAP ICI !!! #}
+		<div class="col-md-2">
+			<select class="input-style-5" id="etoile" name="etoile" class="category">
+				<option disabled selected>{{ 'Étoile'|trans }}</option>
+				<option value="ASC">{{ 'Par ordre croissant'|trans }}</option>
+				<option value="DESC">{{ 'Par ordre décroissant'|trans }}</option>
+			</select>
 		</div>
-	</div>
-
-	<div class="col-md-12 filter-bar">
-		<div class="col-md-2 col-md-offset-2">
-			<div class="filter-div">
-				<h4><strong>{{ 'Classer par'|trans }} :</strong></h4>
-			</div>
+		                   
+		
+		<div class="col-md-2">
+			<select class="input-style-5" id="note" name="note" class="category">
+				<option disabled selected>{{ "Notes"|trans }}</option>
+				<option value="DESC">{{ "Les plus appréciés par l'utilisateur"|trans }}</option>
+                <option value="ASC">{{ "Les moins appréciés par l'utilisateur"|trans }}</option>
+			</select>
 		</div>
-		<form id="tri" name="tri" methode="GET" action="{{ path('tobook_search') }}">
-			<div class="col-md-2">
-				<select id="tri-prix" name="prix" class="input-style-5">
-					<option value="">{{ 'Prix'|trans }}</option>
-					<option value="desc">{{ 'Les plus chers'|trans }}</option>
-					<option value="asc">{{ 'Les plus économiques'|trans }}</option>
-				</select>
-			</div>
-			<div class="col-md-2">
-				<select id="tri-etoiles" name="etoiles" class="input-style-5">
-					<option value="">{{ 'Étoile'|trans }}</option>
-					<option value="asc">{{ 'Par ordre croissant'|trans }}</option>
-					<option value="desc">{{ 'Par ordre décroissant'|trans }} </option>				
-				</select>
-			</div>
-			<div class="col-md-2">
-				<select id="tri-note" name="note" class="input-style-5">
-					<option value="">{{ "Notes"|trans }}</option>
-					<option value="desc">{{ "Les plus appréciés par l'utilisateur"|trans }}</option>				
-					<option value="asc">{{ "Les moins appréciés par l'utilisateur"|trans }}</option>				
-				</select>
-			</div>
-			<input name="latitude" type="hidden" value="{{ latitude }}"/>
-			<input name="longitude" type="hidden" value="{{ longitude }}"/>
-			<input name="address" type="hidden" value="{{ address }}"/>
-			<input name="category" type="hidden" value="{{ category }}"/>
-		</form>
-		<script type="text/javascript">
-		    $('#tri div select').change(function(){
-		        //alert( $(this).attr('name') +' ' + $(this).find("option:selected").attr('value') );
-		        //$("#tri").submit();
-		        this.form.submit();
-		    });
-		</script>
+		
 	</div>
-
-<!-- articles resultats -->
-{# Liens images qui sont cacher mais qui servent à recupere le liens pour l'utiliser dans javascript #}
-<img style="display:none;"  id="assetMarker" src="{{ asset('img/') }}" alt="">
-<img style="display:none;"  id="assetEtablissement" src="{{ asset('img/uploads/') }}" alt="">
-{#  #}
-<section id="two" class="wrapper alt">
-
-</section>
-<div class="navigation">
-    {{ knp_pagination_render(resultats) }}
 </div>
-
+	<!-- articles resultats -->
+	{# Liens images qui sont cacher mais qui servent à recupere le liens pour l'utiliser dans javascript #}
+	<img style="display:none;"  id="assetMarker" src="{{ asset('img/') }}" alt="">
+	<img style="display:none;"  id="assetEtablissement" src="{{ asset('img/uploads/') }}" alt="">
+	<section class="row" id="two" class="wrapper alt">
+	</section>
+	<div class="row flex">
+		<div id="pagination">
+			
+	  	</div>
+  	</div>
+</div>
 {% endblock %}

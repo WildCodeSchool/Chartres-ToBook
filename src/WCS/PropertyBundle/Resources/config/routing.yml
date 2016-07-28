@@ -20,12 +20,12 @@ Etablissement:
 
 SortingEtablissement:
     path:     /fr/SortingEtablissement
-    defaults: {_controller: WCSPropertyBundle:SortingEtablissement:SortingEtablissement }
+    defaults: {_controller: WCSPropertyBundle:ShowEtablissement:SortingEtablissement }
     options:
         expose: true
 
 StarEtablissement:
     path:     /fr/StarEtablissement
-    defaults: {_controller: WCSPropertyBundle:StarEtablissement:StarEtablissement }
+    defaults: {_controller: WCSPropertyBundle:ShowEtablissement:StarEtablissement }
     options:
         expose: true

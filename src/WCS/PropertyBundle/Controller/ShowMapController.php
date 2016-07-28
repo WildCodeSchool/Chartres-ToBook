@@ -29,7 +29,7 @@ class ShowMapController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            $repository = $em->getRepository('WCS\PropertyBundle:Professionnel');
+            $repository = $em->getRepository('WCSPropertyBundle:Professionnel');
 
             $LatLng = $repository->getLatLng($latitude, $longitude, $radius);
             

@@ -16,12 +16,15 @@ class ProfessionnelRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder('LatLng');
 
         $qb->select('LatLng.profLatitude as lat',
-                    'LatLng.profLongitude as lng')
+                    'LatLng.profLongitude as lng',
+                    'LatLng.profNom as name',
+                    'LatLng.profDescriptif as description',
+                    'LatLng.profWeb as email')
             ->addSelect('( 6371 * acos(cos(radians(' . $latitude . ')) * cos( radians( LatLng.profLatitude ) ) * cos( radians( LatLng.profLongitude ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( LatLng.profLatitude ) ) ) ) as radius')
             ->having('radius < :radius')
             ->orderBy('radius', 'ASC')
-            ->setFirstResult(0)
-            ->setMaxResults(45)
+            // ->setFirstResult(0)
+            // ->setMaxResults(45)
             ->setParameter('radius', $radius);
         ;
     
@@ -47,7 +50,7 @@ class ProfessionnelRepository extends \Doctrine\ORM\EntityRepository
             ->having('radius < :radius')
             ->orderBy('radius', 'ASC')
             ->setFirstResult(0)
-            ->setMaxResults(15)
+            ->setMaxResults(150)
             ->setParameter('radius', $radius);
         ;
     
@@ -72,8 +75,6 @@ class ProfessionnelRepository extends \Doctrine\ORM\EntityRepository
             ->addSelect('profimages.primImgUrl as path')
             ->having('radius < :radius')
             ->addOrderBy($sorting, $direction)
-            ->setFirstResult(0)
-            ->setMaxResults(15)
             ->setParameter('radius', $radius);
         ;
     
@@ -98,8 +99,8 @@ class ProfessionnelRepository extends \Doctrine\ORM\EntityRepository
             ->addSelect('profimages.primImgUrl as path')
             ->having('radius < :radius')
             ->addOrderBy($star, $direction)
-            ->setFirstResult(0)
-            ->setMaxResults(15)
+            // ->setFirstResult(0)
+            // ->setMaxResults(15)
             ->setParameter('radius', $radius);
         ;
     

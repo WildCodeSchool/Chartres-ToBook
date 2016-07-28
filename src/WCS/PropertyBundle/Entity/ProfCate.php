@@ -24,7 +24,7 @@ class ProfCate
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
+     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel", inversedBy="profCateId")
      * @ORM\JoinColumn(name="prca_prof_id", referencedColumnName="id")
      */
     private $prcaProfId;
@@ -36,7 +36,6 @@ class ProfCate
      * @ORM\JoinColumn(name="prca_cate_id", referencedColumnName="cate_id")
      */
     private $prcaCateId;
-
 
 
     /**
@@ -52,10 +51,10 @@ class ProfCate
     /**
      * Set prcaProfId
      *
-     * @param integer $prcaProfId
+     * @param \WCS\PropertyBundle\Entity\Professionnel $prcaProfId
      * @return ProfCate
      */
-    public function setPrcaProfId($prcaProfId)
+    public function setPrcaProfId(\WCS\PropertyBundle\Entity\Professionnel $prcaProfId = null)
     {
         $this->prcaProfId = $prcaProfId;
 
@@ -65,7 +64,7 @@ class ProfCate
     /**
      * Get prcaProfId
      *
-     * @return integer 
+     * @return \WCS\PropertyBundle\Entity\Professionnel 
      */
     public function getPrcaProfId()
     {
@@ -75,10 +74,10 @@ class ProfCate
     /**
      * Set prcaCateId
      *
-     * @param integer $prcaCateId
+     * @param \WCS\PropertyBundle\Entity\Categorie $prcaCateId
      * @return ProfCate
      */
-    public function setPrcaCateId($prcaCateId)
+    public function setPrcaCateId(\WCS\PropertyBundle\Entity\Categorie $prcaCateId = null)
     {
         $this->prcaCateId = $prcaCateId;
 
@@ -88,7 +87,7 @@ class ProfCate
     /**
      * Get prcaCateId
      *
-     * @return integer 
+     * @return \WCS\PropertyBundle\Entity\Categorie 
      */
     public function getPrcaCateId()
     {
