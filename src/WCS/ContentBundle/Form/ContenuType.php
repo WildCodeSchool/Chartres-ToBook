@@ -16,7 +16,7 @@ class ContenuType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->remove('contContId')
+            ->add('contContId', 'hidden')
             ->remove('contSourceId')
             ->remove('contCibleId')
             ->remove('contSourceType')

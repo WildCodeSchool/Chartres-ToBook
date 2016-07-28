@@ -1,6 +1,6 @@
 {% extends 'TobookBundle::base.html.twig' %}
 
-{% block title %}{{ "Club House"|trans }}{% endblock %}
+{% block title %}{{ "Club House"|trans }} - {{etablissement.profNom}} {% endblock %}
 
 {% block ariane %}
 
@@ -109,13 +109,13 @@
 		<div class="col-md-12 onglets row">
 			<div class="col-md-12 titre row">
 				<div class="col-md-4 but1 but">
-					<h3 class="front-color-1">{{ "DESCRIPTIF"|trans }}</h3>
+					<h3>{{ "DESCRIPTIF"|trans }}</h3>
 				</div>
 				<div class="col-md-4 but2 but">
-					<h3 class="front-color-2">{{ "COMMENTAIRES"|trans }}</h3>
+					<h3 class="active">{{ "COMMENTAIRES"|trans }}</h3>
 				</div>
 				<div class="col-md-4 but3 but">
-					<h3 class="front-color-2">{{ "CONTACT"|trans }}</h3>
+					<h3>{{ "CONTACT"|trans }}</h3>
 				</div>
 			</div>
 			<div class="col-md-12 contenu row">
@@ -133,7 +133,7 @@
 						{{ render(controller('WCSContentBundle:Contenu:new')) }}
 					{% else %}
 						<p>Vous devez être connecté pour laisser un commentaire !</p>
-						<a href="{{ path('user_login') }}">Se connecter </a>	
+						<a href="{{ path('user_login') }}">{{ "Se connecter"|trans }} </a>	
 					{% endif %}
 					<h2>{{ "Commentaires"|trans }} </h2> 
 					{{ render(controller('WCSContentBundle:Contenu:index', { 'profCode': etablissement.profCode })) }}
