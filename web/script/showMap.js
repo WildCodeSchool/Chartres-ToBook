@@ -27,6 +27,10 @@ var assetMarker;
 // On declare une variable pour stocker le lien vers les images etablissements.
 var assetEtablissement;
 // Chargement des fonctionnalités jquery avant le reste.
+var detail;
+var eloile;
+var winInfo;
+var nbResult;
 jQuery(document).ready(function() {
  
   // Quand on mes le focus dans le champs recherche on vide le localstorage. 
@@ -164,14 +168,12 @@ function initMap() {
       position: google.maps.ControlPosition.LEFT_TOP
       }
   });
-  // On alimente la variable avec le contenu que l'on souhaite voir afficher au survol des markers.
-  infoWindow = new google.maps.InfoWindow({
-    content: contentString
-  });
 }
 // Fonction qui affiche la map en fonction des resultat de recherche
 function affichageMap(results){
-  
+
+  nbResult = results.length;
+
   if(results.length < 15){ zoom = 14; }else{ zoom = 17; }
   
   myLatLng = {
@@ -182,37 +184,50 @@ function affichageMap(results){
   initMap(myLatLng,zoom);
 
   for (var i = 0; i < results.length; i++) {
-    var tab = results[i];
-    var LatLong = {lat: Number(tab.lat), lng: Number(tab.lng)};
-    addMarkerWithTimeout(LatLong, i * 200);
+    winInfo = results[i];
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng( results[i].lat, results[i].lng),
+      map: map,
+      animation: google.maps.Animation.DROP,
+      icon: assetMarker + "marker_map/hotels.png"
+    });
+    (function(contentString){
+      contentString = "<div id='content'>"+
+      "<div id='siteNotice'>"+
+      "</div>"+
+      "<h1 id='firstHeading' class='firstHeading'>"+ winInfo.name +"</h1>"+
+      "<div id='bodyContent'>"+
+      "<p>" + winInfo.description + "</p>"+
+      "<p><a href=" + winInfo.email + ">" + winInfo.email + "</a> </p>"+
+      '</div>'+
+      '</div>'
+      ;
+      google.maps.event.addListener(marker, 'click', function() {
+        // affectation du texte passé en paramètre
+        infoWindow = new google.maps.InfoWindow({content: contentString});
+        // infoWindow.setContent(contentString);
+        // affichage InfoWindow
+        infoWindow.open( this.getMap(), this);
+      });
+    })();
   }
   
-  showTextResult(address);
+  showTextResult(address,nbResult);
 }
 // Fonction qui va afficher le text de la bar de resultat.
-function showTextResult(address) {
+function showTextResult(address, nbResult) {
 
   // On test la presence d'une address sinon on affiche un marker a notres geolocalisation.
   if(address === undefined || address == null){
     $('#resultatMap').text( 'Effectuer votre recherche' );  
   }else{
+    $('#resultatMap').before("<span class='badge badge-mr'>" + nbResult + "</span>")
     $('#resultatMap').text( "résultat pour "+ address );
   }
 }
-// Fonction qui affiche les markers.
-function addMarkerWithTimeout(LatLong, timeout) {
-    window.setTimeout(function() {
-      marker = new google.maps.Marker({
-      position: LatLong,
-      map: map,
-      animation: google.maps.Animation.DROP,
-      icon: assetMarker + "marker_map/hotels.png"
-      });
-    }, timeout);
-}
 // Fonction qui execute une requete une ajax.
 function showEtablissementMarker(latitudeSearch, longitudeSearch){
-
+  $('.badge-mr').remove();
   assetMarker = document.getElementById('assetMarker').getAttribute('src');
 
   $.ajax({
@@ -311,16 +326,17 @@ function starEtablissementDetail(latitudeSearch, longitudeSearch, star, directio
       }
     });
 }
-function affichageResultats (results) {
-
+function affichageResultats(results) {
+  var divSelect = '.listEtablissement';
+  var divPager = '#pagination';
+  var nbParPage = 15;
   $('#two > section').remove();
 
   assetEtablissement = document.getElementById('assetEtablissement').getAttribute('src');
  
   for (var i = 0; i < results.length; i++) {
-    var detail = results[i];
+    detail = results[i];
     // On declare une variable etoile qui va nous permettre de stocker le resultat de la condition switch
-    var etoile;
     if(detail.description == null){ detail.description = "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l\'imprimerie depuis les années 1500"; }
     if(detail.prixmini == null){ detail.prixmini = 0; }
     if(detail.path == null || detail.path === undefined){ detail.path = 'no-picture.png';}
@@ -341,7 +357,7 @@ function affichageResultats (results) {
         break;
     }
     // Apres l'element identifier par l'id #two on va ajouter tous les elements qui ce trouve dans la fonction append.
-    $('#two').append("<section class='spotlight avatar'>"
+    $('#two').append("<section class='spotlight listEtablissement'>"
             +"<div class='image'>"
             +"<a href=''>"
             +"<img src=" + assetEtablissement + detail.path + ">"
@@ -361,11 +377,7 @@ function affichageResultats (results) {
             +"</div>"
             +"</section>"
             );          
-  } 
-
-  var divSelect = '.avatar';
-  var divPager = '#pagination';
-  var model = 3;
-  var nbParPage = 15;
-  pagination(nbParPage,divSelect,divPager,model);   
+  }
+  
+  pagination(nbParPage,divSelect,divPager);   
 }

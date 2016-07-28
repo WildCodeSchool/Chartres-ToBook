@@ -12,6 +12,8 @@ send_mail:
     path:     /{_locale}/emailing/send
     defaults: { _controller: WCSEmailingBundle:Default:sendmail }
 
-create_mail:
-    path:     /{_locale}/emailing/create
-    defaults: { _controller: WCSEmailingBundle:Default:createmail }
+wcs_emailing_suppr:
+    path:     /{_locale}/emailing/suppr/{idClient}
+    defaults: { _controller: WCSEmailingBundle:Default:suppr }
+    options:
+        expose: true
