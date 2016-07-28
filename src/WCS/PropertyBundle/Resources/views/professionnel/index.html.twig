@@ -1,0 +1,85 @@
+{% extends 'TobookBundle::base.html.twig' %}
+
+{% block body %}
+    <h1>Professionnel list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Profid</th>
+                <th>Profactif</th>
+                <th>Profcode</th>
+                <th>Profetoiles</th>
+                <th>Profformejuri</th>
+                <th>Profnom</th>
+                <th>Profadd1</th>
+                <th>Profadd2</th>
+                <th>Profadd3</th>
+                <th>Profcp</th>
+                <th>Profville</th>
+                <th>Proftel</th>
+                <th>Proffax</th>
+                <th>Profmail</th>
+                <th>Profweb</th>
+                <th>Profwebresa</th>
+                <th>Profprixmini</th>
+                <th>Profdescriptif</th>
+                <th>Proflatitude</th>
+                <th>Proflongitude</th>
+                <th>Profcapapersonne</th>
+                <th>Profcapachambre</th>
+                <th>Profcapaemplacement</th>
+                <th>Profcapahabitation</th>
+                <th>Proftemp</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for professionnel in professionnels %}
+            <tr>
+                <td><a href="{{ path('professionnel_show', { 'id': professionnel.profId }) }}">{{ professionnel.profId }}</a></td>
+                <td>{% if professionnel.profActif %}Yes{% else %}No{% endif %}</td>
+                <td>{{ professionnel.profCode }}</td>
+                <td>{{ professionnel.profEtoiles }}</td>
+                <td>{{ professionnel.profFormeJuri }}</td>
+                <td>{{ professionnel.profNom }}</td>
+                <td>{{ professionnel.profAdd1 }}</td>
+                <td>{{ professionnel.profAdd2 }}</td>
+                <td>{{ professionnel.profAdd3 }}</td>
+                <td>{{ professionnel.profCp }}</td>
+                <td>{{ professionnel.profVille }}</td>
+                <td>{{ professionnel.profTel }}</td>
+                <td>{{ professionnel.profFax }}</td>
+                <td>{{ professionnel.profMail }}</td>
+                <td>{{ professionnel.profWeb }}</td>
+                <td>{{ professionnel.profWebResa }}</td>
+                <td>{{ professionnel.profPrixMini }}</td>
+                <td>{{ professionnel.profDescriptif }}</td>
+                <td>{{ professionnel.profLatitude }}</td>
+                <td>{{ professionnel.profLongitude }}</td>
+                <td>{{ professionnel.profCapaPersonne }}</td>
+                <td>{{ professionnel.profCapaChambre }}</td>
+                <td>{{ professionnel.profCapaEmplacement }}</td>
+                <td>{{ professionnel.profCapaHabitation }}</td>
+                <td>{{ professionnel.profTemp }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('professionnel_show', { 'id': professionnel.profId }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('professionnel_edit', { 'id': professionnel.profId }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('professionnel_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
