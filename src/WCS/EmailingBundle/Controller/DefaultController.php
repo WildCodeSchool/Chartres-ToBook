@@ -149,6 +149,7 @@ class DefaultController extends Controller
 		//On utilise chaque champ précédemment 
 	    $message = \Swift_Message::newInstance()
 	        ->setSubject($sujet)
+            ->setFrom('test@test.com')
 	        ->setTo($dest)
 	        ->setBody($message);
 	    $this->get('mailer')->send($message);

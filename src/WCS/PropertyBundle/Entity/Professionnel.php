@@ -200,6 +200,7 @@ class Professionnel
 
 
 
+
     /**
      * Get profId
      *
@@ -208,29 +209,6 @@ class Professionnel
     public function getProfId()
     {
         return $this->profId;
-    }
-
-    /**
-     * Set profCateId
-     *
-     * @param integer $profCateId
-     * @return Professionnel
-     */
-    public function setProfCateId($profCateId)
-    {
-        $this->profCateId = $profCateId;
-
-        return $this;
-    }
-
-    /**
-     * Get profCateId
-     *
-     * @return integer 
-     */
-    public function getProfCateId()
-    {
-        return $this->profCateId;
     }
 
     /**
@@ -783,5 +761,28 @@ class Professionnel
     public function getProfTemp()
     {
         return $this->profTemp;
+    }
+
+    /**
+     * Set profCateId
+     *
+     * @param \WCS\PropertyBundle\Entity\Categorie $profCateId
+     * @return Professionnel
+     */
+    public function setProfCateId(\WCS\PropertyBundle\Entity\Categorie $profCateId = null)
+    {
+        $this->profCateId = $profCateId;
+
+        return $this;
+    }
+
+    /**
+     * Get profCateId
+     *
+     * @return \WCS\PropertyBundle\Entity\Categorie 
+     */
+    public function getProfCateId()
+    {
+        return $this->profCateId;
     }
 }
