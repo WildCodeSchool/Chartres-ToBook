@@ -76,7 +76,7 @@ class DefaultController extends Controller
 		// permet de récupérer l'id de l'établissement écrit dans l'url après son nom (via une regex qui supprime les caractères non numériques)
 		$profId = preg_replace("/\D/",'', $profCode);
 		// récupère l'établissement pour lequel l'upload du csv se fait
-		$etablissement = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneByprofId($profId);
+		$etablissement = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneById($profId);
 		// récupère l'id du pro
 		$userId = $this->get('security.token_storage')->getToken()->getUser()->getId();
 		// var_dump($userId);die;
@@ -149,6 +149,7 @@ class DefaultController extends Controller
 		//On utilise chaque champ précédemment 
 	    $message = \Swift_Message::newInstance()
 	        ->setSubject($sujet)
+            ->setFrom("clubtobook@gmail.com")
 	        ->setTo($dest)
 	        ->setBody($message);
 	    $this->get('mailer')->send($message);
@@ -158,9 +159,28 @@ class DefaultController extends Controller
 	    return $this->redirect($this->generateUrl('wcs_emailing_homepage'));
 	}
 
-	public function createmailAction()
+	// fonction de suppression de référence clients
+    public function supprAction($idClient)
     {
-        return $this->render('WCSEmailingBundle:Emails:create.html.twig');
+        // new session pour flashbag
+        $session = new Session();
+        
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $clients = explode(',', $idClient);
+
+        foreach($clients as $client) {
+
+            $emailClient = $em->getRepository('WCSEmailingBundle:EmailUserListing')->findOneById($client);
+
+            $em->remove($emailClient);
+        }
+
+        $em->flush();
+
+        $session->getFlashBag()->add('infos', $this->get('translator')->trans('Client(s) supprimé(s)'));
+
+        return $this->redirect($this->generateUrl('wcs_emailing_homepage'));
     }
  
 }

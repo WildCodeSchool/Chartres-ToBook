@@ -25,7 +25,7 @@ class RatingProperty
      * @var integer
      *
      * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
-     * @ORM\JoinColumn(name="prof_id", referencedColumnName="prof_id")
+     * @ORM\JoinColumn(name="prof_id", referencedColumnName="id")
      */
     private $profId;
 

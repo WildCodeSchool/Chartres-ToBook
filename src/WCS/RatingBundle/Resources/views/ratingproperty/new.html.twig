@@ -1,0 +1,5 @@
+    {{ form_start(form, {'method': 'post', 'action': path('ratingproperty_new', { 'profCode': profCode }) }) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Envoyer" />
+    {{ form_end(form) }}
+

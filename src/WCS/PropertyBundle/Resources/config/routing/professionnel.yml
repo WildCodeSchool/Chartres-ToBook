@@ -1,0 +1,24 @@
+professionnel_index:
+    path:     /
+    defaults: { _controller: "WCSPropertyBundle:Professionnel:index" }
+    methods:  GET
+
+professionnel_show:
+    path:     /{id}/show
+    defaults: { _controller: "WCSPropertyBundle:Professionnel:show" }
+    methods:  GET
+
+professionnel_new:
+    path:     /new
+    defaults: { _controller: "WCSPropertyBundle:Professionnel:new" }
+    methods:  [GET, POST]
+
+professionnel_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "WCSPropertyBundle:Professionnel:edit" }
+    methods:  [GET, POST]
+
+professionnel_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "WCSPropertyBundle:Professionnel:delete" }
+    methods:  DELETE
