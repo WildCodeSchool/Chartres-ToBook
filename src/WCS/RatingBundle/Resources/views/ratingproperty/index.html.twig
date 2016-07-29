@@ -1,1 +1,5 @@
-{{ moyenneTotal|round(1, 'floor') }}
+{% if moyenneTotal == 0 %}
+	{{ moyenneTotal }} 
+{% else %}
+	{{ moyenneTotal|round(1, 'floor') }}/10
+{% endif %}

@@ -24,21 +24,31 @@ class RatingPropertyController extends Controller
 
         $profId = preg_replace("/\D/",'', $profCode);
 
-        $property = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneByProfId($profId);
+        $property = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneById($profId);
 
-        $ratingProperties = $em->getRepository('WCSRatingBundle:RatingProperty')->findBy(array('profId'=>$property->getProfId()));
-        $howManyProperties = count($ratingProperties);
-        $totalnote=0;
+        $ratingProperties = $em->getRepository('WCSRatingBundle:RatingProperty')->findBy(array('profId'=>$property->getId()));
 
-        foreach ($ratingProperties as $ratingProperty) {
+            $howManyProperties = count($ratingProperties);
+            $totalnote=0;
+            if ($howManyProperties == 0) {
+                $moyenneTotal="Il n'y a pas de vote sur cet établissement";
+            }
 
-            $note1=$ratingProperty->getRating1();
-            $note2=$ratingProperty->getRating2();
-            $note3=$ratingProperty->getRating3();
-            $sommenote=$note1+$note2+$note3;
-            $totalnote+=$sommenote;    
-        }
-        $moyenneTotal=$totalnote/($howManyProperties*3);
+            elseif ($howManyProperties < 3) {
+                $moyenneTotal="Il n'y a pas assez de vote sur cet établissement";
+            }
+            else {
+                foreach ($ratingProperties as $ratingProperty) {
+
+                    $note1=$ratingProperty->getRating1();
+                    $note2=$ratingProperty->getRating2();
+                    $note3=$ratingProperty->getRating3();
+                    $sommenote=$note1+$note2+$note3;
+                    $totalnote+=$sommenote;    
+                }
+                $moyenneTotal=$totalnote/($howManyProperties*3);
+            }
+        
 
         return $this->render('WCSRatingBundle:ratingproperty:index.html.twig', array(
             'ratingProperties' => $ratingProperties,
@@ -61,10 +71,10 @@ class RatingPropertyController extends Controller
         // récupère l'user actuel
         $user = $this->container->get('security.context')->getToken()->getUser();
 
-        $property = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneByProfId($profId);
+        $property = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneById($profId);
 
         // récupère les votes existants pour un utilsateur
-        $notations = $em->getRepository('WCSRatingBundle:RatingProperty')->findBy(array('userId'=>$user->getId(), 'profId'=>$property->getProfId()));
+        $notations = $em->getRepository('WCSRatingBundle:RatingProperty')->findBy(array('userId'=>$user->getId(), 'profId'=>$property->getId()));
 
 
         $ratingProperty = new RatingProperty();

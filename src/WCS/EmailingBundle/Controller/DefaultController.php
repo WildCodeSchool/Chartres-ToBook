@@ -76,7 +76,7 @@ class DefaultController extends Controller
 		// permet de récupérer l'id de l'établissement écrit dans l'url après son nom (via une regex qui supprime les caractères non numériques)
 		$profId = preg_replace("/\D/",'', $profCode);
 		// récupère l'établissement pour lequel l'upload du csv se fait
-		$etablissement = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneByprofId($profId);
+		$etablissement = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneById($profId);
 		// récupère l'id du pro
 		$userId = $this->get('security.token_storage')->getToken()->getUser()->getId();
 		// var_dump($userId);die;
