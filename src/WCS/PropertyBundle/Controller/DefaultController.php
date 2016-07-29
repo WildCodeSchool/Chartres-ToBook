@@ -18,7 +18,7 @@ class DefaultController extends Controller
         // permet de récupérer l'id de l'établissement écrit dans l'url après son nom (via une regex qui supprime les caractères non numériques)
         $profId = preg_replace("/\D/",'', $profCode);
 
-        $etablissement = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneByprofId($profId);
+        $etablissement = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneById($profId);
         // echo ("<pre>");
         // var_dump($etablissement);
         // echo ("</pre>");

@@ -15,17 +15,17 @@ class ProfImages
     /**
      * @var integer
      *
-     * @ORM\Column(name="prim_id", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $primId;
+    private $id;
 
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
-     * @ORM\JoinColumn(name="prim_prof_id", referencedColumnName="prof_id")
+     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel", inversedBy="profimages")
+     * @ORM\JoinColumn(name="prim_prof_id", referencedColumnName="id")
      */
     private $primProfId;
 
@@ -72,38 +72,14 @@ class ProfImages
     private $primImgUrl;
 
 
-
     /**
-     * Get primId
+     * Get id
      *
      * @return integer 
      */
-    public function getPrimId()
+    public function getId()
     {
-        return $this->primId;
-    }
-
-    /**
-     * Set primProfId
-     *
-     * @param integer $primProfId
-     * @return ProfImages
-     */
-    public function setPrimProfId($primProfId)
-    {
-        $this->primProfId = $primProfId;
-
-        return $this;
-    }
-
-    /**
-     * Get primProfId
-     *
-     * @return integer 
-     */
-    public function getPrimProfId()
-    {
-        return $this->primProfId;
+        return $this->id;
     }
 
     /**
@@ -132,7 +108,7 @@ class ProfImages
     /**
      * Set primOrd
      *
-     * @param boolean $primOrd
+     * @param integer $primOrd
      * @return ProfImages
      */
     public function setPrimOrd($primOrd)
@@ -145,7 +121,7 @@ class ProfImages
     /**
      * Get primOrd
      *
-     * @return boolean 
+     * @return integer 
      */
     public function getPrimOrd()
     {
@@ -242,5 +218,28 @@ class ProfImages
     public function getPrimImgUrl()
     {
         return $this->primImgUrl;
+    }
+
+    /**
+     * Set primProfId
+     *
+     * @param \WCS\PropertyBundle\Entity\Professionnel $primProfId
+     * @return ProfImages
+     */
+    public function setPrimProfId(\WCS\PropertyBundle\Entity\Professionnel $primProfId = null)
+    {
+        $this->primProfId = $primProfId;
+
+        return $this;
+    }
+
+    /**
+     * Get primProfId
+     *
+     * @return \WCS\PropertyBundle\Entity\Professionnel 
+     */
+    public function getPrimProfId()
+    {
+        return $this->primProfId;
     }
 }

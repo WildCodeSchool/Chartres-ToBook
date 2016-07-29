@@ -149,7 +149,7 @@ class DefaultController extends Controller
 		//On utilise chaque champ précédemment 
 	    $message = \Swift_Message::newInstance()
 	        ->setSubject($sujet)
-            ->setFrom('test@test.com')
+            ->setFrom("clubtobook@gmail.com")
 	        ->setTo($dest)
 	        ->setBody($message);
 	    $this->get('mailer')->send($message);
@@ -159,9 +159,28 @@ class DefaultController extends Controller
 	    return $this->redirect($this->generateUrl('wcs_emailing_homepage'));
 	}
 
-	public function createmailAction()
+	// fonction de suppression de référence clients
+    public function supprAction($idClient)
     {
-        return $this->render('WCSEmailingBundle:Emails:create.html.twig');
+        // new session pour flashbag
+        $session = new Session();
+        
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $clients = explode(',', $idClient);
+
+        foreach($clients as $client) {
+
+            $emailClient = $em->getRepository('WCSEmailingBundle:EmailUserListing')->findOneById($client);
+
+            $em->remove($emailClient);
+        }
+
+        $em->flush();
+
+        $session->getFlashBag()->add('infos', $this->get('translator')->trans('Client(s) supprimé(s)'));
+
+        return $this->redirect($this->generateUrl('wcs_emailing_homepage'));
     }
  
 }

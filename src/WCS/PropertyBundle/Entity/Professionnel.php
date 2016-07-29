@@ -16,17 +16,15 @@ class Professionnel
     /**
      * @var integer
      *
-     * @ORM\Column(name="prof_id", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $profId;
+    private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Categorie")
-     * @ORM\JoinColumn(name="prof_cate_id", referencedColumnName="cate_id")
+     * @ORM\OneToMany(targetEntity="WCS\PropertyBundle\Entity\ProfCate", mappedBy="prcaProfId")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $profCateId;
 
@@ -36,6 +34,12 @@ class Professionnel
      * @ORM\Column(name="prof_actif", type="boolean", nullable=false)
      */
     private $profActif;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WCS\PropertyBundle\Entity\ProfImages", mappedBy="primProfId")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $profimages;
 
     /**
      * @var string
@@ -198,17 +202,23 @@ class Professionnel
      */
     private $profTemp;
 
-
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->profCateId = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->profimages = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
-     * Get profId
+     * Get id
      *
      * @return integer 
      */
-    public function getProfId()
+    public function getId()
     {
-        return $this->profId;
+        return $this->id;
     }
 
     /**
@@ -764,25 +774,68 @@ class Professionnel
     }
 
     /**
-     * Set profCateId
+     * Add profCateId
      *
-     * @param \WCS\PropertyBundle\Entity\Categorie $profCateId
+     * @param \WCS\PropertyBundle\Entity\ProfCate $profCateId
      * @return Professionnel
      */
-    public function setProfCateId(\WCS\PropertyBundle\Entity\Categorie $profCateId = null)
+    public function addProfCateId(\WCS\PropertyBundle\Entity\ProfCate $profCateId)
     {
-        $this->profCateId = $profCateId;
+        $this->profCateId[] = $profCateId;
 
         return $this;
     }
 
     /**
+     * Remove profCateId
+     *
+     * @param \WCS\PropertyBundle\Entity\ProfCate $profCateId
+     */
+    public function removeProfCateId(\WCS\PropertyBundle\Entity\ProfCate $profCateId)
+    {
+        $this->profCateId->removeElement($profCateId);
+    }
+
+    /**
      * Get profCateId
      *
-     * @return \WCS\PropertyBundle\Entity\Categorie 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getProfCateId()
     {
         return $this->profCateId;
+    }
+
+    /**
+     * Add profimages
+     *
+     * @param \WCS\PropertyBundle\Entity\ProfImages $profimages
+     * @return Professionnel
+     */
+    public function addProfimage(\WCS\PropertyBundle\Entity\ProfImages $profimages)
+    {
+        $this->profimages[] = $profimages;
+
+        return $this;
+    }
+
+    /**
+     * Remove profimages
+     *
+     * @param \WCS\PropertyBundle\Entity\ProfImages $profimages
+     */
+    public function removeProfimage(\WCS\PropertyBundle\Entity\ProfImages $profimages)
+    {
+        $this->profimages->removeElement($profimages);
+    }
+
+    /**
+     * Get profimages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProfimages()
+    {
+        return $this->profimages;
     }
 }

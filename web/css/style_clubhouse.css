@@ -22,16 +22,15 @@
     margin:auto;
 }
 
-.front-color-1
+div.but h3
 {
-    color:#559827;
+    color: #D8D8D8;
     font-weight:bold;
 }
 
-.front-color-2
+div.but h3.active
 {
-    color:#D8D8D8;
-    font-weight:bold;
+    color: #559827;
 }
 
 .page1
@@ -141,7 +140,7 @@
 .pageother {
     overflow: auto;
 }
-.case2 {
+.case1 {
     display:none;
 }
 .case3 {
@@ -157,6 +156,7 @@
 
 .text-gris {
     color: #808080;
+    font-style: italic;
 }
 
 .text-noir {
@@ -168,4 +168,12 @@
     margin-bottom: 10px;
     padding-left: 10px;
     background-color: #eff6ff;
+}
+.post-box.reply {
+    margin-left: 40px;
+}
+
+/*affichage de la modale*/
+#modal-reply-to-comment {
+    margin: 36px 0 0 0;
 }

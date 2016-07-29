@@ -26,7 +26,7 @@ class EmailUserListing
      * @var integer
      *
      * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
-     * @ORM\JoinColumn(name="emai_prof_id", referencedColumnName="prof_id")
+     * @ORM\JoinColumn(name="emai_prof_id", referencedColumnName="id")
      */
     private $emaiProfId;
 

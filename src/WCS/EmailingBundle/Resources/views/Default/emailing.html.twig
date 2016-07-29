@@ -20,6 +20,8 @@
             <table class="display" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>IDtab</th>                      
+                        <th>ID</th>
                         <th>{{ "Email"|trans }}</th>
                         <th>{{ "Nom"|trans }}</th>
                         <th>{{ "Prénom"|trans }}</th>
@@ -32,26 +34,29 @@
                 </thead>
                 <tbody>    
                     {% for key, client in client if client.emaiProfId == etablissement.usprProfId %}
-                        <tr id="{{ key }}" data-info="{{ client.emaiEmail }}">
-                            <td>{{ client.emaiEmail }}</td> <!--email-->
-                            <td>{{ client.emaiNom }}</td> <!--nom-->
-                            <td>{{ client.emaiPrenom }}</td> <!--prénom-->
-                            <td>{{ client.emaiAdresse }}</td> <!--adresse-->
-                            <td>{{ client.emaiVille }}</td> <!--ville-->
-                            <td>{{ client.emaiPays }}</td> <!--pays-->
-                            <td>{{ client.emaiGenre }}</td> <!--genre-->
-                            <td>{{ client.emaiCSP }}</td> <!--csp-->
+                        <tr id="{{ key }}" data-info="{{ client.emaiEmail }}" data-id="{{ client.id }}">
+                          <td>{{ key }}</td> <!--idrow-->
+                          <td>{{ client.id }}</td> <!--id-->
+                          <td>{{ client.emaiEmail }}</td> <!--email-->
+                          <td>{{ client.emaiNom }}</td> <!--nom-->
+                          <td>{{ client.emaiPrenom }}</td> <!--prénom-->
+                          <td>{{ client.emaiAdresse }}</td> <!--adresse-->
+                          <td>{{ client.emaiVille }}</td> <!--ville-->
+                          <td>{{ client.emaiPays }}</td> <!--pays-->
+                          <td>{{ client.emaiGenre }}</td> <!--genre-->
+                          <td>{{ client.emaiCSP }}</td> <!--csp-->
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
 
-            <input id="suppr" type="button" class="btn btn-danger" value="{{ "Supprimer sélection"|trans }}" />
-            <!-- Button trigger modal -->
-            <button id="modal" type="button" class="btn pull-right btn-primary" data-toggle="modal" data-target="#modalAjoutClient" data-profcode="{{ etablissement.usprProfId.profCode }}" data-locale="{{ app.request.getLocale() }}">{{ "Ajout de clients"|trans }}</button>
+            <input id="vider" type="button" class="btn btn-danger" value="{{ "Vider la sélection"|trans }}" />
+            <button id="modalAjout" type="button" class="btn pull-right btn-primary" data-toggle="modal" data-target="#modalAjoutClient" data-profcode="{{ etablissement.usprProfId.profCode }}" data-locale="{{ app.request.getLocale() }}">{{ "Ajout de clients"|trans }}</button>          
             <br />
             <input id="envoi" type="button" class="btn btn-primary" value="{{ "Envoi vers email"|trans }}" />
             
+            <button id="modalSuppr" type="button" class="btn pull-right btn-danger" data-toggle="modal" data-target="#modalSupprClient" data-locale="{{ app.request.getLocale() }}">{{ "Suppression de référence clients"|trans }}</button> 
+
         </div> 
 
         <!-- container email -->
@@ -106,7 +111,7 @@
                         </button>
                         <h4 class="modal-title" id="modalLabel">Ajout de nouveaux clients</h4>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body ajout">
                         {{ form_start(form, {'method': 'post', 'action': path('wcs_emailing_import', { 'profCode': etablissement.usprProfId.profCode })}) }}
                             {{ form_row(form.emaiCSVFile) }}
                             <input type="submit" value="Upload" class="btn btn-success"/>
@@ -117,6 +122,25 @@
                 </div>
             </div>
         </div>
+
+        {# Modal suppression des clients #}
+        {# L'action du formulaire de soumission est remplacée via une fonction jquery qui récupère les id sélectionnés#}
+        <div class="modal fade" id="modalSupprClient" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header suppr">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <form method="get" action="{{ path('wcs_emailing_suppr', { 'idClient': '1' } ) }}">
+                          <input id="suppr" type="submit" class="btn btn-danger" value="{{ "Supprimer la liste ci-dessous" | trans }}" />
+                        </form>
+                    </div>
+                    <div class="modal-body listeSuppr" style="height:75px; overflow:scroll">
+                    </div>
+                </div>
+            </div>
+        </div>        
 
     {% endfor %}
 

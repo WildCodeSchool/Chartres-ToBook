@@ -43,40 +43,82 @@ class ContenuController extends Controller
 
         $profId = preg_replace("/\D/",'', $profCode);
 
-        $contenus = $em->getRepository('WCSContentBundle:Contenu')->findByContProfId($profId);
+        // $contenus = $em->getRepository('WCSContentBundle:Contenu')->findByContProfId($profId);
+        $contenus = $em->getRepository('WCSContentBundle:Contenu')->findBy(array('contProfId'=>$profId, 'contContId'=>null), array('contId'=>'desc'));
 
+        // $tab = [];
 
-        $tab = [];
+        // foreach ($contenus as $contenu)
+        // {   
 
-        foreach ($contenus as $contenu)
-        {
-            $userid = $em->getRepository('UserBundle:User')->findOneById($contenu->getContUserId());
-            if (!empty($userid)) {
-                $tab[] = array(
-                    'prenom' => $userid->getUserPrenom(),
-                    'nom' => $userid->getUserNom(),
-                    'contenu' => $contenu->getContText(),
-                    'sujet' => $contenu->getContSujet(),
-                    'file' => $contenu->getContImgExt(),
-                    'date' => $contenu->getContDate(),
-                );
-            }
-            else {
-                $tab[] = array(
-                    'prenom' => "utilisateur",
-                    'nom' => "anonyme",
-                    'contenu' => $contenu->getContText(),
-                    'sujet' => $contenu->getContSujet(),
-                    'file' => $contenu->getContImgExt(),
-                    'date' => $contenu->getContDate(),
-                );
-            }
-        }
+        //     $userid = $em->getRepository('UserBundle:User')->findOneById($contenu->getContUserId());
+        //     if (empty($userid)) {
+        //         $prenom = "utilisateur";
+        //         $nom    = "anonyme";
+        //     } else {
+        //         $prenom = $userid->getUserPrenom();
+        //         $nom    = $userid->getUserNom();
+        //     }
+            
+        //     $tab[] = array(
+        //         'id'        => $contenu ->getContId(),
+        //         'cont_id'   => $contenu ->getContContId(),
+        //         'prenom'    => $prenom,
+        //         'nom'       => $nom,
+        //         'contenu'   => $contenu->getContText(),
+        //         'sujet'     => $contenu->getContSujet(),
+        //         'file'      => $contenu->getContImgExt(),
+        //         'date'      => $contenu->getContDate(),
+        //         'childs'    => $this->getChildComment($profId, $contenu ->getContId()),
+        //     );
+            
+        // }
 
+        $tab = $this->getChildComment($profId, null);
+        // dump($tab);
+        
         return $this->render('WCSContentBundle:contenu:index.html.twig', array(
-            'contenu' => $contenus,
             'tab'=> $tab,
         ));
+    }
+
+    /**
+     * Request childs Comments.
+     *
+     */
+    public function getChildComment($profId, $idParent)
+    {
+        // dump($profId, $idParent);
+        $em = $this->getDoctrine()->getManager();
+        $commentaires = $em->getRepository('WCSContentBundle:Contenu')->findBy(array('contProfId'=>$profId, 'contContId'=>$idParent), array('contId'=>'asc'));
+
+        $comm_tab =[];
+        
+        foreach ($commentaires as $commentaire) {
+            $userid = $em->getRepository('UserBundle:User')->findOneById($commentaire->getContUserId());
+            if (empty($userid)) {
+                $prenom = "utilisateur";
+                $nom    = "anonyme";
+            } else {
+                $prenom = $userid->getUserPrenom();
+                $nom    = $userid->getUserNom();
+            }
+            
+            $comm_tab[] = array(
+                'id'        => $commentaire ->getContId(),
+                'cont_id'   => $commentaire ->getContContId(),
+                'prenom'    => $prenom,
+                'nom'       => $nom,
+                'contenu'   => $commentaire->getContText(),
+                'sujet'     => $commentaire->getContSujet(),
+                'file'      => $commentaire->getContImgExt(),
+                'date'      => $commentaire->getContDate(),
+                'childs'    => $this->getChildComment($profId, $commentaire ->getContId()),
+            );            
+        }
+        return $comm_tab;
+
+
     }
 
     /**
