@@ -1,0 +1,24 @@
+ratingproperty_index:
+    path:     /
+    defaults: { _controller: "WCSRatingBundle:RatingProperty:index" }
+    methods:  GET
+
+ratingproperty_show:
+    path:     /{id}/show
+    defaults: { _controller: "WCSRatingBundle:RatingProperty:show" }
+    methods:  GET
+
+ratingproperty_new:
+    path:     /new
+    defaults: { _controller: "WCSRatingBundle:RatingProperty:new" }
+    methods:  [GET, POST]
+
+ratingproperty_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "WCSRatingBundle:RatingProperty:edit" }
+    methods:  [GET, POST]
+
+ratingproperty_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "WCSRatingBundle:RatingProperty:delete" }
+    methods:  DELETE

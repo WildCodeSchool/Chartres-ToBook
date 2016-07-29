@@ -1,0 +1,40 @@
+{% extends 'TobookBundle::base.html.twig' %}
+
+{% block body %}
+    <h1>RatingProperty</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ratingProperty.id }}</td>
+            </tr>
+            <tr>
+                <th>Rating1</th>
+                <td>{{ ratingProperty.rating1 }}</td>
+            </tr>
+            <tr>
+                <th>Rating2</th>
+                <td>{{ ratingProperty.rating2 }}</td>
+            </tr>
+            <tr>
+                <th>Rating3</th>
+                <td>{{ ratingProperty.rating3 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ratingproperty_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('ratingproperty_edit', { 'id': ratingProperty.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
