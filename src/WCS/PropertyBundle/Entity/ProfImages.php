@@ -22,15 +22,9 @@ class ProfImages
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel", inversedBy="profimages")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $professionnel;
-
-    /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
+     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel", inversedBy="profimages")
      * @ORM\JoinColumn(name="prim_prof_id", referencedColumnName="id")
      */
     private $primProfId;
@@ -224,29 +218,6 @@ class ProfImages
     public function getPrimImgUrl()
     {
         return $this->primImgUrl;
-    }
-
-    /**
-     * Set professionnel
-     *
-     * @param \WCS\PropertyBundle\Entity\Professionnel $professionnel
-     * @return ProfImages
-     */
-    public function setProfessionnel(\WCS\PropertyBundle\Entity\Professionnel $professionnel)
-    {
-        $this->professionnel = $professionnel;
-
-        return $this;
-    }
-
-    /**
-     * Get professionnel
-     *
-     * @return \WCS\PropertyBundle\Entity\Professionnel 
-     */
-    public function getProfessionnel()
-    {
-        return $this->professionnel;
     }
 
     /**

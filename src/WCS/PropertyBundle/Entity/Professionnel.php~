@@ -36,7 +36,7 @@ class Professionnel
     private $profActif;
 
     /**
-     * @ORM\OneToMany(targetEntity="WCS\PropertyBundle\Entity\ProfImages", mappedBy="professionnel")
+     * @ORM\OneToMany(targetEntity="WCS\PropertyBundle\Entity\ProfImages", mappedBy="primProfId")
      * @ORM\JoinColumn(nullable=false)
      */
     private $profimages;
