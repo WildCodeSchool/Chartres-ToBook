@@ -707,13 +707,17 @@ body {
 	padding-top:20px;
 	position:relative;
 }
+.search-bar {
+    margin-top: 40px;
+}
 
 .result-bar
 {
 	background-color:#559827;
 	height:40px;
+    line-height: 40px;
 	text-align:center;
-	margin-top:65px;
+	margin-top:115px;
 	position:absolute;
 	width:100%;
 }
@@ -722,7 +726,7 @@ body {
 {
 	background-color:#F3E2A9;
 	height:500px;
-	margin-top:115px;
+	margin-top: 155px;
 	position:absolute;
 	width:100%;
 }
@@ -738,6 +742,7 @@ body {
 	background-color:#FFFFFF;
 	font-weight:bold;
 	padding:10px;
+    height: 44px;
 	width:100%;
 }
 
@@ -766,10 +771,9 @@ body {
 
 .filter-div
 {
-    min-height:45px;
+    min-height:44px;
     background-color:#559827;
     color:#FFFFFF;
-    padding-top:1px;
     text-align:center;
 }
 
@@ -798,9 +802,235 @@ body {
 
 }
 
+
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 998;
+  background-color: #FFFFFF;
+  opacity: 0.6;
+  display: none ;
+}
+#loadingImg {
+  position: fixed;
+  top: 44%;
+  left: 44%;
+  width: 12%;
+  height: 12%;
+  z-index: 999;
+  display: none ;
+}
+#rating {
+  display: inline-block;
+  width: 145.4px;
+  height: 26.66666666666667px;
+  margin-left: 1em;
+  background-image: url(../img/rating/rating.svg);
+  background-repeat: no-repeat;
+  list-style: none;
+  background-size: 100%;
+}
+.rating0 { background-position: left top; }
+.rating1 { background-position: left 20%; }
+.rating2 { background-position: left 40%; }
+.rating3 { background-position: left 60%; }
+.rating4 { background-position: left 80%; }
+.rating5 { background-position: left 100%; }
+
 /* Import CSV */
 
 .modal-warning {
   margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
   transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+}
+
+#resultatMap {
+
+    display: inline-block;
+    height: 100%;
+    font-size: 20px;
+    color: #FFFFFF;
+    line-height: 40px;
+    font-weight: bolder;
+}
+/*
+Tactile by Pixelarity
+pixelarity.com @pixelarity
+License: pixelarity.com/license
+*/
+
+/* Spotlight */
+
+.spotlight {
+    -moz-align-items: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.spotlight .image {
+    -moz-order: 1;
+    -webkit-order: 1;
+    -ms-order: 1;
+    order: 1;
+    border-radius: 0;
+    width: 40%;
+}
+
+.spotlight .image img {
+    border-radius: 0;
+    width: 100%;
+}
+
+.spotlight .content {
+    padding: 2em 4em 0.1em 4em ;
+    -moz-order: 2;
+    -webkit-order: 2;
+    -ms-order: 2;
+    order: 2;
+    max-width: 48em;
+    width: 60%;
+}
+
+.spotlight:nth-child(2n) {
+    -moz-flex-direction: row-reverse;
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+}
+
+.spotlight:last-child {
+    border-bottom: none;
+}
+
+@media screen and (max-width: 1280px) {
+
+    /* .spotlight .image {
+    width: 45%;
+} */
+
+    .spotlight .content {
+        width: 55%;
+    }
+
+}
+
+@media screen and (max-width: 980px) {
+
+    .spotlight {
+        border-bottom: none;
+        display: block;
+    }
+
+    .spotlight .image {
+        display: block;
+        width: 100%;
+    }
+
+    .spotlight .content {
+        padding: 3em 3em 1em 3em ;
+        display: block;
+        max-width: none;
+        text-align: center;
+        width: 100%;
+    }
+
+    .spotlight .content .major:after {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+
+@media screen and (max-width: 736px) {
+
+    .spotlight .content {
+        padding: 3em 2em 1em 2em ;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+
+    .spotlight .content {
+        padding: 2.5em 2em 0.5em 2em ;
+    }
+
+}
+
+.spotlight {
+    border-bottom-color: rgba(144, 144, 144, 0.3);
+}
+
+/*
+Tactile by Pixelarity
+pixelarity.com @pixelarity
+License: pixelarity.com/license*/
+#elements {
+    display: inline;
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+.infoprix {
+    margin-left: 5%;
+    font-size: 16px;
+}
+.content {
+    margin-left: auto;
+    margin-right: auto;
+}
+.button {
+    color: rgb(102, 179, 47);
+}
+.button.detail {
+    margin-top: -6px;
+}
+.image a img {
+
+    display: inline-block;
+    min-width: 762px;
+    max-width: 762px;
+    max-height: 420px;
+    min-height: 420px;
+}
+/* Class qui supprime les marges negative de bootsrap */
+.marg-row {
+    margin: 0 !important;
+}
+/* Class qui supprime les paddings de bootsrap */
+.padd-row {
+    padding: 0 !important;
+}
+.flex {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.flex u {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+
+}
+#pagination {
+    max-height: 46px;
+}
+.pagination{
+    margin: 0px !important;
+}
+.badge-mr {
+    margin-right: 10px;
+    margin-bottom: 4px;
+    background-color: #FFFFFF;
+    color: #559827;
+    font-size: 18px;
 }

@@ -33,7 +33,7 @@ class UsersProfessionnel
      * @var integer
      *
      * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Professionnel")
-     * @ORM\JoinColumn(name="uspr_prof_id", referencedColumnName="prof_id")
+     * @ORM\JoinColumn(name="uspr_prof_id", referencedColumnName="id")
      */
     private $usprProfId;
 

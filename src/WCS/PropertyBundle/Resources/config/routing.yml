@@ -17,3 +17,15 @@ Etablissement:
     defaults: {_controller: WCSPropertyBundle:ShowEtablissement:Etablissement }
     options:
         expose: true
+
+SortingEtablissement:
+    path:     /fr/SortingEtablissement
+    defaults: {_controller: WCSPropertyBundle:ShowEtablissement:SortingEtablissement }
+    options:
+        expose: true
+
+StarEtablissement:
+    path:     /fr/StarEtablissement
+    defaults: {_controller: WCSPropertyBundle:ShowEtablissement:StarEtablissement }
+    options:
+        expose: true

@@ -17,17 +17,14 @@ $(document).ready(function()
             bouton = 3;
         }
 
-        if ($('.case'+bouton).hasClass("open"))
-        {
-            $('.pageother').css("display","none");
-            $('.case'+bouton).removeClass("open");
-        }
-        else
+        if (!$('.case'+bouton).hasClass("open"))
         {
             $('.pageother').css("display","none");
             $('.pageother').removeClass("open");
             $('.case'+bouton).css("display","block");
             $('.case'+bouton).addClass("open");
+            $('h3.active').removeClass("active");
+            $('.but'+bouton +' h3').addClass("active");
         }
     });
 

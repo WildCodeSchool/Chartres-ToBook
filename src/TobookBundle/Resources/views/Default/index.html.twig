@@ -11,29 +11,32 @@
 
 		<h3>{{ 'Servez-vous'|trans }} !</h3>
 
-		<form name="mainSearch" method="GET" action="{{ path('tobook_search') }}">
-			<input name="location" id="autocomplete" type="text" onfocus="initautocomplete()" placeholder="Ville / Code postal" class="input-style-1">
-			<select name="category" id="category" class="input-style-1">
-				<option value='1'selected>{{ "Hôtels"|trans }}</option>
-                <option value='3'>{{ "Chambres d'hôtes"|trans }}</option>
-                <option value='2'>{{ "Gîtes"|trans }}</option>
-                <option value='5'>{{ "Restaurants"|trans }}</option>
-                <option value='8'>{{ "Musées"|trans }}</option>
-                <option value='6'>{{ "Restaurants gastronomique"|trans }}</option>
-                <!--
-                <option value='4'>{{ "Camping"|trans }}</option>
-                <option value='7'>{{ "Parcs de loisirs"|trans }}</option>
-                <option value='9'>{{ "Chateaux"|trans }}</option>
-                <option value='10'>{{ "Hébergements"|trans }}</option>
-                <option value='11'>{{ "Tables d'hotes"|trans }}</option>
-            	-->                
-			</select>
-			<input name="latitude"  type="hidden" value=""/>
-			<input name="longitude" type="hidden" value=""/>
-			<input name="address" type="hidden" value=""/>
-			<p>
-				<input type="submit" class="input-style-2 btn btn-success" value="{{ 'Rechercher'|trans }}">
-			</p>
+		<form class="row" name="mainSearch" id='formHome' action="{{ path('tobook_search') }}">
+			<div class="col-md-6 col-md-offset-3">
+				<input id="autocomplete" onfocus="initautocomplete()" class="input-style-5" type="text" placeholder="Entrez votre recherche">
+			</div>
+			<div class="col-md-6 col-md-offset-3">
+				<select name="category" id="category" class="input-style-5">
+					<option value='1'selected>{{ "Hôtels"|trans }}</option>
+	                <option value='3'>{{ "Chambres d'hôtes"|trans }}</option>
+	                <option value='2'>{{ "Gîtes"|trans }}</option>
+	                <option value='5'>{{ "Restaurants"|trans }}</option>
+	                <option value='8'>{{ "Musées"|trans }}</option>
+	                <option value='6'>{{ "Restaurants gastronomique"|trans }}</option>
+	                {#
+	                <option value='4'>{{ "Camping"|trans }}</option>
+	                <option value='7'>{{ "Parcs de loisirs"|trans }}</option>
+	                <option value='9'>{{ "Chateaux"|trans }}</option>
+	                <option value='10'>{{ "Hébergements"|trans }}</option>
+	                <option value='11'>{{ "Tables d'hotes"|trans }}</option>
+	            	#}                
+				</select>
+			</div>
+			<div class="col-md-6 col-md-offset-3">
+				<p>
+					<input type="submit" class="input-style-2 btn btn-success" value="{{ 'Rechercher'|trans }}">
+				</p>
+			</div>
 		</form>
 
 	</div>

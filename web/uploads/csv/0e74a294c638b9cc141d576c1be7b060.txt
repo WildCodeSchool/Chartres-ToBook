@@ -1,0 +1,7 @@
+email,nom,prenom,adresse,ville,pays,genre,csp
+testpro1@test.com,testpro,tt,"12, rue de la paix",paris,france,m,pro
+testclient1@test.com,testclient,yy,"16, rue de la paix",paris,france,f,touriste
+testpro2@test.com,testpro,ii,"12, rue de la paix",paris,france,m,pro
+testclient2@test.com,testclient,∞,"18, rue de la paix",paris,france,f,touriste
+testclient3@test.com,testclient,∞,"18, rue de la paix",paris,france,f,touriste
+testclient4@test.com,testclient,uu,"19, rue de la paix",paris,france,f,touriste
