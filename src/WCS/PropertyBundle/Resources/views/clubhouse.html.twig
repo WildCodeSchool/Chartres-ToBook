@@ -40,18 +40,9 @@
 		<div class="col-md-12 club-head">
 		    <h4>
 		        <span>{{ "Note des clients :"|trans }}</span>
-		        <span>
-		        	<!-- Coeurs (actuellement géré avec les étoiles) -->
-		            {% for i in 1..5 %}
-		                <a href="{{ path('rating-property', { 'profCode': etablissement.profCode, 'note1': i, 'note2': i, 'note3': i }) }}" title="Voter {{i}} coeur(s)">
-		                {% if i <= etablissement.profEtoiles %}
-		                    	<img src="{{ asset('img/picto/jauge_coeur_1.png') }}" alt="Coeur allumé" />
-		                {% else %}
-		                    <img src="{{ asset('img/picto/jauge_coeur_0.png') }}" alt="Coeur éteind" />
-		                {% endif %}
-		                </a>
-		            {% endfor %}
+		        <span>{{ render(controller('WCSRatingBundle:RatingProperty:index', { 'profCode': etablissement.profCode })) }}
 		        </span>
+		        <a data-toggle="modal" href="" data-target="#modal-vote">Noter cet établissement </a>
 
 		        <!-- suivre cet hotel -->
 		        <span>
@@ -289,5 +280,46 @@
 		</div>
 
 	</div>
+	
+	{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+		<div class="modal fade" id="modal-vote" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content modal-vote">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Laisser un avis</h4>
+					</div>
+					<div class="modal-body">
+						{{ render(controller('WCSRatingBundle:RatingProperty:new', { 'profCode': etablissement.profCode })) }}
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% else %}
+
+		<div class="modal fade" id="modal-vote" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content modal-vote">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Attention</h4>
+					</div>
+					<div class="modal-body">
+						<p>Vous devez être connecté pour laisser votre avis !</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endif %}
+
 
 {% endblock %}

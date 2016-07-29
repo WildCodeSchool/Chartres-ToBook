@@ -1,5 +1,4 @@
 /* CLUB-HOUSE */
-
 .club-head
 {
     padding:10px 0px 10px 0px;
@@ -122,6 +121,12 @@ div.but h3.active
     -o-filter: grayscale(100%);
     -ms-filter: grayscale(100%);
     filter: grayscale(100%);
+}
+/* Notation */
+
+#modal-vote {
+    width: 650px;
+    margin: 80px auto;
 }
 
 /* CLUB-HOUSE gestion des onglets */

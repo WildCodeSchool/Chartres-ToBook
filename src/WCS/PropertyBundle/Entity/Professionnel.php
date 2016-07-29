@@ -799,7 +799,7 @@ class Professionnel
     /**
      * Get profCateId
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getProfCateId()
     {
