@@ -1,7 +1,7 @@
 /***********************************************************\
  author - Kennouche Omar Wild Code School chartres Session 1
 \***********************************************************/
-
+console.log("toto");
 // On initialise la variable autocomplete
 var autocomplete;
 // On declare une variable qui va stocker les coordonners latitude et longitude
@@ -222,7 +222,7 @@ function showTextResult(address, nbResult) {
     $('#resultatMap').text( 'Effectuer votre recherche' );  
   }else{
     $('#resultatMap').before("<span class='badge badge-mr'>" + nbResult + "</span>")
-    $('#resultatMap').text( "résultat pour "+ address );
+    $('#resultatMap').text( "résultats pour "+ address );
   }
 }
 // Fonction qui execute une requete une ajax.
@@ -357,13 +357,13 @@ function affichageResultats(results) {
         break;
     }
     // Apres l'element identifier par l'id #two on va ajouter tous les elements qui ce trouve dans la fonction append.
-    $('#two').append("<section class='spotlight listEtablissement'>"
-            +"<div class='image'>"
+    $('#two').append("<section class='spotlight listEtablissement row'>"
+            +"<div class='image col-md-5'>"
             +"<a href=''>"
             +"<img src=" + assetEtablissement + detail.path + ">"
             +"</a>"
             +"</div>"
-            +"<div class='content'>"
+            +"<div class='content col-md-7'>"
             +"<h3 class='major'><a href='club-house.php?code=capricorne'>" + detail.name + "</a>" + etoile + "</h3>"
             +"<p class='descriptif_hotel'>" + detail.description + "</p>"
             +"<div id='prix'>"

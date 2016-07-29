@@ -997,7 +997,7 @@ License: pixelarity.com/license*/
 .image a img {
 
     display: inline-block;
-    min-width: 762px;
+    /*min-width: 762px;*/
     max-width: 762px;
     max-height: 420px;
     min-height: 420px;
