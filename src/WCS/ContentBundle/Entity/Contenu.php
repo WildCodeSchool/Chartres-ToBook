@@ -151,7 +151,7 @@ class Contenu
     /**
      * @ORM\Column(type="string", nullable=true)
      *
-     * @Assert\File(mimeTypes={ "image/jpeg", "image/pjpeg", "image/png" })
+     * @Assert\File(mimeTypes={ "image/gif", "image/jpeg", "image/pjpeg", "image/png" })
      */
     private $contImgExt;
 
