@@ -30,11 +30,11 @@ class ProfessionnelType extends AbstractType
             'expanded' => false,
             'required' => true,
         ))
-            ->add('profCateId', 'entity', 
-                array ('label' => 'Catégorie',
-                       'class' => 'WCSPropertyBundle:Categorie', 
-                       'property' => 'cateNom',
-                       'required' => true))
+            // ->add('profCateId', 'entity', 
+            //     array('label' => 'Catégorie',
+            //            'class' => 'WCSPropertyBundle:Categorie', 
+            //            'property' => 'cateNom',
+            //            'required' => true))
             ->add('profAdd1')
             ->add('profAdd2')
             ->add('profCp')

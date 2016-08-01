@@ -5,6 +5,11 @@
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
+        <select name="test">
+            {% for cat in cate %}
+                <option> {{ cat.cateNom }}</option>
+            {% endfor %}
+        </select>
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 
