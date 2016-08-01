@@ -371,7 +371,7 @@ function affichageResultats(results) {
             +"<img src='http://localhost/Tobook-Chartres/web/img/jauge_coeur_1.png' title='Note' >"
             +"</h2>"
             +"<p class='infoprix'>à partir de: <span>" + detail.prixmini + "€</span></p>"
-            +"<a href='club-house.php?code=capricorne' class='button detail'>Plus de détails</a>"
+            +"<a href='clubhouse/" + detail.page +"' class='button detail'>Plus de détails</a>"
             +"</div>"
             +"<p class='vue'>Evalué par <span>25</span> personnes</p>"
             +"</div>"
