@@ -34,7 +34,7 @@ class ResettingController extends Controller
      * Request reset user password: show form
      */
     /**
-    * @Route("/{_locale}/resetting/request", name="user_resetting_request")
+    * @Route("/resetting/request", name="user_resetting_request")
     */ 
     public function requestAction()
     {
@@ -45,7 +45,7 @@ class ResettingController extends Controller
      * Request reset user password: submit form and send email
      */
     /**
-    * @Route("/{_locale}/resetting/send-email", name="user_resetting_send_email")
+    * @Route("/resetting/send-email", name="user_resetting_send_email")
     */ 
     public function sendEmailAction(Request $request)
     {
@@ -83,7 +83,7 @@ class ResettingController extends Controller
      * Tell the user to check his email provider
      */
     /**
-    * @Route("/{_locale}/resetting/check-email", name="user_resetting_check_email")
+    * @Route("/resetting/check-email", name="user_resetting_check_email")
     */ 
     public function checkEmailAction(Request $request)
     {
@@ -103,7 +103,7 @@ class ResettingController extends Controller
      * Reset user password
      */
     /**
-    * @Route("/{_locale}/resetting/reset/{token}", name="user_resetting_reset")
+    * @Route("/resetting/reset/{token}", name="user_resetting_reset")
     */ 
     public function resetAction(Request $request, $token)
     {

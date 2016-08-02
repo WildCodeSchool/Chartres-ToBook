@@ -1,6 +1,6 @@
 wcs_content_contenu:
     resource: "@WCSContentBundle/Resources/config/routing/contenu.yml"
-    prefix:   /{_locale}/contenu
+    prefix:   /contenu
 
 contenu_new:
     path:     /contenu/new

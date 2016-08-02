@@ -1,7 +1,7 @@
 wcs_rating_ratingproperty:
     resource: "@WCSRatingBundle/Resources/config/routing/ratingproperty.yml"
-    prefix:  /{_locale}/clubhouse/{profCode}/rating
+    prefix:  /clubhouse/{profCode}/rating
 
 rating-property:
-    path:     /{_locale}/rating/property/{profCode}
+    path:     /rating/property/{profCode}
     defaults: {_controller: WCSRatingBundle:Default:ratingProperty }

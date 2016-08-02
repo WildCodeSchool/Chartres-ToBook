@@ -1,7 +1,6 @@
 /***********************************************************\
  author - Kennouche Omar Wild Code School chartres Session 1
 \***********************************************************/
-console.log("toto");
 // On initialise la variable autocomplete
 var autocomplete;
 // On declare une variable qui va stocker les coordonners latitude et longitude
@@ -231,7 +230,7 @@ function showEtablissementMarker(latitudeSearch, longitudeSearch){
   assetMarker = document.getElementById('assetMarker').getAttribute('src');
 
   $.ajax({
-      url: Routing.generate('showMap'),
+      url: Routing.generate('showMap', {'_locale': 'fr'}),
       type: 'POST',
       dataType: "json",
       data: {'lat': latitudeSearch, 'lng': longitudeSearch },
@@ -256,7 +255,7 @@ function showEtablissementDetail(latitudeSearch, longitudeSearch){
   assetEtablissement = document.getElementById('assetEtablissement').getAttribute('src');
 
   $.ajax({
-      url: Routing.generate('Etablissement'),
+      url: Routing.generate('Etablissement', {'_locale': 'fr'}),
       type: 'POST',
       dataType: "json",
       data: {'lat': latitudeSearch, 'lng': longitudeSearch },

@@ -3,22 +3,24 @@
     <h1><a href="{{ path('tobook_homepage') }}">Tobook<span>.club</span></a></h1>
 
     <span>
-        <form method="POST" action="{{ path('changeLocale') }}">
-            <button class="langdevise">Langue &nbsp;</button>
-            <select name="langue">
-                <option {% if app.request.locale == 'fr' %}selected{% endif %}>fr</option>
-                <option {% if app.request.locale == 'en' %}selected{% endif %}>en</option>
-                <option {% if app.request.locale == 'de' %}selected{% endif %}>de</option>               
-            </select>
-
-            <span class="barre">&nbsp; &nbsp; | &nbsp; &nbsp;</span>
-            <button class="langdevise">Devise &nbsp;</button>
-            <select>
-                <option>EUR</option>
-                <option>GBP</option>
-                <option>USD</option>
-            </select>
-        </form>
+        <ul class="nav navbar-nav navbar-left"> 
+            <li class="dropdown"> 
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'Langue'|trans }}</a> 
+                <ul class="dropdown-menu" role="menu"> 
+                    <li><a tabindex="-1" href="{{ path(app.request.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'en'})) }}">English</a></li> 
+                    <li><a tabindex="-1" href="{{ path(app.request.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'fr'})) }}">Français</a></li> 
+                    <li><a tabindex="-1" href="{{ path(app.request.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'de'})) }}">Deutsch</a></li> 
+                </ul>
+            </li>
+            <li class="dropdown"> 
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ 'Devise'|trans }}</a> 
+                <ul class="dropdown-menu" role="menu"> 
+                    <li><a tabindex="-1" href="#">EUR</a></li> 
+                    <li><a tabindex="-1" href="#">GBP</a></li> 
+                    <li><a tabindex="-1" href="#">USD</a></li> 
+                </ul>
+            </li>
+        </ul>
     </span>
 
     <a href="https://www.facebook.com/Roomservyou-454428541427992/?fref=nf" target="_blank">

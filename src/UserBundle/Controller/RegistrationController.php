@@ -32,7 +32,7 @@ use FOS\UserBundle\Model\UserInterface;
 class RegistrationController extends Controller
 {
     /**
-    * @Route("/{_locale}/user/register", name="user_register")
+    * @Route("/user/register", name="user_register")
     */
     public function registerAction(Request $request)
     {
@@ -93,7 +93,7 @@ class RegistrationController extends Controller
      * Tell the user to check his email provider
      */
     /**
-    * @Route("/{_locale}/user/register/check", name="user_registration_check")
+    * @Route("/user/register/check", name="user_registration_check")
     */    
     public function checkEmailAction()
     {
@@ -114,7 +114,7 @@ class RegistrationController extends Controller
      * Receive the confirmation token from user email provider, login the user
      */
     /**
-    * @Route("/{_locale}/user/register/confirm", name="fos_user_registration_confirm")
+    * @Route("/user/register/confirm", name="fos_user_registration_confirm")
     */   
     public function confirmAction(Request $request, $token)
     {

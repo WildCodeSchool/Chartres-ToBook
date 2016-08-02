@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 class SecurityController extends Controller
 {
     /**
-    * @Route("/{_locale}/user/login", name="user_login")
+    * @Route("/user/login", name="user_login")
     */
     public function loginAction(Request $request)
     {
@@ -84,7 +84,7 @@ class SecurityController extends Controller
     }
 
     /**
-    * @Route("/{_locale}/user/login/check", name="user_login_check")
+    * @Route("/user/login/check", name="user_login_check")
     */
     public function checkAction()
     {

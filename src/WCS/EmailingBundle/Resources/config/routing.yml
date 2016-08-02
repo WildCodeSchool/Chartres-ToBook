@@ -1,19 +1,19 @@
 wcs_emailing_homepage:
-    path:     /{_locale}/emailing/
+    path:     /emailing/
     defaults: { _controller: WCSEmailingBundle:Default:index }
 
 wcs_emailing_import:
-    path:     /{_locale}/emailing/import/{profCode}
+    path:     /emailing/import/{profCode}
     defaults: { _controller: WCSEmailingBundle:Default:importCSV }
     options:
         expose: true
 
 send_mail:
-    path:     /{_locale}/emailing/send
+    path:     /emailing/send
     defaults: { _controller: WCSEmailingBundle:Default:sendmail }
 
 wcs_emailing_suppr:
-    path:     /{_locale}/emailing/suppr/{idClient}
+    path:     /emailing/suppr/{idClient}
     defaults: { _controller: WCSEmailingBundle:Default:suppr }
     options:
         expose: true
