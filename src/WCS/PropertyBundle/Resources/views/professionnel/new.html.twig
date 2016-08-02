@@ -1,21 +1,21 @@
 {% extends 'TobookBundle::base.html.twig' %}
 
 {% block body %}
-    <h1>Professionnel creation</h1>
+    {# <h1>Professionnel creation</h1> #}
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+        {{ form_widget(form) }}{# 
         <select name="categorie">
             {% for cat in cate %}
                 <option> {{ cat.cateNom }}</option>
             {% endfor %}
-        </select>
+        </select> #}
         <input type="submit" value="Create" />
     {{ form_end(form) }}
-
+{# 
     <ul>
         <li>
             <a href="{{ path('professionnel_index') }}">Back to the list</a>
         </li>
-    </ul>
+    </ul> #}
 {% endblock %}

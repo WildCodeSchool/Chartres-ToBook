@@ -15,7 +15,7 @@ class ProfImagesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->remove('primDefaut')
+            ->add('primDefaut')
             ->remove('primOrd')
             ->remove('primExt')
             ->remove('primNom')

@@ -6,9 +6,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use WCS\PropertyBundle\Entity\Professionnel;
+use WCS\PropertyBundle\Entity\ProfImages;
 use WCS\PropertyBundle\Form\ProfessionnelType;
 use UserBundle\Entity\UsersProfessionnel;
 use UserBundle\Form\UsersProfessionnelType;
+use WCS\PropertyBundle\Form\MergedFormType;
 use WCS\PropertyBundle\Entity\ProfCate;
 
 /**
@@ -38,34 +40,64 @@ class ProfessionnelController extends Controller
      */
     public function newAction(Request $request)
     {
-        //On créer un nouvel objet pour l'entité professionnel, ainsi qu'un autre pour chaque dépendance de ce dernier.
         $professionnel = new Professionnel();
         $usersprofessionnel = new UsersProfessionnel();
         $profCate = new ProfCate();
+        $profImg = new ProfImages();
+
+        $formData['professionnel'] = $professionnel;
+        $formData['profimg'] = $profImg;
+
+        $form = $this->createForm(new MergedFormType(), $formData);
+        $form->handleRequest($request);
 
         $em = $this->getDoctrine()->getManager();
-        $cate = $em->getRepository('WCSPropertyBundle:Categorie')->findAll();
-        $form = $this->createForm('WCS\PropertyBundle\Form\ProfessionnelType', $professionnel);
-        $form->handleRequest($request);
+        dump($formData);
 
         if ($form->isSubmitted() && $form->isValid()) {
             
-            //L'établissement est crée avec le formulaire de création d'hotel accessible via les utilisateurs, il est donc actif.
             $professionnel->setProfActif(1);
-
-            //On récupère la réponse de l'utilisateur concernant la catégorie de son établissement.
+            $usersprofessionnel->setUsprDroits(0);
+            $profImg->setPrimOrd(1);
+            $profImg->setPrimExt('Non utilisé');
+            
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $cateNom = $request->request->get('categorie');
-
-            //Ici on récupère la catégorie correspondante au choix de l'utilisateur.
             $cateForm = $em->getRepository('WCSPropertyBundle:Categorie')->findOneByCateNom($cateNom);
+            $liste_etablissements = $em->getRepository('WCSPropertyBundle:Professionnel');
+            $profNom = $professionnel->getProfNom();
+            
+            //On enregistre tout en base
+            $em->persist($professionnel);
+            $em->persist($profImg);
+            $em->persist($profCate);
+            $em->persist($usersprofessionnel);
+            
+            $em->flush();
+
+        }
+        // //On créer un nouvel objet pour l'entité professionnel, ainsi qu'un autre pour chaque dépendance de ce dernier.
+        // $professionnel = new Professionnel();
+        // $usersprofessionnel = new UsersProfessionnel();
+        // $profCate = new ProfCate();
+
+        // $em = $this->getDoctrine()->getManager();
+        // $cate = $em->getRepository('WCSPropertyBundle:Categorie')->findAll();
+        // $form = $this->createForm('WCS\PropertyBundle\Form\ProfessionnelType', $professionnel);
+        // $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            L'établissement est crée avec le formulaire de création d'hotel accessible via les utilisateurs, il est donc actif.
+
+            On récupère la réponse de l'utilisateur concernant la catégorie de son établissement.
+
+            Ici on récupère la catégorie correspondante au choix de l'utilisateur.
 
             //Ici on récupère l'utilisateur actif.
-            $user = $this->get('security.token_storage')->getToken()->getUser();
 
-            $liste_etablissements = $em->getRepository('WCSPropertyBundle:Professionnel');
 
             //On récupère le ProfNom de l'établissement en cours de création afin de préparer la création du profCode
-            $profNom = $professionnel->getProfNom();
 
             //On transforme le profNom pour retirer les accents et espaces grâce à la fonction présente plus bas
             $newProfNom = $this->createProfCode($profNom);
@@ -76,7 +108,6 @@ class ProfessionnelController extends Controller
             $professionnel->setProfCode($newProfNom);
 
             //On remplit la table de lien usersprofessionnel
-            $usersprofessionnel->setUsprDroits(0);
             $usersprofessionnel->setUsprUserId($user);
             $usersprofessionnel->setUsprProfId($professionnel);
 
@@ -116,7 +147,7 @@ class ProfessionnelController extends Controller
         return $this->render('WCSPropertyBundle:professionnel:new.html.twig', array(
             'professionnel' => $professionnel,
             'form' => $form->createView(),
-            'cate' => $cate,
+            // 'cate' => $cate,
         ));
     }
 

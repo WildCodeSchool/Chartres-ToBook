@@ -58,6 +58,7 @@ class ProfessionnelType extends AbstractType
             ->remove('profCode')
             ->remove('profActif')
         ;
+
     }
     
     /**
