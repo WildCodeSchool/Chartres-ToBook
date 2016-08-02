@@ -5,7 +5,7 @@
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <select name="test">
+        <select name="categorie">
             {% for cat in cate %}
                 <option> {{ cat.cateNom }}</option>
             {% endfor %}

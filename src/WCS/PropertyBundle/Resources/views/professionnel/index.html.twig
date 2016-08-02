@@ -37,7 +37,7 @@
         <tbody>
         {% for professionnel in professionnels %}
             <tr>
-                <td><a href="{{ path('professionnel_show', { 'id': professionnel.profId }) }}">{{ professionnel.profId }}</a></td>
+                <td><a href="{{ path('professionnel_show', { 'id': professionnel.Id }) }}">{{ professionnel.Id }}</a></td>
                 <td>{% if professionnel.profActif %}Yes{% else %}No{% endif %}</td>
                 <td>{{ professionnel.profCode }}</td>
                 <td>{{ professionnel.profEtoiles }}</td>
@@ -65,10 +65,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('professionnel_show', { 'id': professionnel.profId }) }}">show</a>
+                            <a href="{{ path('professionnel_show', { 'id': professionnel.Id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('professionnel_edit', { 'id': professionnel.profId }) }}">edit</a>
+                            <a href="{{ path('professionnel_edit', { 'id': professionnel.Id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>

@@ -38,49 +38,79 @@ class ProfessionnelController extends Controller
      */
     public function newAction(Request $request)
     {
+        //On créer un nouvel objet pour l'entité professionnel, ainsi qu'un autre pour chaque dépendance de ce dernier.
         $professionnel = new Professionnel();
+        $usersprofessionnel = new UsersProfessionnel();
+        $profCate = new ProfCate();
+
         $em = $this->getDoctrine()->getManager();
         $cate = $em->getRepository('WCSPropertyBundle:Categorie')->findAll();
         $form = $this->createForm('WCS\PropertyBundle\Form\ProfessionnelType', $professionnel);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            //L'établissement est crée avec le formulaire de création d'hotel accessible via les utilisateurs, il est donc actif.
             $professionnel->setProfActif(1);
 
-            $usersprofessionnel = new UsersProfessionnel();
-            $profCate = new ProfCate();
+            //On récupère la réponse de l'utilisateur concernant la catégorie de son établissement.
+            $cateNom = $request->request->get('categorie');
 
-            $cateNom = $request->request->get('test');
+            //Ici on récupère la catégorie correspondante au choix de l'utilisateur.
             $cateForm = $em->getRepository('WCSPropertyBundle:Categorie')->findOneByCateNom($cateNom);
 
+            //Ici on récupère l'utilisateur actif.
             $user = $this->get('security.token_storage')->getToken()->getUser();
+
             $liste_etablissements = $em->getRepository('WCSPropertyBundle:Professionnel');
 
+            //On récupère le ProfNom de l'établissement en cours de création afin de préparer la création du profCode
             $profNom = $professionnel->getProfNom();
-            dump($profNom);
-            $profId = $professionnel->getId();
-            dump($profId);
-            $newProfNom = $this->createProfCode($profNom);
-            // dump($profCode);
 
+            //On transforme le profNom pour retirer les accents et espaces grâce à la fonction présente plus bas
+            $newProfNom = $this->createProfCode($profNom);
+
+            //Ne pouvant pas récupérer l'id avant de créer l'entrée,
+            //On ne peut pas créer le profCode (ProfNom+Id) on va donc procéder en deux temps
+            //Tout d'abord on remplit le champs avec seulement le nom transformer (sans espaces/accents)
             $professionnel->setProfCode($newProfNom);
 
+            //On remplit la table de lien usersprofessionnel
             $usersprofessionnel->setUsprDroits(0);
             $usersprofessionnel->setUsprUserId($user);
             $usersprofessionnel->setUsprProfId($professionnel);
 
+            //On remplit la table de lien profCate
             $profCate->setPrcaCateId($cateForm);
             $profCate->setPrcaProfId($professionnel);
 
+            //On enregistre tout en base
             $em->persist($professionnel);
             $em->persist($profCate);
             $em->persist($usersprofessionnel);
             
             $em->flush();
 
+            //Une fois les entrées créés en base on va récupérer Professionnel pour modifier le profCode à l'aide de l'id
+            $prof = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneByProfCode($newProfNom);
 
+            //On récupère l'id
+            $profId = $prof->getId();
 
-            return $this->redirectToRoute('professionnel_new', array('id' => $professionnel->getdedeId()));
+            //On récupère le profCode (qui ne contient pour l'instant que le nom)
+            $profCode = $prof->getProfCode();
+
+            //On créer le nouveau profCode (ancien+id)
+            $newProfCode = $profCode.$profId;
+
+            //On remplit le champs profCode
+            $prof->setProfCode($newProfCode);
+
+            //On enregistre en base
+            $em->persist($professionnel);
+            $em->flush();
+
+            return $this->redirectToRoute('professionnel_show', array('id' => $professionnel->getId()));
         }
 
         return $this->render('WCSPropertyBundle:professionnel:new.html.twig', array(
@@ -138,8 +168,18 @@ class ProfessionnelController extends Controller
         $form = $this->createDeleteForm($professionnel);
         $form->handleRequest($request);
 
+        $profId = $professionnel->getId();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            //On récupère les dépendances d'un établissement pour les supprimer également
+            $userProf = $em->getRepository('UserBundle:UsersProfessionnel')->findOneByUsprProfId($profId);
+            $profCate = $em->getRepository('WCSPropertyBundle:ProfCate')->findOneByPrcaProfId($profId);
+
+            //On les supprimes
+            $em->remove($userProf);
+            $em->remove($profCate);
             $em->remove($professionnel);
             $em->flush();
         }
@@ -157,7 +197,7 @@ class ProfessionnelController extends Controller
     private function createDeleteForm(Professionnel $professionnel)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('professionnel_delete', array('id' => $professionnel->getProfId())))
+            ->setAction($this->generateUrl('professionnel_delete', array('id' => $professionnel->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;
