@@ -44,6 +44,8 @@ class ProfessionnelController extends Controller
         $usersprofessionnel = new UsersProfessionnel();
         $profCate = new ProfCate();
         $profImg = new ProfImages();
+        $em = $this->getDoctrine()->getManager();
+        $cate = $em->getRepository('WCSPropertyBundle:Categorie')->findAll();
 
         $formData['professionnel'] = $professionnel;
         $formData['profimg'] = $profImg;
@@ -51,77 +53,48 @@ class ProfessionnelController extends Controller
         $form = $this->createForm(new MergedFormType(), $formData);
         $form->handleRequest($request);
 
-        $em = $this->getDoctrine()->getManager();
         dump($formData);
 
         if ($form->isSubmitted() && $form->isValid()) {
             
+
             $professionnel->setProfActif(1);
             $usersprofessionnel->setUsprDroits(0);
             $profImg->setPrimOrd(1);
             $profImg->setPrimExt('Non utilisé');
+            $profImg->setPrimDefaut(0);
             
             $user = $this->get('security.token_storage')->getToken()->getUser();
             $cateNom = $request->request->get('categorie');
             $cateForm = $em->getRepository('WCSPropertyBundle:Categorie')->findOneByCateNom($cateNom);
             $liste_etablissements = $em->getRepository('WCSPropertyBundle:Professionnel');
-            $profNom = $professionnel->getProfNom();
-            
-            //On enregistre tout en base
-            $em->persist($professionnel);
-            $em->persist($profImg);
-            $em->persist($profCate);
-            $em->persist($usersprofessionnel);
-            
-            $em->flush();
-
-        }
-        // //On créer un nouvel objet pour l'entité professionnel, ainsi qu'un autre pour chaque dépendance de ce dernier.
-        // $professionnel = new Professionnel();
-        // $usersprofessionnel = new UsersProfessionnel();
-        // $profCate = new ProfCate();
-
-        // $em = $this->getDoctrine()->getManager();
-        // $cate = $em->getRepository('WCSPropertyBundle:Categorie')->findAll();
-        // $form = $this->createForm('WCS\PropertyBundle\Form\ProfessionnelType', $professionnel);
-        // $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            L'établissement est crée avec le formulaire de création d'hotel accessible via les utilisateurs, il est donc actif.
-
-            On récupère la réponse de l'utilisateur concernant la catégorie de son établissement.
-
-            Ici on récupère la catégorie correspondante au choix de l'utilisateur.
-
-            //Ici on récupère l'utilisateur actif.
-
 
             //On récupère le ProfNom de l'établissement en cours de création afin de préparer la création du profCode
-
+            $profNom = $professionnel->getProfNom();
             //On transforme le profNom pour retirer les accents et espaces grâce à la fonction présente plus bas
             $newProfNom = $this->createProfCode($profNom);
-
+            
             //Ne pouvant pas récupérer l'id avant de créer l'entrée,
             //On ne peut pas créer le profCode (ProfNom+Id) on va donc procéder en deux temps
             //Tout d'abord on remplit le champs avec seulement le nom transformer (sans espaces/accents)
             $professionnel->setProfCode($newProfNom);
-
+            
             //On remplit la table de lien usersprofessionnel
             $usersprofessionnel->setUsprUserId($user);
             $usersprofessionnel->setUsprProfId($professionnel);
-
+            
             //On remplit la table de lien profCate
             $profCate->setPrcaCateId($cateForm);
             $profCate->setPrcaProfId($professionnel);
 
+            
             //On enregistre tout en base
             $em->persist($professionnel);
             $em->persist($profCate);
             $em->persist($usersprofessionnel);
-            
-            $em->flush();
 
+            $em->flush();
+            
             //Une fois les entrées créés en base on va récupérer Professionnel pour modifier le profCode à l'aide de l'id
             $prof = $em->getRepository('WCSPropertyBundle:Professionnel')->findOneByProfCode($newProfNom);
 
@@ -137,17 +110,34 @@ class ProfessionnelController extends Controller
             //On remplit le champs profCode
             $prof->setProfCode($newProfCode);
 
+            //Ici c'est la partie upload d'image
+
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $profImg->getPrimImgUrl();
+
+            // Génère un nom unique avant d'enregistrer l'image
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // Déplace le fichier dans web/uploads/img/{profCode}
+            $file->move(
+                $this->getParameter('hotelimg_directory').$newProfCode,
+                $fileName
+            );
+
+            // met à jour la table pour contenir le nom
+            // au lieu de son contenu
+            $profImg->setPrimImgUrl($fileName);
+
             //On enregistre en base
+            $em->persist($profImg);
             $em->persist($professionnel);
             $em->flush();
-
-            return $this->redirectToRoute('professionnel_show', array('id' => $professionnel->getId()));
         }
 
         return $this->render('WCSPropertyBundle:professionnel:new.html.twig', array(
             'professionnel' => $professionnel,
             'form' => $form->createView(),
-            // 'cate' => $cate,
+            'cate' => $cate,
         ));
     }
 
@@ -244,7 +234,10 @@ class ProfessionnelController extends Controller
             'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e',
             'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o',
             'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b',
-            'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r', '/' => '', ' ' => ''
+            'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r', '/' => '', ' ' => '', 'A'=>'a', 'B'=>'b', 'C'=>'c', 'D'=>'d', 'E'=>'e',
+            'F'=>'f', 'G'=>'g', 'H'=>'h', 'I'=>'i', 'J'=>'j', 'K'=>'k', 'L'=>'l', 'M'=>'m', 'N'=>'n', 'O'=>'o',
+            'P'=>'p', 'Q'=>'q', 'R'=>'r', 'S'=>'s', 'T'=>'t', 'U'=>'u', 'V'=>'v', 'W'=>'w', 'X'=>'x', 'Y'=>'y',
+            'Z'=>'z',
     );
 
     // -- Remove duplicated spaces
