@@ -280,7 +280,7 @@ function sortingEtablissementDetail(latitudeSearch, longitudeSearch, sorting, di
   assetEtablissement = document.getElementById('assetEtablissement').getAttribute('src');
 
   $.ajax({
-      url: Routing.generate('SortingEtablissement'),
+      url: Routing.generate('SortingEtablissement', {'_locale': 'fr'}),
       type: 'POST',
       dataType: "json",
       data: {'lat': latitudeSearch, 'lng': longitudeSearch, 'prixmini': sorting , 'direction': direction },
@@ -305,7 +305,7 @@ function starEtablissementDetail(latitudeSearch, longitudeSearch, star, directio
   assetEtablissement = document.getElementById('assetEtablissement').getAttribute('src');
 
   $.ajax({
-      url: Routing.generate('StarEtablissement'),
+      url: Routing.generate('StarEtablissement', {'_locale': 'fr'}),
       type: 'POST',
       dataType: "json",
       data: {'lat': latitudeSearch, 'lng': longitudeSearch, 'etoile': star , 'direction': direction },
