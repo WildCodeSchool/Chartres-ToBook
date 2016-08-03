@@ -15,6 +15,7 @@ parameters:
     locale: fr
     csv_directory: '%kernel.root_dir%/../web/uploads/csv'
     img_directory: '%kernel.root_dir%/../web/uploads/img/comments'
+    hotelimg_directory: '%kernel.root_dir%/../web/uploads/img/'
 
 framework:
     #esi:             ~
