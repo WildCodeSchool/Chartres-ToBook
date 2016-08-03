@@ -23,12 +23,6 @@ class Professionnel
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="WCS\PropertyBundle\Entity\ProfCate", mappedBy="prcaProfId")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $profCateId;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="prof_actif", type="boolean", nullable=false)

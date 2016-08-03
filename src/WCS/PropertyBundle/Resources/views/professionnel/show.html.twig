@@ -7,7 +7,7 @@
         <tbody>
             <tr>
                 <th>Profid</th>
-                <td>{{ professionnel.profId }}</td>
+                <td>{{ professionnel.Id }}</td>
             </tr>
             <tr>
                 <th>Profactif</th>
@@ -113,7 +113,7 @@
             <a href="{{ path('professionnel_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('professionnel_edit', { 'id': professionnel.profId }) }}">Edit</a>
+            <a href="{{ path('professionnel_edit', { 'id': professionnel.Id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

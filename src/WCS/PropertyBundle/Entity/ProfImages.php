@@ -3,6 +3,7 @@
 namespace WCS\PropertyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ProfImages
@@ -65,9 +66,9 @@ class ProfImages
     private $primXy;
 
     /**
-     * @var string
+     * @ORM\Column(type="string", name="prim_img_url", nullable=true)
      *
-     * @ORM\Column(name="prim_img_url", type="text", length=65535, nullable=true)
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/pjpeg", "image/png" })
      */
     private $primImgUrl;
 
