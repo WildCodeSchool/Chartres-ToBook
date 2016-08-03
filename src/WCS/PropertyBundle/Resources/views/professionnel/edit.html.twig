@@ -1,20 +1,17 @@
 {% extends 'TobookBundle::base.html.twig' %}
 
 {% block body %}
-    <h1>Professionnel edit</h1>
+    <h1>{{'Modification établissement'|trans}}</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input type="submit" value="{{'Modifier'|trans}}" />
     {{ form_end(edit_form) }}
 
     <ul>
         <li>
-            <a href="{{ path('professionnel_index') }}">Back to the list</a>
-        </li>
-        <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="{{'Delete'|trans}}">
             {{ form_end(delete_form) }}
         </li>
     </ul>

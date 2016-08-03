@@ -26,11 +26,13 @@ class ProfessionnelController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        $professionnels = $em->getRepository('WCSPropertyBundle:Professionnel')->findAll();
+
+        $listeprofessionnels = $em->getRepository('UserBundle:UsersProfessionnel')->findByUsprUserId($user);
 
         return $this->render('WCSPropertyBundle:professionnel:index.html.twig', array(
-            'professionnels' => $professionnels,
+            'listeprofessionnels' => $listeprofessionnels,
         ));
     }
 
@@ -53,8 +55,6 @@ class ProfessionnelController extends Controller
         $form = $this->createForm(new MergedFormType(), $formData);
         $form->handleRequest($request);
 
-        dump($formData);
-
         if ($form->isSubmitted() && $form->isValid()) {
             
 
@@ -64,7 +64,6 @@ class ProfessionnelController extends Controller
             $profImg->setPrimExt('Non utilisé');
             $profImg->setPrimDefaut(0);
             
-            $user = $this->get('security.token_storage')->getToken()->getUser();
             $cateNom = $request->request->get('categorie');
             $cateForm = $em->getRepository('WCSPropertyBundle:Categorie')->findOneByCateNom($cateNom);
             $liste_etablissements = $em->getRepository('WCSPropertyBundle:Professionnel');
@@ -132,7 +131,9 @@ class ProfessionnelController extends Controller
             $em->persist($profImg);
             $em->persist($professionnel);
             $em->flush();
-        }
+
+            return $this->redirectToRoute('profil_edit', array('id' => $user->getId()));
+            }
 
         return $this->render('WCSPropertyBundle:professionnel:new.html.twig', array(
             'professionnel' => $professionnel,
@@ -188,6 +189,7 @@ class ProfessionnelController extends Controller
     {
         $form = $this->createDeleteForm($professionnel);
         $form->handleRequest($request);
+        $user = $this->get('security.token_storage')->getToken()->getUser();
 
         $profId = $professionnel->getId();
 
@@ -205,7 +207,7 @@ class ProfessionnelController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('professionnel_index');
+        return $this->redirectToRoute('profil_edit', array('id' => $user->getId()));
     }
 
     /**

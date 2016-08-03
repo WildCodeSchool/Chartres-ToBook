@@ -1,5 +1,5 @@
 {% extends 'TobookBundle::base.html.twig' %}
-
+{% block title %}Edition{% endblock %}
 {% block body %}
     <h1>{{ 'Gestion profil'|trans }}</h1>
 
@@ -37,6 +37,10 @@
 
         <input type="submit" value="{{ 'Sauvegarder'|trans }}" />
         {{ form_end(edit_form) }}
+
+        {% if user.userProf == 1 %}
+        {{ render(controller('WCSPropertyBundle:Professionnel:index')) }}
+        {% endif %}
 
 {% endblock %}
 

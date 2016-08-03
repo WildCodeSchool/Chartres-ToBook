@@ -1,7 +1,6 @@
 {% extends 'TobookBundle::base.html.twig' %}
 
 {% block body %}
-    {# <h1>Professionnel creation</h1> #}
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -10,7 +9,7 @@
                 <option> {{ cat.cateNom }}</option>
             {% endfor %}
         </select> 
-        <input type="submit" value="Create" />
+        <input type="submit" value="{{'Créer'|trans}}" />
     {{ form_end(form) }}
 
 {% endblock %}
