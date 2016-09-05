@@ -1,42 +1,118 @@
 {% extends 'TobookBundle::base.html.twig' %}
-
+{% block title %}Edition{% endblock %}
 {% block body %}
-    <h1>{{ 'Gestion profil'|trans }}</h1>
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <h1><span style="color:rgb(102,179,47);" class="glyphicon glyphicon-user"></span> {{ 'Mon profil utilisateur'|trans }}</h1>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{ form_start(edit_form) }}
-        {{ form_label(edit_form.userNom, 'Nom :'|trans ) }}
-        {{ form_widget(edit_form.userNom) }}<br>
+    <div class="col-md-12 edit-form-profil">
+        <div class="col-md-5">
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <p>{{ form_label(edit_form.userNom, 'Nom :'|trans ) }}</p>
+                </div>
+                <div class="col-md-3">
+                    <p>{{ form_widget(edit_form.userNom) }}</p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <p>{{ form_label(edit_form.userPrenom, 'Prénom :'|trans ) }}</p>
+                </div>
+                <div class="col-md-3">
+                    <p>{{ form_widget(edit_form.userPrenom) }}</p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <p>{{ form_label(edit_form.userLangue, 'Langue principale'|trans ) }}</p>
+                </div>
+                <div class="col-md-3">
+                    <p>{{ form_widget(edit_form.userLangue) }}</p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <p>{{ form_label(edit_form.userAdd1, 'Adresses :'|trans ) }}</p>
+                </div>
+                <div class="col-md-3">
+                    <p>{{ form_widget(edit_form.userAdd1, {'attr': {'placeholder': 'Adresse 1'}}) }}</p>
+                    <p>{{ form_widget(edit_form.userAdd2, {'attr': {'placeholder': 'Adresse 2'}}) }}</p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <p>{{ form_label(edit_form.userCp, 'Code Postal :'|trans ) }}</p>
+                </div>
+                <div class="col-md-3">
+                    <p>{{ form_widget(edit_form.userCp) }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <p>{{ form_label(edit_form.userVille, 'Ville :'|trans ) }}</p>
+                </div>
+                <div class="col-md-3">
+                    <p>{{ form_widget(edit_form.userVille) }}</p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <p>{{ form_label(edit_form.userTel, 'Tel :'|trans ) }}</p>
+                </div>
+                <div class="col-md-3">
+                    <p>{{ form_widget(edit_form.userTel) }}</p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <p>{{ form_label(edit_form.userMob, 'Mobile :'|trans ) }}</p>
+                </div>
+                <div class="col-md-3">
+                    <p>{{ form_widget(edit_form.userMob) }}</p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <p>{{ form_label(edit_form.userDtNais, 'Date de naissance :'|trans) }}</p>
+                </div>
+                <div class="col-md-3">
+                    <p>{{ form_widget(edit_form.userDtNais, { 'attr': {'placeholder': "yyyy-mm-dd"} }) }}</p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <p>{{ form_label(edit_form.userDescriptif, 'Description :'|trans ) }}</p>
+                </div>
+                <div class="col-md-3">
+                    <p>{{ form_widget(edit_form.userDescriptif) }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <hr>
+            <div class="col-md-12">
+                <div class="col-md-5">
+                    <input class="btn btn-success" type="submit" value="{{ 'Sauvegarder'|trans }}" />
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(edit_form) }}
 
-        {{ form_label(edit_form.userPrenom, 'Prénom :'|trans ) }}
-        {{ form_widget(edit_form.userPrenom) }}<br>
-
-        {{ form_label(edit_form.userLangue, 'Langue principale'|trans ) }}
-        {{ form_widget(edit_form.userLangue) }}<br>
-
-        {{ form_label(edit_form.userAdd1, 'Adresse :'|trans ) }}
-        {{ form_widget(edit_form.userAdd1) }}<br>
-        {{ form_widget(edit_form.userAdd2) }}<br>
-
-        {{ form_label(edit_form.userCp, 'Code Postal :'|trans ) }}
-        {{ form_widget(edit_form.userCp) }}<br>
-
-        {{ form_label(edit_form.userVille, 'Ville :'|trans ) }}
-        {{ form_widget(edit_form.userVille) }}<br>
-
-        {{ form_label(edit_form.userTel, 'Tel :'|trans ) }}
-        {{ form_widget(edit_form.userTel) }}<br>
-
-        {{ form_label(edit_form.userMob, 'Mobile :'|trans ) }}
-        {{ form_widget(edit_form.userMob) }}<br>
-
-        {{ form_label(edit_form.userDtNais, 'Date de naissance :'|trans) }}
-        {{ form_widget(edit_form.userDtNais, { 'attr': {'placeholder': "yyyy-mm-dd"} }) }}<br>
-
-        {{ form_label(edit_form.userDescriptif, 'Description'|trans ) }}<br>
-        {{ form_widget(edit_form.userDescriptif) }} <br>
-
-        <input type="submit" value="{{ 'Sauvegarder'|trans }}" />
-        {{ form_end(edit_form) }}
+    {% if user.userProf == 1 %}
+        {{ render(controller('WCSPropertyBundle:Professionnel:index')) }}
+    {% endif %}
 
 {% endblock %}
 

@@ -47,8 +47,6 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
-            return $this->redirectToRoute('tobook_homepage', array('id' => $user->getId()));
         }
 
         return $this->render('UserBundle:user:edit.html.twig', array(

@@ -3,34 +3,37 @@
     <h1><a href="{{ path('tobook_homepage') }}">Tobook<span>.club</span></a></h1>
 
     <span>
-        <form method="POST" action="{{ path('changeLocale') }}">
-            <button class="langdevise">Langue &nbsp;</button>
-            <select name="langue">
-                <option {% if app.request.locale == 'fr' %}selected{% endif %}>fr</option>
-                <option {% if app.request.locale == 'en' %}selected{% endif %}>en</option>
-                <option {% if app.request.locale == 'de' %}selected{% endif %}>de</option>               
-            </select>
-
-            <span class="barre">&nbsp; &nbsp; | &nbsp; &nbsp;</span>
-            <button class="langdevise">Devise &nbsp;</button>
-            <select>
-                <option>EUR</option>
-                <option>GBP</option>
-                <option>USD</option>
-            </select>
-        </form>
+        <ul class="nav navbar-nav navbar-left">
+            <li class="dropdown">
+                <a style="padding:10px;color:#444" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span style="color:rgb(102,179,47);" class="glyphicon glyphicon-flag"></span> {{ 'Langue'|trans }}</a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a tabindex="-1" href="{{ path(app.request.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'en'})) }}">English</a></li>
+                    <li><a tabindex="-1" href="{{ path(app.request.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'fr'})) }}">Français</a></li>
+                    <li><a tabindex="-1" href="{{ path(app.request.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'de'})) }}">Deutsch</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a style="padding:10px;color:#444" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span style="color:rgb(102,179,47);" class="glyphicon glyphicon-piggy-bank"></span> {{ 'Devise'|trans }}</a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a tabindex="-1" href="#">EUR</a></li>
+                    <li><a tabindex="-1" href="#">GBP</a></li>
+                    <li><a tabindex="-1" href="#">USD</a></li>
+                </ul>
+            </li>
+        </ul>
     </span>
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <a class="hidden-xs" href='{{ path('profil_edit', { 'id': app.user.id }) }}'><span style="color:rgb(102,179,47);" class="glyphicon glyphicon-user"></span> {{ 'Bienvenue'|trans }} {{ app.user.userPrenom }} {{ app.user.userNom }}</a>
+    {% else %}
+        <a href="{{ path('user_register') }}"><span>{{ "S'INSCRIRE"|trans }}</span></a>
+        <a href="{{ path('user_login') }}"><span>{{ 'SE CONNECTER'|trans }}</span></a>
+    {% endif %}
 
     <a href="https://www.facebook.com/Roomservyou-454428541427992/?fref=nf" target="_blank">
         <img src="{{ asset('img/picto/icon-facebook.png') }}" alt="Logo Facebook" title="Suivez-nous sur Facebook" class="vertialimid" />
     </a>
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <span>{{ 'Bienvenu'|trans }} {{ app.user.userPrenom }} {{ app.user.userNom }}</span>
-    {% else %}
-        <a href="{{ path('user_register') }}"><span>{{ "S'INSCRIRE"|trans }}</span></a>
-        <a href="{{ path('user_login') }}"><span>{{ 'SE CONNECTER'|trans }}</span></a>
-    {% endif %}           
-    
+
     <a href="#menu"><span>{{ 'Menu'|trans }}</span></a>
 
 </header>
@@ -39,8 +42,8 @@
 <nav id="menu">
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <ul class="links">
-            <li><a href="{{ path('tobook_search') }}">{{ 'Nouvelle Recherche'|trans }}</a></li>
-            <li><a href='{{ path('profil_edit', { 'id': app.user.id }) }}'>{{ 'Ma page'|trans }}</a></li>
+            <li><a href="{{ path('tobook_search') }}"><span style="color:rgb(102,179,47);" class="glyphicon glyphicon-search"></span> {{ 'Nouvelle Recherche'|trans }}</a></li>
+            <li><a href='{{ path('profil_edit', { 'id': app.user.id }) }}'><span style="color:rgb(102,179,47);" class="glyphicon glyphicon-user"></span> {{ 'Mon Profil'|trans }}</a></li>
             {# 
             <li><a href='#'>{{ 'Mes Favoris'|trans }}</a></li>
             <li><a href='#'>{{ 'Mes paramètres'|trans }}</a></li> #}

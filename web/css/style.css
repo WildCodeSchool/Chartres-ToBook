@@ -1034,3 +1034,43 @@ License: pixelarity.com/license*/
     color: #559827;
     font-size: 18px;
 }
+
+.edit-form-profil
+{
+    padding:20px;
+}
+
+.footer-part h4
+{
+    color:#FFFFFF;
+    font-weight:bold;
+    margin-top:75px;
+}
+
+.footer-part h3
+{
+    margin-top:-15px;
+    font-weight:bold;
+    color:#333;
+}
+
+.footer-part .empty
+{
+    height:20px;
+}
+
+.footer-part p
+{
+    color:#FFFFFF;
+}
+
+.footer-end
+{
+    text-align:center;
+    margin-top:70px;
+}
+
+.footer-end p
+{
+    color:#FFFFFF;
+}
