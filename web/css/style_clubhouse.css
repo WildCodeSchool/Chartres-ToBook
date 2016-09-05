@@ -1,0 +1,179 @@
+/* CLUB-HOUSE */
+.club-head
+{
+    padding:10px 0px 10px 0px;
+}
+
+.club-photo
+{
+    height:600px;
+}
+
+.multi-photo
+{
+    min-height:200px;
+    padding:40px 0px 40px 15px;
+}
+
+.img-style-3
+{
+    height:150px;
+    width:auto;
+    margin:auto;
+}
+
+div.but h3
+{
+    color: #D8D8D8;
+    font-weight:bold;
+}
+
+div.but h3.active
+{
+    color: #559827;
+}
+
+.page1
+{
+    padding:20px;
+}
+
+.page1-text
+{
+    padding-left:40px;
+}
+
+.page1-map
+{
+    background-color:#F3E2A9;
+    height:215px;
+}
+
+.info-comparateur
+{
+    background-color:#559827;
+    min-height:100px;
+    text-align:center;
+    padding:15px;
+    margin-top:25px;
+}
+
+.info-comparateur h3
+{
+    color:#FFFFFF;
+}
+
+.info-empty
+{
+    height:25px;
+}
+
+.filActuTitre
+{
+    background-color:#559827;
+    min-height:100px;
+    text-align:center;
+    padding:15px;
+    margin-top:25px;
+}
+
+.filActuTitre h3
+{
+    color:#FFFFFF;
+}
+
+.fileActuContenu
+{
+    background-color:#eff6ff;
+    min-height:75px;
+    padding:10px;
+    margin-top:10px;
+}
+
+.comparateur-item
+{
+    background-color:#eff6ff;
+    min-height:75px;
+    padding:10px;
+    margin-top:10px;
+}
+
+.img-style-4
+{
+    min-height:65px;
+    width:auto;
+}
+
+.picto-section
+{
+    margin-top:50px;
+}
+
+.large-empty
+{
+    height:100px;
+}
+
+#favoriGray 
+{
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+/* Notation */
+
+#modal-vote {
+    width: 650px;
+    margin: 80px auto;
+}
+
+/* CLUB-HOUSE gestion des onglets */
+
+.onglets {
+    display: inline-block;
+}
+.titre {
+    cursor: pointer;
+}
+.pageother {
+    overflow: auto;
+}
+.case1 {
+    display:none;
+}
+.case3 {
+    display:none;
+}
+
+
+/*Commentaires */
+
+.text-vert {
+    color: green;
+}
+
+.text-gris {
+    color: #808080;
+    font-style: italic;
+}
+
+.text-noir {
+    color: black;
+}
+
+.post-box {
+    border-left: 3px solid #A9A9A9;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    background-color: #eff6ff;
+}
+.post-box.reply {
+    margin-left: 40px;
+}
+
+/*affichage de la modale*/
+#modal-reply-to-comment {
+    margin: 36px 0 0 0;
+}

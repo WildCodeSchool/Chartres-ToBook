@@ -1,0 +1,174 @@
+{% extends 'TobookBundle::base.html.twig' %}
+
+{% block title %}{{ "Emailing"|trans }}{% endblock %}
+
+{% block extraCSS %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/DataTables/datatables.min.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/DataTables/jquery.dataTables.min.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/style_emailing.css') }}"/>
+{% endblock extraCSS %}
+
+{% block body %}
+
+    {% for etablissement in liste_etablissements %}
+
+    	<div>
+    		<h2>{{ etablissement.usprProfId.profNom }}</h2></br>
+    	</div>
+
+        <div class="container">
+            <table class="display" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>IDtab</th>                      
+                        <th>ID</th>
+                        <th>{{ "Email"|trans }}</th>
+                        <th>{{ "Nom"|trans }}</th>
+                        <th>{{ "Prénom"|trans }}</th>
+                        <th>{{ "Adresse"|trans }}</th>
+                        <th>{{ "Ville"|trans }}</th>
+                        <th>{{ "Pays"|trans }}</th>
+                        <th>{{ "Genre"|trans }}</th>
+                        <th>{{ "CSP"|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>    
+                    {% for key, client in client if client.emaiProfId == etablissement.usprProfId %}
+                        <tr id="{{ key }}" data-info="{{ client.emaiEmail }}" data-id="{{ client.id }}">
+                          <td>{{ key }}</td> <!--idrow-->
+                          <td>{{ client.id }}</td> <!--id-->
+                          <td>{{ client.emaiEmail }}</td> <!--email-->
+                          <td>{{ client.emaiNom }}</td> <!--nom-->
+                          <td>{{ client.emaiPrenom }}</td> <!--prénom-->
+                          <td>{{ client.emaiAdresse }}</td> <!--adresse-->
+                          <td>{{ client.emaiVille }}</td> <!--ville-->
+                          <td>{{ client.emaiPays }}</td> <!--pays-->
+                          <td>{{ client.emaiGenre }}</td> <!--genre-->
+                          <td>{{ client.emaiCSP }}</td> <!--csp-->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <input id="vider" type="button" class="btn btn-danger" value="{{ "Vider la sélection"|trans }}" />
+            <button id="modalAjout" type="button" class="btn pull-right btn-primary" data-toggle="modal" data-target="#modalAjoutClient" data-profcode="{{ etablissement.usprProfId.profCode }}" data-locale="{{ app.request.getLocale() }}">{{ "Ajout de clients"|trans }}</button>          
+            <br />
+            <input id="envoi" type="button" class="btn btn-primary" value="{{ "Envoi vers email"|trans }}" />
+            
+            <button id="modalSuppr" type="button" class="btn pull-right btn-danger" data-toggle="modal" data-target="#modalSupprClient" data-locale="{{ app.request.getLocale() }}">{{ "Suppression de référence clients"|trans }}</button> 
+
+        </div> 
+
+        <!-- container email -->
+        <div class="container">
+          <fieldset>
+            <form class="well form-horizontal" id="contact_form" method="post" action="{{ path ('send_mail') }}">
+              <div class="form-group">
+                <label class="col-md-4 control-label">Destinataire</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id ="{{ etablissement.usprProfId.profCode }}" class="form-control"  type="text" name="destinataire" placeholder="Liste des destinataires" value="">
+                        <span class="input-group-addon"><a data-toggle="modal" data-target="#modal-warning"><i class="glyphicon glyphicon-warning-sign"></i></a></span>
+                    </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label">Sujet</label>  
+                <div class="col-md-4 inputGroupContainer">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                    <input class="form-control" type="text" name="sujet" placeholder="Sujet">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label">Contenu du mail</label>  
+                <div class="col-md-4 inputGroupContainer">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <textarea class="form-control" name="message" placeholder="Contenu du mail"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                  <button type="submit" class="btn btn-warning" >Envoyer<span class="glyphicon glyphicon-send"></span></button>
+                </div>
+              </div>
+            </form>
+          </fieldset>
+        </div>
+
+        <!-- Modal ajout de nouveaux clients -->
+        <div class="modal fade" id="modalAjoutClient" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="modalLabel">Ajout de nouveaux clients</h4>
+                    </div>
+                    <div class="modal-body ajout">
+                        {{ form_start(form, {'method': 'post', 'action': path('wcs_emailing_import', { 'profCode': etablissement.usprProfId.profCode })}) }}
+                            {{ form_row(form.emaiCSVFile) }}
+                            <input type="submit" value="Upload" class="btn btn-success"/>
+                        {{ form_end(form) }}
+                    </div>
+                    <h5>{{ "Exemple de fichier à charger"|trans }} (<a href="{{ asset('downloads/exCsvTab.csv') }}">{{ "Télécharger un exemple"|trans }}</a>)</h5>
+                    <img id="imgModal" src="{{ asset('img/ex_csv_tab.png') }}" title="exCsvTab" />
+                </div>
+            </div>
+        </div>
+
+        {# Modal suppression des clients #}
+        {# L'action du formulaire de soumission est remplacée via une fonction jquery qui récupère les id sélectionnés#}
+        <div class="modal fade" id="modalSupprClient" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header suppr">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <form method="get" action="{{ path('wcs_emailing_suppr', { 'idClient': '1' } ) }}">
+                          <input id="suppr" type="submit" class="btn btn-danger" value="{{ "Supprimer la liste ci-dessous" | trans }}" />
+                        </form>
+                    </div>
+                    <div class="modal-body listeSuppr" style="height:75px; overflow:scroll">
+                    </div>
+                </div>
+            </div>
+        </div>        
+
+    {% endfor %}
+
+    <div class="modal fade" id="modal-warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content modal-warning">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Attention</h4>
+          </div>
+          <div class="modal-body">
+            Veuillez bien respecter le format suivant pour l'écriture des destinataire : mail1@test.com,mail2@test.com,mail3@test.com
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block extraJavascript %}
+    {# appel script gestion emailing et datatables #}
+    <script src="{{ asset('script/emailing.js') }}"></script>
+
+    {# appel script options datatables #}
+    <script src="{{ asset('script/emailing_dataTables_options.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('script/DataTables/datatables.min.js') }}"></script>
+{% endblock extraJavascript %}

@@ -1,0 +1,203 @@
+<?php
+
+namespace WCS\PropertyBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Professionnel
+ *
+ * @ORM\Table(name="professionnel", uniqueConstraints={@ORM\UniqueConstraint(name="prof_code", columns={"prof_code"})})
+ * @ORM\Entity
+ * @ORM\Entity(repositoryClass="WCS\PropertyBundle\Repository\ProfessionnelRepository")
+ */
+class Professionnel
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prof_id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $profId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="WCS\PropertyBundle\Entity\Categorie")
+     * @ORM\JoinColumn(name="prof_cate_id", referencedColumnName="cate_id")
+     */
+    private $profCateId;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="prof_actif", type="boolean", nullable=false)
+     */
+    private $profActif;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_code", type="string", length=250, nullable=true)
+     */
+    private $profCode;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prof_etoiles", type="smallint", nullable=false)
+     */
+    private $profEtoiles;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_forme_juri", type="string", length=128, nullable=true)
+     */
+    private $profFormeJuri;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_nom", type="string", length=128, nullable=true)
+     */
+    private $profNom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_add1", type="string", length=250, nullable=true)
+     */
+    private $profAdd1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_add2", type="string", length=250, nullable=true)
+     */
+    private $profAdd2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_add3", type="string", length=250, nullable=true)
+     */
+    private $profAdd3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_cp", type="string", length=16, nullable=true)
+     */
+    private $profCp;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_ville", type="string", length=250, nullable=true)
+     */
+    private $profVille;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_tel", type="string", length=250, nullable=true)
+     */
+    private $profTel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_fax", type="string", length=32, nullable=true)
+     */
+    private $profFax;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_mail", type="string", length=250, nullable=true)
+     */
+    private $profMail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_web", type="string", length=250, nullable=true)
+     */
+    private $profWeb;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_web_resa", type="string", length=250, nullable=true)
+     */
+    private $profWebResa;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_prix_mini", type="decimal", precision=8, scale=2, nullable=true)
+     */
+    private $profPrixMini;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_descriptif", type="text", length=65535, nullable=true)
+     */
+    private $profDescriptif;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_latitude", type="decimal", precision=24, scale=20, nullable=false)
+     */
+    private $profLatitude;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prof_longitude", type="decimal", precision=24, scale=20, nullable=false)
+     */
+    private $profLongitude;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prof_capa_personne", type="integer", nullable=true)
+     */
+    private $profCapaPersonne;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prof_capa_chambre", type="integer", nullable=true)
+     */
+    private $profCapaChambre;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prof_capa_emplacement", type="integer", nullable=true)
+     */
+    private $profCapaEmplacement;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prof_capa_habitation", type="integer", nullable=true)
+     */
+    private $profCapaHabitation;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prof_temp", type="smallint", nullable=true)
+     */
+    private $profTemp;
+
+
+
+}

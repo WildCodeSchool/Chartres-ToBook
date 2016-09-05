@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 class SecurityController extends Controller
 {
     /**
-    * @Route("/user/login", name="user_login")
+    * @Route("/{_locale}/user/login", name="user_login")
     */
     public function loginAction(Request $request)
     {
@@ -83,6 +83,9 @@ class SecurityController extends Controller
         return $this->render('UserBundle:login:login.html.twig', $data);
     }
 
+    /**
+    * @Route("/{_locale}/user/login/check", name="user_login_check")
+    */
     public function checkAction()
     {
         throw new \RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');

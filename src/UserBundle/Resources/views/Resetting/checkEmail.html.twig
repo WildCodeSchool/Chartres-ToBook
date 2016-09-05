@@ -1,0 +1,34 @@
+{% extends 'TobookBundle::base.html.twig' %}
+
+{% block ariane %}
+
+	<div class="col-md-12 ariane">
+		<div class="col-md-1 ariane-back">
+			<h4>< Retour</h4>
+		</div>
+		<div class="col-md-11 ariane-content">
+			<a>Accueil</a> >
+			<a>Tobook</a> >
+			<a>Login</a>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+
+	<div class="col-md-6 col-md-offset-3 main-div">
+		<img class="img-style-2" src="{{ asset('img/picto/logo-tobook.png') }}">
+
+		<h3><strong>MAIL ENVOYÉ</strong></h3>
+		<h4>__________</h4>
+		<br></br>
+
+		<div class="col-md-10 col-md-offset-1">
+			<p>Félications un mail contenant un lien pour changer votre mot de passe vient de vous être envoyé </p>
+		</div>
+	</div>
+
+{% endblock %}

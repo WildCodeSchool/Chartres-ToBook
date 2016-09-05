@@ -1,0 +1,24 @@
+<div class="col-md-8 col-md-offset-2">
+	{{ form_start(form, {'method': 'post', 'action': path('contenu_new')}) }}
+		{{ form_widget(form.contContId, { 'attr': {'class': 'form-control', 'value': ''} }) }}
+	<div class="form-group">
+		{{ form_label(form.contSujet, 'Sujet'|trans, { 'label_attr': { 'class': 'sr-only'  } }) }}
+		{{ form_errors(form.contSujet) }}
+		{{ form_widget(form.contSujet, { 'attr': {'class': 'form-control', 'placeholder': 'Sujet'|trans } }) }}
+	</div>	
+	<div class="form-group">
+		{{ form_label(form.contText, 'Commentaire'|trans, { 'label_attr': { 'class': 'sr-only'  } }) }}
+		{{ form_errors(form.contText) }}
+		{{ form_widget(form.contText, { 'attr': {'class': 'form-control', 'placeholder': 'Commentaire'|trans } }) }}
+	</div>	
+	<div class="form-group">
+		{{ form_label(form.contImgExt, 'Fichier'|trans, { 'label_attr': { 'class': 'sr-only'  } }) }}
+		{{ form_widget(form.contImgExt) }}
+	</div>	
+
+	<div class="form-group">
+	    <input type="submit" class="btn btn-primary" value="Envoyer" />
+	</div>	
+	{{ form_end(form) }}
+</div>
+

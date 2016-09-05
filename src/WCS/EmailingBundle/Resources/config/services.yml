@@ -1,0 +1,3 @@
+services:
+    import.csvtoarray:
+        class: WCS\EmailingBundle\Services\ConvertCsvToArray

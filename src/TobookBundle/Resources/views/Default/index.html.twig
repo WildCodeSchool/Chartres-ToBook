@@ -1,4 +1,6 @@
-{% extends '::base.html.twig' %}
+{% extends 'TobookBundle::base.html.twig' %}
+
+{% block title %}{{ 'Home'|trans }}{% endblock %}
 
 {% block body %}
 
@@ -7,16 +9,34 @@
 
 		<img class="img-style-1" src="{{ asset('img/background/background-1.jpg') }}">
 
-		<h3>Servez-vous !</h3>
+		<h3>{{ 'Servez-vous'|trans }} !</h3>
 
-		<form method="POST" action="">
-			<input type="text" placeholder="Ville / Code postal" class="input-style-1">
-			<select class="input-style-1">
-				<option>Hôtels</option>
-			</select>
-			<p>
-				<input type="submit" class="input-style-2 btn btn-success" value="Rechercher">
-			</p>
+		<form class="row" name="mainSearch" id='formHome' action="{{ path('tobook_search') }}">
+			<div class="col-md-6 col-md-offset-3">
+				<input id="autocomplete" onfocus="initautocomplete()" class="input-style-5" type="text" placeholder="Entrez votre recherche">
+			</div>
+			<div class="col-md-6 col-md-offset-3">
+				<select name="category" id="category" class="input-style-5">
+					<option value='1'selected>{{ "Hôtels"|trans }}</option>
+	                <option value='3'>{{ "Chambres d'hôtes"|trans }}</option>
+	                <option value='2'>{{ "Gîtes"|trans }}</option>
+	                <option value='5'>{{ "Restaurants"|trans }}</option>
+	                <option value='8'>{{ "Musées"|trans }}</option>
+	                <option value='6'>{{ "Restaurants gastronomique"|trans }}</option>
+	                {#
+	                <option value='4'>{{ "Camping"|trans }}</option>
+	                <option value='7'>{{ "Parcs de loisirs"|trans }}</option>
+	                <option value='9'>{{ "Chateaux"|trans }}</option>
+	                <option value='10'>{{ "Hébergements"|trans }}</option>
+	                <option value='11'>{{ "Tables d'hotes"|trans }}</option>
+	            	#}                
+				</select>
+			</div>
+			<div class="col-md-6 col-md-offset-3">
+				<p>
+					<input type="submit" class="input-style-2 btn btn-success" value="{{ 'Rechercher'|trans }}">
+				</p>
+			</div>
 		</form>
 
 	</div>
@@ -24,56 +44,64 @@
 	<div class="col-md-6 home-second-div-part">
 		<div class="col-md-10 col-md-offset-1">
 			<img src="{{ asset('img/picto/icon-voyageur.png') }}">
-			<h3>JE RECHERCHE UN HÔTEL</h3>
+			<h3>{{ 'JE RECHERCHE UN HÔTEL'|trans }}</h3>
 			<h4>__________</h4>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+				{% trans %}
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+				{% endtrans %}
 			</p>
 			<br></br>
 			<a class="bouton-style-1" href="#">
-				<strong>EN SAVOIR +</strong>
+				<strong>{{ 'EN SAVOIR +'|trans }}</strong>
 			</a>
 		</div>
 	</div>
 	<div class="col-md-6 home-second-div-part">
 		<div class="col-md-10 col-md-offset-1">
 			<img src="{{ asset('img/picto/icon-ampoule.png') }}">
-			<h3>JE RECHERCHE UN HÔTEL</h3>
+			<h3>{{ 'JE RECHERCHE UN HÔTEL'|trans }}</h3>
 			<h4>__________</h4>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+				{% trans %}
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+				{% endtrans %}
 			</p>
 			<br></br>
 			<a class="bouton-style-1" href="#">
-				<strong>JE DECOUVRE</strong>
+				<strong>{{ 'JE DÉCOUVRE'|trans }}</strong>
 			</a>
 		</div>
 	</div>
 	<div class="col-md-6 home-second-div-part">
 		<div class="col-md-10 col-md-offset-1">
 			<img src="{{ asset('img/picto/icon-pro.png') }}">
-			<h3>JE RECHERCHE UN HÔTEL</h3>
+			<h3>{{ 'JE RECHERCHE UN HÔTEL'|trans }}</h3>
 			<h4>__________</h4>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+				{% trans %}
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+				{% endtrans %}
 			</p>
 			<br></br>
 			<a class="bouton-style-1" href="#">
-				<strong>JE M'INSCRIS</strong>
+				<strong>{{ "JE M'INSCRIS"|trans }}</strong>
 			</a>
 		</div>
 	</div>
 	<div class="col-md-6 home-second-div-part">
 		<div class="col-md-10 col-md-offset-1">
 			<img src="{{ asset('img/picto/icon-contact.png') }}">
-			<h3>JE RECHERCHE UN HÔTEL</h3>
+			<h3>{{ 'JE RECHERCHE UN HÔTEL'|trans }}</h3>
 			<h4>__________</h4>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+				{% trans %}
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+				{% endtrans %}
 			</p>
 			<br></br>
 			<a class="bouton-style-1" href="#">
-				<strong>CONTACTEZ-NOUS</strong>
+				<strong>{{'CONTACTEZ-NOUS'|trans }}</strong>
 			</a>
 		</div>
 	</div>
@@ -83,29 +111,33 @@
 			<img class="img-style-1" src="{{asset('img/background/hotel1.jpg') }}">
 		</div>
 		<div class="col-md-5 col-md-offset-1 text-div">
-			<h3><strong>PARIS</strong></h3>
+			<h3><strong>{{ 'PARIS'|trans }}</strong></h3>
 			<h4>__________</h4>
-			<p><strong>Le charme à la française</strong></p>
+			<p><strong>{{ 'Le charme à la française'|trans }}</strong></p>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+				{% trans %}
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+				{% endtrans %}
 			</p>
 			<br></br>
 			<a class="bouton-style-2" href="#">
-				<strong>LISTE DES HÔTELS</strong>
+				<strong>{{ 'LISTE DES HÔTELS'|trans }}</strong>
 			</a>
 		</div>
 	</div>
 	<div class="col-md-12 home-third-div border-2">
 		<div class="col-md-5 col-md-offset-1 text-div">
-			<h3><strong>LONDRES</strong></h3>
+			<h3><strong>{{ 'LONDRES'|trans }}</strong></h3>
 			<h4>__________</h4>
-			<p><strong>Une destination "so British my dear"</strong></p>
+			<p><strong>{{ 'Une destination "so British my dear"'|trans }}</strong></p>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+				{% trans %}
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+				{% endtrans %}
 			</p>
 			<br></br>
 			<a class="bouton-style-2" href="#">
-				<strong>LISTE DES HÔTELS</strong>
+				<strong>{{ 'LISTE DES HÔTELS'|trans }}</strong>
 			</a>
 		</div>
 		<div class="col-md-5 col-md-offset-1 img-div">
@@ -115,14 +147,15 @@
 
 	<div class="col-md-12 home-fourth-div">
 		<div class="col-md-8 col-md-offset-2">
-			<h4>TOBOOK C'EST L'ASSURANCE D'UNE RESERVATION AU MEILLEUR PRIX ET D'UNE RELATION DIRECTE ENTRE HÔTELIERS ET PARTICULIERS.</h4>
+			<h4>{{ "TOBOOK C'EST L'ASSURANCE D'UNE RESERVATION AU MEILLEUR PRIX ET D'UNE RELATION DIRECTE ENTRE HÔTELIERS ET PARTICULIERS."|trans }}</h4>
 			<h3>__________</h3>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+				{% trans %}
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+				{% endtrans %}
 			</p>
 			<br></br>
-			<a href=""><strong>JE M'INSCRIS</strong></a>
+			<a href=""><strong>{{ "JE M'INSCRIS"|trans }}</strong></a>
 		</div>
 	</div>
-
 {% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'TobookBundle::base.html.twig' %}
+
+{% block body %}
+    <h1>Professionnel</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Profid</th>
+                <td>{{ professionnel.profId }}</td>
+            </tr>
+            <tr>
+                <th>Profactif</th>
+                <td>{% if professionnel.profActif %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Profcode</th>
+                <td>{{ professionnel.profCode }}</td>
+            </tr>
+            <tr>
+                <th>Profetoiles</th>
+                <td>{{ professionnel.profEtoiles }}</td>
+            </tr>
+            <tr>
+                <th>Profformejuri</th>
+                <td>{{ professionnel.profFormeJuri }}</td>
+            </tr>
+            <tr>
+                <th>Profnom</th>
+                <td>{{ professionnel.profNom }}</td>
+            </tr>
+            <tr>
+                <th>Profadd1</th>
+                <td>{{ professionnel.profAdd1 }}</td>
+            </tr>
+            <tr>
+                <th>Profadd2</th>
+                <td>{{ professionnel.profAdd2 }}</td>
+            </tr>
+            <tr>
+                <th>Profadd3</th>
+                <td>{{ professionnel.profAdd3 }}</td>
+            </tr>
+            <tr>
+                <th>Profcp</th>
+                <td>{{ professionnel.profCp }}</td>
+            </tr>
+            <tr>
+                <th>Profville</th>
+                <td>{{ professionnel.profVille }}</td>
+            </tr>
+            <tr>
+                <th>Proftel</th>
+                <td>{{ professionnel.profTel }}</td>
+            </tr>
+            <tr>
+                <th>Proffax</th>
+                <td>{{ professionnel.profFax }}</td>
+            </tr>
+            <tr>
+                <th>Profmail</th>
+                <td>{{ professionnel.profMail }}</td>
+            </tr>
+            <tr>
+                <th>Profweb</th>
+                <td>{{ professionnel.profWeb }}</td>
+            </tr>
+            <tr>
+                <th>Profwebresa</th>
+                <td>{{ professionnel.profWebResa }}</td>
+            </tr>
+            <tr>
+                <th>Profprixmini</th>
+                <td>{{ professionnel.profPrixMini }}</td>
+            </tr>
+            <tr>
+                <th>Profdescriptif</th>
+                <td>{{ professionnel.profDescriptif }}</td>
+            </tr>
+            <tr>
+                <th>Proflatitude</th>
+                <td>{{ professionnel.profLatitude }}</td>
+            </tr>
+            <tr>
+                <th>Proflongitude</th>
+                <td>{{ professionnel.profLongitude }}</td>
+            </tr>
+            <tr>
+                <th>Profcapapersonne</th>
+                <td>{{ professionnel.profCapaPersonne }}</td>
+            </tr>
+            <tr>
+                <th>Profcapachambre</th>
+                <td>{{ professionnel.profCapaChambre }}</td>
+            </tr>
+            <tr>
+                <th>Profcapaemplacement</th>
+                <td>{{ professionnel.profCapaEmplacement }}</td>
+            </tr>
+            <tr>
+                <th>Profcapahabitation</th>
+                <td>{{ professionnel.profCapaHabitation }}</td>
+            </tr>
+            <tr>
+                <th>Proftemp</th>
+                <td>{{ professionnel.profTemp }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('professionnel_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('professionnel_edit', { 'id': professionnel.profId }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

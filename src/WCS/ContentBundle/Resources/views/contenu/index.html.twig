@@ -1,0 +1,65 @@
+    {% for contenu in tab|reverse %}
+      <div class="post-box" id="comment-{{ contenu['id'] }}">
+        <p class="text-gris">
+            {{ 'Message de'|trans }} <span class="text-vert">{{ contenu['prenom'] }} {{ contenu['nom'] }}</span>  
+            <a href="#comment-{{ contenu['id'] }}"><span class="text-noir">{{ 'publié le'|trans }} {{ contenu['date']|date("m/d/Y à H:i") }}</span></a>
+            <a role="button" class="btn btn-default answer-comment" title="{{ "Answer comment"|trans }}" aria-label="{{ "Answer comment"|trans }}" data-toggle="modal" data-target="#modal-reply-to-comment"><i class="fa fa-reply" aria-hidden="true"></i></a>
+            <a role="button" class="btn btn-default send-message" title="{{ "Send message to owner"|trans }}" aria-label="{{ "Send message to owner"|trans }}"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+        </p>
+
+        <p class="text-gris">{{ 'Sujet'|trans }} : <strong class="text-noir">{{ contenu['sujet'] }}</strong></p>
+        <p class="text-gris">{{ 'Message'|trans }} : <span class="text-noir">{{ contenu['contenu'] }}</span></p>
+        {% if contenu['file'] %}
+          <a href="{{ asset('uploads/img/comments/' ~ contenu['file']) }}"><img style="width:200px;" src="{{ asset('uploads/img/comments/' ~ contenu['file']) }}"></a>
+        {% endif %}
+      </div>
+
+      {% for child in contenu['childs'] %}
+        {% macro recursiveReplie(child) %}
+          <div class="post-box reply" id="comment-{{ child['id'] }}">
+            <p class="text-gris">
+                {{ 'Message de'|trans }} <span class="text-vert">{{ child['prenom'] }} {{ child['nom'] }}</span>  
+                <a href="#comment-{{ child['id'] }}"><span class="text-noir">{{ 'publié le'|trans }} {{ child['date']|date("m/d/Y à H:i") }}</span></a>
+                <a role="button" class="btn btn-default answer-comment" title="{{ "Answer comment"|trans }}" aria-label="{{ "Answer comment"|trans }}" data-toggle="modal" data-target="#modal-reply-to-comment"><i class="fa fa-reply" aria-hidden="true"></i></a>
+                <a role="button" class="btn btn-default send-message" title="{{ "Send message to owner"|trans }}" aria-label="{{ "Send message to owner"|trans }}"><i class="fa fa-envelope" aria-hidden="true"></i></a>                
+            </p>
+
+            <p class="text-gris">{{ 'Sujet'|trans }} : <strong class="text-noir">{{ child['sujet'] }}</strong></p>
+            <p class="text-gris">{{ 'Message'|trans }} : <span class="text-noir">{{ child['contenu'] }}</span></p>
+            {% if child['file'] %}
+              <a href="{{ asset('uploads/img/comments/' ~ child['file']) }}"><img style="width:200px;" src="{{ asset('uploads/img/comments/' ~ child['file']) }}"></a>
+            {% endif %}            
+          </div>
+          {% for littleChild in child['childs'] %}
+            {{ _self.recursiveReplie(littleChild) }}
+          {% endfor %}
+        {% endmacro %}
+        {{ _self.recursiveReplie(child) }}
+      {% endfor %}
+    {% endfor %}
+
+<!-- Modal -->
+      <div class="modal fade" id="modal-reply-to-comment" tabindex="-1" role="dialog" aria-labelledby="{{ "Répondre à un commentaire"|trans }}">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">{{ "Répondre à un commentaire"|trans }}</h4>
+            </div>
+            <div class="modal-body">
+              <div class="reply-to-comment">
+              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {{ render(controller('WCSContentBundle:Contenu:new')) }}
+              {% else %}
+                <p>Vous devez être connecté pour laisser un commentaire !</p>
+                <a href="{{ path('user_login') }}">{{ "Se connecter"|trans }} </a>  
+              {% endif %}
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+

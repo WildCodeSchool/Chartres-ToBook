@@ -22,11 +22,16 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('userPrenom')
+            ->add('userNom')
+            ->remove('username')
             ->add('userProf', ChoiceType::class, array(
                 'choices'  => array(
                     1 => 'Professionnel',
                     0 => 'Client',
                 ),
+            'multiple'  => false,
+            'expanded'  => true,
+            'required'  => true,
         ));
     }
 
