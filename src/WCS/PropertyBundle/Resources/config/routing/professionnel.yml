@@ -7,6 +7,8 @@ professionnel_show:
     path:     /{id}/show
     defaults: { _controller: "WCSPropertyBundle:Professionnel:show" }
     methods:  GET
+    options:
+        expose: true
 
 professionnel_new:
     path:     /new

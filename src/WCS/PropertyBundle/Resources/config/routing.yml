@@ -1,6 +1,7 @@
 wcs_property_professionnel:
     resource: "@WCSPropertyBundle/Resources/config/routing/professionnel.yml"
     prefix:   /{_locale}/professionnel
+    defaults: {_locale: fr}
 
 club-house:
     path:     /{_locale}/clubhouse/{profCode}

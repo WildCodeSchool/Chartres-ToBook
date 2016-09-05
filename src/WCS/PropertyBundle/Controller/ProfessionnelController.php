@@ -136,7 +136,7 @@ class ProfessionnelController extends Controller
     private function createDeleteForm(Professionnel $professionnel)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('professionnel_delete', array('id' => $professionnel->getProfId())))
+            ->setAction($this->generateUrl('professionnel_delete', array('id' => $professionnel->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

@@ -364,7 +364,7 @@ function affichageResultats(results) {
             +"</a>"
             +"</div>"
             +"<div class='content'>"
-            +"<h3 class='major'><a href='club-house.php?code=capricorne'>" + detail.name + "</a>" + etoile + "</h3>"
+            +"<h3 class='major'><a href=" + Routing.generate('professionnel_show', {'id': detail.id, '_locale': 'fr'}) + ">" + detail.name + "</a>" + etoile + "</h3>"
             +"<p class='descriptif_hotel'>" + detail.description + "</p>"
             +"<div id='prix'>"
             +"<h2 id='elements'>"
