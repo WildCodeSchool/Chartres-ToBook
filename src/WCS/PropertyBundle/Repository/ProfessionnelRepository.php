@@ -26,7 +26,6 @@ class ProfessionnelRepository extends \Doctrine\ORM\EntityRepository
             // ->setFirstResult(0)
             // ->setMaxResults(45)
             ->setParameter('radius', $radius);
-        ;
     
         return $qb->getQuery()->getResult();    
     }
@@ -36,7 +35,7 @@ class ProfessionnelRepository extends \Doctrine\ORM\EntityRepository
 
         $qb = $this->createQueryBuilder('Detail');
 
-        $qb->select('Detail.id as id',    
+        $qb->select('DISTINCT Detail.id as id',    
                     'Detail.profLatitude as lat',
                     'Detail.profLongitude as lng',
                     'Detail.profNom as name',
@@ -47,6 +46,7 @@ class ProfessionnelRepository extends \Doctrine\ORM\EntityRepository
             ->addSelect('( 6371 * acos(cos(radians(' . $latitude . ')) * cos( radians( Detail.profLatitude ) ) * cos( radians( Detail.profLongitude ) - radians(' . $longitude . ') ) + sin( radians(' . $latitude . ') ) * sin( radians( Detail.profLatitude ) ) ) ) as radius')
             ->leftJoin('Detail.profimages', 'profimages')
             ->addSelect('profimages.primImgUrl as path')
+            ->groupBy('Detail.id')
             ->having('radius < :radius')
             ->orderBy('radius', 'ASC')
             ->setFirstResult(0)
